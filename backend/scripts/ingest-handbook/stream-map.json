@@ -1,0 +1,7 @@
+{
+  "Physical Science": ["Physical Science", "Mathematics", "Physical Sciences"],
+  "Biological Science": ["Biological Science", "Biological Sciences", "Bio Science"],
+  "Commerce": ["Commerce", "Management", "Accounting"],
+  "Arts": ["Arts", "Humanities", "Social Sciences"],
+  "Technology": ["Technology", "Engineering Technology", "Tech"]
+}

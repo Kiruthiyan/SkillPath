@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: skillpath
+      POSTGRES_PASSWORD: skillpath
+      POSTGRES_DB: skillpath
+    volumes:
+      - skillpath_pg:/var/lib/postgresql/data
+
+volumes:
+  skillpath_pg:

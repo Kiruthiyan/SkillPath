@@ -1,0 +1,1134 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: SkillPath AI API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: universities
+    description: University operations
+  - name: courses
+    description: Course operations
+  - name: careers
+    description: Career path operations
+  - name: reviews
+    description: Alumni review operations
+  - name: stories
+    description: Success story operations
+  - name: roadmaps
+    description: AI career roadmap operations
+  - name: ai
+    description: AI mentor chat operations
+  - name: dashboard
+    description: User dashboard operations
+  - name: auth
+    description: Authentication operations
+  - name: users
+    description: User profile operations
+  - name: saved
+    description: Saved courses and universities
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /universities:
+    get:
+      operationId: listUniversities
+      tags: [universities]
+      summary: List all universities
+      responses:
+        "200":
+          description: List of universities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/University"
+
+  /universities/{id}:
+    get:
+      operationId: getUniversity
+      tags: [universities]
+      summary: Get university by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: University details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/University"
+
+  /courses:
+    get:
+      operationId: listCourses
+      tags: [courses]
+      summary: List and filter courses
+      parameters:
+        - name: stream
+          in: query
+          schema:
+            type: string
+        - name: zscore
+          in: query
+          schema:
+            type: number
+        - name: universityId
+          in: query
+          schema:
+            type: integer
+        - name: degreeType
+          in: query
+          schema:
+            type: string
+        - name: duration
+          in: query
+          schema:
+            type: integer
+        - name: faculty
+          in: query
+          schema:
+            type: string
+        - name: district
+          in: query
+          schema:
+            type: string
+          description: District quota (required when zscore is provided)
+        - name: yearMode
+          in: query
+          schema:
+            type: string
+            enum: [official, predicted]
+            default: predicted
+        - name: academicYear
+          in: query
+          schema:
+            type: string
+          description: Handbook academic year e.g. 2025/26
+      responses:
+        "200":
+          description: List of matching courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Course"
+
+  /courses/{id}:
+    get:
+      operationId: getCourse
+      tags: [courses]
+      summary: Get course details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: district
+          in: query
+          schema:
+            type: string
+        - name: yearMode
+          in: query
+          schema:
+            type: string
+            enum: [official, predicted]
+            default: predicted
+      responses:
+        "200":
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseDetail"
+
+  /courses/{id}/prediction-insight:
+    get:
+      operationId: getCoursePredictionInsight
+      tags: [courses]
+      summary: Get cutoff history, prediction breakdown, and AI explanation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: district
+          in: query
+          schema:
+            type: string
+        - name: zscore
+          in: query
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Prediction insight with Gemini explanation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredictionInsight"
+        "404":
+          description: Course not found
+
+  /courses/{id}/careers:
+    get:
+      operationId: getCourseCareerPaths
+      tags: [courses]
+      summary: Get career paths for a course
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Career paths for this course
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CareerPath"
+
+  /careers:
+    get:
+      operationId: listCareerPaths
+      tags: [careers]
+      summary: List all career paths
+      parameters:
+        - name: degreeType
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of career paths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CareerPath"
+
+  /reviews:
+    get:
+      operationId: listReviews
+      tags: [reviews]
+      summary: List alumni reviews
+      parameters:
+        - name: courseId
+          in: query
+          schema:
+            type: integer
+        - name: universityId
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AlumniReview"
+
+  /stories:
+    get:
+      operationId: listSuccessStories
+      tags: [stories]
+      summary: List success stories
+      parameters:
+        - name: degreeType
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of success stories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SuccessStory"
+
+  /stories/{id}:
+    get:
+      operationId: getSuccessStory
+      tags: [stories]
+      summary: Get a success story by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success story details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessStory"
+
+  /roadmaps/generate:
+    post:
+      operationId: generateRoadmap
+      tags: [roadmaps]
+      summary: Generate AI career roadmap for a course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoadmapInput"
+      responses:
+        "200":
+          description: Generated roadmap
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Roadmap"
+
+  /ai/chat:
+    post:
+      operationId: aiChat
+      tags: [ai]
+      summary: Chat with AI mentor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatInput"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+
+  /dashboard/stats:
+    get:
+      operationId: getDashboardStats
+      tags: [dashboard]
+      summary: Get summary stats for the platform
+      responses:
+        "200":
+          description: Platform stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /dashboard/recommendations:
+    get:
+      operationId: getRecommendations
+      tags: [dashboard]
+      summary: Get AI recommendations for a student profile
+      parameters:
+        - name: stream
+          in: query
+          schema:
+            type: string
+        - name: zscore
+          in: query
+          schema:
+            type: number
+        - name: district
+          in: query
+          schema:
+            type: string
+        - name: yearMode
+          in: query
+          schema:
+            type: string
+            enum: [official, predicted]
+            default: predicted
+      responses:
+        "200":
+          description: Recommended courses and careers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recommendations"
+
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: User registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /users/me:
+    patch:
+      operationId: updateProfile
+      tags: [users]
+      summary: Update user profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileInput"
+      responses:
+        "200":
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /saved/courses:
+    get:
+      operationId: listSavedCourses
+      tags: [saved]
+      summary: List saved courses
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Saved courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SavedCourse"
+    post:
+      operationId: saveCourse
+      tags: [saved]
+      summary: Save a course
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveCourseInput"
+      responses:
+        "201":
+          description: Course saved
+
+  /saved/courses/{courseId}:
+    delete:
+      operationId: unsaveCourse
+      tags: [saved]
+      summary: Remove saved course
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Course unsaved
+
+  /saved/universities:
+    get:
+      operationId: listSavedUniversities
+      tags: [saved]
+      summary: List saved universities
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Saved universities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SavedUniversity"
+    post:
+      operationId: saveUniversity
+      tags: [saved]
+      summary: Save a university
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveUniversityInput"
+      responses:
+        "201":
+          description: University saved
+
+  /saved/universities/{universityId}:
+    delete:
+      operationId: unsaveUniversity
+      tags: [saved]
+      summary: Remove saved university
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: universityId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: University unsaved
+
+  /roadmaps:
+    get:
+      operationId: listRoadmaps
+      tags: [roadmaps]
+      summary: List user roadmaps
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Saved roadmaps
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SavedRoadmap"
+
+  /dashboard/recent-searches:
+    get:
+      operationId: listRecentSearches
+      tags: [dashboard]
+      summary: List recent searches
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Recent searches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecentSearch"
+    post:
+      operationId: recordSearch
+      tags: [dashboard]
+      summary: Record a search
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecordSearchInput"
+      responses:
+        "201":
+          description: Search recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentSearch"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    University:
+      type: object
+      required: [id, name, shortName, location, foundedYear, logoColor, ranking]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        shortName:
+          type: string
+        location:
+          type: string
+        foundedYear:
+          type: integer
+        logoColor:
+          type: string
+        ranking:
+          type: integer
+        description:
+          type: ["string", "null"]
+
+    Course:
+      type: object
+      required: [id, universityId, universityName, degreeName, faculty, degreeType, durationYears, minimumZScore, stream]
+      properties:
+        id:
+          type: integer
+        universityId:
+          type: integer
+        universityName:
+          type: string
+        universityShortName:
+          type: string
+        degreeName:
+          type: string
+        faculty:
+          type: string
+        degreeType:
+          type: string
+        durationYears:
+          type: integer
+        minimumZScore:
+          type: number
+        stream:
+          type: string
+        matchScore:
+          type: ["string", "null"]
+        description:
+          type: ["string", "null"]
+        officialMinimumZScore:
+          type: ["number", "null"]
+        predictedMinimumZScore:
+          type: ["number", "null"]
+        officialAcademicYear:
+          type: ["string", "null"]
+        predictedAcademicYear:
+          type: ["string", "null"]
+        confidence:
+          type: ["string", "null"]
+          enum: [high, medium, low, null]
+        eligibility:
+          type: ["string", "null"]
+          enum: [likely, borderline, reach, unlikely, null]
+        dataSource:
+          type: ["string", "null"]
+        district:
+          type: ["string", "null"]
+
+    CourseDetail:
+      type: object
+      required: [id, universityId, universityName, degreeName, faculty, degreeType, durationYears, minimumZScore, stream, subjects, skillsDeveloped]
+      properties:
+        id:
+          type: integer
+        universityId:
+          type: integer
+        universityName:
+          type: string
+        universityShortName:
+          type: string
+        degreeName:
+          type: string
+        faculty:
+          type: string
+        degreeType:
+          type: string
+        durationYears:
+          type: integer
+        minimumZScore:
+          type: number
+        stream:
+          type: string
+        description:
+          type: ["string", "null"]
+        subjects:
+          type: array
+          items:
+            type: string
+        skillsDeveloped:
+          type: array
+          items:
+            type: string
+        officialMinimumZScore:
+          type: ["number", "null"]
+        predictedMinimumZScore:
+          type: ["number", "null"]
+        officialAcademicYear:
+          type: ["string", "null"]
+        predictedAcademicYear:
+          type: ["string", "null"]
+        confidence:
+          type: ["string", "null"]
+        dataSource:
+          type: ["string", "null"]
+        district:
+          type: ["string", "null"]
+        cutoffHistory:
+          type: array
+          items:
+            $ref: "#/components/schemas/CutoffHistoryPoint"
+
+    CutoffHistoryPoint:
+      type: object
+      required: [academicYear, minimumZScore]
+      properties:
+        academicYear:
+          type: string
+        minimumZScore:
+          type: number
+
+    PredictionInsight:
+      type: object
+      required: [programme, district, history, prediction, handbookAttribution, explanation]
+      properties:
+        programme:
+          type: object
+          required: [id, degreeName, stream, faculty]
+          properties:
+            id:
+              type: integer
+            degreeName:
+              type: string
+            universityName:
+              type: ["string", "null"]
+            stream:
+              type: string
+            faculty:
+              type: string
+        district:
+          type: string
+        studentZscore:
+          type: ["number", "null"]
+        history:
+          type: array
+          items:
+            $ref: "#/components/schemas/CutoffHistoryPoint"
+        historyByDistrict:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: "#/components/schemas/CutoffHistoryPoint"
+        prediction:
+          type: object
+          properties:
+            officialCutoff:
+              type: ["number", "null"]
+            officialAcademicYear:
+              type: ["string", "null"]
+            predictedCutoff:
+              type: ["number", "null"]
+            predictedAcademicYear:
+              type: ["string", "null"]
+            confidence:
+              type: string
+            dataSource:
+              type: string
+            yearOverYearDeltas:
+              type: array
+              items:
+                type: number
+        eligibility:
+          type: ["string", "null"]
+        handbookAttribution:
+          type: string
+        explanation:
+          type: string
+
+    CareerPath:
+      type: object
+      required: [id, title, degreeType, salaryMin, salaryMax, growthPotential, industryDemand]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        degreeType:
+          type: string
+        salaryMin:
+          type: integer
+        salaryMax:
+          type: integer
+        currency:
+          type: string
+        growthPotential:
+          type: string
+        industryDemand:
+          type: string
+        description:
+          type: ["string", "null"]
+
+    AlumniReview:
+      type: object
+      required: [id, reviewerName, universityName, degreeName, graduationYear, currentPosition, company, reviewText, isVerified]
+      properties:
+        id:
+          type: integer
+        reviewerName:
+          type: string
+        universityName:
+          type: string
+        degreeName:
+          type: string
+        graduationYear:
+          type: integer
+        currentPosition:
+          type: string
+        company:
+          type: string
+        reviewText:
+          type: string
+        rating:
+          type: integer
+        isVerified:
+          type: boolean
+        avatarColor:
+          type: ["string", "null"]
+
+    SuccessStory:
+      type: object
+      required: [id, name, degreeName, universityName, graduationYear, currentPosition, careerJourney]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        degreeName:
+          type: string
+        universityName:
+          type: string
+        graduationYear:
+          type: integer
+        currentPosition:
+          type: string
+        summary:
+          type: ["string", "null"]
+        careerJourney:
+          type: array
+          items:
+            type: string
+        avatarColor:
+          type: ["string", "null"]
+
+    RoadmapInput:
+      type: object
+      required: [courseId]
+      properties:
+        courseId:
+          type: integer
+        stream:
+          type: string
+        zscore:
+          type: number
+
+    Roadmap:
+      type: object
+      required: [courseId, degreeName, years, afterGraduation]
+      properties:
+        courseId:
+          type: integer
+        degreeName:
+          type: string
+        years:
+          type: array
+          items:
+            $ref: "#/components/schemas/RoadmapYear"
+        afterGraduation:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerMilestone"
+
+    RoadmapYear:
+      type: object
+      required: [year, milestones]
+      properties:
+        year:
+          type: integer
+        milestones:
+          type: array
+          items:
+            type: string
+
+    CareerMilestone:
+      type: object
+      required: [timeframe, role]
+      properties:
+        timeframe:
+          type: string
+        role:
+          type: string
+
+    ChatInput:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+        context:
+          type: ["string", "null"]
+
+    ChatResponse:
+      type: object
+      required: [reply]
+      properties:
+        reply:
+          type: string
+
+    DashboardStats:
+      type: object
+      required: [totalUniversities, totalCourses, totalReviews, totalSuccessStories, topStreams]
+      properties:
+        totalUniversities:
+          type: integer
+        totalCourses:
+          type: integer
+        totalReviews:
+          type: integer
+        totalSuccessStories:
+          type: integer
+        handbookYear:
+          type: ["string", "null"]
+        topStreams:
+          type: array
+          items:
+            $ref: "#/components/schemas/StreamStat"
+
+    StreamStat:
+      type: object
+      required: [stream, courseCount]
+      properties:
+        stream:
+          type: string
+        courseCount:
+          type: integer
+
+    Recommendations:
+      type: object
+      required: [courses, careers]
+      properties:
+        courses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Course"
+        careers:
+          type: array
+          items:
+            $ref: "#/components/schemas/CareerPath"
+        disclaimer:
+          type: ["string", "null"]
+        handbookAttribution:
+          type: ["string", "null"]
+        predictedYear:
+          type: ["string", "null"]
+
+    RegisterInput:
+      type: object
+      required: [email, password, name]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 6
+        name:
+          type: string
+
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    User:
+      type: object
+      required: [id, email, name]
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        stream:
+          type: ["string", "null"]
+        zscore:
+          type: ["number", "null"]
+        language:
+          type: ["string", "null"]
+        district:
+          type: ["string", "null"]
+
+    AuthResponse:
+      type: object
+      required: [token, user]
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+
+    UpdateProfileInput:
+      type: object
+      properties:
+        name:
+          type: string
+        stream:
+          type: string
+        zscore:
+          type: number
+        language:
+          type: string
+        district:
+          type: string
+
+    SaveCourseInput:
+      type: object
+      required: [courseId]
+      properties:
+        courseId:
+          type: integer
+
+    SaveUniversityInput:
+      type: object
+      required: [universityId]
+      properties:
+        universityId:
+          type: integer
+
+    SavedCourse:
+      allOf:
+        - $ref: "#/components/schemas/Course"
+        - type: object
+          properties:
+            savedAt:
+              type: string
+              format: date-time
+
+    SavedUniversity:
+      allOf:
+        - $ref: "#/components/schemas/University"
+        - type: object
+          properties:
+            savedAt:
+              type: string
+              format: date-time
+
+    SavedRoadmap:
+      type: object
+      required: [id, courseId, degreeName, createdAt, roadmap]
+      properties:
+        id:
+          type: integer
+        courseId:
+          type: integer
+        degreeName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        roadmap:
+          $ref: "#/components/schemas/Roadmap"
+
+    RecordSearchInput:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+        filters:
+          type: object
+          additionalProperties: true
+
+    RecentSearch:
+      type: object
+      required: [id, query, createdAt]
+      properties:
+        id:
+          type: integer
+        query:
+          type: string
+        filters:
+          type: ["object", "null"]
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time

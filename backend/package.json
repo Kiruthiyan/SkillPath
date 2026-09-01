@@ -1,0 +1,50 @@
+{
+  "name": "skillpath-backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development tsx watch ./src/index.ts",
+    "build": "node ./build.mjs",
+    "start": "node ./dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "db:push": "drizzle-kit push --config ./drizzle.config.ts",
+    "db:push-force": "drizzle-kit push --config ./drizzle.config.ts --force",
+    "db:seed": "tsx ./src/db/seed.ts",
+    "handbook:import": "tsx ./src/db/import-handbook.ts",
+    "handbook:stage": "tsx ./src/db/stage-handbook.ts"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.6",
+    "drizzle-orm": "^0.45.2",
+    "drizzle-zod": "^0.8.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.0",
+    "pino": "^9.14.0",
+    "pino-http": "^10.5.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^25.3.3",
+    "@types/pg": "^8.11.14",
+    "cross-env": "^7.0.3",
+    "drizzle-kit": "^0.31.4",
+    "esbuild": "0.27.3",
+    "esbuild-plugin-pino": "^2.3.3",
+    "pino-pretty": "^13.1.3",
+    "thread-stream": "3.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

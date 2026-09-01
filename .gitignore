@@ -1,0 +1,58 @@
+# Never commit secrets — copy .env.example to .env locally
+.env
+.env.local
+.env.*.local
+
+# build outputs (all packages)
+dist/
+**/dist/
+tmp/
+out-tsc/
+
+# typescript incremental
+*.tsbuildinfo
+
+# dependencies
+node_modules/
+.pnpm-store/
+
+# logs / OS
+*.log
+npm-debug.log
+yarn-error.log
+.DS_Store
+Thumbs.db
+
+# IDE / tooling
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.cache/
+.local/
+.cursor/
+
+# mobile / misc
+.expo
+.expo-shared
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# deploy
+.vercel/
+
+# legacy nx references
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

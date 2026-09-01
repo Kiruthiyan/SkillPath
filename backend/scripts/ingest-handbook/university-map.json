@@ -1,0 +1,19 @@
+{
+  "_readme": "Maps canonical (English) university names to Sinhala/Tamil aliases, used to resolve cross-language matching during extraction. Populate the alias arrays as real Sinhala/Tamil handbook text is reviewed — left empty here as a scaffold; do not treat empty arrays as verified translations.",
+  "University of Colombo": [],
+  "University of Peradeniya": [],
+  "University of Sri Jayewardenepura": [],
+  "University of Kelaniya": [],
+  "University of Moratuwa": [],
+  "University of Jaffna": [],
+  "University of Ruhuna": [],
+  "Eastern University, Sri Lanka": [],
+  "South Eastern University of Sri Lanka": [],
+  "Rajarata University of Sri Lanka": [],
+  "Sabaragamuwa University of Sri Lanka": [],
+  "Wayamba University of Sri Lanka": [],
+  "Uva Wellassa University": [],
+  "University of the Visual and Performing Arts": [],
+  "University of Vavuniya": [],
+  "Buddhist and Pali University of Sri Lanka": []
+}
