@@ -1,4 +1,4 @@
-import { eq, and, inArray, asc, or, isNull } from "drizzle-orm";
+import { eq, and, inArray, asc, or, isNull, sql } from "drizzle-orm";
 import { db } from "./client";
 import {
   degreeProgrammesTable,
@@ -43,7 +43,7 @@ export async function listCheckerProgrammes(opts: {
 }): Promise<CheckerProgramme[]> {
   const lang = opts.lang ?? "en";
   const conditions = [];
-  if (opts.stream) conditions.push(eq(degreeProgrammesTable.stream, opts.stream));
+  if (opts.stream) conditions.push(sql`lower(${degreeProgrammesTable.stream}) = lower(${opts.stream})`);
   if (opts.universityId) conditions.push(eq(degreeProgrammesTable.universityId, opts.universityId));
 
   let query = db

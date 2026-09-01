@@ -1,28 +1,17 @@
 import { Router } from "express";
 import {
-  listProgrammesWithCutoffs,
-  getProgrammeDetail,
-  getPredictionInsight,
-  type YearMode,
-} from "../db";
-import { degreeProgrammesTable, careerPathsTable } from "../db";
-import { db } from "../db";
-import { eq } from "drizzle-orm";
-import { explainCutoffPrediction } from "../lib/gemini";
+  getOfficialCourseDetail,
+  listOfficialCourses,
+} from "../db/official-handbook-query";
 
 const router = Router();
 
 router.get("/courses", async (req, res) => {
   const stream = req.query.stream as string | undefined;
   const zscore = req.query.zscore ? Number(req.query.zscore) : undefined;
-  const universityId = req.query.universityId
-    ? Number(req.query.universityId)
-    : undefined;
-  const degreeType = req.query.degreeType as string | undefined;
-  const duration = req.query.duration ? Number(req.query.duration) : undefined;
+  const universityId = req.query.universityId ? Number(req.query.universityId) : undefined;
   const faculty = req.query.faculty as string | undefined;
   const district = (req.query.district as string | undefined) ?? "All Island";
-  const yearMode = ((req.query.yearMode as string) || "predicted") as YearMode;
   const academicYear = req.query.academicYear as string | undefined;
 
   if (zscore != null && !Number.isNaN(zscore) && !req.query.district) {
@@ -32,15 +21,12 @@ router.get("/courses", async (req, res) => {
     return;
   }
 
-  const courses = await listProgrammesWithCutoffs({
+  const courses = await listOfficialCourses({
     stream,
     zscore,
     universityId,
-    degreeType,
-    duration,
     faculty,
     district,
-    yearMode,
     academicYear,
   });
 
@@ -51,40 +37,47 @@ router.get("/courses/:id/prediction-insight", async (req, res) => {
   const id = Number(req.params.id);
   const district = (req.query.district as string | undefined) ?? "All Island";
   const zscore = req.query.zscore ? Number(req.query.zscore) : undefined;
+  const course = await getOfficialCourseDetail(id, { district });
 
-  const insight = await getPredictionInsight(
-    id,
-    district,
-    zscore != null && !Number.isNaN(zscore) ? zscore : undefined,
-  );
-
-  if (!insight) {
+  if (!course) {
     res.status(404).json({ error: "Course not found" });
     return;
   }
 
-  const explanation = await explainCutoffPrediction({
-    programme: insight.programme,
-    district: insight.district,
-    history: insight.history,
-    predicted: insight.prediction,
-    studentZscore: insight.studentZscore ?? undefined,
-    eligibility: insight.eligibility,
-    handbookAttribution: insight.handbookAttribution,
-  });
-
   res.json({
-    ...insight,
-    explanation,
+    programme: {
+      id: course.id,
+      degreeName: course.degreeName,
+      universityName: course.universityName,
+      stream: course.stream ?? "",
+      faculty: course.faculty ?? "",
+    },
+    district,
+    studentZscore: zscore != null && !Number.isNaN(zscore) ? zscore : null,
+    history: course.cutoffHistory,
+    historyByDistrict: { [district]: course.cutoffHistory },
+    prediction: {
+      officialCutoff: course.officialMinimumZScore,
+      officialAcademicYear: course.officialAcademicYear,
+      predictedCutoff: null,
+      predictedAcademicYear: null,
+      confidence: course.officialMinimumZScore == null ? "Low" : "High",
+      dataSource: "official_handbook_2025",
+      yearOverYearDeltas: [],
+    },
+    eligibility: course.eligibility,
+    handbookAttribution: "Data from official handbook-derived local 2025/2026 records.",
+    explanation:
+      "This view uses exact official handbook-derived course and cutoff mappings only. No predicted cutoff is generated for normalized 2025/2026 handbook records.",
   });
 });
 
 router.get("/courses/:id", async (req, res) => {
   const id = Number(req.params.id);
   const district = (req.query.district as string | undefined) ?? "All Island";
-  const yearMode = ((req.query.yearMode as string) || "predicted") as YearMode;
+  const academicYear = req.query.academicYear as string | undefined;
 
-  const row = await getProgrammeDetail(id, district, yearMode);
+  const row = await getOfficialCourseDetail(id, { district, academicYear });
 
   if (!row) {
     res.status(404).json({ error: "Course not found" });
@@ -96,22 +89,14 @@ router.get("/courses/:id", async (req, res) => {
 
 router.get("/courses/:id/careers", async (req, res) => {
   const id = Number(req.params.id);
-  const [programme] = await db
-    .select({ degreeType: degreeProgrammesTable.degreeType })
-    .from(degreeProgrammesTable)
-    .where(eq(degreeProgrammesTable.id, id));
+  const course = await getOfficialCourseDetail(id, {});
 
-  if (!programme) {
+  if (!course) {
     res.status(404).json({ error: "Course not found" });
     return;
   }
 
-  const careers = await db
-    .select()
-    .from(careerPathsTable)
-    .where(eq(careerPathsTable.degreeType, programme.degreeType));
-
-  res.json(careers);
+  res.json([]);
 });
 
 export default router;

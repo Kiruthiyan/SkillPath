@@ -59,8 +59,10 @@ function ResultCard({
       </CardHeader>
       <CardContent className="space-y-3">
         <div className="flex flex-wrap gap-2">
-          <Badge variant="outline">{result.faculty}</Badge>
-          <Badge variant="outline">{result.degreeDuration} years</Badge>
+          <Badge variant="outline">{result.faculty ?? "Faculty not listed"}</Badge>
+          <Badge variant="outline">
+            {result.duration ?? (result.degreeDuration != null ? `${result.degreeDuration} years` : "Duration not listed")}
+          </Badge>
           {result.medium && <Badge variant="outline">{result.medium}</Badge>}
           <Badge variant="outline" className="bg-primary/5">{result.requiredStream} stream</Badge>
         </div>

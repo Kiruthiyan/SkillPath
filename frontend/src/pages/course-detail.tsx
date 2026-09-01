@@ -6,8 +6,6 @@ import {
   Building2,
   Clock,
   GraduationCap,
-  Map,
-  Star,
   Sparkles,
   Info,
 } from "lucide-react";
@@ -23,11 +21,15 @@ import {
 import { useProfileStore } from "@/hooks/use-profile";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { QueryError } from "@/components/query-error";
-import { BookmarkCourseButton } from "@/components/bookmark-course-button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+
+function displayMedium(medium: string | string[] | null | undefined): string | null {
+  if (Array.isArray(medium)) return medium.join(" / ");
+  return medium ?? null;
+}
 
 export default function CourseDetail() {
   const params = useParams();
@@ -99,35 +101,32 @@ export default function CourseDetail() {
           <div className="lg:col-span-2 space-y-6">
             <div>
               <div className="flex flex-wrap gap-2 mb-3">
-                <Badge>{course.degreeType}</Badge>
-                <Badge variant="outline">{course.stream}</Badge>
+                <Badge>{course.uniCode}</Badge>
+                {course.eligibleStreams?.map((stream) => (
+                  <Badge key={stream} variant="outline">{stream}</Badge>
+                ))}
                 <Badge variant="outline">
-                  Min Z: {course.minimumZScore}
-                  {course.predictedAcademicYear && ` (predicted ${course.predictedAcademicYear})`}
+                  {course.minimumZScore != null
+                    ? `Cutoff: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
+                    : "Cutoff not mapped"}
                 </Badge>
-                {course.officialMinimumZScore != null && (
-                  <Badge variant="outline">
-                    Official {course.officialAcademicYear}: {course.officialMinimumZScore}
-                  </Badge>
-                )}
-                {course.confidence && (
-                  <Badge variant="secondary">{course.confidence} confidence</Badge>
-                )}
+                {course.confidence && <Badge variant="secondary">{course.confidence} confidence</Badge>}
               </div>
               <h1 className="text-3xl font-bold">{course.degreeName}</h1>
-              <p className="text-muted-foreground mt-2 flex items-center gap-2">
+              <p className="text-muted-foreground mt-2 flex flex-wrap items-center gap-2">
                 <Building2 className="h-4 w-4" />
                 <Link href={`/universities/${course.universityId}`} className="hover:text-primary">
                   {course.universityName}
                 </Link>
-                · {course.faculty} · {district} quota
+                <span>{course.faculty ?? "Faculty not listed"}</span>
+                <span>{district} quota</span>
               </p>
             </div>
 
             <Card className="border-secondary/40 bg-secondary/5">
               <CardContent className="flex gap-2 p-4 text-sm text-muted-foreground">
                 <Info className="h-4 w-4 shrink-0 mt-0.5" />
-                Data from UGC University Admissions Handbook. Predictions are statistical estimates.
+                Data from official handbook-derived local 2025/2026 records. Missing values are not guessed.
               </CardContent>
             </Card>
 
@@ -135,7 +134,7 @@ export default function CourseDetail() {
               <Card>
                 <CardHeader>
                   <CardTitle>Historical Cutoffs ({district})</CardTitle>
-                  <CardDescription>Official UGC handbook minimum Z-scores by year</CardDescription>
+                  <CardDescription>Official handbook minimum Z-scores by year</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -158,7 +157,7 @@ export default function CourseDetail() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    AI Prediction Insight
+                    Official Data Note
                   </CardTitle>
                   <CardDescription>{insight?.handbookAttribution}</CardDescription>
                 </CardHeader>
@@ -168,17 +167,8 @@ export default function CourseDetail() {
                   ) : insight?.explanation ? (
                     <p className="text-muted-foreground leading-relaxed">{insight.explanation}</p>
                   ) : (
-                    <p className="text-muted-foreground text-sm">Unable to load insight.</p>
+                    <p className="text-muted-foreground text-sm">Unable to load note.</p>
                   )}
-                </CardContent>
-              </Card>
-            )}
-
-            {course.description && (
-              <Card>
-                <CardHeader><CardTitle>Overview</CardTitle></CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">{course.description}</p>
                 </CardContent>
               </Card>
             )}
@@ -188,23 +178,36 @@ export default function CourseDetail() {
                 <CardHeader><CardTitle>Subjects</CardTitle></CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {course.subjects.map((s) => (
-                      <Badge key={s} variant="secondary">{s}</Badge>
+                    {course.subjects.map((subject) => (
+                      <Badge key={subject} variant="secondary">{subject}</Badge>
                     ))}
                   </div>
                 </CardContent>
               </Card>
             )}
 
-            {course.skillsDeveloped.length > 0 && (
+            {course.minimumGrades && course.minimumGrades.length > 0 && (
               <Card>
-                <CardHeader><CardTitle>Skills Developed</CardTitle></CardHeader>
+                <CardHeader><CardTitle>Minimum Grades</CardTitle></CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {course.skillsDeveloped.map((s) => (
-                      <Badge key={s} variant="outline">{s}</Badge>
+                    {course.minimumGrades.map((rule) => (
+                      <Badge key={rule} variant="outline">{rule}</Badge>
                     ))}
                   </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {course.specialRequirements && course.specialRequirements.length > 0 && (
+              <Card>
+                <CardHeader><CardTitle>Special Requirements</CardTitle></CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    {course.specialRequirements.map((rule) => (
+                      <li key={rule}>{rule}</li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
             )}
@@ -218,45 +221,38 @@ export default function CourseDetail() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-2 text-sm">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  {course.durationYears} years
+                  {course.duration ?? "Duration not listed"}
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                  {course.faculty}
+                  {course.faculty ?? "Faculty not listed"}
                 </div>
+                {displayMedium(course.medium) && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <GraduationCap className="h-4 w-4 text-muted-foreground" />
+                    {displayMedium(course.medium)}
+                  </div>
+                )}
+                {course.intake != null && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <GraduationCap className="h-4 w-4 text-muted-foreground" />
+                    Intake: {course.intake}
+                  </div>
+                )}
+                {course.campus && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Building2 className="h-4 w-4 text-muted-foreground" />
+                    {course.campus}
+                  </div>
+                )}
                 {university && (
                   <div className="flex items-center gap-2 text-sm">
                     <Building2 className="h-4 w-4 text-muted-foreground" />
-                    Rank #{university.ranking}
+                    {university.courseCount ?? 0} official courses
                   </div>
                 )}
                 <Button variant="secondary" className="w-full" onClick={handleAskAi}>
-                  <Sparkles className="h-4 w-4 mr-2" /> Ask AI Why
-                </Button>
-                <BookmarkCourseButton courseId={course.id} className="w-full" size="default" />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Explore Further</CardTitle>
-                <CardDescription>Related pages for this degree</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <Link href={`/careers?degreeType=${encodeURIComponent(course.degreeType)}`}>
-                    <GraduationCap className="h-4 w-4 mr-2" /> Career Paths
-                  </Link>
-                </Button>
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <Link href={`/roadmap?courseId=${course.id}`}>
-                    <Map className="h-4 w-4 mr-2" /> Generate Roadmap
-                  </Link>
-                </Button>
-                <Button variant="outline" className="w-full justify-start" asChild>
-                  <Link href={`/reviews?courseId=${course.id}`}>
-                    <Star className="h-4 w-4 mr-2" /> Alumni Reviews
-                  </Link>
+                  <Sparkles className="h-4 w-4 mr-2" /> Official Data Note
                 </Button>
               </CardContent>
             </Card>

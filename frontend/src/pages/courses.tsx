@@ -11,9 +11,7 @@ import {
 import { useProfileStore } from "@/hooks/use-profile";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
-import { useToast } from "@/hooks/use-toast";
 import { QueryError } from "@/components/query-error";
-import { BookmarkCourseButton } from "@/components/bookmark-course-button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -38,6 +36,11 @@ const ELIGIBILITY_STYLES: Record<string, string> = {
   unlikely: "bg-red-500/15 text-red-700 border-red-500/30",
 };
 
+function displayMedium(medium: string | string[] | null | undefined): string | null {
+  if (Array.isArray(medium)) return medium.join(" / ");
+  return medium ?? null;
+}
+
 export default function Courses() {
   usePageTitle("Courses");
   const urlSearch = useSearch();
@@ -45,7 +48,6 @@ export default function Courses() {
   const [universityFilter, setUniversityFilter] = useState<string>(
     () => getQueryParam(urlSearch, "universityId") ?? "all",
   );
-  const [degreeTypeFilter, setDegreeTypeFilter] = useState<string>("all");
 
   const profile = useProfileStore();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
@@ -57,9 +59,8 @@ export default function Courses() {
       district: profile.district || "Colombo",
       yearMode: "predicted" as const,
       universityId: universityFilter !== "all" ? Number(universityFilter) : undefined,
-      degreeType: degreeTypeFilter !== "all" ? degreeTypeFilter : undefined,
     }),
-    [profile.stream, profile.zscore, profile.district, universityFilter, degreeTypeFilter],
+    [profile.stream, profile.zscore, profile.district, universityFilter],
   );
 
   const { data: courses, isLoading, isError, refetch } = useListCourses(params);
@@ -75,7 +76,8 @@ export default function Courses() {
       (c) =>
         c.degreeName.toLowerCase().includes(q) ||
         c.universityName.toLowerCase().includes(q) ||
-        c.faculty.toLowerCase().includes(q),
+        (c.faculty ?? "").toLowerCase().includes(q) ||
+        (c.uniCode ?? "").toLowerCase().includes(q),
     );
   }, [courses, search]);
 
@@ -86,19 +88,12 @@ export default function Courses() {
     }
   }
 
-  const degreeTypes = useMemo(() => {
-    if (!courses) return [];
-    return [...new Set(courses.map((c) => c.degreeType))].sort();
-  }, [courses]);
-
-  const predictedYear = courses?.[0]?.predictedAcademicYear;
-
   return (
     <div className="space-y-8 pb-10">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Courses</h1>
         <p className="text-muted-foreground mt-2">
-          Government university programmes from the UGC Admissions Handbook with predicted cutoffs.
+          Government university programmes from official handbook-derived local data.
         </p>
       </div>
 
@@ -106,10 +101,8 @@ export default function Courses() {
         <CardContent className="flex gap-3 p-4 text-sm text-muted-foreground">
           <Info className="h-5 w-5 shrink-0 text-secondary" />
           <p>
-            Predictions are estimates based on past UGC cutoffs, not official admissions.
-            {predictedYear && (
-              <> Showing predicted minimum Z-scores for {predictedYear} ({profile.district} quota).</>
-            )}
+            Missing handbook fields are shown as unavailable. Cutoffs are shown only where an exact
+            official district mapping exists for {profile.district || "selected"} quota.
           </p>
         </CardContent>
       </Card>
@@ -132,17 +125,6 @@ export default function Courses() {
             <SelectItem value="all">All Universities</SelectItem>
             {universities?.map((u) => (
               <SelectItem key={u.id} value={String(u.id)}>{u.shortName}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={degreeTypeFilter} onValueChange={setDegreeTypeFilter}>
-          <SelectTrigger className="w-full md:w-48">
-            <SelectValue placeholder="Degree Type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            {degreeTypes.map((t) => (
-              <SelectItem key={t} value={t}>{t}</SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -188,23 +170,26 @@ export default function Courses() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">{course.degreeType}</Badge>
-                  <Badge variant="outline">{course.stream}</Badge>
-                  <Badge variant="outline">
-                    Z: {course.minimumZScore}
-                    {course.predictedAcademicYear && ` (${course.predictedAcademicYear})`}
-                  </Badge>
-                  {course.officialMinimumZScore != null && (
-                    <Badge variant="outline" className="text-muted-foreground">
-                      Official {course.officialAcademicYear}: {course.officialMinimumZScore}
-                    </Badge>
+                  <Badge variant="outline">{course.uniCode}</Badge>
+                  {course.eligibleStreams?.map((stream) => (
+                    <Badge key={stream} variant="outline">{stream}</Badge>
+                  ))}
+                  {course.faculty && <Badge variant="outline">{course.faculty}</Badge>}
+                  {course.duration && <Badge variant="outline">{course.duration}</Badge>}
+                  {displayMedium(course.medium) && (
+                    <Badge variant="outline">{displayMedium(course.medium)}</Badge>
                   )}
+                  {course.intake != null && <Badge variant="outline">Intake: {course.intake}</Badge>}
+                  <Badge variant="outline">
+                    {course.minimumZScore != null
+                      ? `Cutoff: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
+                      : "Cutoff not mapped"}
+                  </Badge>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" asChild>
                     <Link href={`/courses/${course.id}`}>View Details</Link>
                   </Button>
-                  <BookmarkCourseButton courseId={course.id} />
                 </div>
               </CardContent>
             </Card>

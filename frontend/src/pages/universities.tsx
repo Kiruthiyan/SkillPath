@@ -1,6 +1,6 @@
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
-import { Building2, MapPin, Calendar, ArrowLeft } from "lucide-react";
+import { Building2, ArrowLeft } from "lucide-react";
 
 import {
   useListUniversities,
@@ -9,7 +9,6 @@ import {
 } from "@/api";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { QueryError } from "@/components/query-error";
-import { BookmarkUniversityButton } from "@/components/bookmark-university-button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -54,19 +53,16 @@ export default function Universities() {
         <Card className="overflow-hidden">
           <div className="h-3" style={{ backgroundColor: university.logoColor }} />
           <CardHeader>
-            <Badge variant="secondary" className="w-fit">Rank #{university.ranking}</Badge>
+            <Badge variant="secondary" className="w-fit">
+              {university.courseCount ?? 0} official courses
+            </Badge>
             <CardTitle className="text-3xl">{university.name}</CardTitle>
-            <CardDescription className="flex items-center gap-4 text-base">
-              <span className="flex items-center gap-1"><MapPin className="h-4 w-4" /> {university.location}</span>
-              <span className="flex items-center gap-1"><Calendar className="h-4 w-4" /> Est. {university.foundedYear}</span>
+            <CardDescription className="text-base">
+              Official handbook-derived 2025/2026 course provider
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground leading-relaxed">{university.description}</p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild><Link href={`/courses?universityId=${university.id}`}>View Courses</Link></Button>
-              <BookmarkUniversityButton universityId={university.id} />
-            </div>
+          <CardContent>
+            <Button asChild><Link href={`/courses?universityId=${university.id}`}>View Courses</Link></Button>
           </CardContent>
         </Card>
       </div>
@@ -77,7 +73,9 @@ export default function Universities() {
     <div className="space-y-8 pb-10">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Universities</h1>
-        <p className="text-muted-foreground mt-2">Explore Sri Lankan state universities and their programs.</p>
+        <p className="text-muted-foreground mt-2">
+          Explore providers exactly as they appear in the official handbook-derived course data.
+        </p>
       </div>
 
       {isError && <QueryError onRetry={() => refetch()} />}
@@ -92,21 +90,20 @@ export default function Universities() {
           animate={{ opacity: 1 }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {universities?.map((univ) => (
-            <Card key={univ.id} className="hover:border-primary/50 transition-colors overflow-hidden">
-              <div className="h-2" style={{ backgroundColor: univ.logoColor }} />
+          {universities?.map((universityRow) => (
+            <Card key={universityRow.id} className="hover:border-primary/50 transition-colors overflow-hidden">
+              <div className="h-2" style={{ backgroundColor: universityRow.logoColor }} />
               <CardHeader>
-                <div className="flex items-start justify-between">
-                  <Building2 className="h-8 w-8 text-primary" />
-                  <Badge variant="outline">#{univ.ranking}</Badge>
+                <div className="flex items-start justify-between gap-3">
+                  <Building2 className="h-8 w-8 text-primary shrink-0" />
+                  <Badge variant="outline">{universityRow.courseCount ?? 0} courses</Badge>
                 </div>
-                <CardTitle className="text-lg">{univ.name}</CardTitle>
-                <CardDescription>{univ.shortName} · {univ.location}</CardDescription>
+                <CardTitle className="text-lg">{universityRow.name}</CardTitle>
+                <CardDescription>Official handbook-derived provider</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{univ.description}</p>
                 <Button size="sm" asChild>
-                  <Link href={`/universities/${univ.id}`}>View Details</Link>
+                  <Link href={`/universities/${universityRow.id}`}>View Details</Link>
                 </Button>
               </CardContent>
             </Card>

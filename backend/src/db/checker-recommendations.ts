@@ -1,4 +1,4 @@
-import { and, asc, eq, inArray, lt, or, isNull } from "drizzle-orm";
+import { and, asc, eq, inArray, lt, or, isNull, sql } from "drizzle-orm";
 import { db } from "./client";
 import {
   academicYearsTable,
@@ -160,9 +160,14 @@ export async function getModeForYear(academicYear: string): Promise<{
   return { mode: "historical_estimate", editionId: null };
 }
 
-async function listCandidateProgrammes(
+function streamMatches(stream: string) {
+  return sql`lower(${degreeProgrammesTable.stream}) = lower(${stream})`;
+}
+
+export async function listCandidateProgrammes(
   academicYear: string,
   mode: CheckerResultMode,
+  stream: string,
 ): Promise<CandidateProgramme[]> {
   if (mode === "official") {
     return db
@@ -188,6 +193,7 @@ async function listCandidateProgrammes(
         and(
           eq(courseAvailabilityTable.academicYear, academicYear),
           eq(courseAvailabilityTable.available, true),
+          streamMatches(stream),
         ),
       )
       .orderBy(asc(degreeProgrammesTable.degreeName));
@@ -214,6 +220,7 @@ async function listCandidateProgrammes(
       and(
         lt(handbookEditionsTable.academicYear, academicYear),
         inArray(admissionCutoffsTable.verifiedStatus, [...VERIFIED_CUTOFF_STATUSES]),
+        streamMatches(stream),
       ),
     )
     .orderBy(asc(degreeProgrammesTable.degreeName));
@@ -600,7 +607,7 @@ export async function getCheckerRecommendations(
   input: CheckerRecommendationRequest,
 ): Promise<CheckerRecommendationsResponse> {
   const { mode, editionId } = await getModeForYear(input.academicYear);
-  const candidates = await listCandidateProgrammes(input.academicYear, mode);
+  const candidates = await listCandidateProgrammes(input.academicYear, mode, input.stream);
   const requirementsByProgramme = candidates.length > 0
     ? await getRequirementsByProgramme(
       candidates.map((programme) => programme.id),

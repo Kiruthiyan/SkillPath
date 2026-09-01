@@ -1,24 +1,18 @@
 import { Router } from "express";
-import { db } from "../db";
-import { universitiesTable } from "../db";
-import { asc, eq } from "drizzle-orm";
+import {
+  getOfficialUniversity,
+  listOfficialUniversities,
+} from "../db/official-handbook-query";
 
 const router = Router();
 
 router.get("/universities", async (_req, res) => {
-  const universities = await db
-    .select()
-    .from(universitiesTable)
-    .orderBy(asc(universitiesTable.ranking));
-  res.json(universities);
+  res.json(await listOfficialUniversities());
 });
 
 router.get("/universities/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const [university] = await db
-    .select()
-    .from(universitiesTable)
-    .where(eq(universitiesTable.id, id));
+  const university = await getOfficialUniversity(id);
 
   if (!university) {
     res.status(404).json({ error: "University not found" });

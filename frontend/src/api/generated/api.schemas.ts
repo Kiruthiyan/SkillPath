@@ -13,12 +13,16 @@ export interface University {
   id: number;
   name: string;
   shortName: string;
-  location: string;
-  foundedYear: number;
+  /** @nullable */
+  location: string | null;
+  /** @nullable */
+  foundedYear: number | null;
   logoColor: string;
-  ranking: number;
+  /** @nullable */
+  ranking: number | null;
   /** @nullable */
   description?: string | null;
+  courseCount?: number;
 }
 
 /**
@@ -52,11 +56,29 @@ export interface Course {
   universityName: string;
   universityShortName?: string;
   degreeName: string;
-  faculty: string;
-  degreeType: string;
-  durationYears: number;
-  minimumZScore: number;
-  stream: string;
+  /** @nullable */
+  uniCode?: string | null;
+  /** @nullable */
+  academicYear?: string | null;
+  /** @nullable */
+  faculty: string | null;
+  /** @nullable */
+  degreeType: string | null;
+  /** @nullable */
+  durationYears: number | null;
+  /** @nullable */
+  duration?: string | null;
+  /** @nullable */
+  minimumZScore: number | null;
+  /** @nullable */
+  stream: string | null;
+  eligibleStreams?: string[];
+  /** @nullable */
+  medium?: string | string[] | null;
+  /** @nullable */
+  intake?: number | null;
+  /** @nullable */
+  campus?: string | null;
   /** @nullable */
   matchScore?: string | null;
   /** @nullable */
@@ -90,14 +112,34 @@ export interface CourseDetail {
   universityName: string;
   universityShortName?: string;
   degreeName: string;
-  faculty: string;
-  degreeType: string;
-  durationYears: number;
-  minimumZScore: number;
-  stream: string;
+  /** @nullable */
+  uniCode?: string | null;
+  /** @nullable */
+  academicYear?: string | null;
+  /** @nullable */
+  faculty: string | null;
+  /** @nullable */
+  degreeType: string | null;
+  /** @nullable */
+  durationYears: number | null;
+  /** @nullable */
+  duration?: string | null;
+  /** @nullable */
+  minimumZScore: number | null;
+  /** @nullable */
+  stream: string | null;
+  eligibleStreams?: string[];
+  /** @nullable */
+  medium?: string | string[] | null;
+  /** @nullable */
+  intake?: number | null;
+  /** @nullable */
+  campus?: string | null;
   /** @nullable */
   description?: string | null;
   subjects: string[];
+  minimumGrades?: string[];
+  specialRequirements?: string[];
   skillsDeveloped: string[];
   /** @nullable */
   officialMinimumZScore?: number | null;
@@ -122,7 +164,7 @@ export type PredictionInsightProgramme = {
   /** @nullable */
   universityName?: string | null;
   stream: string;
-  faculty: string;
+  faculty: string | null;
 };
 
 export type PredictionInsightHistoryByDistrict = {[key: string]: CutoffHistoryPoint[]};
@@ -412,4 +454,3 @@ export const GetRecommendationsYearMode = {
   official: 'official',
   predicted: 'predicted',
 } as const;
-

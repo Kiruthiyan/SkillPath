@@ -1,0 +1,761 @@
+# Handbook 2025 Data Quality Report
+
+## Counts
+- Source course rows: 254
+- Normalized course rows: 254
+- Source eligibility rule groups: 50
+- Expanded eligibility rows: 112
+- Source Section 9 cutoff rows: 6150
+- Normalized numeric cutoff rows: 3913
+
+## Not Available Replacements
+- faculty: 220
+- duration: 96
+- medium: 168
+- campus: 225
+
+## Required Field Issues
+- No empty required fields.
+
+## Duplicate Identity Issues
+- No duplicate uni_code or academic_year + uni_code identities.
+
+## Intake Issues
+- No invalid intake values.
+
+## Stream Mapping
+- Distinct handbook eligibility streams: Biological Science, Physical Science
+- No invalid stream values in matched eligibility rules.
+
+## Missing Eligibility
+- 011G | University of Moratuwa | Quantity Surveying
+- 014L | Sabaragamuwa University of Sri Lanka | Surveying Science
+- 016A | University of Colombo | Management
+- 016B | University of Peradeniya | Management
+- 016C | University of Sri Jayewardenepura | Management
+- 016D | University of Kelaniya | Management
+- 016E | University of Jaffna | Management
+- 016F | University of Ruhuna | Management
+- 016H | Eastern University, Sri Lanka | Management
+- 016J | South Eastern University of Sri Lanka | Management
+- 016K | Rajarata University of Sri Lanka | Management
+- 016L | Sabaragamuwa University of Sri Lanka | Management
+- 016M | Wayamba University of Sri Lanka | Management
+- 017C | University of Sri Jayewardenepura | Real Estate Management and Valuation
+- 018C | University of Sri Jayewardenepura | Commerce
+- 018D | University of Kelaniya | Commerce
+- 018E | University of Jaffna | Commerce
+- 018H | Eastern University, Sri Lanka | Commerce
+- 018J | South Eastern University of Sri Lanka | Commerce
+- 019A | University of Colombo | Arts
+- 019B | University of Peradeniya | Arts
+- 019C | University of Sri Jayewardenepura | Arts
+- 019D | University of Kelaniya | Arts
+- 019E | University of Jaffna | Arts
+- 019F | University of Ruhuna | Arts
+- 019H | Eastern University, Sri Lanka | Arts
+- 019J | South Eastern University of Sri Lanka | Arts
+- 019K | Rajarata University of Sri Lanka | Arts
+- 020S | Sripalee Campus, University of Colombo | Arts (SP) - Mass Media
+- 021L | Sabaragamuwa University of Sri Lanka | Arts (SAB)
+- 022R | University of Vavuniya, Sri Lanka | Management Studies (TV)
+- 022W | Trincomalee Campus, Eastern University, Sri Lanka | Management Studies (TV)
+- 023G | University of Moratuwa | Architecture
+- 024G | University of Moratuwa | Design
+- 025A | University of Colombo | Law
+- 025B | University of Peradeniya | Law
+- 025E | University of Jaffna | Law
+- 026G | University of Moratuwa | Information Technology (IT)
+- 027D | University of Kelaniya | Management and Information Technology (MIT)
+- 028C | University of Sri Jayewardenepura | Management and Public Policy
+- 029W | Trincomalee Campus, Eastern University, Sri Lanka | Communication Studies
+- 030G | University of Moratuwa | Urban Informatics and Planning
+- 031D | University of Kelaniya | Peace and Conflict Resolution
+- 034G | University of Moratuwa | Fashion Design & Product Development
+- 038K | Rajarata University of Sri Lanka | Information and Communication Technology (ICT)
+- 038R | University of Vavuniya, Sri Lanka | Information and Communication Technology (ICT)
+- 041S | Sripalee Campus, University of Colombo | Arts (SP) - Performing Arts
+- 056G | University of Moratuwa | Facilities Management
+- 063J | South Eastern University of Sri Lanka | Islamic Studies
+- 064U | Uva Wellassa University of Sri Lanka | Science and Technology
+- 065U | Uva Wellassa University of Sri Lanka | Computer Science & Technology
+- 066U | Uva Wellassa University of Sri Lanka | Entrepreneurship and Management
+- 068C | University of Sri Jayewardenepura | Music
+- 068E | University of Jaffna | Music
+- 068Y | Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka | Music
+- 068Z | University of the Visual & Performing Arts | Music
+- 069E | University of Jaffna | Dance
+- 069Y | Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka | Dance
+- 069Z | University of the Visual & Performing Arts | Dance
+- 070E | University of Jaffna | Art & Design
+- 071Y | Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka | Drama & Theatre
+- 071Z | University of the Visual & Performing Arts | Drama & Theatre
+- 072Y | Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka | Visual & Technological Arts
+- 075U | Uva Wellassa University of Sri Lanka | Industrial Information Technology
+- 076U | Uva Wellassa University of Sri Lanka | Mineral Resources and Technology
+- 077C | University of Sri Jayewardenepura | Business Information Systems (Honours) (BIS)
+- 079J | South Eastern University of Sri Lanka | Management and Information Technology (SEUSL)
+- 081E | University of Jaffna | Physical Education
+- 081L | Sabaragamuwa University of Sri Lanka | Physical Education
+- 082C | University of Sri Jayewardenepura | Sports Science & Management
+- 082L | Sabaragamuwa University of Sri Lanka | Sports Science & Management
+- 084J | South Eastern University of Sri Lanka | Arabic Language
+- 085Z | University of the Visual & Performing Arts | Visual Arts
+- 090U | Uva Wellassa University of Sri Lanka | Hospitality, Tourism and Events Management
+- 091G | University of Moratuwa | Information Technology & Management
+- 092L | Sabaragamuwa University of Sri Lanka | Tourism & Hospitality Management
+- 092K | Rajarata University of Sri Lanka | Tourism & Hospitality Management
+- 096T | University of Colombo School of Computing | Information Systems
+- 096C | University of Sri Jayewardenepura | Information Systems
+- 096L | Sabaragamuwa University of Sri Lanka | Information Systems
+- 097G | University of Moratuwa | Landscape Architecture
+- 098D | University of Kelaniya | Translation Studies
+- 098E | University of Jaffna | Translation Studies
+- 098H | Eastern University, Sri Lanka | Translation Studies
+- 098L | Sabaragamuwa University of Sri Lanka | Translation Studies
+- 099C | University of Sri Jayewardenepura | Software Engineering
+- 099D | University of Kelaniya | Software Engineering
+- 099L | Sabaragamuwa University of Sri Lanka | Software Engineering
+- 100D | University of Kelaniya | Film & Television Studies
+- 101R | University of Vavuniya, Sri Lanka | Project Management
+- 102C | University of Sri Jayewardenepura | Engineering Technology (ET)
+- 102D | University of Kelaniya | Engineering Technology (ET)
+- 102E | University of Jaffna | Engineering Technology (ET)
+- 102F | University of Ruhuna | Engineering Technology (ET)
+- 102K | Rajarata University of Sri Lanka | Engineering Technology (ET)
+- 102L | Sabaragamuwa University of Sri Lanka | Engineering Technology (ET)
+- 102M | Wayamba University of Sri Lanka | Engineering Technology (ET)
+- 102U | Uva Wellassa University of Sri Lanka | Engineering Technology (ET)
+- 103A | University of Colombo | Biosystems Technology (BST)
+- 103C | University of Sri Jayewardenepura | Biosystems Technology (BST)
+- 103D | University of Kelaniya | Biosystems Technology (BST)
+- 103E | University of Jaffna | Biosystems Technology (BST)
+- 103F | University of Ruhuna | Biosystems Technology (BST)
+- 103H | Eastern University, Sri Lanka | Biosystems Technology (BST)
+- 103J | South Eastern University of Sri Lanka | Biosystems Technology (BST)
+- 103K | Rajarata University of Sri Lanka | Biosystems Technology (BST)
+- 103L | Sabaragamuwa University of Sri Lanka | Biosystems Technology (BST)
+- 103M | Wayamba University of Sri Lanka | Biosystems Technology (BST)
+- 103U | Uva Wellassa University of Sri Lanka | Biosystems Technology (BST)
+- 104A | University of Colombo | Information Communication Technology
+- 104C | University of Sri Jayewardenepura | Information Communication Technology
+- 104D | University of Kelaniya | Information Communication Technology
+- 104F | University of Ruhuna | Information Communication Technology
+- 104H | Eastern University, Sri Lanka | Information Communication Technology
+- 104J | South Eastern University of Sri Lanka | Information Communication Technology
+- 104K | Rajarata University of Sri Lanka | Information Communication Technology
+- 104R | University of Vavuniya, Sri Lanka | Information Communication Technology
+- 104U | Uva Wellassa University of Sri Lanka | Information Communication Technology
+- 105C | University of Sri Jayewardenepura | Teaching English as a Second Language (TESL)
+- 105D | University of Kelaniya | Teaching English as a Second Language (TESL)
+- 105L | Sabaragamuwa University of Sri Lanka | Teaching English as a Second Language (TESL)
+- 106F | University of Ruhuna | Marine and Freshwater Sciences
+- 107L | Sabaragamuwa University of Sri Lanka | Food Business Management
+- 109G | University of Moratuwa | Business Science
+- 110D | University of Kelaniya | Financial Engineering
+- 111B | University of Peradeniya | Geographical Information Science
+- 112B | University of Peradeniya | Social Work
+- 112C | University of Sri Jayewardenepura | Social Work
+- 113F | University of Ruhuna | Financial Mathematics and Industrial Statistics
+- 114U | Uva Wellassa University of Sri Lanka | Human Resource Development
+- 127D | University of Kelaniya | Accounting Information Systems
+- 128C | University of Sri Jayewardenepura | Arts - Information Technology
+- 131C | University of Sri Jayewardenepura | Financial Economics
+- 132U | Uva Wellassa University of Sri Lanka | English Language & Applied Linguistics
+- 133R | University of Vavuniya, Sri Lanka | Banking and Insurance
+- 134C | University of Sri Jayewardenepura | Creative Music Technology and Production
+- 135U | Uva Wellassa University of Sri Lanka | Plantation Management and Technology
+- 137A | University of Colombo | Primary Education
+- 139C | University of Sri Jayewardenepura | Polymer Science and Industrial Management
+- 141D | University of Kelaniya | Sports Science
+- 142F | University of Ruhuna | Geographical Information Systems (New)
+- 143B | University of Peradeniya | Electronic and Intelligent Systems Engineering (New)
+
+## Eligibility Rules Not Used
+- Electronic and Intelligent Systems Engineering
+
+## Cutoff Mapping Issues
+- Rows without unique course identity: 175
+- Rows with non-numeric official markers: 812
+- Rows skipped because extraction requires review: 1250
+
+### First 200 Rows Without Unique Course Identity
+- 2024/25 | University of Jayewardenepura | Social Work | Colombo | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Gampaha | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Kalutara | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Matale | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Kandy | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Nuwara Eliya | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Galle | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Matara | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Hambantota | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Jaffna | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Kilinochchi | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Mannar | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Mullaitivu | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Vavuniya | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Trincomalee | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Batticaloa | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Ampara | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Puttalam | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Kurunegala | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Anuradhapura | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Polonnaruwa | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Badulla | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Monaragala | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Kegalle | missing_match
+- 2024/25 | University of Jayewardenepura | Social Work | Ratnapura | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Colombo | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Gampaha | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Kalutara | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Matale | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Kandy | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Nuwara Eliya | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Galle | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Matara | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Hambantota | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Jaffna | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Kilinochchi | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Mannar | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Mullaitivu | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Vavuniya | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Trincomalee | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Batticaloa | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Ampara | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Puttalam | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Kurunegala | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Anuradhapura | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Polonnaruwa | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Badulla | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Monaragala | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Kegalle | missing_match
+- 2024/25 | University of Kelaniya | Sports Science & Management | Ratnapura | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Colombo | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Gampaha | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Kalutara | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Matale | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Kandy | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Nuwara Eliya | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Galle | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Matara | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Hambantota | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Jaffna | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Kilinochchi | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Mannar | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Mullaitivu | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Vavuniya | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Trincomalee | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Batticaloa | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Ampara | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Puttalam | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Kurunegala | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Anuradhapura | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Polonnaruwa | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Badulla | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Monaragala | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Kegalle | missing_match
+- 2024/25 | University of Colombo | Engineering Technology (ET) | Ratnapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Colombo | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Gampaha | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kalutara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Matale | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kandy | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Nuwara Eliya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Galle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Matara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Hambantota | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Jaffna | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kilinochchi | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Mannar | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Mullaitivu | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Vavuniya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Trincomalee | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Batticaloa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Ampara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Puttalam | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kurunegala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Anuradhapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Polonnaruwa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Badulla | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Monaragala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kegalle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Ratnapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Colombo | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Gampaha | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kalutara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Matale | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kandy | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Nuwara Eliya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Galle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Matara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Hambantota | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Jaffna | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kilinochchi | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Mannar | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Mullaitivu | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Vavuniya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Trincomalee | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Batticaloa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Ampara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Puttalam | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kurunegala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Anuradhapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Polonnaruwa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Badulla | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Monaragala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kegalle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Ratnapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Colombo | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Gampaha | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kalutara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Matale | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kandy | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Nuwara Eliya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Galle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Matara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Hambantota | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Jaffna | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kilinochchi | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Mannar | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Mullaitivu | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Vavuniya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Trincomalee | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Batticaloa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Ampara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Puttalam | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kurunegala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Anuradhapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Polonnaruwa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Badulla | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Monaragala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kegalle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Ratnapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Colombo | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Gampaha | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kalutara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Matale | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kandy | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Nuwara Eliya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Galle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Matara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Hambantota | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Jaffna | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kilinochchi | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Mannar | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Mullaitivu | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Vavuniya | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Trincomalee | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Batticaloa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Ampara | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Puttalam | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kurunegala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Anuradhapura | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Polonnaruwa | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Badulla | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Monaragala | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kegalle | missing_match
+- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Ratnapura | missing_match
+
+### First 200 Non-Numeric Cutoff Markers
+- 2024/25 | University of Colombo | Biological Science | Gampaha | NQC
+- 2024/25 | University of Colombo | Biological Science | Nuwara Eliya | NQC
+- 2024/25 | University of Colombo | Biological Science | Kilinochchi | NQC
+- 2024/25 | University of Colombo | Biological Science | Mannar | NQC
+- 2024/25 | University of Colombo | Biological Science | Mullaitivu | NQC
+- 2024/25 | University of Colombo | Biological Science | Vavuniya | NQC
+- 2024/25 | University of Colombo | Biological Science | Trincomalee | NQC
+- 2024/25 | University of Colombo | Biological Science | Batticaloa | NQC
+- 2024/25 | University of Colombo | Biological Science | Puttalam | NQC
+- 2024/25 | University of Colombo | Biological Science | Anuradhapura | NQC
+- 2024/25 | University of Colombo | Biological Science | Polonnaruwa | NQC
+- 2024/25 | University of Colombo | Biological Science | Monaragala | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Food Science & Technology | Hambantota | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Food Science & Technology | Monaragala | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Matale | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Nuwara Eliya | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Jaffna | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Kilinochchi | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Mannar | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Mullaitivu | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Vavuniya | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Trincomalee | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Batticaloa | NQC
+- 2024/25 | University of Sri Jayewardenepura | Food Science & Technology | Polonnaruwa | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Nuwara Eliya | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Kilinochchi | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Mannar | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Mullaitivu | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Vavuniya | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Trincomalee | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Polonnaruwa | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Badulla | NQC
+- 2024/25 | University of Peradeniya | Food Science & Technology | Monaragala | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Agriculture | Kilinochchi | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Agriculture | Vavuniya | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Agriculture | Trincomalee | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Agriculture | Nuwara Eliya | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Agriculture | Kilinochchi | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Agriculture | Mannar | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Agriculture | Mullaitivu | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Agriculture | Polonnaruwa | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Agriculture | Jaffna | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Agriculture | Kilinochchi | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Agriculture | Mannar | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Agriculture | Mullaitivu | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Agriculture | Trincomalee | NQC
+- 2024/25 | Eastern University, Sri Lanka | Agriculture | Kalutara | NQC
+- 2024/25 | Eastern University, Sri Lanka | Agriculture | Matale | NQC
+- 2024/25 | Eastern University, Sri Lanka | Agriculture | Matara | NQC
+- 2024/25 | Eastern University, Sri Lanka | Agriculture | Jaffna | NQC
+- 2024/25 | University of Jaffna | Agriculture | Mannar | NQC
+- 2024/25 | University of Peradeniya | Dental Surgery | Nuwara Eliya | NQC
+- 2024/25 | University of Peradeniya | Dental Surgery | Mannar | NQC
+- 2024/25 | University of Peradeniya | Dental Surgery | Vavuniya | NQC
+- 2024/25 | University of Peradeniya | Dental Surgery | Trincomalee | NQC
+- 2024/25 | University of Peradeniya | Dental Surgery | Polonnaruwa | NQC
+- 2024/25 | University of Peradeniya | Dental Surgery | Monaragala | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Kalutara | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Matale | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Kandy | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Matara | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Hambantota | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Jaffna | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Kilinochchi | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Mannar | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Mullaitivu | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Vavuniya | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Trincomalee | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Batticaloa | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Ampara | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Kurunegala | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Anuradhapura | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Badulla | NQC
+- 2024/25 | Uva Wellassa University of Sri Lanka | Medicine | Kegalle | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Medicine | Jaffna | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Medicine | Kilinochchi | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Medicine | Mannar | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Medicine | Mullaitivu | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Medicine | Vavuniya | NQC
+- 2024/25 | Wayamba University of Sri Lanka | Medicine | Badulla | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Nuwara Eliya | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Jaffna | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Kilinochchi | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Mannar | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Mullaitivu | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Vavuniya | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Trincomalee | NQC
+- 2024/25 | Sabaragamuwa University of Sri Lanka | Medicine | Anuradhapura | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Medicine | Jaffna | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Medicine | Kilinochchi | NQC
+- 2024/25 | Rajarata University of Sri Lanka | Medicine | Mullaitivu | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Gampaha | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Kalutara | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Matale | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Galle | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Matara | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Hambantota | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Jaffna | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Kilinochchi | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Mullaitivu | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Kurunegala | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Badulla | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Kegalle | NQC
+- 2024/25 | Eastern University, Sri Lanka | Medicine | Ratnapura | NQC
+- 2024/25 | University of Moratuwa | Medicine | Matale | NQC
+- 2024/25 | University of Moratuwa | Medicine | Jaffna | NQC
+- 2024/25 | University of Moratuwa | Medicine | Kilinochchi | NQC
+- 2024/25 | University of Moratuwa | Medicine | Mannar | NQC
+- 2024/25 | University of Moratuwa | Medicine | Mullaitivu | NQC
+- 2024/25 | University of Moratuwa | Medicine | Vavuniya | NQC
+- 2024/25 | University of Moratuwa | Medicine | Batticaloa | NQC
+- 2024/25 | University of Moratuwa | Medicine | Badulla | NQC
+- 2024/25 | University of Ruhuna | Medicine | Jaffna | NQC
+- 2024/25 | University of Ruhuna | Medicine | Kilinochchi | NQC
+- 2024/25 | University of Ruhuna | Medicine | Mannar | NQC
+- 2024/25 | University of Ruhuna | Medicine | Vavuniya | NQC
+- 2024/25 | University of Ruhuna | Medicine | Trincomalee | NQC
+- 2024/25 | University of Jaffna | Medicine | Hambantota | NQC
+- 2024/25 | University of Kelaniya | Medicine | Kilinochchi | NQC
+- 2024/25 | University of Kelaniya | Medicine | Mannar | NQC
+- 2024/25 | University of Kelaniya | Medicine | Mullaitivu | NQC
+- 2024/25 | University of Kelaniya | Medicine | Vavuniya | NQC
+- 2024/25 | University of Sri Jayewardenepura | Medicine | Matale | NQC
+- 2024/25 | University of Sri Jayewardenepura | Medicine | Nuwara Eliya | NQC
+- 2024/25 | University of Sri Jayewardenepura | Medicine | Mannar | NQC
+- 2024/25 | University of Sri Jayewardenepura | Medicine | Mullaitivu | NQC
+- 2024/25 | University of Sri Jayewardenepura | Medicine | Batticaloa | NQC
+- 2024/25 | University of Sri Jayewardenepura | Medicine | Monaragala | NQC
+- 2024/25 | University of Peradeniya | Medicine | Mannar | NQC
+- 2024/25 | University of Peradeniya | Medicine | Mullaitivu | NQC
+- 2024/25 | University of Peradeniya | Medicine | Trincomalee | NQC
+- 2024/25 | University of Peradeniya | Medicine | Polonnaruwa | NQC
+- 2024/25 | University of Colombo | Medicine | Mannar | NQC
+- 2024/25 | University of Colombo | Medicine | Mullaitivu | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Kilinochchi | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Mannar | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Mullaitivu | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Vavuniya | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Trincomalee | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Ampara | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Polonnaruwa | NQC
+- 2024/25 | University of Peradeniya | Physical Science | Monaragala | NQC
+- 2024/25 | University of Colombo | Physical Science | Matale | NQC
+- 2024/25 | University of Colombo | Physical Science | Kilinochchi | NQC
+- 2024/25 | University of Colombo | Physical Science | Mannar | NQC
+- 2024/25 | University of Colombo | Physical Science | Mullaitivu | NQC
+- 2024/25 | University of Colombo | Physical Science | Vavuniya | NQC
+- 2024/25 | University of Colombo | Physical Science | Trincomalee | NQC
+- 2024/25 | University of Colombo | Physical Science | Batticaloa | NQC
+- 2024/25 | University of Colombo | Physical Science | Ampara | NQC
+- 2024/25 | University of Colombo | Physical Science | Polonnaruwa | NQC
+- 2024/25 | University of Colombo | Physical Science | Badulla | NQC
+- 2024/25 | University of Colombo | Physical Science | Monaragala | NQC
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | Computer Science | Colombo | NQC
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | Computer Science | Kalutara | NQC
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | Computer Science | Galle | NQC
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | Computer Science | Matara | NQC
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | Computer Science | Hambantota | NQC
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | Computer Science | Kilinochchi | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Matale | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Nuwara Eliya | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Matara | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Jaffna | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Mannar | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Mullaitivu | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Vavuniya | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Trincomalee | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Batticaloa | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Ampara | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Anuradhapura | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Polonnaruwa | NQC
+- 2024/25 | University of Ruhuna | Computer Science | Monaragala | NQC
+- 2024/25 | University of Jaffna | Computer Science | Kalutara | NQC
+- 2024/25 | University of Jaffna | Computer Science | Matale | NQC
+- 2024/25 | University of Jaffna | Computer Science | Nuwara Eliya | NQC
+- 2024/25 | University of Jaffna | Computer Science | Galle | NQC
+- 2024/25 | University of Jaffna | Computer Science | Matara | NQC
+- 2024/25 | University of Jaffna | Computer Science | Hambantota | NQC
+- 2024/25 | University of Jaffna | Computer Science | Mannar | NQC
+- 2024/25 | University of Jaffna | Computer Science | Mullaitivu | NQC
+- 2024/25 | University of Jaffna | Computer Science | Vavuniya | NQC
+- 2024/25 | University of Jaffna | Computer Science | Polonnaruwa | NQC
+- 2024/25 | University of Jaffna | Computer Science | Monaragala | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Matale | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Nuwara Eliya | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Jaffna | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Kilinochchi | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Mannar | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Mullaitivu | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Vavuniya | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Trincomalee | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Batticaloa | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Puttalam | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Kurunegala | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Anuradhapura | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Polonnaruwa | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Badulla | NQC
+- 2024/25 | University of Kelaniya | Computer Science | Monaragala | NQC
+- 2024/25 | University of Sri Jayewardenepura | Computer Science | Matale | NQC
+- 2024/25 | University of Sri Jayewardenepura | Computer Science | Kandy | NQC
+
+### First 200 Cutoff Rows Requiring Review
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Colombo
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Gampaha
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kalutara
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Matale
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kandy
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Nuwara Eliya
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Galle
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Matara
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Hambantota
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Jaffna
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kilinochchi
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Mannar
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Mullaitivu
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Vavuniya
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Trincomalee
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Batticaloa
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Ampara
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Puttalam
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kurunegala
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Anuradhapura
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Polonnaruwa
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Badulla
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Monaragala
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kegalle
+- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Ratnapura
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Colombo
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Gampaha
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kalutara
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Matale
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kandy
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Nuwara Eliya
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Galle
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Matara
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Hambantota
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Jaffna
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kilinochchi
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Mannar
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Mullaitivu
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Vavuniya
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Trincomalee
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Batticaloa
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Ampara
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Puttalam
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kurunegala
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Anuradhapura
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Polonnaruwa
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Badulla
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Monaragala
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kegalle
+- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Ratnapura
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Colombo
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Gampaha
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kalutara
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Matale
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kandy
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Nuwara Eliya
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Galle
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Matara
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Hambantota
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Jaffna
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kilinochchi
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Mannar
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Mullaitivu
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Vavuniya
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Trincomalee
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Batticaloa
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Ampara
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Puttalam
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kurunegala
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Anuradhapura
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Polonnaruwa
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Badulla
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Monaragala
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kegalle
+- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Ratnapura
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Colombo
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Gampaha
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kalutara
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matale
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kandy
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Nuwara Eliya
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Galle
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matara
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Hambantota
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Jaffna
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kilinochchi
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mannar
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mullaitivu
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Vavuniya
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Trincomalee
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Batticaloa
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ampara
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Puttalam
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kurunegala
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Anuradhapura
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Polonnaruwa
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Badulla
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Monaragala
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kegalle
+- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ratnapura
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Colombo
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Gampaha
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kalutara
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matale
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kandy
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Nuwara Eliya
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Galle
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matara
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Hambantota
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Jaffna
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kilinochchi
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mannar
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mullaitivu
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Vavuniya
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Trincomalee
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Batticaloa
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ampara
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Puttalam
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kurunegala
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Anuradhapura
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Polonnaruwa
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Badulla
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Monaragala
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kegalle
+- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ratnapura
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Colombo
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Gampaha
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kalutara
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Matale
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kandy
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Nuwara Eliya
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Galle
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Matara
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Hambantota
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Jaffna
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kilinochchi
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Mannar
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Mullaitivu
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Vavuniya
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Trincomalee
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Batticaloa
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Ampara
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Puttalam
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kurunegala
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Anuradhapura
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Polonnaruwa
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Badulla
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Monaragala
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kegalle
+- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Ratnapura
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Colombo
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Gampaha
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kalutara
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Matale
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kandy
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Nuwara Eliya
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Galle
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Matara
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Hambantota
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Jaffna
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kilinochchi
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Mannar
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Mullaitivu
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Vavuniya
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Trincomalee
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Batticaloa
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Ampara
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Puttalam
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kurunegala
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Anuradhapura
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Polonnaruwa
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Badulla
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Monaragala
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kegalle
+- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Ratnapura
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Colombo
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Gampaha
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kalutara
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Matale
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kandy
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Nuwara Eliya
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Galle
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Matara
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Hambantota
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Jaffna
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kilinochchi
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Mannar
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Mullaitivu
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Vavuniya
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Trincomalee
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Batticaloa
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Ampara
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Puttalam
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kurunegala
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Anuradhapura
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Polonnaruwa
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Badulla
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Monaragala
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kegalle
+- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Ratnapura

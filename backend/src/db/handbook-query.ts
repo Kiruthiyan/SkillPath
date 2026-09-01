@@ -6,7 +6,7 @@ import {
   universitiesTable,
   coursesTable,
 } from "./schema/index";
-import { eq, and, asc, desc, inArray } from "drizzle-orm";
+import { eq, and, asc, desc, inArray, sql } from "drizzle-orm";
 import {
   predictCutoff,
   eligibilityTier,
@@ -135,7 +135,7 @@ export async function listProgrammesWithCutoffs(opts: {
   if (!edition) return [];
 
   const programmeConditions = [];
-  if (stream) programmeConditions.push(eq(degreeProgrammesTable.stream, stream));
+  if (stream) programmeConditions.push(sql`lower(${degreeProgrammesTable.stream}) = lower(${stream})`);
   if (universityId)
     programmeConditions.push(eq(degreeProgrammesTable.universityId, universityId));
   if (degreeType)

@@ -1,0 +1,311 @@
+{
+  "universities": [
+    {
+      "university_code": "001",
+      "university_name": "University of Colombo",
+      "institutes": [
+        {
+          "institute_name": "University of Colombo",
+          "location": "Colombo",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Sripalee Campus, University of Colombo",
+          "location": "Horana",
+          "faculty": "Arts"
+        },
+        {
+          "institute_name": "Faculty of Medicine, University of Colombo",
+          "location": "Colombo 08",
+          "faculty": "Medicine"
+        },
+        {
+          "institute_name": "University of Colombo School of Computing",
+          "location": "Colombo 07",
+          "faculty": "Computing"
+        },
+        {
+          "institute_name": "Institute of Human Resource Advancement, University of Colombo",
+          "location": "Colombo 07",
+          "faculty": "Not Available"
+        }
+      ]
+    },
+    {
+      "university_code": "002",
+      "university_name": "University of Peradeniya",
+      "institutes": [
+        {
+          "institute_name": "University of Peradeniya",
+          "location": "Peradeniya",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Dental Sciences, University of Peradeniya",
+          "location": "Peradeniya",
+          "faculty": "Dental Sciences"
+        },
+        {
+          "institute_name": "Faculty of Veterinary Medicine and Animal Science, University of Peradeniya",
+          "location": "Peradeniya",
+          "faculty": "Veterinary Medicine and Animal Science"
+        },
+        {
+          "institute_name": "Faculty of Medicine, University of Peradeniya",
+          "location": "Peradeniya",
+          "faculty": "Medicine"
+        }
+      ]
+    },
+    {
+      "university_code": "003",
+      "university_name": "University of Sri Jayewardenepura",
+      "institutes": [
+        {
+          "institute_name": "University of Sri Jayewardenepura",
+          "location": "Gangodawila, Nugegoda",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medical Sciences, University of Sri Jayewardenepura",
+          "location": "Gangodawila",
+          "faculty": "Medical Sciences"
+        },
+        {
+          "institute_name": "Faculty of Dental Sciences, University of Sri Jayewardenepura",
+          "location": "Gangodawila",
+          "faculty": "Dental Sciences"
+        }
+      ]
+    },
+    {
+      "university_code": "004",
+      "university_name": "University of Kelaniya",
+      "institutes": [
+        {
+          "institute_name": "University of Kelaniya",
+          "location": "Kelaniya",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, University of Kelaniya",
+          "location": "Ragama",
+          "faculty": "Medicine"
+        }
+      ]
+    },
+    {
+      "university_code": "005",
+      "university_name": "University of Moratuwa",
+      "institutes": [
+        {
+          "institute_name": "University of Moratuwa",
+          "location": "Moratuwa",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, University of Moratuwa",
+          "location": "Kalutara",
+          "faculty": "Medicine"
+        },
+        {
+          "institute_name": "Institute of Technology, University of Moratuwa",
+          "location": "Not Available",
+          "faculty": "Technology"
+        }
+      ]
+    },
+    {
+      "university_code": "006",
+      "university_name": "University of Jaffna",
+      "institutes": [
+        {
+          "institute_name": "University of Jaffna",
+          "location": "Jaffna",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, University of Jaffna",
+          "location": "Jaffna",
+          "faculty": "Medicine"
+        }
+      ]
+    },
+    {
+      "university_code": "007",
+      "university_name": "University of Ruhuna",
+      "institutes": [
+        {
+          "institute_name": "University of Ruhuna",
+          "location": "Matara",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, University of Ruhuna",
+          "location": "Karapitiya, Galle",
+          "faculty": "Medicine"
+        },
+        {
+          "institute_name": "Faculty of Agriculture, University of Ruhuna",
+          "location": "Mapalana, Kamburupitiya",
+          "faculty": "Agriculture"
+        },
+        {
+          "institute_name": "Faculty of Engineering, University of Ruhuna",
+          "location": "Hapugala, Galle",
+          "faculty": "Engineering"
+        }
+      ]
+    },
+    {
+      "university_code": "008",
+      "university_name": "Eastern University, Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "Eastern University, Sri Lanka",
+          "location": "Vantharamoolai, Chenkalady",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Health-Care Sciences, Eastern University, Sri Lanka",
+          "location": "Batticaloa",
+          "faculty": "Health-Care Sciences"
+        },
+        {
+          "institute_name": "Trincomalee Campus, Eastern University, Sri Lanka",
+          "location": "Konesapuri, Nilavely, Trincomalee",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka",
+          "location": "Kallady, Batticaloa",
+          "faculty": "Aesthetic Studies"
+        }
+      ]
+    },
+    {
+      "university_code": "009",
+      "university_name": "South Eastern University of Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "South Eastern University of Sri Lanka",
+          "location": "Oluvil",
+          "faculty": "Multiple"
+        }
+      ]
+    },
+    {
+      "university_code": "010",
+      "university_name": "Rajarata University of Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "Rajarata University of Sri Lanka",
+          "location": "Mihintale",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine & Allied Sciences, Rajarata University of Sri Lanka",
+          "location": "Saliyapura, Anuradhapura",
+          "faculty": "Medicine & Allied Sciences"
+        }
+      ]
+    },
+    {
+      "university_code": "011",
+      "university_name": "Sabaragamuwa University of Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "Sabaragamuwa University of Sri Lanka",
+          "location": "Pambahinna, Belihuloya",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, Sabaragamuwa University of Sri Lanka",
+          "location": "Ratnapura",
+          "faculty": "Medicine"
+        }
+      ]
+    },
+    {
+      "university_code": "012",
+      "university_name": "Wayamba University of Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "Wayamba University of Sri Lanka",
+          "location": "Kuliyapitiya",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, Wayamba University of Sri Lanka",
+          "location": "Kuliyapitiya",
+          "faculty": "Medicine"
+        },
+        {
+          "institute_name": "Faculty of Agriculture & Plantation Management, Wayamba University of Sri Lanka",
+          "location": "Makandura, Gonawila",
+          "faculty": "Agriculture & Plantation Management"
+        }
+      ]
+    },
+    {
+      "university_code": "013",
+      "university_name": "Uva Wellassa University of Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "Uva Wellassa University of Sri Lanka",
+          "location": "Badulla",
+          "faculty": "Multiple"
+        },
+        {
+          "institute_name": "Faculty of Medicine, Uva Wellassa University of Sri Lanka",
+          "location": "Badulla",
+          "faculty": "Medicine"
+        }
+      ]
+    },
+    {
+      "university_code": "014",
+      "university_name": "University of the Visual & Performing Arts",
+      "institutes": [
+        {
+          "institute_name": "University of the Visual & Performing Arts",
+          "location": "Colombo 07",
+          "faculty": "Visual & Performing Arts"
+        }
+      ]
+    },
+    {
+      "university_code": "015",
+      "university_name": "Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "Gampaha Wickramarachchi University of Indigenous Medicine, Sri Lanka",
+          "location": "Yakkala",
+          "faculty": "Indigenous Medicine"
+        }
+      ]
+    },
+    {
+      "university_code": "016",
+      "university_name": "University of Vavuniya, Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "University of Vavuniya, Sri Lanka",
+          "location": "Pampaaimadu, Vavuniya",
+          "faculty": "Multiple"
+        }
+      ]
+    },
+    {
+      "university_code": "017",
+      "university_name": "The Open University of Sri Lanka",
+      "institutes": [
+        {
+          "institute_name": "The Open University of Sri Lanka",
+          "location": "Nawala, Nugegoda",
+          "faculty": "Not Available"
+        }
+      ]
+    }
+  ]
+}

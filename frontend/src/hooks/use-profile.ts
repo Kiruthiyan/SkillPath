@@ -32,7 +32,6 @@ export const useProfileStore = create<ProfileState>()(
 );
 
 export const UGC_DISTRICTS = [
-  "All Island",
   "Colombo",
   "Gampaha",
   "Kalutara",
@@ -43,7 +42,10 @@ export const UGC_DISTRICTS = [
   "Matara",
   "Hambantota",
   "Jaffna",
-  "Vanni",
+  "Kilinochchi",
+  "Mannar",
+  "Mullaitivu",
+  "Vavuniya",
   "Batticaloa",
   "Ampara",
   "Trincomalee",

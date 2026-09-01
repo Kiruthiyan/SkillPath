@@ -8,10 +8,12 @@ export interface CheckerProgramme {
   universityId: number;
   universityName: string;
   degreeName: string;
-  faculty: string;
-  degreeType: string;
-  durationYears: number;
+  faculty: string | null;
+  degreeType: string | null;
+  duration: string | null;
+  durationYears: number | null;
   stream: string;
+  eligibleStreams?: string[];
 }
 
 export interface CheckerAcademicYear {
@@ -21,7 +23,7 @@ export interface CheckerAcademicYear {
 
 export interface SubjectRequirement {
   id: number;
-  requirementType: "compulsory" | "one_of" | "recommended";
+  requirementType: "compulsory" | "one_of" | "recommended" | "official_text";
   groupKey: string;
   subjectName: string;
   minimumGrade: string | null;
@@ -109,8 +111,9 @@ export interface CheckerRecommendation {
   universityId: number;
   university: string;
   courseName: string;
-  faculty: string;
-  degreeDuration: number;
+  faculty: string | null;
+  degreeDuration: number | null;
+  duration?: string | null;
   medium: string | null;
   studentZScore: number;
   officialCutoff: number | null;

@@ -18,6 +18,7 @@ import {
   getModeForYear,
   getOfficialCutoff,
   getVerifiedHistoryBeforeYear,
+  listCandidateProgrammes,
   type CandidateProgramme,
   type CheckerRecommendationEngineContext,
   type CheckerRecommendationRequest,
@@ -268,6 +269,34 @@ describe("buildCheckerRecommendations", () => {
     expect(serialized).not.toContain("needs_review");
     expect(serialized).not.toContain("rawDegreeName");
     expect(serialized).not.toContain("extractedProgrammeRows");
+  });
+});
+
+describe("listCandidateProgrammes", () => {
+  it("filters official-mode candidates by stream in the SQL query, not just in-memory", async () => {
+    const chain = mockChain([]);
+    const mock = db as unknown as { select: ReturnType<typeof vi.fn> };
+    mock.select.mockImplementationOnce(() => chain);
+
+    await listCandidateProgrammes("2025/26", "official", "Physical Science");
+
+    const whereArg = (chain.where as ReturnType<typeof vi.fn>).mock.calls[0][0];
+    const serialized = safeStringify(whereArg);
+    expect(serialized.toLowerCase()).toContain("lower");
+    expect(serialized).toContain("Physical Science");
+  });
+
+  it("filters historical-mode candidates by stream in the SQL query, not just in-memory", async () => {
+    const chain = mockChain([]);
+    const mock = db as unknown as { selectDistinct: ReturnType<typeof vi.fn> };
+    mock.selectDistinct.mockImplementationOnce(() => chain);
+
+    await listCandidateProgrammes("2025/26", "historical_estimate", "Biological Science");
+
+    const whereArg = (chain.where as ReturnType<typeof vi.fn>).mock.calls[0][0];
+    const serialized = safeStringify(whereArg);
+    expect(serialized.toLowerCase()).toContain("lower");
+    expect(serialized).toContain("Biological Science");
   });
 });
 
