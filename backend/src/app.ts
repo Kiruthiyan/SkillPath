@@ -11,7 +11,7 @@ const corsOrigins = process.env.CORS_ORIGINS?.split(",").map((o) => o.trim()).fi
 
 app.use(
   helmet({
-    contentSecurityPolicy: process.env.NODE_ENV === "production" ? undefined : false,
+    contentSecurityPolicy: false,
   }),
 );
 app.use(
@@ -27,6 +27,20 @@ app.use(
     redact: ["req.headers.authorization", "req.headers.cookie"],
   }),
 );
+
+// Gracefully handle browser DevTools probes
+app.use("/.well-known", (_req, res) => {
+  res.status(204).end();
+});
+
+// Redirect browser traffic on port 5000 to the frontend app
+app.get("/", (req, res) => {
+  if (req.accepts("html")) {
+    res.redirect("http://localhost:5173");
+  } else {
+    res.json({ status: "ok", message: "SkillPath API Server", webApp: "http://localhost:5173" });
+  }
+});
 
 app.use("/api", apiRouter);
 

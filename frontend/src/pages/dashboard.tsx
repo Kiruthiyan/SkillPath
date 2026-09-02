@@ -24,6 +24,7 @@ import {
 import { useProfileStore } from "@/hooks/use-profile";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { QueryError } from "@/components/query-error";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +32,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Dashboard() {
-  usePageTitle("Dashboard");
+  const { t } = useTranslations();
+  usePageTitle(t.dashboard.title);
   const profile = useProfileStore();
   const user = useAuthStore((s) => s.user);
   const isComplete = profile.isComplete() || !!(user?.stream && user?.zscore != null);
@@ -57,23 +59,23 @@ export default function Dashboard() {
   const { data: recentSearches } = useListRecentSearches();
 
   const statCards = [
-    { label: "Universities", value: stats?.totalUniversities, icon: Building2 },
-    { label: "Courses", value: stats?.totalCourses, icon: BookOpen },
-    { label: "Reviews", value: stats?.totalReviews, icon: Star },
-    { label: "Success Stories", value: stats?.totalSuccessStories, icon: Trophy },
+    { label: t.dashboard.statUniversities, value: stats?.totalUniversities, icon: Building2 },
+    { label: t.dashboard.statCourses, value: stats?.totalCourses, icon: BookOpen },
+    { label: t.dashboard.statReviews, value: stats?.totalReviews, icon: Star },
+    { label: t.dashboard.statStories, value: stats?.totalSuccessStories, icon: Trophy },
   ];
 
   return (
     <div className="space-y-8 pb-10">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t.dashboard.title}</h1>
           <p className="text-muted-foreground mt-2">
-            {user ? `Welcome back, ${user.name}` : "Your personalized overview"}
+            {user ? `${t.dashboard.welcomeBack}, ${user.name}` : t.dashboard.overviewSubtitle}
           </p>
         </div>
         {stats?.handbookYear && (
-          <Badge variant="outline">UGC Handbook {stats.handbookYear}</Badge>
+          <Badge variant="outline">{t.dashboard.handbookBadge} {stats.handbookYear}</Badge>
         )}
       </div>
 
@@ -84,10 +86,10 @@ export default function Dashboard() {
           <CardContent className="flex items-center gap-4 p-6">
             <AlertCircle className="h-8 w-8 text-secondary shrink-0" />
             <div className="flex-1">
-              <p className="font-medium">Complete your profile for personalized recommendations</p>
-              <p className="text-sm text-muted-foreground">Add your stream, Z-score, and district to unlock UGC-based course matches.</p>
+              <p className="font-medium">{t.dashboard.profileAlertTitle}</p>
+              <p className="text-sm text-muted-foreground">{t.dashboard.profileAlertDesc}</p>
             </div>
-            <Button asChild><Link href="/profile">Set Up Profile</Link></Button>
+            <Button asChild><Link href="/profile">{t.actions.setUpProfile}</Link></Button>
           </CardContent>
         </Card>
       )}
@@ -113,7 +115,7 @@ export default function Dashboard() {
       {stats?.topStreams && stats.topStreams.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Top A/L Streams by Programme Count</CardTitle>
+            <CardTitle className="text-base">{t.dashboard.topStreamsTitle}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
             {stats.topStreams.map((s) => (
@@ -143,10 +145,10 @@ export default function Dashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <GraduationCap className="h-5 w-5 text-primary" />
-                Recommended Courses
+                {t.dashboard.recommendedTitle}
               </CardTitle>
               <CardDescription>
-                Top matches for your profile
+                {t.dashboard.recommendedSubtitle}
                 {recommendations?.predictedYear && (
                   <> · Predicted {recommendations.predictedYear}</>
                 )}
@@ -176,7 +178,7 @@ export default function Dashboard() {
                   </Link>
                 ))
               ) : (
-                <p className="text-muted-foreground text-sm">No recommendations yet.</p>
+                <p className="text-muted-foreground text-sm">{t.dashboard.noRecommendations}</p>
               )}
             </CardContent>
           </Card>
@@ -185,9 +187,9 @@ export default function Dashboard() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5 text-primary" />
-                Career Paths
+                {t.dashboard.careerPathsTitle}
               </CardTitle>
-              <CardDescription>Aligned with your stream</CardDescription>
+              <CardDescription>{t.dashboard.careerPathsSubtitle}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {recsLoading ? (
@@ -202,7 +204,7 @@ export default function Dashboard() {
                   </div>
                 ))
               ) : (
-                <p className="text-muted-foreground text-sm">No career paths yet.</p>
+                <p className="text-muted-foreground text-sm">{t.dashboard.noCareers}</p>
               )}
             </CardContent>
           </Card>
@@ -214,7 +216,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Bookmark className="h-4 w-4" /> Saved Courses
+              <Bookmark className="h-4 w-4" /> {t.dashboard.savedCoursesTitle}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -225,7 +227,7 @@ export default function Dashboard() {
                 </Link>
               ))
             ) : (
-              <p className="text-sm text-muted-foreground">No saved courses</p>
+              <p className="text-sm text-muted-foreground">{t.dashboard.noSavedCourses}</p>
             )}
           </CardContent>
         </Card>
@@ -233,7 +235,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Building2 className="h-4 w-4" /> Saved Universities
+              <Building2 className="h-4 w-4" /> {t.dashboard.savedUniversitiesTitle}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -244,7 +246,7 @@ export default function Dashboard() {
                 </Link>
               ))
             ) : (
-              <p className="text-sm text-muted-foreground">No saved universities</p>
+              <p className="text-sm text-muted-foreground">{t.dashboard.noSavedUniversities}</p>
             )}
           </CardContent>
         </Card>
@@ -252,7 +254,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <MapIcon className="h-4 w-4" /> Roadmaps
+              <MapIcon className="h-4 w-4" /> {t.dashboard.roadmapsTitle}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -267,7 +269,7 @@ export default function Dashboard() {
                 </Link>
               ))
             ) : (
-              <p className="text-sm text-muted-foreground">No roadmaps generated</p>
+              <p className="text-sm text-muted-foreground">{t.dashboard.noRoadmaps}</p>
             )}
           </CardContent>
         </Card>
@@ -277,7 +279,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Search className="h-4 w-4" /> Recent Searches
+              <Search className="h-4 w-4" /> {t.dashboard.recentSearchesTitle}
             </CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">

@@ -8,6 +8,7 @@ import { useListCourses, useGenerateRoadmap } from "@/api";
 import type { Roadmap } from "@/api";
 import { useProfileStore } from "@/hooks/use-profile";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { QueryError } from "@/components/query-error";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -60,7 +61,8 @@ function downloadRoadmapPdf(roadmap: Roadmap) {
 }
 
 export default function RoadmapPage() {
-  usePageTitle("Career Roadmap");
+  const { t, language } = useTranslations();
+  usePageTitle(t.roadmap.title);
   const search = useSearch();
   const courseIdParam = getQueryParam(search, "courseId");
   const profile = useProfileStore();
@@ -77,10 +79,14 @@ export default function RoadmapPage() {
     mutation: {
       onSuccess: (data) => {
         setRoadmap(data);
-        toast({ title: "Roadmap generated!" });
+        toast({ title: t.roadmap.generatedSuccess });
       },
       onError: () => {
-        toast({ title: "Failed to generate roadmap", variant: "destructive" });
+        toast({
+          title: "Failed to generate roadmap",
+          description: "Please select a course and try again.",
+          variant: "destructive",
+        });
       },
     },
   });
@@ -91,105 +97,139 @@ export default function RoadmapPage() {
     }
   }, [courseIdParam]);
 
-  function handleGenerate() {
-    const courseId = parseInt(selectedCourseId);
-    if (!courseId) {
-      toast({ title: "Select a course first", variant: "destructive" });
-      return;
+  useEffect(() => {
+    if (selectedCourseId && !roadmap) {
+      const langName = language === "si" ? "Sinhala" : language === "ta" ? "Tamil" : "English";
+      generateRoadmap({
+        data: {
+          courseId: parseInt(selectedCourseId),
+          stream: profile.stream || undefined,
+          targetCareer: undefined,
+          additionalContext: `Please generate the roadmap steps and advice in ${langName}.`,
+        },
+      });
     }
+  }, [selectedCourseId]);
+
+  function handleGenerate() {
+    if (!selectedCourseId) return;
+    const langName = language === "si" ? "Sinhala" : language === "ta" ? "Tamil" : "English";
     generateRoadmap({
       data: {
-        courseId,
+        courseId: parseInt(selectedCourseId),
         stream: profile.stream || undefined,
-        zscore: profile.zscore ?? undefined,
+        targetCareer: undefined,
+        additionalContext: `Please generate the roadmap steps and advice in ${langName}.`,
       },
     });
   }
 
   return (
-    <div className="space-y-8 pb-10">
+    <div className="space-y-8 pb-10 max-w-4xl mx-auto">
       <div>
         <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
           <Map className="h-8 w-8 text-primary" />
-          AI Career Roadmap
+          {t.roadmap.title}
         </h1>
-        <p className="text-muted-foreground mt-2">
-          Generate a personalized year-by-year plan for your chosen degree.
-        </p>
+        <p className="text-muted-foreground mt-2">{t.roadmap.subtitle}</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Select a Course</CardTitle>
-          <CardDescription>Choose a degree program to generate your roadmap</CardDescription>
+          <CardTitle>{t.roadmap.selectCourseLabel}</CardTitle>
+          <CardDescription>Choose from official degree programmes</CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col sm:flex-row gap-4">
+        <CardContent className="space-y-4">
           {isError && <QueryError onRetry={() => refetch()} />}
-          {coursesLoading ? (
-            <Skeleton className="h-10 flex-1" />
-          ) : (
-            <Select value={selectedCourseId} onValueChange={setSelectedCourseId}>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Select
+              value={selectedCourseId}
+              onValueChange={setSelectedCourseId}
+              disabled={coursesLoading}
+            >
               <SelectTrigger className="flex-1">
-                <SelectValue placeholder="Choose a course..." />
+                <SelectValue placeholder={coursesLoading ? "Loading courses..." : t.roadmap.selectCoursePlaceholder} />
               </SelectTrigger>
               <SelectContent>
                 {courses?.map((c) => (
                   <SelectItem key={c.id} value={String(c.id)}>
-                    {c.degreeName} — {c.universityShortName ?? c.universityName}
+                    {c.degreeName} — {c.universityName}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-          )}
-          <Button onClick={handleGenerate} disabled={isPending || !selectedCourseId}>
-            <Sparkles className="h-4 w-4 mr-2" />
-            {isPending ? "Generating..." : "Generate Roadmap"}
-          </Button>
+            <Button
+              onClick={handleGenerate}
+              disabled={!selectedCourseId || isPending}
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              {isPending ? t.roadmap.generatingBtn : t.roadmap.generateBtn}
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
-      {roadmap && (
+      {isPending && (
+        <div className="space-y-4">
+          <Skeleton className="h-32 w-full" />
+          <Skeleton className="h-48 w-full" />
+        </div>
+      )}
+
+      {roadmap && !isPending && (
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">{roadmap.degreeName}</h2>
-            <Button variant="outline" onClick={() => downloadRoadmapPdf(roadmap)}>
-              <Download className="h-4 w-4 mr-2" /> Download PDF
+            <div>
+              <h2 className="text-2xl font-bold">{roadmap.degreeName}</h2>
+              {roadmap.targetCareer && (
+                <p className="text-muted-foreground">Target: {roadmap.targetCareer}</p>
+              )}
+            </div>
+            <Button variant="outline" size="sm" onClick={() => downloadRoadmapPdf(roadmap)}>
+              <Download className="h-4 w-4 mr-2" /> {t.roadmap.downloadPdfBtn}
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {roadmap.years.map((year) => (
-              <Card key={year.year}>
+          <div className="space-y-4">
+            {roadmap.years.map((yr) => (
+              <Card key={yr.year}>
                 <CardHeader>
-                  <Badge>Year {year.year}</Badge>
-                  <CardTitle className="text-lg">Milestones</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Badge variant="outline">{t.roadmap.year} {yr.year}</Badge>
+                    {t.roadmap.milestones}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {year.milestones.map((m, i) => (
-                      <li key={i} className="text-sm text-muted-foreground flex gap-2">
-                        <span className="text-primary">•</span> {m}
+                    {yr.milestones.map((m, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm">
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                        <span>{m}</span>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
               </Card>
             ))}
-          </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>After Graduation</CardTitle>
-            </CardHeader>
-            <CardContent className="grid sm:grid-cols-2 gap-4">
-              {roadmap.afterGraduation.map((m, i) => (
-                <div key={i} className="p-4 rounded-lg border border-[hsl(var(--border))]">
-                  <p className="text-sm text-muted-foreground">{m.timeframe}</p>
-                  <p className="font-medium">{m.role}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+            {roadmap.afterGraduation && roadmap.afterGraduation.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">{t.roadmap.afterGraduation}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {roadmap.afterGraduation.map((ag, idx) => (
+                      <div key={idx} className="p-3 rounded-lg border border-[hsl(var(--border))]">
+                        <p className="text-xs text-muted-foreground font-medium">{ag.timeframe}</p>
+                        <p className="font-semibold mt-1">{ag.role}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         </motion.div>
       )}
     </div>

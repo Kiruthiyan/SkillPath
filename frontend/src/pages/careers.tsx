@@ -5,6 +5,7 @@ import { Briefcase, TrendingUp, DollarSign } from "lucide-react";
 
 import { useListCareerPaths } from "@/api";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { QueryError } from "@/components/query-error";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +17,8 @@ function getQueryParam(search: string, key: string): string | null {
 }
 
 export default function Careers() {
-  usePageTitle("Career Paths");
+  const { t } = useTranslations();
+  usePageTitle(t.careers.title);
   const search = useSearch();
   const degreeTypeParam = getQueryParam(search, "degreeType");
 
@@ -47,15 +49,15 @@ export default function Careers() {
   return (
     <div className="space-y-8 pb-10">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Career Paths</h1>
-        <p className="text-muted-foreground mt-2">Explore career opportunities by degree type.</p>
+        <h1 className="text-3xl font-bold tracking-tight">{t.careers.title}</h1>
+        <p className="text-muted-foreground mt-2">{t.careers.subtitle}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="flex-wrap h-auto">
           {degreeTypes.map((type) => (
             <TabsTrigger key={type} value={type} className="capitalize">
-              {type === "all" ? "All" : type}
+              {type === "all" ? t.careers.allCategories : type}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -85,11 +87,11 @@ export default function Careers() {
                   <CardContent className="space-y-3">
                     <div className="flex items-center gap-2 text-sm">
                       <DollarSign className="h-4 w-4 text-muted-foreground" />
-                      LKR {career.salaryMin.toLocaleString()} – {career.salaryMax.toLocaleString()}
+                      {t.careers.salaryEstimate}: LKR {career.salaryMin.toLocaleString()} – {career.salaryMax.toLocaleString()}
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <TrendingUp className="h-4 w-4 text-muted-foreground" />
-                      Growth: {career.growthPotential} · Demand: {career.industryDemand}
+                      {t.careers.growth}: {career.growthPotential} · {t.careers.demand}: {career.industryDemand}
                     </div>
                   </CardContent>
                 </Card>
@@ -98,7 +100,7 @@ export default function Careers() {
           )}
 
           {!isLoading && filtered.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">No career paths found.</p>
+            <p className="text-center text-muted-foreground py-12">{t.careers.noCareersFound}</p>
           )}
         </TabsContent>
       </Tabs>

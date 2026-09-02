@@ -8,6 +8,7 @@ import { LogIn, GraduationCap } from "lucide-react";
 import { useLogin } from "@/api";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,7 +30,8 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
-  usePageTitle("Sign In");
+  const { t } = useTranslations();
+  usePageTitle(t.auth.signInTitle);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const setAuth = useAuthStore((s) => s.setAuth);
@@ -71,9 +73,9 @@ export default function Login() {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2 text-2xl">
               <LogIn className="h-6 w-6 text-primary" />
-              Sign In
+              {t.auth.signInTitle}
             </CardTitle>
-            <CardDescription>Access your SkillPath AI dashboard</CardDescription>
+            <CardDescription>{t.auth.signInSubtitle}</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -83,7 +85,7 @@ export default function Login() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t.auth.emailLabel}</FormLabel>
                       <FormControl>
                         <Input type="email" placeholder="you@example.com" {...field} />
                       </FormControl>
@@ -96,7 +98,7 @@ export default function Login() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t.auth.passwordLabel}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -105,14 +107,14 @@ export default function Login() {
                   )}
                 />
                 <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending ? "Signing in..." : "Sign In"}
+                  {isPending ? t.actions.saving : t.auth.signInBtn}
                 </Button>
               </form>
             </Form>
             <p className="text-center text-sm text-muted-foreground mt-6">
-              Don&apos;t have an account?{" "}
+              {t.auth.dontHaveAccount}{" "}
               <Link href="/register" className="text-primary font-medium hover:underline">
-                Register
+                {t.nav.register}
               </Link>
             </p>
           </CardContent>

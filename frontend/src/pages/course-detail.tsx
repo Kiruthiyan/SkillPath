@@ -20,6 +20,7 @@ import {
 } from "@/api";
 import { useProfileStore } from "@/hooks/use-profile";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { QueryError } from "@/components/query-error";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -32,6 +33,7 @@ function displayMedium(medium: string | string[] | null | undefined): string | n
 }
 
 export default function CourseDetail() {
+  const { t } = useTranslations();
   const params = useParams();
   const courseId = parseInt(params.id ?? "0");
   const profile = useProfileStore();
@@ -68,7 +70,7 @@ export default function CourseDetail() {
       },
     );
 
-  usePageTitle(course?.degreeName);
+  usePageTitle(course?.degreeName ?? t.courses.courseDetails);
 
   async function handleAskAi() {
     setShowInsight(true);
@@ -84,8 +86,8 @@ export default function CourseDetail() {
   if (!course) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-2xl font-bold mb-4">Course not found</h2>
-        <Button asChild><Link href="/courses">Back to Courses</Link></Button>
+        <h2 className="text-2xl font-bold mb-4">{t.courses.noCoursesFound}</h2>
+        <Button asChild><Link href="/courses">{t.courses.backToCourses}</Link></Button>
       </div>
     );
   }
@@ -93,7 +95,7 @@ export default function CourseDetail() {
   return (
     <div className="space-y-8 pb-10">
       <Button variant="ghost" size="sm" asChild>
-        <Link href="/courses"><ArrowLeft className="h-4 w-4 mr-2" /> All Courses</Link>
+        <Link href="/courses"><ArrowLeft className="h-4 w-4 mr-2" /> {t.courses.backToCourses}</Link>
       </Button>
 
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
@@ -107,7 +109,7 @@ export default function CourseDetail() {
                 ))}
                 <Badge variant="outline">
                   {course.minimumZScore != null
-                    ? `Cutoff: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
+                    ? `${t.courses.districtCutoff}: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
                     : "Cutoff not mapped"}
                 </Badge>
                 {course.confidence && <Badge variant="secondary">{course.confidence} confidence</Badge>}
@@ -118,22 +120,22 @@ export default function CourseDetail() {
                 <Link href={`/universities/${course.universityId}`} className="hover:text-primary">
                   {course.universityName}
                 </Link>
-                <span>{course.faculty ?? "Faculty not listed"}</span>
-                <span>{district} quota</span>
+                <span>{course.faculty ?? "Faculty"}</span>
+                <span>({district} quota)</span>
               </p>
             </div>
 
             <Card className="border-secondary/40 bg-secondary/5">
               <CardContent className="flex gap-2 p-4 text-sm text-muted-foreground">
                 <Info className="h-4 w-4 shrink-0 mt-0.5" />
-                Data from official handbook-derived local 2025/2026 records. Missing values are not guessed.
+                Data from official handbook-derived local records.
               </CardContent>
             </Card>
 
             {course.cutoffHistory && course.cutoffHistory.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Historical Cutoffs ({district})</CardTitle>
+                  <CardTitle>{t.courses.cutoffHistory} ({district})</CardTitle>
                   <CardDescription>Official handbook minimum Z-scores by year</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -144,7 +146,7 @@ export default function CourseDetail() {
                         className="flex justify-between items-center py-2 border-b border-[hsl(var(--border))] last:border-0"
                       >
                         <span className="text-sm font-medium">{point.academicYear}</span>
-                        <span className="font-mono">{point.minimumZScore.toFixed(3)}</span>
+                        <span className="font-mono font-semibold">{point.minimumZScore.toFixed(3)}</span>
                       </div>
                     ))}
                   </div>
@@ -157,7 +159,7 @@ export default function CourseDetail() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    Official Data Note
+                    {t.courses.aiPrediction}
                   </CardTitle>
                   <CardDescription>{insight?.handbookAttribution}</CardDescription>
                 </CardHeader>
@@ -175,7 +177,7 @@ export default function CourseDetail() {
 
             {course.subjects.length > 0 && (
               <Card>
-                <CardHeader><CardTitle>Subjects</CardTitle></CardHeader>
+                <CardHeader><CardTitle>A/L Subjects</CardTitle></CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {course.subjects.map((subject) => (
@@ -188,7 +190,7 @@ export default function CourseDetail() {
 
             {course.minimumGrades && course.minimumGrades.length > 0 && (
               <Card>
-                <CardHeader><CardTitle>Minimum Grades</CardTitle></CardHeader>
+                <CardHeader><CardTitle>Minimum Grade Requirements</CardTitle></CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {course.minimumGrades.map((rule) => (
@@ -205,7 +207,7 @@ export default function CourseDetail() {
                 <CardContent>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {course.specialRequirements.map((rule) => (
-                      <li key={rule}>{rule}</li>
+                      <li key={rule}>• {rule}</li>
                     ))}
                   </ul>
                 </CardContent>
@@ -216,43 +218,42 @@ export default function CourseDetail() {
           <div className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Quick Info</CardTitle>
+                <CardTitle className="text-lg">Quick Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-2 text-sm">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  {course.duration ?? "Duration not listed"}
+                  <span>{t.courses.duration}: {course.duration ?? "4 Years"}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                  {course.faculty ?? "Faculty not listed"}
+                  <span>{course.faculty ?? "Faculty"}</span>
                 </div>
                 {displayMedium(course.medium) && (
                   <div className="flex items-center gap-2 text-sm">
                     <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                    {displayMedium(course.medium)}
+                    <span>{t.courses.medium}: {displayMedium(course.medium)}</span>
                   </div>
                 )}
                 {course.intake != null && (
                   <div className="flex items-center gap-2 text-sm">
                     <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                    Intake: {course.intake}
-                  </div>
-                )}
-                {course.campus && (
-                  <div className="flex items-center gap-2 text-sm">
-                    <Building2 className="h-4 w-4 text-muted-foreground" />
-                    {course.campus}
+                    <span>Intake: {course.intake} seats</span>
                   </div>
                 )}
                 {university && (
                   <div className="flex items-center gap-2 text-sm">
                     <Building2 className="h-4 w-4 text-muted-foreground" />
-                    {university.courseCount ?? 0} official courses
+                    <span>{university.courseCount ?? 0} {t.universities.officialCourses}</span>
                   </div>
                 )}
                 <Button variant="secondary" className="w-full" onClick={handleAskAi}>
-                  <Sparkles className="h-4 w-4 mr-2" /> Official Data Note
+                  <Sparkles className="h-4 w-4 mr-2" /> {t.courses.getPrediction}
+                </Button>
+                <Button variant="default" className="w-full" asChild>
+                  <Link href={`/roadmap?courseId=${course.id}`}>
+                    {t.courses.generateCareerRoadmap}
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
