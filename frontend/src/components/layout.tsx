@@ -99,14 +99,14 @@ function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex">
-      <aside className="hidden lg:flex w-64 flex-col border-r border-[hsl(var(--border))] bg-card">
-        <div className="p-5 border-b border-[hsl(var(--border))] flex items-center justify-between">
+      <aside className="hidden lg:flex w-64 flex-col border-r border-[hsl(var(--border))] bg-card h-screen sticky top-0">
+        <div className="p-5 border-b border-[hsl(var(--border))] flex items-center justify-between shrink-0">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
             <GraduationCap className="h-6 w-6" />
             SkillPath AI
           </Link>
         </div>
-        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+        <nav className="flex-1 min-h-0 p-3 space-y-1 overflow-y-auto">
           {navItems.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
@@ -123,7 +123,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </nav>
-        <div className="p-4 border-t border-[hsl(var(--border))]">
+        <div className="p-4 border-t border-[hsl(var(--border))] shrink-0">
           {isAuthenticated ? (
             <div className="space-y-2">
               <p className="text-xs text-muted-foreground truncate">{user?.email}</p>

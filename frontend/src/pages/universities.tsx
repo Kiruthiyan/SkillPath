@@ -104,7 +104,7 @@ export default function Universities() {
                     </div>
                     <div>
                       <CardTitle className="text-base leading-snug">{u.name}</CardTitle>
-                      <p className="text-xs text-muted-foreground">{u.location ?? "Sri Lanka"}</p>
+                      {u.location && <p className="text-xs text-muted-foreground">{u.location}</p>}
                     </div>
                   </div>
                 </CardHeader>

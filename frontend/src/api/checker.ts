@@ -100,11 +100,8 @@ export interface StudentAnswers {
 }
 
 export type CheckerResultMode = "official" | "historical_estimate";
-export type CheckerResultGroup =
-  | "strongMatches"
-  | "competitiveOptions"
-  | "nearHistoricalRange"
-  | "notEligible";
+export type CheckerResultGroup = "eligible" | "notEligible";
+export type ZScoreStatus = "above" | "near" | "below" | "unavailable";
 
 export interface CheckerRecommendation {
   programmeId: number;
@@ -126,6 +123,11 @@ export interface CheckerRecommendation {
   sourcePage: number | null;
   requiredStream: string;
   requiredSubjects: { subjectName: string; requirementType: string; minimumGrade: string | null }[];
+  specialRequirements: string[];
+  meetsHandbookRequirements: boolean;
+  handbookStatusReason: string;
+  zscoreDiff: number | null;
+  zscoreStatus: ZScoreStatus;
   reasons: string[];
 }
 

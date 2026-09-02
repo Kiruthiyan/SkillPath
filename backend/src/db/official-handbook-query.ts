@@ -80,6 +80,8 @@ export interface OfficialUniversity {
   courseCount?: number;
 }
 
+export type ZScoreStatus = "above" | "near" | "below" | "unavailable";
+
 export interface OfficialCheckerRecommendation {
   programmeId: number;
   universityId: number;
@@ -100,6 +102,14 @@ export interface OfficialCheckerRecommendation {
   sourcePage: number | null;
   requiredStream: string;
   requiredSubjects: { subjectName: string; requirementType: string; minimumGrade: string | null }[];
+  specialRequirements: string[];
+  /** Whether the student's entered subject grades satisfy the handbook's stream + subject requirements, independent of Z-score. */
+  meetsHandbookRequirements: boolean;
+  /** "Meets Handbook Requirements" when meetsHandbookRequirements is true, otherwise the exact missing requirement. */
+  handbookStatusReason: string;
+  /** studentZScore - officialCutoff, or null when no cutoff is mapped. Purely a re-presentation of existing values, not a new calculation. */
+  zscoreDiff: number | null;
+  zscoreStatus: ZScoreStatus;
   reasons: string[];
 }
 
@@ -110,9 +120,9 @@ export interface OfficialCheckerRecommendationsResponse {
   district: string;
   disclaimer: string;
   groups: {
-    strongMatches: OfficialCheckerRecommendation[];
-    competitiveOptions: OfficialCheckerRecommendation[];
-    nearHistoricalRange: OfficialCheckerRecommendation[];
+    /** Meets handbook stream + subject requirements, sorted by best Z-score match first. */
+    eligible: OfficialCheckerRecommendation[];
+    /** Does not meet handbook stream + subject requirements. */
     notEligible: OfficialCheckerRecommendation[];
   };
 }
@@ -309,6 +319,7 @@ export async function listOfficialCourses(opts: {
   universityId?: number;
   faculty?: string;
   duration?: string | number;
+  medium?: string;
   district?: string;
   academicYear?: string;
 }): Promise<OfficialCourse[]> {
@@ -324,6 +335,11 @@ export async function listOfficialCourses(opts: {
       if (opts.universityId != null && officialUniversityApiId(row.university) !== opts.universityId) return false;
       if (opts.faculty && row.faculty !== opts.faculty) return false;
       if (opts.duration != null && row.duration !== String(opts.duration)) return false;
+      if (opts.medium) {
+        const medium = asMedium(row.medium);
+        const mediumList = Array.isArray(medium) ? medium : medium ? [medium] : [];
+        if (!mediumList.includes(opts.medium)) return false;
+      }
       return true;
     })
     .map((row) => rowToCourse(row, { district: opts.district, zscore: opts.zscore }));
@@ -457,19 +473,15 @@ function isSimpleSubjectRequirement(subject: string): boolean {
 
 function emptyRecommendationGroups(): OfficialCheckerRecommendationsResponse["groups"] {
   return {
-    strongMatches: [],
-    competitiveOptions: [],
-    nearHistoricalRange: [],
+    eligible: [],
     notEligible: [],
   };
 }
 
-function groupForCutoff(zscore: number, cutoff: number): keyof OfficialCheckerRecommendationsResponse["groups"] {
-  const diff = zscore - cutoff;
-  if (diff >= 0.1) return "strongMatches";
-  if (diff >= 0) return "competitiveOptions";
-  if (diff >= -0.15) return "nearHistoricalRange";
-  return "notEligible";
+function zscoreStatusFor(diff: number | null): ZScoreStatus {
+  if (diff == null) return "unavailable";
+  if (diff >= -0.15) return diff >= 0.1 ? "above" : "near";
+  return "below";
 }
 
 export async function getOfficialCheckerRecommendations(input: {
@@ -500,14 +512,13 @@ export async function getOfficialCheckerRecommendations(input: {
       .filter(isSimpleSubjectRequirement)
       .filter((subject) => !isPassingGrade(input.subjectGrades[subject]));
     const manualSubjects = subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
-    const reasons: string[] = [];
 
-    if (missingSubjects.length > 0) {
-      reasons.push(`Missing required subject pass: ${missingSubjects.join(", ")}`);
-    } else {
-      reasons.push(`Stream exactly matches official rule: ${input.stream}`);
-    }
+    const meetsHandbookRequirements = missingSubjects.length === 0;
+    const handbookStatusReason = meetsHandbookRequirements
+      ? "Meets Handbook Requirements"
+      : `Missing required subject pass: ${missingSubjects.join(", ")}`;
 
+    const reasons: string[] = [handbookStatusReason];
     if (manualSubjects.length > 0) {
       reasons.push(`Manual subject verification required: ${manualSubjects.join("; ")}`);
     }
@@ -523,6 +534,8 @@ export async function getOfficialCheckerRecommendations(input: {
     } else {
       reasons.push(`Official cutoff ${row.latest_cutoff} for ${input.district}`);
     }
+
+    const zscoreDiff = row.latest_cutoff == null ? null : input.zscore - row.latest_cutoff;
 
     const recommendation: OfficialCheckerRecommendation = {
       programmeId: officialCourseApiId(row.uni_code),
@@ -548,35 +561,32 @@ export async function getOfficialCheckerRecommendations(input: {
         requirementType: "official_text",
         minimumGrade: null,
       })),
+      specialRequirements,
+      meetsHandbookRequirements,
+      handbookStatusReason,
+      zscoreDiff,
+      zscoreStatus: zscoreStatusFor(zscoreDiff),
       reasons,
     };
 
-    if (missingSubjects.length > 0 || row.latest_cutoff == null) {
-      groups.notEligible.push(recommendation);
+    if (meetsHandbookRequirements) {
+      groups.eligible.push(recommendation);
     } else {
-      groups[groupForCutoff(input.zscore, row.latest_cutoff)].push(recommendation);
+      groups.notEligible.push(recommendation);
     }
   }
 
-  const sortByNearestZScore = (items: OfficialCheckerRecommendation[]) =>
+  const sortByBestZScore = (items: OfficialCheckerRecommendation[]) =>
     [...items].sort((a, b) => {
-      const cutoffA = a.officialCutoff ?? a.estimatedCenter;
-      const cutoffB = b.officialCutoff ?? b.estimatedCenter;
-      if (cutoffA == null && cutoffB == null) return 0;
-      if (cutoffA == null) return 1;
-      if (cutoffB == null) return -1;
-      const distA = Math.abs(input.zscore - cutoffA);
-      const distB = Math.abs(input.zscore - cutoffB);
-      if (Math.abs(distA - distB) > 0.0001) {
-        return distA - distB;
-      }
-      return cutoffB - cutoffA;
+      if (a.zscoreDiff == null && b.zscoreDiff == null) return a.courseName.localeCompare(b.courseName);
+      if (a.zscoreDiff == null) return 1;
+      if (b.zscoreDiff == null) return -1;
+      if (a.zscoreDiff !== b.zscoreDiff) return b.zscoreDiff - a.zscoreDiff;
+      return a.courseName.localeCompare(b.courseName);
     });
 
-  groups.competitiveOptions = sortByNearestZScore(groups.competitiveOptions);
-  groups.nearHistoricalRange = sortByNearestZScore(groups.nearHistoricalRange);
-  groups.strongMatches = sortByNearestZScore(groups.strongMatches);
-  groups.notEligible = sortByNearestZScore(groups.notEligible);
+  groups.eligible = sortByBestZScore(groups.eligible);
+  groups.notEligible = sortByBestZScore(groups.notEligible);
 
   return {
     mode: "historical_estimate",

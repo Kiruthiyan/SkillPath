@@ -11,6 +11,7 @@ router.get("/courses", async (req, res) => {
   const zscore = req.query.zscore ? Number(req.query.zscore) : undefined;
   const universityId = req.query.universityId ? Number(req.query.universityId) : undefined;
   const faculty = req.query.faculty as string | undefined;
+  const medium = req.query.medium as string | undefined;
   const district = (req.query.district as string | undefined) ?? "All Island";
   const academicYear = req.query.academicYear as string | undefined;
 
@@ -26,6 +27,7 @@ router.get("/courses", async (req, res) => {
     zscore,
     universityId,
     faculty,
+    medium,
     district,
     academicYear,
   });

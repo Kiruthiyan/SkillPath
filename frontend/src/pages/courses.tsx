@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { motion } from "framer-motion";
-import { Search, GraduationCap, Target, Building2, Info } from "lucide-react";
+import { Search, GraduationCap, Building2, Clock, Target } from "lucide-react";
 
 import {
   useListCourses,
   useListUniversities,
+  useListCheckerAcademicYears,
   useRecordSearch,
 } from "@/api";
 import { useProfileStore } from "@/hooks/use-profile";
@@ -47,16 +48,40 @@ export default function Courses() {
   usePageTitle(t.courses.title);
   const urlSearch = useSearch();
   const STREAMS = ["Physical Science", "Biological Science", "Commerce", "Arts", "Technology"];
+  const FACULTIES = [
+    "Aesthetic Studies",
+    "Arts",
+    "Computing",
+    "Dental Sciences",
+    "Engineering",
+    "Health-Care Sciences",
+    "Indigenous Medicine",
+    "Medical Sciences",
+    "Medicine",
+    "Medicine & Allied Sciences",
+    "Veterinary Medicine and Animal Science",
+    "Visual & Performing Arts",
+  ];
+  const MEDIUMS = ["Sinhala", "Tamil", "English"];
 
   const profile = useProfileStore();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
   const [search, setSearch] = useState("");
 
   const [streamFilter, setStreamFilter] = useState<string>(
-    () => getQueryParam(urlSearch, "stream") ?? profile.stream ?? "all",
+    () => getQueryParam(urlSearch, "stream") ?? "all",
   );
   const [universityFilter, setUniversityFilter] = useState<string>(
     () => getQueryParam(urlSearch, "universityId") ?? "all",
+  );
+  const [facultyFilter, setFacultyFilter] = useState<string>(
+    () => getQueryParam(urlSearch, "faculty") ?? "all",
+  );
+  const [mediumFilter, setMediumFilter] = useState<string>(
+    () => getQueryParam(urlSearch, "medium") ?? "all",
+  );
+  const [academicYearFilter, setAcademicYearFilter] = useState<string>(
+    () => getQueryParam(urlSearch, "academicYear") ?? "all",
   );
 
   const params = useMemo(
@@ -66,12 +91,24 @@ export default function Courses() {
       district: profile.district || "Colombo",
       yearMode: "predicted" as const,
       universityId: universityFilter !== "all" ? Number(universityFilter) : undefined,
+      faculty: facultyFilter !== "all" ? facultyFilter : undefined,
+      medium: mediumFilter !== "all" ? mediumFilter : undefined,
+      academicYear: academicYearFilter !== "all" ? academicYearFilter : undefined,
     }),
-    [streamFilter, profile.zscore, profile.district, universityFilter],
+    [
+      streamFilter,
+      profile.zscore,
+      profile.district,
+      universityFilter,
+      facultyFilter,
+      mediumFilter,
+      academicYearFilter,
+    ],
   );
 
   const { data: courses, isLoading, isError, refetch } = useListCourses(params);
   const { data: universities } = useListUniversities();
+  const { data: academicYears } = useListCheckerAcademicYears();
 
   const { mutate: recordSearch } = useRecordSearch();
 
@@ -148,9 +185,48 @@ export default function Courses() {
             ))}
           </SelectContent>
         </Select>
+        <Select value={facultyFilter} onValueChange={setFacultyFilter}>
+          <SelectTrigger className="w-full md:w-52">
+            <SelectValue placeholder="All Faculties" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Faculties</SelectItem>
+            {FACULTIES.map((f) => (
+              <SelectItem key={f} value={f}>{f}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select value={mediumFilter} onValueChange={setMediumFilter}>
+          <SelectTrigger className="w-full md:w-40">
+            <SelectValue placeholder="All Mediums" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Mediums</SelectItem>
+            {MEDIUMS.map((m) => (
+              <SelectItem key={m} value={m}>{m}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select value={academicYearFilter} onValueChange={setAcademicYearFilter}>
+          <SelectTrigger className="w-full md:w-44">
+            <SelectValue placeholder="All Academic Years" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Academic Years</SelectItem>
+            {academicYears?.map((y) => (
+              <SelectItem key={y.academicYear} value={y.academicYear}>{y.academicYear}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {isError && <QueryError onRetry={() => refetch()} />}
+
+      {!isLoading && !isError && (
+        <p className="text-sm text-muted-foreground">
+          Showing {filtered.length} course{filtered.length === 1 ? "" : "s"}
+        </p>
+      )}
 
       {isLoading ? (
         <div className="grid sm:grid-cols-2 gap-6">
@@ -176,11 +252,6 @@ export default function Courses() {
                         {getEligibilityLabel(course.eligibility)}
                       </Badge>
                     )}
-                    {course.matchScore && (
-                      <Badge variant="secondary" className="flex items-center gap-1">
-                        <Target className="h-3 w-3" /> {course.matchScore}
-                      </Badge>
-                    )}
                   </div>
                 </div>
                 <CardTitle className="text-lg">{course.degreeName}</CardTitle>
@@ -189,22 +260,28 @@ export default function Courses() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">{course.uniCode}</Badge>
-                  {course.eligibleStreams?.map((stream) => (
-                    <Badge key={stream} variant="outline">{stream}</Badge>
-                  ))}
-                  {course.faculty && <Badge variant="outline">{course.faculty}</Badge>}
-                  {course.duration && <Badge variant="outline">{course.duration}</Badge>}
-                  {displayMedium(course.medium) && (
-                    <Badge variant="outline">{displayMedium(course.medium)}</Badge>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
+                  {course.faculty && (
+                    <div className="flex items-center gap-1.5">
+                      <GraduationCap className="h-3.5 w-3.5 shrink-0" /> {course.faculty}
+                    </div>
                   )}
-                  {course.intake != null && <Badge variant="outline">Intake: {course.intake}</Badge>}
-                  <Badge variant="outline">
-                    {course.minimumZScore != null
-                      ? `Cutoff: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
-                      : "Cutoff not mapped"}
-                  </Badge>
+                  {course.duration && (
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="h-3.5 w-3.5 shrink-0" /> {course.duration}
+                    </div>
+                  )}
+                  {displayMedium(course.medium) && (
+                    <div className="flex items-center gap-1.5 col-span-2">
+                      {displayMedium(course.medium)}
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 text-sm font-medium">
+                  <Target className="h-3.5 w-3.5 shrink-0 text-primary" />
+                  {course.minimumZScore != null
+                    ? `Cutoff: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
+                    : "Cutoff not mapped"}
                 </div>
                 <div className="flex gap-2 pt-2">
                   <Button size="sm" asChild>
