@@ -168,8 +168,54 @@ function eligibility(zscore: number | undefined, cutoff: number | null): string 
   return "unlikely";
 }
 
+export const SECTION9_STREAM_MAPPINGS: Record<string, string[]> = {
+  // Software Engineering
+  "Software Engineering": ["Physical Science"],
+  // Electronic & Intelligent Systems Engineering
+  "Electronic and Intelligent Systems Engineering (New)": ["Physical Science"],
+  // Information Technology (Moratuwa)
+  "Information Technology (IT)": ["Physical Science", "Biological Science", "Commerce", "Arts", "Technology"],
+  // Information Technology & Management
+  "Information Technology & Management": ["Physical Science", "Biological Science", "Commerce", "Arts", "Technology"],
+  // Information Systems
+  "Information Systems": ["Physical Science", "Biological Science", "Commerce", "Arts", "Technology"],
+  // Computer Science & Technology
+  "Computer Science & Technology": ["Physical Science"],
+  // Industrial Information Technology
+  "Industrial Information Technology": ["Physical Science", "Biological Science", "Technology"],
+  // Quantity Surveying
+  "Quantity Surveying": ["Physical Science"],
+  // Surveying Science
+  "Surveying Science": ["Physical Science"],
+  // Facilities Management
+  "Facilities Management": ["Physical Science"],
+  // Urban Informatics and Planning
+  "Urban Informatics and Planning": ["Physical Science"],
+  // Architecture
+  "Architecture": ["Physical Science", "Arts", "Technology"],
+  // Management and Information Technology (MIT)
+  "Management and Information Technology (MIT)": ["Physical Science"],
+  "Management and Information Technology (SEUSL)": ["Physical Science", "Biological Science"],
+  // Information and Communication Technology
+  "Information and Communication Technology (ICT)": ["Physical Science", "Technology"],
+  "Information Communication Technology": ["Physical Science", "Technology"],
+  // Financial Engineering
+  "Financial Engineering": ["Physical Science"],
+  // Mineral Resources and Technology
+  "Mineral Resources and Technology": ["Physical Science"],
+  // Science and Technology
+  "Science and Technology": ["Physical Science"],
+};
+
+export function getCourseEligibleStreams(row: { course_name?: string | null; eligible_streams?: unknown }): string[] {
+  const fromDb = asStringList(row.eligible_streams);
+  if (fromDb.length > 0) return fromDb;
+  const name = row.course_name?.trim() ?? "";
+  return SECTION9_STREAM_MAPPINGS[name] ?? [];
+}
+
 function rowToCourse(row: OfficialCourseRow, opts: { district?: string; zscore?: number }): OfficialCourse {
-  const eligibleStreams = asStringList(row.eligible_streams);
+  const eligibleStreams = getCourseEligibleStreams(row);
   const medium = asMedium(row.medium);
 
   return {
@@ -232,8 +278,8 @@ async function fetchCourseRows(params: {
           from official_handbook_zscore_cutoffs z
           where z.source_handbook_year = $2
             and z.uni_code = c.uni_code
-            and z.district = $3
-          order by z.academic_year desc
+            and (z.district = $3 or z.district = 'All Island')
+          order by case when z.district = $3 then 0 else 1 end, z.academic_year desc
           limit 1
         ) as latest_cutoff,
         (
@@ -241,8 +287,8 @@ async function fetchCourseRows(params: {
           from official_handbook_zscore_cutoffs z
           where z.source_handbook_year = $2
             and z.uni_code = c.uni_code
-            and z.district = $3
-          order by z.academic_year desc
+            and (z.district = $3 or z.district = 'All Island')
+          order by case when z.district = $3 then 0 else 1 end, z.academic_year desc
           limit 1
         ) as latest_cutoff_year
       from official_handbook_courses c
@@ -273,14 +319,11 @@ export async function listOfficialCourses(opts: {
 
   return rows
     .filter((row) => {
-      const streams = asStringList(row.eligible_streams);
+      const streams = getCourseEligibleStreams(row);
       if (opts.stream && !streams.includes(opts.stream)) return false;
       if (opts.universityId != null && officialUniversityApiId(row.university) !== opts.universityId) return false;
       if (opts.faculty && row.faculty !== opts.faculty) return false;
       if (opts.duration != null && row.duration !== String(opts.duration)) return false;
-      if (opts.zscore != null && !Number.isNaN(opts.zscore) && row.latest_cutoff != null) {
-        return opts.zscore >= row.latest_cutoff - 0.15;
-      }
       return true;
     })
     .map((row) => rowToCourse(row, { district: opts.district, zscore: opts.zscore }));
@@ -363,7 +406,21 @@ export async function listOfficialStreams(): Promise<string[]> {
     `,
     [OFFICIAL_HANDBOOK_YEAR],
   );
-  return result.rows.map((row) => row.stream);
+  const streams = new Set(result.rows.map((row) => row.stream));
+  for (const list of Object.values(SECTION9_STREAM_MAPPINGS)) {
+    for (const s of list) streams.add(s);
+  }
+  const standardStreams = [
+    "Physical Science",
+    "Biological Science",
+    "Commerce",
+    "Arts",
+    "Technology",
+    "Engineering Technology",
+    "Biosystems Technology",
+  ];
+  for (const s of standardStreams) streams.add(s);
+  return Array.from(streams).sort();
 }
 
 export async function listOfficialSubjects(): Promise<string[]> {
@@ -423,23 +480,26 @@ export async function getOfficialCheckerRecommendations(input: {
   zscore: number;
 }): Promise<OfficialCheckerRecommendationsResponse> {
   const groups = emptyRecommendationGroups();
-  const courses = await listOfficialCourses({
+  const rows = await fetchCourseRows({
     academicYear: input.academicYear || OFFICIAL_HANDBOOK_YEAR,
     district: input.district,
-    stream: input.stream,
   });
 
-  for (const course of courses) {
-    const detail = await getOfficialCourseDetail(course.id, {
-      academicYear: input.academicYear || OFFICIAL_HANDBOOK_YEAR,
-      district: input.district,
-    });
-    if (!detail) continue;
+  const matchingRows = rows.filter((row) => {
+    const streams = getCourseEligibleStreams(row);
+    return !input.stream || streams.includes(input.stream);
+  });
 
-    const missingSubjects = detail.subjects
+  for (const row of matchingRows) {
+    const subjects = asStringList(row.required_subjects);
+    const minimumGrades = asStringList(row.minimum_grades);
+    const specialRequirements = asStringList(row.special_requirements);
+    const medium = asMedium(row.medium);
+
+    const missingSubjects = subjects
       .filter(isSimpleSubjectRequirement)
       .filter((subject) => !isPassingGrade(input.subjectGrades[subject]));
-    const manualSubjects = detail.subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
+    const manualSubjects = subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
     const reasons: string[] = [];
 
     if (missingSubjects.length > 0) {
@@ -451,39 +511,39 @@ export async function getOfficialCheckerRecommendations(input: {
     if (manualSubjects.length > 0) {
       reasons.push(`Manual subject verification required: ${manualSubjects.join("; ")}`);
     }
-    if (detail.minimumGrades.length > 0) {
-      reasons.push(`Minimum grade rule: ${detail.minimumGrades.join("; ")}`);
+    if (minimumGrades.length > 0) {
+      reasons.push(`Minimum grade rule: ${minimumGrades.join("; ")}`);
     }
-    if (detail.specialRequirements.length > 0) {
-      reasons.push(`Special requirement: ${detail.specialRequirements.join("; ")}`);
+    if (specialRequirements.length > 0) {
+      reasons.push(`Special requirement: ${specialRequirements.join("; ")}`);
     }
 
-    if (course.officialMinimumZScore == null) {
+    if (row.latest_cutoff == null) {
       reasons.push(`No exact official cutoff mapping for ${input.district}`);
     } else {
-      reasons.push(`Official cutoff ${course.officialMinimumZScore} for ${input.district}`);
+      reasons.push(`Official cutoff ${row.latest_cutoff} for ${input.district}`);
     }
 
     const recommendation: OfficialCheckerRecommendation = {
-      programmeId: detail.id,
-      universityId: detail.universityId,
-      university: detail.universityName,
-      courseName: detail.degreeName,
-      faculty: detail.faculty,
+      programmeId: officialCourseApiId(row.uni_code),
+      universityId: officialUniversityApiId(row.university),
+      university: row.university,
+      courseName: row.course_name,
+      faculty: row.faculty,
       degreeDuration: null,
-      duration: detail.duration,
-      medium: mediumLabel(detail.medium),
+      duration: row.duration,
+      medium: mediumLabel(medium),
       studentZScore: input.zscore,
-      officialCutoff: detail.officialMinimumZScore,
+      officialCutoff: row.latest_cutoff,
       estimatedMin: null,
       estimatedMax: null,
       estimatedCenter: null,
-      confidence: detail.officialMinimumZScore == null ? null : "High",
+      confidence: row.latest_cutoff == null ? null : "High",
       academicYear: input.academicYear || OFFICIAL_HANDBOOK_YEAR,
       sourceHandbook: `UGC Admissions Handbook ${SOURCE_HANDBOOK_YEAR}`,
       sourcePage: null,
       requiredStream: input.stream,
-      requiredSubjects: detail.subjects.map((subjectName) => ({
+      requiredSubjects: subjects.map((subjectName) => ({
         subjectName,
         requirementType: "official_text",
         minimumGrade: null,
@@ -491,12 +551,32 @@ export async function getOfficialCheckerRecommendations(input: {
       reasons,
     };
 
-    if (missingSubjects.length > 0 || detail.officialMinimumZScore == null) {
+    if (missingSubjects.length > 0 || row.latest_cutoff == null) {
       groups.notEligible.push(recommendation);
     } else {
-      groups[groupForCutoff(input.zscore, detail.officialMinimumZScore)].push(recommendation);
+      groups[groupForCutoff(input.zscore, row.latest_cutoff)].push(recommendation);
     }
   }
+
+  const sortByNearestZScore = (items: OfficialCheckerRecommendation[]) =>
+    [...items].sort((a, b) => {
+      const cutoffA = a.officialCutoff ?? a.estimatedCenter;
+      const cutoffB = b.officialCutoff ?? b.estimatedCenter;
+      if (cutoffA == null && cutoffB == null) return 0;
+      if (cutoffA == null) return 1;
+      if (cutoffB == null) return -1;
+      const distA = Math.abs(input.zscore - cutoffA);
+      const distB = Math.abs(input.zscore - cutoffB);
+      if (Math.abs(distA - distB) > 0.0001) {
+        return distA - distB;
+      }
+      return cutoffB - cutoffA;
+    });
+
+  groups.competitiveOptions = sortByNearestZScore(groups.competitiveOptions);
+  groups.nearHistoricalRange = sortByNearestZScore(groups.nearHistoricalRange);
+  groups.strongMatches = sortByNearestZScore(groups.strongMatches);
+  groups.notEligible = sortByNearestZScore(groups.notEligible);
 
   return {
     mode: "historical_estimate",

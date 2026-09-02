@@ -8,6 +8,7 @@ import { UserPlus, GraduationCap } from "lucide-react";
 import { useRegister } from "@/api";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -30,7 +31,8 @@ const registerSchema = z.object({
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function Register() {
-  usePageTitle("Create Account");
+  const { t } = useTranslations();
+  usePageTitle(t.auth.registerTitle);
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const setAuth = useAuthStore((s) => s.setAuth);
@@ -72,9 +74,9 @@ export default function Register() {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2 text-2xl">
               <UserPlus className="h-6 w-6 text-primary" />
-              Create Account
+              {t.auth.registerTitle}
             </CardTitle>
-            <CardDescription>Start your university and career journey</CardDescription>
+            <CardDescription>{t.auth.registerSubtitle}</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -84,7 +86,7 @@ export default function Register() {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Full Name</FormLabel>
+                      <FormLabel>{t.auth.nameLabel}</FormLabel>
                       <FormControl>
                         <Input placeholder="Your name" {...field} />
                       </FormControl>
@@ -97,7 +99,7 @@ export default function Register() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t.auth.emailLabel}</FormLabel>
                       <FormControl>
                         <Input type="email" placeholder="you@example.com" {...field} />
                       </FormControl>
@@ -110,7 +112,7 @@ export default function Register() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t.auth.passwordLabel}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -119,14 +121,14 @@ export default function Register() {
                   )}
                 />
                 <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending ? "Creating account..." : "Register"}
+                  {isPending ? t.actions.saving : t.auth.registerBtn}
                 </Button>
               </form>
             </Form>
             <p className="text-center text-sm text-muted-foreground mt-6">
-              Already have an account?{" "}
+              {t.auth.alreadyHaveAccount}{" "}
               <Link href="/login" className="text-primary font-medium hover:underline">
-                Sign In
+                {t.nav.signIn}
               </Link>
             </p>
           </CardContent>

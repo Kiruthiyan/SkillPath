@@ -11,6 +11,7 @@ import {
 import { useProfileStore } from "@/hooks/use-profile";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { QueryError } from "@/components/query-error";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -42,25 +43,31 @@ function displayMedium(medium: string | string[] | null | undefined): string | n
 }
 
 export default function Courses() {
-  usePageTitle("Courses");
+  const { t } = useTranslations();
+  usePageTitle(t.courses.title);
   const urlSearch = useSearch();
+  const STREAMS = ["Physical Science", "Biological Science", "Commerce", "Arts", "Technology"];
+
+  const profile = useProfileStore();
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
   const [search, setSearch] = useState("");
+
+  const [streamFilter, setStreamFilter] = useState<string>(
+    () => getQueryParam(urlSearch, "stream") ?? profile.stream ?? "all",
+  );
   const [universityFilter, setUniversityFilter] = useState<string>(
     () => getQueryParam(urlSearch, "universityId") ?? "all",
   );
 
-  const profile = useProfileStore();
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
-
   const params = useMemo(
     () => ({
-      stream: profile.stream || undefined,
+      stream: streamFilter !== "all" ? streamFilter : undefined,
       zscore: profile.zscore ?? undefined,
       district: profile.district || "Colombo",
       yearMode: "predicted" as const,
       universityId: universityFilter !== "all" ? Number(universityFilter) : undefined,
     }),
-    [profile.stream, profile.zscore, profile.district, universityFilter],
+    [streamFilter, profile.zscore, profile.district, universityFilter],
   );
 
   const { data: courses, isLoading, isError, refetch } = useListCourses(params);
@@ -88,41 +95,54 @@ export default function Courses() {
     }
   }
 
+  function getEligibilityLabel(eligibility: string | undefined) {
+    if (!eligibility) return null;
+    switch (eligibility.toLowerCase()) {
+      case "likely":
+        return t.courses.eligibilityLikely;
+      case "borderline":
+        return t.courses.eligibilityBorderline;
+      case "reach":
+        return t.courses.eligibilityReach;
+      default:
+        return t.courses.eligibilityUnlikely;
+    }
+  }
+
   return (
     <div className="space-y-8 pb-10">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Courses</h1>
-        <p className="text-muted-foreground mt-2">
-          Government university programmes from official handbook-derived local data.
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight">{t.courses.title}</h1>
+        <p className="text-muted-foreground mt-2">{t.courses.subtitle}</p>
       </div>
-
-      <Card className="border-secondary/40 bg-secondary/5">
-        <CardContent className="flex gap-3 p-4 text-sm text-muted-foreground">
-          <Info className="h-5 w-5 shrink-0 text-secondary" />
-          <p>
-            Missing handbook fields are shown as unavailable. Cutoffs are shown only where an exact
-            official district mapping exists for {profile.district || "selected"} quota.
-          </p>
-        </CardContent>
-      </Card>
 
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search courses..."
+            placeholder={t.courses.searchPlaceholder}
             className="pl-10"
             value={search}
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
-        <Select value={universityFilter} onValueChange={setUniversityFilter}>
-          <SelectTrigger className="w-full md:w-48">
-            <SelectValue placeholder="University" />
+        <Select value={streamFilter} onValueChange={setStreamFilter}>
+          <SelectTrigger className="w-full md:w-52">
+            <SelectValue placeholder="All Streams" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Universities</SelectItem>
+            <SelectItem value="all">All Streams</SelectItem>
+            {STREAMS.map((s) => (
+              <SelectItem key={s} value={s}>{s}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select value={universityFilter} onValueChange={setUniversityFilter}>
+          <SelectTrigger className="w-full md:w-56">
+            <SelectValue placeholder={t.courses.filterByUni} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t.courses.allUniversities}</SelectItem>
             {universities?.map((u) => (
               <SelectItem key={u.id} value={String(u.id)}>{u.shortName}</SelectItem>
             ))}
@@ -143,7 +163,7 @@ export default function Courses() {
           className="grid sm:grid-cols-2 gap-6"
         >
           {filtered.map((course) => (
-            <Card key={course.id} className="hover:border-primary/50 transition-colors">
+            <Card key={course.id} className="hover:border-primary/50 transition-colors flex flex-col justify-between">
               <CardHeader>
                 <div className="flex items-start justify-between gap-2">
                   <GraduationCap className="h-6 w-6 text-primary shrink-0" />
@@ -153,7 +173,7 @@ export default function Courses() {
                         variant="outline"
                         className={ELIGIBILITY_STYLES[course.eligibility] ?? ""}
                       >
-                        {course.eligibility}
+                        {getEligibilityLabel(course.eligibility)}
                       </Badge>
                     )}
                     {course.matchScore && (
@@ -186,9 +206,9 @@ export default function Courses() {
                       : "Cutoff not mapped"}
                   </Badge>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 pt-2">
                   <Button size="sm" asChild>
-                    <Link href={`/courses/${course.id}`}>View Details</Link>
+                    <Link href={`/courses/${course.id}`}>{t.courses.viewCourse}</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -199,8 +219,7 @@ export default function Courses() {
 
       {!isLoading && filtered.length === 0 && (
         <p className="text-center text-muted-foreground py-12">
-          No courses match your filters. Import handbook data with{" "}
-          <code className="text-xs">pnpm handbook:import</code> if the list is empty.
+          {t.courses.noCoursesFound}
         </p>
       )}
     </div>

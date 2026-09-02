@@ -6,6 +6,7 @@ import { useAiChat } from "@/api";
 import { useProfileStore } from "@/hooks/use-profile";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslations } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,23 +16,40 @@ interface Message {
   content: string;
 }
 
-const SUGGESTIONS = [
-  "What courses suit a Physical Science student with Z-score 1.5?",
-  "How do I choose between Engineering and Medicine?",
-  "What careers are available after a Commerce degree?",
-];
+const LOCALIZED_SUGGESTIONS = {
+  en: [
+    "What courses suit a Physical Science student with Z-score 1.5?",
+    "How do I choose between Engineering and Information Systems?",
+    "What careers are available after a Commerce degree?",
+  ],
+  si: [
+    "භෞතික විද්‍යා ධාරාවේ Z-ලකුණ 1.5 ක් ඇති සිසුවෙකුට ගැළපෙන පාඨමාලා මොනවාද?",
+    "ඉංජිනේරු සහ තොරතුරු තාක්ෂණ උපාධි අතරින් හොඳම තේරීම කුමක්ද?",
+    "වාණිජ උපාධියකින් පසු ඇති රැකියා අවස්ථා මොනවාද?",
+  ],
+  ta: [
+    "பௌதீக விஞ்ஞானப் பிரிவில் Z-புள்ளி 1.5 பெற்ற மாணவருக்குப் பொருத்தமான பாடநெறிகள் எவை?",
+    "பொறியியல் மற்றும் தகவல் தொழில்நுட்ப பட்டப்படிப்புகளுக்கு இடையிலான வேறுபாடு என்ன?",
+    "வர்த்தகப் பட்டப்படிப்பை முடித்த பின் உள்ள தொழில் வாய்ப்புகள் எவை?",
+  ],
+};
 
 export default function Chat() {
-  usePageTitle("AI Mentor");
+  const { t, language } = useTranslations();
+  usePageTitle(t.chat.title);
   const profile = useProfileStore();
   const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const context = profile.isComplete()
-    ? `Student stream: ${profile.stream}, Z-score: ${profile.zscore}, language: ${profile.language}`
-    : undefined;
+  const langName = language === "si" ? "Sinhala" : language === "ta" ? "Tamil" : "English";
+  const context = `Language: ${langName} (${language}). ` +
+    (profile.isComplete()
+      ? `Student stream: ${profile.stream}, Z-score: ${profile.zscore}, district: ${profile.district}. Please reply in ${langName}.`
+      : `Please respond clearly in ${langName}.`);
+
+  const suggestions = LOCALIZED_SUGGESTIONS[language] || LOCALIZED_SUGGESTIONS.en;
 
   const { mutate: sendMessage, isPending } = useAiChat({
     mutation: {
@@ -40,11 +58,18 @@ export default function Chat() {
         setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
       },
       onError: () => {
+        const errorMsg =
+          language === "si"
+            ? "සමාවන්න, මේ මොහොතේ ඔබේ ප්‍රශ්නයට පිළිතුරු දීමට නොහැක. කරුණාකර නැවත උත්සාහ කරන්න."
+            : language === "ta"
+              ? "மன்னிக்கவும், தற்போது உங்கள் கேள்விக்கு பதிலளிக்க முடியவில்லை. தயவுசெய்து சிறிது நேரம் கழித்து மீண்டும் முயற்சிக்கவும்."
+              : "Sorry, I couldn't process your question right now. Please try again.";
+
         setMessages((prev) => [
           ...prev,
           {
             role: "assistant",
-            content: "Sorry, I couldn't process your question right now. Please try again.",
+            content: errorMsg,
           },
         ]);
         toast({
@@ -70,20 +95,20 @@ export default function Chat() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
           <Bot className="h-8 w-8 text-primary" />
-          AI Mentor
+          {t.chat.title}
         </h1>
-        <p className="text-muted-foreground mt-2">Ask questions about courses, careers, and university life.</p>
+        <p className="text-muted-foreground mt-2">{t.chat.subtitle}</p>
       </div>
 
       {messages.length === 0 && (
-        <Card>
+        <Card className="border border-[hsl(var(--border))]">
           <CardHeader>
-            <CardTitle>Get started</CardTitle>
-            <CardDescription>Try one of these questions</CardDescription>
+            <CardTitle className="text-base">{t.chat.suggestionsTitle}</CardTitle>
+            <CardDescription className="text-xs">{t.chat.disclaimer}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
-            {SUGGESTIONS.map((q) => (
-              <Button key={q} variant="outline" size="sm" onClick={() => handleSend(q)}>
+            {suggestions.map((q) => (
+              <Button key={q} variant="outline" size="sm" className="text-xs h-auto py-2 text-left" onClick={() => handleSend(q)}>
                 {q}
               </Button>
             ))}
@@ -105,7 +130,7 @@ export default function Chat() {
               </div>
             )}
             <div
-              className={`rounded-lg px-4 py-3 max-w-[80%] text-sm ${
+              className={`rounded-lg px-4 py-3 max-w-[80%] text-sm leading-relaxed ${
                 msg.role === "user"
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-foreground"
@@ -125,7 +150,9 @@ export default function Chat() {
             <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
               <Bot className="h-4 w-4 text-primary-foreground animate-pulse" />
             </div>
-            <div className="rounded-lg px-4 py-3 bg-muted text-sm text-muted-foreground">Thinking...</div>
+            <div className="rounded-lg px-4 py-3 bg-muted text-sm text-muted-foreground">
+              {language === "si" ? "පිළිතුර සකසමින් පවතී..." : language === "ta" ? "பதிலை உருவாக்குகிறது..." : "Thinking..."}
+            </div>
           </div>
         )}
         <div ref={bottomRef} />
@@ -133,7 +160,7 @@ export default function Chat() {
 
       <div className="flex gap-2">
         <Textarea
-          placeholder="Ask your question..."
+          placeholder={t.chat.placeholder}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {

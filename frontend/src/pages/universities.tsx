@@ -8,6 +8,7 @@ import {
   getGetUniversityQueryKey,
 } from "@/api";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { useTranslations } from "@/lib/i18n";
 import { QueryError } from "@/components/query-error";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Universities() {
+  const { t } = useTranslations();
   const params = useParams();
   const universityId = params.id ? parseInt(params.id) : null;
 
@@ -27,7 +29,7 @@ export default function Universities() {
       },
     });
 
-  usePageTitle(university?.name ?? (universityId ? "University Details" : "Universities"));
+  usePageTitle(university?.name ?? (universityId ? "University Details" : t.universities.title));
 
   if (universityId) {
     if (isLoadingDetail) {
@@ -39,8 +41,8 @@ export default function Universities() {
     if (!university) {
       return (
         <div className="text-center py-20">
-          <h2 className="text-2xl font-bold mb-4">University not found</h2>
-          <Button asChild><Link href="/universities">Back to Universities</Link></Button>
+          <h2 className="text-2xl font-bold mb-4">{t.universities.notFound}</h2>
+          <Button asChild><Link href="/universities">{t.universities.backToUniversities}</Link></Button>
         </div>
       );
     }
@@ -48,21 +50,21 @@ export default function Universities() {
     return (
       <div className="space-y-8 pb-10">
         <Button variant="ghost" size="sm" asChild>
-          <Link href="/universities"><ArrowLeft className="h-4 w-4 mr-2" /> All Universities</Link>
+          <Link href="/universities"><ArrowLeft className="h-4 w-4 mr-2" /> {t.universities.allUniversities}</Link>
         </Button>
         <Card className="overflow-hidden">
-          <div className="h-3" style={{ backgroundColor: university.logoColor }} />
+          <div className="h-3" style={{ backgroundColor: university.logoColor ?? "#1e3a5f" }} />
           <CardHeader>
             <Badge variant="secondary" className="w-fit">
-              {university.courseCount ?? 0} official courses
+              {university.courseCount ?? 0} {t.universities.officialCourses}
             </Badge>
             <CardTitle className="text-3xl">{university.name}</CardTitle>
             <CardDescription className="text-base">
-              Official handbook-derived 2025/2026 course provider
+              {t.universities.providerDescription}
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild><Link href={`/courses?universityId=${university.id}`}>View Courses</Link></Button>
+            <Button asChild><Link href={`/courses?universityId=${university.id}`}>{t.universities.viewCourses}</Link></Button>
           </CardContent>
         </Card>
       </div>
@@ -72,17 +74,15 @@ export default function Universities() {
   return (
     <div className="space-y-8 pb-10">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Universities</h1>
-        <p className="text-muted-foreground mt-2">
-          Explore providers exactly as they appear in the official handbook-derived course data.
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight">{t.universities.title}</h1>
+        <p className="text-muted-foreground mt-2">{t.universities.subtitle}</p>
       </div>
 
       {isError && <QueryError onRetry={() => refetch()} />}
 
       {isLoading ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5].map((i) => <Skeleton key={i} className="h-48" />)}
+          {[1, 2, 3, 4, 5, 6].map((i) => <Skeleton key={i} className="h-48" />)}
         </div>
       ) : (
         <motion.div
@@ -90,22 +90,35 @@ export default function Universities() {
           animate={{ opacity: 1 }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {universities?.map((universityRow) => (
-            <Card key={universityRow.id} className="hover:border-primary/50 transition-colors overflow-hidden">
-              <div className="h-2" style={{ backgroundColor: universityRow.logoColor }} />
-              <CardHeader>
-                <div className="flex items-start justify-between gap-3">
-                  <Building2 className="h-8 w-8 text-primary shrink-0" />
-                  <Badge variant="outline">{universityRow.courseCount ?? 0} courses</Badge>
-                </div>
-                <CardTitle className="text-lg">{universityRow.name}</CardTitle>
-                <CardDescription>Official handbook-derived provider</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button size="sm" asChild>
-                  <Link href={`/universities/${universityRow.id}`}>View Details</Link>
+          {universities?.map((u) => (
+            <Card key={u.id} className="overflow-hidden hover:border-primary/50 transition-colors flex flex-col justify-between">
+              <div>
+                <div className="h-2" style={{ backgroundColor: u.logoColor ?? "#1e3a5f" }} />
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="h-10 w-10 rounded-lg flex items-center justify-center text-white font-bold shrink-0"
+                      style={{ backgroundColor: u.logoColor ?? "#1e3a5f" }}
+                    >
+                      <Building2 className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-base leading-snug">{u.name}</CardTitle>
+                      <p className="text-xs text-muted-foreground">{u.location ?? "Sri Lanka"}</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <Badge variant="secondary">
+                    {u.courseCount ?? 0} {t.universities.officialCourses}
+                  </Badge>
+                </CardContent>
+              </div>
+              <div className="p-6 pt-0">
+                <Button variant="outline" size="sm" className="w-full" asChild>
+                  <Link href={`/courses?universityId=${u.id}`}>{t.universities.viewCourses}</Link>
                 </Button>
-              </CardContent>
+              </div>
             </Card>
           ))}
         </motion.div>

@@ -597,6 +597,26 @@ export async function buildCheckerRecommendations(
     });
   }
 
+  const sortByNearestZScore = (items: CheckerRecommendation[]) =>
+    [...items].sort((a, b) => {
+      const cutoffA = a.officialCutoff ?? a.estimatedCenter ?? (a.estimatedMin != null && a.estimatedMax != null ? (a.estimatedMin + a.estimatedMax) / 2 : null);
+      const cutoffB = b.officialCutoff ?? b.estimatedCenter ?? (b.estimatedMin != null && b.estimatedMax != null ? (b.estimatedMin + b.estimatedMax) / 2 : null);
+      if (cutoffA == null && cutoffB == null) return 0;
+      if (cutoffA == null) return 1;
+      if (cutoffB == null) return -1;
+      const distA = Math.abs(input.zscore - cutoffA);
+      const distB = Math.abs(input.zscore - cutoffB);
+      if (Math.abs(distA - distB) > 0.0001) {
+        return distA - distB;
+      }
+      return cutoffB - cutoffA;
+    });
+
+  groups.competitiveOptions = sortByNearestZScore(groups.competitiveOptions);
+  groups.nearHistoricalRange = sortByNearestZScore(groups.nearHistoricalRange);
+  groups.strongMatches = sortByNearestZScore(groups.strongMatches);
+  groups.notEligible = sortByNearestZScore(groups.notEligible);
+
   return {
     ...checkerResponse(input, mode, groups),
     message: responseMessage(groups, mode, candidates.length),
