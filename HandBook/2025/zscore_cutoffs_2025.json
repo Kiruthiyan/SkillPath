@@ -1569,6 +1569,181 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Colombo",
+    "cutoff": 1.7958
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Gampaha",
+    "cutoff": 1.6837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Kalutara",
+    "cutoff": 1.8033
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Matale",
+    "cutoff": 1.6962
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Kandy",
+    "cutoff": 1.7727
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.5219
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Galle",
+    "cutoff": 1.7941
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Matara",
+    "cutoff": 1.7612
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Hambantota",
+    "cutoff": 1.7713
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Jaffna",
+    "cutoff": 1.8056
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Kilinochchi",
+    "cutoff": 1.5353
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Mannar",
+    "cutoff": 1.5368
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Mullaitivu",
+    "cutoff": 1.4995
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Vavuniya",
+    "cutoff": 1.5032
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Trincomalee",
+    "cutoff": 1.6277
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Batticaloa",
+    "cutoff": 1.7484
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Ampara",
+    "cutoff": 1.741
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Puttalam",
+    "cutoff": 1.6444
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Kurunegala",
+    "cutoff": 1.7978
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Anuradhapura",
+    "cutoff": 1.6198
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Polonnaruwa",
+    "cutoff": 1.4577
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Badulla",
+    "cutoff": 1.7072
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Monaragala",
+    "cutoff": 1.569
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Kegalle",
+    "cutoff": 1.7558
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "058A",
+    "course_name": "Biochemistry & Molecular Biology",
+    "district": "Ratnapura",
+    "cutoff": 1.736
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "003B",
     "course_name": "Veterinary Science",
     "district": "Colombo",
@@ -4376,6 +4551,356 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Colombo",
+    "cutoff": 1.6254
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Gampaha",
+    "cutoff": 1.5573
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Kalutara",
+    "cutoff": 1.6217
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Matale",
+    "cutoff": 1.3858
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Kandy",
+    "cutoff": 1.5863
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.2477
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Galle",
+    "cutoff": 1.6418
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Matara",
+    "cutoff": 1.6303
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Hambantota",
+    "cutoff": 1.5542
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Jaffna",
+    "cutoff": 1.3633
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Kilinochchi",
+    "cutoff": 1.4223
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Mannar",
+    "cutoff": 0.7844
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Mullaitivu",
+    "cutoff": 0.7512
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Vavuniya",
+    "cutoff": 1.0891
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Trincomalee",
+    "cutoff": 1.1033
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Batticaloa",
+    "cutoff": 1.357
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Ampara",
+    "cutoff": 1.3961
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Puttalam",
+    "cutoff": 1.4443
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Kurunegala",
+    "cutoff": 1.5863
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Anuradhapura",
+    "cutoff": 1.3581
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Polonnaruwa",
+    "cutoff": 1.5136
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Badulla",
+    "cutoff": 1.5063
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Monaragala",
+    "cutoff": 1.613
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Kegalle",
+    "cutoff": 1.6215
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "010G",
+    "course_name": "Engineering (TM) - Textile & Apparel Engineering",
+    "district": "Ratnapura",
+    "cutoff": 1.6072
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Colombo",
+    "cutoff": 1.6128
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Gampaha",
+    "cutoff": 1.523
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Kalutara",
+    "cutoff": 1.6372
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Matale",
+    "cutoff": 1.5485
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Kandy",
+    "cutoff": 1.6052
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.2766
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Galle",
+    "cutoff": 1.6177
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Matara",
+    "cutoff": 1.6211
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Hambantota",
+    "cutoff": 1.5316
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Jaffna",
+    "cutoff": 1.3428
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Kilinochchi",
+    "cutoff": 1.4093
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Mannar",
+    "cutoff": 1.0591
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Mullaitivu",
+    "cutoff": 0.7279
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Vavuniya",
+    "cutoff": 1.0141
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Trincomalee",
+    "cutoff": 1.3231
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Batticaloa",
+    "cutoff": 1.4554
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Ampara",
+    "cutoff": 1.3556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Puttalam",
+    "cutoff": 1.4397
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Kurunegala",
+    "cutoff": 1.5901
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Anuradhapura",
+    "cutoff": 1.3359
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Polonnaruwa",
+    "cutoff": 1.5149
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Badulla",
+    "cutoff": 1.474
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Monaragala",
+    "cutoff": 1.61
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Kegalle",
+    "cutoff": 1.6191
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "009G",
+    "course_name": "Engineering (EM) - Earth Resources Engineering",
+    "district": "Ratnapura",
+    "cutoff": 1.5618
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "008J",
     "course_name": "Engineering",
     "district": "Matale",
@@ -5206,6 +5731,265 @@
     "course_name": "Engineering",
     "district": "Ratnapura",
     "cutoff": 1.9069
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Colombo",
+    "cutoff": 1.0475
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Gampaha",
+    "cutoff": 1.099
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kalutara",
+    "cutoff": 1.0861
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kandy",
+    "cutoff": 1.0597
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Galle",
+    "cutoff": 1.0844
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Matara",
+    "cutoff": 1.0597
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Hambantota",
+    "cutoff": 1.046
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Jaffna",
+    "cutoff": 1.0711
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Ampara",
+    "cutoff": 1.047
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Puttalam",
+    "cutoff": 1.0611
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kurunegala",
+    "cutoff": 1.0451
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Anuradhapura",
+    "cutoff": 1.0483
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Badulla",
+    "cutoff": 1.051
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Monaragala",
+    "cutoff": 1.053
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kegalle",
+    "cutoff": 1.045
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007L",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Ratnapura",
+    "cutoff": 1.0559
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Colombo",
+    "cutoff": 1.0659
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Gampaha",
+    "cutoff": 1.0824
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kalutara",
+    "cutoff": 1.0824
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Matale",
+    "cutoff": 1.0775
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kandy",
+    "cutoff": 1.0644
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.1881
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Galle",
+    "cutoff": 1.0906
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Matara",
+    "cutoff": 1.0733
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Hambantota",
+    "cutoff": 1.0796
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Jaffna",
+    "cutoff": 1.0834
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Trincomalee",
+    "cutoff": 1.1568
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Batticaloa",
+    "cutoff": 1.082
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Ampara",
+    "cutoff": 1.2513
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Puttalam",
+    "cutoff": 1.1077
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kurunegala",
+    "cutoff": 1.0665
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Anuradhapura",
+    "cutoff": 1.071
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1036
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Badulla",
+    "cutoff": 1.1011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Monaragala",
+    "cutoff": 1.0762
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Kegalle",
+    "cutoff": 1.0683
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "007K",
+    "course_name": "Applied Sciences (Biological Science)",
+    "district": "Ratnapura",
+    "cutoff": 1.1479
   },
   {
     "academic_year": "2024/25",
@@ -6473,6 +7257,181 @@
     "course_name": "Commerce",
     "district": "Ratnapura",
     "cutoff": 1.577
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Colombo",
+    "cutoff": 1.4791
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Gampaha",
+    "cutoff": 1.4162
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Kalutara",
+    "cutoff": 1.4561
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Matale",
+    "cutoff": 1.4621
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Kandy",
+    "cutoff": 1.4452
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.4303
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Galle",
+    "cutoff": 1.4835
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Matara",
+    "cutoff": 1.4499
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Hambantota",
+    "cutoff": 1.4462
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Jaffna",
+    "cutoff": 1.3895
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Kilinochchi",
+    "cutoff": 1.3616
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Mannar",
+    "cutoff": 1.3356
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Mullaitivu",
+    "cutoff": 0.966
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Vavuniya",
+    "cutoff": 1.486
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Trincomalee",
+    "cutoff": 1.4234
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Batticaloa",
+    "cutoff": 1.491
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Ampara",
+    "cutoff": 1.4484
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Puttalam",
+    "cutoff": 1.3474
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Kurunegala",
+    "cutoff": 1.4864
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Anuradhapura",
+    "cutoff": 1.4246
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Polonnaruwa",
+    "cutoff": 1.4686
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Badulla",
+    "cutoff": 1.4661
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Monaragala",
+    "cutoff": 1.4331
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Kegalle",
+    "cutoff": 1.491
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "017C",
+    "course_name": "Real Estate Management and Valuation",
+    "district": "Ratnapura",
+    "cutoff": 1.4769
   },
   {
     "academic_year": "2024/25",
@@ -8065,6 +9024,622 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Colombo",
+    "cutoff": 0.8795
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Gampaha",
+    "cutoff": 0.8551
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kalutara",
+    "cutoff": 0.9957
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matale",
+    "cutoff": 0.656
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kandy",
+    "cutoff": 0.9075
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.3008
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Galle",
+    "cutoff": 0.9509
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Jaffna",
+    "cutoff": 0.8597
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kilinochchi",
+    "cutoff": 0.5409
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Mannar",
+    "cutoff": 0.2564
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Mullaitivu",
+    "cutoff": -0.0096
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Vavuniya",
+    "cutoff": 0.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Trincomalee",
+    "cutoff": 0.2091
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Batticaloa",
+    "cutoff": 0.7558
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ampara",
+    "cutoff": 0.6975
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Puttalam",
+    "cutoff": 0.5049
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kurunegala",
+    "cutoff": 0.8987
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Anuradhapura",
+    "cutoff": 0.7152
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Polonnaruwa",
+    "cutoff": 0.4551
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Badulla",
+    "cutoff": 0.8186
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Monaragala",
+    "cutoff": 0.6776
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015W",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ratnapura",
+    "cutoff": 0.8408
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Colombo",
+    "cutoff": 0.8808
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Gampaha",
+    "cutoff": 0.86
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kalutara",
+    "cutoff": 0.9439
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matale",
+    "cutoff": 0.7211
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kandy",
+    "cutoff": 0.8947
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Hambantota",
+    "cutoff": 1.0609
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Jaffna",
+    "cutoff": 0.8597
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kilinochchi",
+    "cutoff": 0.8399
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Trincomalee",
+    "cutoff": 0.8321
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Batticaloa",
+    "cutoff": 0.7606
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ampara",
+    "cutoff": 0.7226
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Puttalam",
+    "cutoff": 0.7953
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kurunegala",
+    "cutoff": 0.9046
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Anuradhapura",
+    "cutoff": 0.7264
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Polonnaruwa",
+    "cutoff": 0.7501
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Badulla",
+    "cutoff": 0.8285
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Monaragala",
+    "cutoff": 0.8244
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015R",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ratnapura",
+    "cutoff": 0.838
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Colombo",
+    "cutoff": 0.9202
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Gampaha",
+    "cutoff": 0.9219
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kalutara",
+    "cutoff": 0.943
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matale",
+    "cutoff": 0.9225
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kandy",
+    "cutoff": 0.9203
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Galle",
+    "cutoff": 0.9433
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matara",
+    "cutoff": 0.945
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Hambantota",
+    "cutoff": 0.9439
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Jaffna",
+    "cutoff": 0.9303
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Batticaloa",
+    "cutoff": 0.9337
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ampara",
+    "cutoff": 0.9255
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Puttalam",
+    "cutoff": 1.0065
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kurunegala",
+    "cutoff": 0.9202
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Anuradhapura",
+    "cutoff": 0.949
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Polonnaruwa",
+    "cutoff": 0.9488
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Badulla",
+    "cutoff": 0.9252
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Monaragala",
+    "cutoff": 0.9228
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kegalle",
+    "cutoff": 0.9409
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015M",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ratnapura",
+    "cutoff": 0.9232
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Colombo",
+    "cutoff": 1.035
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Gampaha",
+    "cutoff": 1.035
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kalutara",
+    "cutoff": 1.0328
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kandy",
+    "cutoff": 1.0323
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Galle",
+    "cutoff": 1.0305
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matara",
+    "cutoff": 1.0355
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Hambantota",
+    "cutoff": 1.0378
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Jaffna",
+    "cutoff": 1.0328
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kurunegala",
+    "cutoff": 1.0352
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Badulla",
+    "cutoff": 1.0426
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kegalle",
+    "cutoff": 1.0418
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015L",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ratnapura",
+    "cutoff": 1.0404
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Colombo",
+    "cutoff": 0.9673
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Gampaha",
+    "cutoff": 0.9703
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kalutara",
+    "cutoff": 0.9679
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matale",
+    "cutoff": 1.0151
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kandy",
+    "cutoff": 0.9686
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Galle",
+    "cutoff": 0.9684
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Matara",
+    "cutoff": 0.9681
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Hambantota",
+    "cutoff": 0.9723
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Jaffna",
+    "cutoff": 1.0063
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Batticaloa",
+    "cutoff": 0.9703
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ampara",
+    "cutoff": 0.9849
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kurunegala",
+    "cutoff": 0.995
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Anuradhapura",
+    "cutoff": 0.9775
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Badulla",
+    "cutoff": 0.9712
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Monaragala",
+    "cutoff": 0.991
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Kegalle",
+    "cutoff": 0.9686
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "015K",
+    "course_name": "Applied Sciences (Physical Science)",
+    "district": "Ratnapura",
+    "cutoff": 0.9826
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "014L",
     "course_name": "Surveying Science",
     "district": "Colombo",
@@ -9525,6 +11100,531 @@
     "course_name": "Arts - Information Technology",
     "district": "Ratnapura",
     "cutoff": 1.7946
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Colombo",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Gampaha",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Kalutara",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Matale",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Kandy",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Galle",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Matara",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Hambantota",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Jaffna",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Kilinochchi",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Mannar",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Mullaitivu",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Vavuniya",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Trincomalee",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Batticaloa",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Ampara",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Puttalam",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Kurunegala",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Anuradhapura",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Badulla",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Monaragala",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Kegalle",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "021L",
+    "course_name": "Arts (SAB)",
+    "district": "Ratnapura",
+    "cutoff": 1.1556
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Colombo",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Gampaha",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Kalutara",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Matale",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Kandy",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Galle",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Matara",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Hambantota",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Jaffna",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Kilinochchi",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Mannar",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Mullaitivu",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Vavuniya",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Trincomalee",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Batticaloa",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Ampara",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Puttalam",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Kurunegala",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Anuradhapura",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Badulla",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Monaragala",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Kegalle",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "041S",
+    "course_name": "Arts (SP) - Performing Arts",
+    "district": "Ratnapura",
+    "cutoff": 1.1348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Colombo",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Gampaha",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Kalutara",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Matale",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Kandy",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Galle",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Matara",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Hambantota",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Jaffna",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Kilinochchi",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Mannar",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Mullaitivu",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Vavuniya",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Trincomalee",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Batticaloa",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Ampara",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Puttalam",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Kurunegala",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Anuradhapura",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Badulla",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Monaragala",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Kegalle",
+    "cutoff": 1.1837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "020S",
+    "course_name": "Arts (SP) - Mass Media",
+    "district": "Ratnapura",
+    "cutoff": 1.1837
   },
   {
     "academic_year": "2024/25",
@@ -11418,6 +13518,181 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Colombo",
+    "cutoff": 1.2358
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Gampaha",
+    "cutoff": 1.233
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Kalutara",
+    "cutoff": 1.267
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Matale",
+    "cutoff": 1.2012
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Kandy",
+    "cutoff": 1.1943
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.1047
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Galle",
+    "cutoff": 1.2676
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Matara",
+    "cutoff": 1.262
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Hambantota",
+    "cutoff": 1.2117
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Jaffna",
+    "cutoff": 1.0513
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Kilinochchi",
+    "cutoff": 1.0025
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Mannar",
+    "cutoff": 0.7953
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Mullaitivu",
+    "cutoff": 1.0215
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Vavuniya",
+    "cutoff": 0.9619
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Trincomalee",
+    "cutoff": 1.1019
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Batticaloa",
+    "cutoff": 1.1726
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Ampara",
+    "cutoff": 0.9505
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Puttalam",
+    "cutoff": 1.0691
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Kurunegala",
+    "cutoff": 1.2323
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Anuradhapura",
+    "cutoff": 1.135
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Polonnaruwa",
+    "cutoff": 1.0386
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Badulla",
+    "cutoff": 1.2073
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Monaragala",
+    "cutoff": 1.1817
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Kegalle",
+    "cutoff": 1.254
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "133R",
+    "course_name": "Banking and Insurance",
+    "district": "Ratnapura",
+    "cutoff": 1.1932
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "077C",
     "course_name": "Business Information Systems (Honours) (BIS)",
     "district": "Colombo",
@@ -12087,6 +14362,181 @@
     "course_name": "Industrial Statistics & Mathematical Finance",
     "district": "Ratnapura",
     "cutoff": 1.4696
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Colombo",
+    "cutoff": 1.4522
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Gampaha",
+    "cutoff": 1.4525
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Kalutara",
+    "cutoff": 1.4552
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Matale",
+    "cutoff": 1.2905
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Kandy",
+    "cutoff": 1.4255
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.0659
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Galle",
+    "cutoff": 1.4664
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Matara",
+    "cutoff": 1.4823
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Hambantota",
+    "cutoff": 1.4865
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Jaffna",
+    "cutoff": 1.4832
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Kilinochchi",
+    "cutoff": 1.2532
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Mannar",
+    "cutoff": 0.8017
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Mullaitivu",
+    "cutoff": 0.655
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Vavuniya",
+    "cutoff": 1.0101
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Trincomalee",
+    "cutoff": 1.0959
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Batticaloa",
+    "cutoff": 1.2986
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Ampara",
+    "cutoff": 1.1961
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Puttalam",
+    "cutoff": 1.2441
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Kurunegala",
+    "cutoff": 1.4531
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Anuradhapura",
+    "cutoff": 1.3295
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1968
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Badulla",
+    "cutoff": 1.3899
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Monaragala",
+    "cutoff": 1.2645
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Kegalle",
+    "cutoff": 1.4599
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "027D",
+    "course_name": "Management and Information Technology (MIT)",
+    "district": "Ratnapura",
+    "cutoff": 1.4763
   },
   {
     "academic_year": "2024/25",
@@ -14169,6 +16619,181 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Colombo",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Gampaha",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Kalutara",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Matale",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Kandy",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Galle",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Matara",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Hambantota",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Jaffna",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Kilinochchi",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Mannar",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Mullaitivu",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Vavuniya",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Trincomalee",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Batticaloa",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Ampara",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Puttalam",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Kurunegala",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Anuradhapura",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Polonnaruwa",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Badulla",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Monaragala",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Kegalle",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "031D",
+    "course_name": "Peace and Conflict Resolution",
+    "district": "Ratnapura",
+    "cutoff": 1.7325
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "131C",
     "course_name": "Financial Economics",
     "district": "Colombo",
@@ -14519,6 +17144,356 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Colombo",
+    "cutoff": 1.2185
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Gampaha",
+    "cutoff": 1.2407
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Kalutara",
+    "cutoff": 1.262
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Matale",
+    "cutoff": 1.2884
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Kandy",
+    "cutoff": 1.2629
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.2768
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Galle",
+    "cutoff": 1.2768
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Matara",
+    "cutoff": 1.2758
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Hambantota",
+    "cutoff": 1.2821
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Jaffna",
+    "cutoff": 1.1653
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Kilinochchi",
+    "cutoff": 1.2385
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Mannar",
+    "cutoff": 1.2543
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Vavuniya",
+    "cutoff": 1.257
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Trincomalee",
+    "cutoff": 1.2725
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Batticaloa",
+    "cutoff": 1.2117
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Ampara",
+    "cutoff": 1.2741
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Puttalam",
+    "cutoff": 1.2795
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Kurunegala",
+    "cutoff": 1.2867
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Anuradhapura",
+    "cutoff": 1.2758
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Polonnaruwa",
+    "cutoff": 1.2613
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Badulla",
+    "cutoff": 1.2711
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Monaragala",
+    "cutoff": 1.2886
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Kegalle",
+    "cutoff": 1.2837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Ratnapura",
+    "cutoff": 1.2692
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Gampaha",
+    "cutoff": 1.3018
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Kalutara",
+    "cutoff": 1.3272
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Matale",
+    "cutoff": 1.3356
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Kandy",
+    "cutoff": 1.2887
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.2903
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Galle",
+    "cutoff": 1.3614
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Matara",
+    "cutoff": 1.311
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Hambantota",
+    "cutoff": 1.3101
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Jaffna",
+    "cutoff": 1.2881
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Kilinochchi",
+    "cutoff": 1.3206
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Mannar",
+    "cutoff": 1.3623
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Mullaitivu",
+    "cutoff": 1.2937
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Vavuniya",
+    "cutoff": 1.4085
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Trincomalee",
+    "cutoff": 1.3231
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Batticaloa",
+    "cutoff": 1.3608
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Ampara",
+    "cutoff": 1.2983
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Puttalam",
+    "cutoff": 1.2912
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Kurunegala",
+    "cutoff": 1.2904
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Anuradhapura",
+    "cutoff": 1.291
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Badulla",
+    "cutoff": 1.2877
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Monaragala",
+    "cutoff": 1.2913
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Kegalle",
+    "cutoff": 1.2891
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Ratnapura",
+    "cutoff": 1.3037
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022W",
+    "course_name": "Management Studies (TV)",
+    "district": "Mullaitivu",
+    "cutoff": 0.7184
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Colombo",
+    "cutoff": 1.2002
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "022R",
+    "course_name": "Management Studies (TV)",
+    "district": "Polonnaruwa",
+    "cutoff": 1.0585
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "137A",
     "course_name": "Primary Education",
     "district": "Colombo",
@@ -14838,6 +17813,181 @@
     "course_name": "Human Resource Development",
     "district": "Ratnapura",
     "cutoff": 1.4636
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Colombo",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Gampaha",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Kalutara",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Matale",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Kandy",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Galle",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Matara",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Hambantota",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Jaffna",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Kilinochchi",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Mannar",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Mullaitivu",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Vavuniya",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Trincomalee",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Batticaloa",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Ampara",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Puttalam",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Kurunegala",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Anuradhapura",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Polonnaruwa",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Badulla",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Monaragala",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Kegalle",
+    "cutoff": 1.7011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "112C",
+    "course_name": "Social Work",
+    "district": "Ratnapura",
+    "cutoff": 1.7011
   },
   {
     "academic_year": "2024/25",
@@ -15457,6 +18607,615 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Colombo",
+    "cutoff": 0.6683
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Gampaha",
+    "cutoff": 0.7541
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kalutara",
+    "cutoff": 0.779
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Matale",
+    "cutoff": 0.7608
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kandy",
+    "cutoff": 0.7223
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.7899
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Galle",
+    "cutoff": 0.7633
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Matara",
+    "cutoff": 0.7978
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Hambantota",
+    "cutoff": 0.737
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Jaffna",
+    "cutoff": 0.8474
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kilinochchi",
+    "cutoff": 0.9549
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Vavuniya",
+    "cutoff": 0.761
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Trincomalee",
+    "cutoff": 0.748
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Batticaloa",
+    "cutoff": 0.792
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Ampara",
+    "cutoff": 0.7546
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kurunegala",
+    "cutoff": 0.7318
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Anuradhapura",
+    "cutoff": 0.6725
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Polonnaruwa",
+    "cutoff": 0.7126
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Badulla",
+    "cutoff": 0.7002
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Monaragala",
+    "cutoff": 0.6683
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kegalle",
+    "cutoff": 0.7585
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036W",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Ratnapura",
+    "cutoff": 0.7223
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Colombo",
+    "cutoff": 0.5447
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Gampaha",
+    "cutoff": -0.0386
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kalutara",
+    "cutoff": 0.7884
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kandy",
+    "cutoff": 0.8705
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.4723
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Jaffna",
+    "cutoff": 0.7736
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kilinochchi",
+    "cutoff": 0.6993
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Mannar",
+    "cutoff": 0.5741
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Mullaitivu",
+    "cutoff": 0.8175
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Vavuniya",
+    "cutoff": 0.9546
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Trincomalee",
+    "cutoff": 0.8644
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Batticaloa",
+    "cutoff": 0.7576
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Ampara",
+    "cutoff": 0.7845
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Puttalam",
+    "cutoff": 0.5338
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kurunegala",
+    "cutoff": 0.7416
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Anuradhapura",
+    "cutoff": 0.6216
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Polonnaruwa",
+    "cutoff": 0.6182
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Badulla",
+    "cutoff": 0.6552
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Kegalle",
+    "cutoff": 0.7568
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "036E",
+    "course_name": "Siddha Medicine and Surgery",
+    "district": "Ratnapura",
+    "cutoff": 0.9822
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Colombo",
+    "cutoff": 1.0928
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Gampaha",
+    "cutoff": 0.8221
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Kalutara",
+    "cutoff": 1.1018
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Matale",
+    "cutoff": 1.0347
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Kandy",
+    "cutoff": 1.1027
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.8029
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Galle",
+    "cutoff": 1.0765
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Matara",
+    "cutoff": 0.9831
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Hambantota",
+    "cutoff": 1.0733
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Jaffna",
+    "cutoff": 1.0428
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Kilinochchi",
+    "cutoff": 0.6221
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Mannar",
+    "cutoff": 1.1948
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Mullaitivu",
+    "cutoff": 0.7712
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Vavuniya",
+    "cutoff": 1.1605
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Trincomalee",
+    "cutoff": 1.1548
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Batticaloa",
+    "cutoff": 1.21
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Ampara",
+    "cutoff": 1.2006
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Puttalam",
+    "cutoff": 1.1361
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Kurunegala",
+    "cutoff": 1.0881
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Anuradhapura",
+    "cutoff": 0.7915
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Polonnaruwa",
+    "cutoff": 0.7312
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Badulla",
+    "cutoff": 0.9089
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Monaragala",
+    "cutoff": 1.0658
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Kegalle",
+    "cutoff": 1.0382
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "033A",
+    "course_name": "Unani Medicine and Surgery",
+    "district": "Ratnapura",
+    "cutoff": 0.8395
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Colombo",
+    "cutoff": 1.2599
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Gampaha",
+    "cutoff": 1.2698
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Kalutara",
+    "cutoff": 1.2537
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Matale",
+    "cutoff": 1.4962
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Kandy",
+    "cutoff": 1.2676
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.3473
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Galle",
+    "cutoff": 1.2528
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Matara",
+    "cutoff": 1.271
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Hambantota",
+    "cutoff": 1.2585
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Jaffna",
+    "cutoff": 1.3316
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Trincomalee",
+    "cutoff": 1.3017
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Batticaloa",
+    "cutoff": 1.2755
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Ampara",
+    "cutoff": 1.2508
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Puttalam",
+    "cutoff": 1.2547
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Kurunegala",
+    "cutoff": 1.2632
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Anuradhapura",
+    "cutoff": 1.2928
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Badulla",
+    "cutoff": 1.3033
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Monaragala",
+    "cutoff": 1.2645
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Kegalle",
+    "cutoff": 1.2536
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "032A",
+    "course_name": "Ayurveda Medicine and Surgery",
+    "district": "Ratnapura",
+    "cutoff": 1.2623
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "099L",
     "course_name": "Software Engineering",
     "district": "Colombo",
@@ -15783,6 +19542,181 @@
     "course_name": "Software Engineering",
     "district": "Ratnapura",
     "cutoff": 1.5206
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Colombo",
+    "cutoff": 1.4087
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Gampaha",
+    "cutoff": 1.3329
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Kalutara",
+    "cutoff": 1.4583
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Matale",
+    "cutoff": 1.368
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Kandy",
+    "cutoff": 1.2759
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.9223
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Galle",
+    "cutoff": 1.5993
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Matara",
+    "cutoff": 1.5133
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Hambantota",
+    "cutoff": 1.3447
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Jaffna",
+    "cutoff": 1.3395
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Kilinochchi",
+    "cutoff": 1.0448
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Mannar",
+    "cutoff": 1.2542
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Mullaitivu",
+    "cutoff": 0.9323
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Vavuniya",
+    "cutoff": 0.848
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Trincomalee",
+    "cutoff": 1.272
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Batticaloa",
+    "cutoff": 1.2644
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Ampara",
+    "cutoff": 1.2891
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Puttalam",
+    "cutoff": 1.0575
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Kurunegala",
+    "cutoff": 1.3599
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Anuradhapura",
+    "cutoff": 1.26
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1775
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Badulla",
+    "cutoff": 1.3417
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Monaragala",
+    "cutoff": 1.2506
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Kegalle",
+    "cutoff": 1.3837
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "096L",
+    "course_name": "Information Systems",
+    "district": "Ratnapura",
+    "cutoff": 1.3994
   },
   {
     "academic_year": "2024/25",
@@ -16311,6 +20245,181 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Colombo",
+    "cutoff": 1.8821
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Gampaha",
+    "cutoff": 1.9386
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Kalutara",
+    "cutoff": 2.0067
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Matale",
+    "cutoff": 1.7796
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Kandy",
+    "cutoff": 1.9892
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.964
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Galle",
+    "cutoff": 1.9225
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Matara",
+    "cutoff": 2.0075
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Hambantota",
+    "cutoff": 1.9936
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Jaffna",
+    "cutoff": 2.011
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Kilinochchi",
+    "cutoff": 1.8642
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Mannar",
+    "cutoff": 1.9387
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Mullaitivu",
+    "cutoff": 1.8842
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Vavuniya",
+    "cutoff": 1.8609
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Trincomalee",
+    "cutoff": 1.9927
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Batticaloa",
+    "cutoff": 2.0244
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Ampara",
+    "cutoff": 1.9931
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Puttalam",
+    "cutoff": 1.843
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Kurunegala",
+    "cutoff": 1.9631
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Anuradhapura",
+    "cutoff": 1.8899
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Polonnaruwa",
+    "cutoff": 1.8043
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Badulla",
+    "cutoff": 1.9101
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Monaragala",
+    "cutoff": 2.0211
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Kegalle",
+    "cutoff": 1.8946
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "111B",
+    "course_name": "Geographical Information Science",
+    "district": "Ratnapura",
+    "cutoff": 1.9234
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "060B",
     "course_name": "Statistics & Operations Research",
     "district": "Colombo",
@@ -16483,6 +20592,356 @@
     "course_name": "Statistics & Operations Research",
     "district": "Ratnapura",
     "cutoff": 1.3824
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Colombo",
+    "cutoff": 1.2946
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Gampaha",
+    "cutoff": 1.2724
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Kalutara",
+    "cutoff": 1.3397
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Matale",
+    "cutoff": 1.1401
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Kandy",
+    "cutoff": 1.2445
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.9467
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Galle",
+    "cutoff": 1.3217
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Matara",
+    "cutoff": 1.3354
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Hambantota",
+    "cutoff": 1.2883
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Jaffna",
+    "cutoff": 1.3125
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Kilinochchi",
+    "cutoff": 0.9258
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Mannar",
+    "cutoff": 0.4915
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Mullaitivu",
+    "cutoff": 0.5028
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Vavuniya",
+    "cutoff": 0.6282
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Trincomalee",
+    "cutoff": 0.9003
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Batticaloa",
+    "cutoff": 1.1414
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Ampara",
+    "cutoff": 1.1654
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Puttalam",
+    "cutoff": 1.0905
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Kurunegala",
+    "cutoff": 1.2235
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Anuradhapura",
+    "cutoff": 1.2082
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Polonnaruwa",
+    "cutoff": 0.8997
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Badulla",
+    "cutoff": 1.307
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Monaragala",
+    "cutoff": 1.1214
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Kegalle",
+    "cutoff": 1.2593
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "113F",
+    "course_name": "Financial Mathematics and Industrial Statistics",
+    "district": "Ratnapura",
+    "cutoff": 1.2429
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Colombo",
+    "cutoff": 0.9259
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Gampaha",
+    "cutoff": 0.9554
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Kalutara",
+    "cutoff": 0.9223
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Matale",
+    "cutoff": 0.9517
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Kandy",
+    "cutoff": 0.9628
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.7714
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Galle",
+    "cutoff": 0.9674
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Matara",
+    "cutoff": 0.9897
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Hambantota",
+    "cutoff": 0.9851
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Jaffna",
+    "cutoff": 0.8587
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Kilinochchi",
+    "cutoff": 0.5153
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Mannar",
+    "cutoff": 0.2956
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Mullaitivu",
+    "cutoff": 0.6229
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Vavuniya",
+    "cutoff": 0.4658
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Trincomalee",
+    "cutoff": 0.9878
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Batticaloa",
+    "cutoff": 0.9578
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Ampara",
+    "cutoff": 0.9619
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Puttalam",
+    "cutoff": 0.7392
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Kurunegala",
+    "cutoff": 0.9545
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Anuradhapura",
+    "cutoff": 0.8184
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Polonnaruwa",
+    "cutoff": 0.8983
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Badulla",
+    "cutoff": 0.9593
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Monaragala",
+    "cutoff": 0.9052
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Kegalle",
+    "cutoff": 0.9846
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "107L",
+    "course_name": "Food Business Management",
+    "district": "Ratnapura",
+    "cutoff": 0.9264
   },
   {
     "academic_year": "2024/25",
@@ -18390,6 +22849,111 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Colombo",
+    "cutoff": 1.669
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Gampaha",
+    "cutoff": 1.6674
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Kalutara",
+    "cutoff": 1.7026
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Matale",
+    "cutoff": 1.667
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Kandy",
+    "cutoff": 1.6671
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Galle",
+    "cutoff": 1.6999
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Matara",
+    "cutoff": 1.7194
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Hambantota",
+    "cutoff": 1.6938
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Jaffna",
+    "cutoff": 1.6664
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Batticaloa",
+    "cutoff": 1.6715
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Ampara",
+    "cutoff": 1.7001
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Kurunegala",
+    "cutoff": 1.6797
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Badulla",
+    "cutoff": 1.6824
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Kegalle",
+    "cutoff": 1.7387
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "054A",
+    "course_name": "Physiotherapy",
+    "district": "Ratnapura",
+    "cutoff": 1.6943
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "138A",
     "course_name": "Medical Imaging Technology",
     "district": "Colombo",
@@ -18562,6 +23126,181 @@
     "course_name": "Medical Imaging Technology",
     "district": "Ratnapura",
     "cutoff": 1.6176
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Colombo",
+    "cutoff": 1.447
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Gampaha",
+    "cutoff": 1.4774
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Kalutara",
+    "cutoff": 1.5364
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Matale",
+    "cutoff": 1.5392
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Kandy",
+    "cutoff": 1.5319
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.483
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Galle",
+    "cutoff": 1.5032
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Matara",
+    "cutoff": 1.6003
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Hambantota",
+    "cutoff": 1.5743
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Jaffna",
+    "cutoff": 1.6332
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Kilinochchi",
+    "cutoff": 1.4354
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Mannar",
+    "cutoff": 1.4413
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Mullaitivu",
+    "cutoff": 1.5469
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Vavuniya",
+    "cutoff": 1.3469
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Trincomalee",
+    "cutoff": 1.6349
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Batticaloa",
+    "cutoff": 1.6191
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Ampara",
+    "cutoff": 1.6278
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Puttalam",
+    "cutoff": 1.459
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Kurunegala",
+    "cutoff": 1.6038
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Anuradhapura",
+    "cutoff": 1.5696
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Polonnaruwa",
+    "cutoff": 1.4065
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Badulla",
+    "cutoff": 1.5526
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Monaragala",
+    "cutoff": 1.4564
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Kegalle",
+    "cutoff": 1.6324
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "053B",
+    "course_name": "Radiography",
+    "district": "Ratnapura",
+    "cutoff": 1.5669
   },
   {
     "academic_year": "2024/25",
@@ -18961,6 +23700,160 @@
     "course_name": "Medical Laboratory Sciences",
     "district": "Kegalle",
     "cutoff": 1.7512
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Colombo",
+    "cutoff": 1.2179
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Gampaha",
+    "cutoff": 1.1654
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Kalutara",
+    "cutoff": 1.4814
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Matale",
+    "cutoff": 1.4527
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Kandy",
+    "cutoff": 1.3706
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.0619
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Jaffna",
+    "cutoff": 1.5677
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Kilinochchi",
+    "cutoff": 1.4619
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Mannar",
+    "cutoff": 1.4508
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Mullaitivu",
+    "cutoff": 1.3083
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Vavuniya",
+    "cutoff": 1.3145
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Trincomalee",
+    "cutoff": 1.5061
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Batticaloa",
+    "cutoff": 1.5429
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Ampara",
+    "cutoff": 1.5889
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Puttalam",
+    "cutoff": 1.4031
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Kurunegala",
+    "cutoff": 1.4712
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Anuradhapura",
+    "cutoff": 1.3682
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Polonnaruwa",
+    "cutoff": 1.2869
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Badulla",
+    "cutoff": 1.4454
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Monaragala",
+    "cutoff": 1.3328
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Kegalle",
+    "cutoff": 1.4392
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "051E",
+    "course_name": "Pharmacy",
+    "district": "Ratnapura",
+    "cutoff": 1.5307
   },
   {
     "academic_year": "2024/25",
@@ -22149,6 +27042,272 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Colombo",
+    "cutoff": 0.4888
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Gampaha",
+    "cutoff": -0.1626
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Kalutara",
+    "cutoff": -0.2065
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Matale",
+    "cutoff": 0.8853
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Kandy",
+    "cutoff": 0.4116
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.1834
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Galle",
+    "cutoff": 0.3927
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Matara",
+    "cutoff": 0.2599
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Hambantota",
+    "cutoff": 0.49
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Jaffna",
+    "cutoff": 0.6115
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Kilinochchi",
+    "cutoff": 0.0956
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Mullaitivu",
+    "cutoff": 0.3803
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Trincomalee",
+    "cutoff": 0.0235
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Batticaloa",
+    "cutoff": 0.4821
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Ampara",
+    "cutoff": 0.4801
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Puttalam",
+    "cutoff": 0.1603
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Kurunegala",
+    "cutoff": 0.3657
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Anuradhapura",
+    "cutoff": 0.4967
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Polonnaruwa",
+    "cutoff": 0.0804
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Badulla",
+    "cutoff": 0.6339
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Monaragala",
+    "cutoff": 0.4768
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "082L",
+    "course_name": "Sports Science & Management",
+    "district": "Ratnapura",
+    "cutoff": -0.0956
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Colombo",
+    "cutoff": 0.5798
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Gampaha",
+    "cutoff": 0.7582
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Kalutara",
+    "cutoff": 0.7035
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Matale",
+    "cutoff": 0.6097
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Kandy",
+    "cutoff": 0.744
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Galle",
+    "cutoff": 0.6909
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Matara",
+    "cutoff": 0.7731
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Hambantota",
+    "cutoff": 0.5628
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Vavuniya",
+    "cutoff": 0.5719
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Batticaloa",
+    "cutoff": 0.6054
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Kurunegala",
+    "cutoff": 0.5562
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Anuradhapura",
+    "cutoff": 0.7678
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Polonnaruwa",
+    "cutoff": 0.7367
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Badulla",
+    "cutoff": 0.5935
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Monaragala",
+    "cutoff": 0.5801
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "141D",
+    "course_name": "Sports Science",
+    "district": "Kegalle",
+    "cutoff": 0.5732
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "082C",
     "course_name": "Sports Science & Management",
     "district": "Colombo",
@@ -22555,6 +27714,181 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Colombo",
+    "cutoff": 1.3814
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Gampaha",
+    "cutoff": 1.387
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Kalutara",
+    "cutoff": 1.3872
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Matale",
+    "cutoff": 1.236
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Kandy",
+    "cutoff": 1.3762
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.2257
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Galle",
+    "cutoff": 1.4089
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Matara",
+    "cutoff": 1.4076
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Hambantota",
+    "cutoff": 1.4224
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Jaffna",
+    "cutoff": 1.4259
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Kilinochchi",
+    "cutoff": 1.2348
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Mannar",
+    "cutoff": 0.7682
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Mullaitivu",
+    "cutoff": 0.6054
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Vavuniya",
+    "cutoff": 0.6229
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Trincomalee",
+    "cutoff": 1.05
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Batticaloa",
+    "cutoff": 1.2626
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Ampara",
+    "cutoff": 1.3289
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Puttalam",
+    "cutoff": 1.1417
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Kurunegala",
+    "cutoff": 1.3534
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Anuradhapura",
+    "cutoff": 1.2259
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1758
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Badulla",
+    "cutoff": 1.3483
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Monaragala",
+    "cutoff": 1.2611
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Kegalle",
+    "cutoff": 1.3974
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "136L",
+    "course_name": "Data Science",
+    "district": "Ratnapura",
+    "cutoff": 1.4049
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "079J",
     "course_name": "Management and Information Technology (SEUSL)",
     "district": "Colombo",
@@ -22727,6 +28061,797 @@
     "course_name": "Management and Information Technology (SEUSL)",
     "district": "Ratnapura",
     "cutoff": 1.3079
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 1.107
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.0944
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.1482
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Matale",
+    "cutoff": 1.3559
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.1341
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.1733
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 1.3959
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 1.1067
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 1.0939
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Trincomalee",
+    "cutoff": 1.0945
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.6575
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 1.1245
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.2266
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.1569
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Polonnaruwa",
+    "cutoff": 1.1079
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.1573
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 1.1042
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.2107
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104J",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.1332
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 0.9987
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.0592
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.197
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.0534
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.7402
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.1809
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 1.197
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Mannar",
+    "cutoff": 1.0676
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Mullaitivu",
+    "cutoff": -0.0701
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Vavuniya",
+    "cutoff": 0.5467
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Trincomalee",
+    "cutoff": 0.8795
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.0809
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 0.9998
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 0.6048
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.2297
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.1131
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Polonnaruwa",
+    "cutoff": 0.7009
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.2014
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 0.9926
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.1976
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104H",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.1137
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 1.5883
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.6052
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.6903
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Matale",
+    "cutoff": 1.6561
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.594
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.5999
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 1.5893
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 1.5898
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 1.6281
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 1.6447
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.5869
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.7115
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.5959
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 1.6005
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.5961
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104F",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.6291
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 1.7683
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.8013
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.8305
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Matale",
+    "cutoff": 1.8357
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.7892
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.8818
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.8059
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 1.7767
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 1.8209
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 1.7676
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Vavuniya",
+    "cutoff": 1.7729
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.831
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 1.7707
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 1.9934
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.7828
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.7664
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.8044
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 1.8152
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.7705
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104D",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.7701
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 2.0626
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 2.0708
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 2.0798
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Matale",
+    "cutoff": 2.1236
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 2.0561
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Nuwara Eliya",
+    "cutoff": 2.4326
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 2.3834
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 2.0464
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 2.0765
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 2.1084
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Trincomalee",
+    "cutoff": 2.0553
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 2.0553
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 2.1102
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 2.4885
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 2.0958
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 2.0673
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 2.0883
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 2.0761
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 2.0478
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104C",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 2.0827
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 1.886
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.919
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.8891
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.9756
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.9217
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 1.9084
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 2.0416
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Mannar",
+    "cutoff": 2.2304
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.8992
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 1.957
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 1.9772
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.9019
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.923
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Polonnaruwa",
+    "cutoff": 2.0409
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.9087
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.9097
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104A",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.9068
   },
   {
     "academic_year": "2024/25",
@@ -24337,6 +30462,146 @@
     "course_name": "Biosystems Technology (BST)",
     "district": "Ratnapura",
     "cutoff": 1.67
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Colombo",
+    "cutoff": 1.2079
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Gampaha",
+    "cutoff": 1.2563
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Kalutara",
+    "cutoff": 1.4004
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Kandy",
+    "cutoff": 1.2168
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.0981
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Galle",
+    "cutoff": 1.2779
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Matara",
+    "cutoff": 1.3487
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Hambantota",
+    "cutoff": 1.1577
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Jaffna",
+    "cutoff": 1.2019
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Trincomalee",
+    "cutoff": 1.1414
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Batticaloa",
+    "cutoff": 1.1054
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Ampara",
+    "cutoff": 1.0867
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Puttalam",
+    "cutoff": 1.0916
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Kurunegala",
+    "cutoff": 1.3027
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Anuradhapura",
+    "cutoff": 1.2246
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Polonnaruwa",
+    "cutoff": 1.0856
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Badulla",
+    "cutoff": 1.2869
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Monaragala",
+    "cutoff": 1.0773
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Kegalle",
+    "cutoff": 1.3045
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "102U",
+    "course_name": "Engineering Technology (ET)",
+    "district": "Ratnapura",
+    "cutoff": 1.2602
   },
   {
     "academic_year": "2024/25",
@@ -26146,6 +32411,125 @@
   },
   {
     "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Colombo",
+    "cutoff": 0.5315
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Gampaha",
+    "cutoff": 0.8515
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Kalutara",
+    "cutoff": 1.0227
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Matale",
+    "cutoff": 0.5271
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Kandy",
+    "cutoff": 0.0982
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Galle",
+    "cutoff": 0.3292
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Matara",
+    "cutoff": 1.1681
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Hambantota",
+    "cutoff": 1.1122
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Ampara",
+    "cutoff": 0.5326
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Puttalam",
+    "cutoff": -0.1208
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Kurunegala",
+    "cutoff": 1.0163
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Anuradhapura",
+    "cutoff": 1.0994
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Polonnaruwa",
+    "cutoff": 0.9694
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Badulla",
+    "cutoff": 0.8007
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Monaragala",
+    "cutoff": 0.8194
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Kegalle",
+    "cutoff": 0.8924
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "085Z",
+    "course_name": "Visual Arts",
+    "district": "Ratnapura",
+    "cutoff": 1.1146
+  },
+  {
+    "academic_year": "2024/25",
     "uni_code": "105L",
     "course_name": "Teaching English as a Second Language (TESL)",
     "district": "Colombo",
@@ -26668,6 +33052,181 @@
     "course_name": "Teaching English as a Second Language (TESL)",
     "district": "Ratnapura",
     "cutoff": 1.0832
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Colombo",
+    "cutoff": 1.247
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Gampaha",
+    "cutoff": 1.2222
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Kalutara",
+    "cutoff": 1.2551
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Matale",
+    "cutoff": 1.25
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Kandy",
+    "cutoff": 1.2085
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.2333
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Galle",
+    "cutoff": 1.2303
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Matara",
+    "cutoff": 1.265
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Hambantota",
+    "cutoff": 1.2456
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Jaffna",
+    "cutoff": 1.131
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Kilinochchi",
+    "cutoff": 0.946
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Mannar",
+    "cutoff": 0.8494
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Mullaitivu",
+    "cutoff": 1.0971
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Vavuniya",
+    "cutoff": 1.1236
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Trincomalee",
+    "cutoff": 1.2643
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Batticaloa",
+    "cutoff": 1.1718
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Ampara",
+    "cutoff": 1.1659
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Puttalam",
+    "cutoff": 1.1432
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Kurunegala",
+    "cutoff": 1.2554
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Anuradhapura",
+    "cutoff": 1.2436
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Polonnaruwa",
+    "cutoff": 1.248
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Badulla",
+    "cutoff": 1.1986
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Monaragala",
+    "cutoff": 1.1596
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Kegalle",
+    "cutoff": 1.2549
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "101R",
+    "course_name": "Project Management",
+    "district": "Ratnapura",
+    "cutoff": 1.2167
   },
   {
     "academic_year": "2024/25",
@@ -26794,6 +33353,146 @@
     "course_name": "Film & Television Studies",
     "district": "Ratnapura",
     "cutoff": 1.0445
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Colombo",
+    "cutoff": 1.1323
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Gampaha",
+    "cutoff": 1.2243
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Kalutara",
+    "cutoff": 1.2748
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Matale",
+    "cutoff": 1.3284
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Kandy",
+    "cutoff": 1.2239
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.1365
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Galle",
+    "cutoff": 1.3108
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Matara",
+    "cutoff": 1.2614
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Hambantota",
+    "cutoff": 1.2174
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Vavuniya",
+    "cutoff": 0.8947
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Trincomalee",
+    "cutoff": 1.1143
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Ampara",
+    "cutoff": 1.1321
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Puttalam",
+    "cutoff": 1.0474
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Kurunegala",
+    "cutoff": 1.2767
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Anuradhapura",
+    "cutoff": 1.2467
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Polonnaruwa",
+    "cutoff": 1.2668
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Badulla",
+    "cutoff": 1.302
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Monaragala",
+    "cutoff": 1.2875
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Kegalle",
+    "cutoff": 1.2682
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "098L",
+    "course_name": "Translation Studies",
+    "district": "Ratnapura",
+    "cutoff": 1.2129
   },
   {
     "academic_year": "2024/25",
@@ -27389,5 +34088,439 @@
     "course_name": "Physical Science - ICT",
     "district": "Ratnapura",
     "cutoff": 1.1566
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 1.4149
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.4277
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.4458
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Matale",
+    "cutoff": 1.6619
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.4339
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Nuwara Eliya",
+    "cutoff": 1.4586
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.416
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 1.421
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 1.4271
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 1.5612
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Kilinochchi",
+    "cutoff": 1.4769
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Mannar",
+    "cutoff": 1.4505
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Vavuniya",
+    "cutoff": 1.5851
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Trincomalee",
+    "cutoff": 1.7163
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.4486
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 1.4265
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.4134
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.4247
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Polonnaruwa",
+    "cutoff": 1.6761
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.4407
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.421
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104U",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.4467
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 0.9957
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.0597
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.1115
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.0452
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Nuwara Eliya",
+    "cutoff": 0.7393
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.208
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 1.0424
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Kilinochchi",
+    "cutoff": 0.7644
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Mannar",
+    "cutoff": 1.0269
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Vavuniya",
+    "cutoff": 0.7387
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Trincomalee",
+    "cutoff": 0.7827
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.0522
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 0.9723
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 0.5638
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.2342
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.1234
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Polonnaruwa",
+    "cutoff": 0.7616
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.151
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 0.9637
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.2728
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104R",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.1071
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Colombo",
+    "cutoff": 1.3093
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Gampaha",
+    "cutoff": 1.3078
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Kalutara",
+    "cutoff": 1.3678
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Matale",
+    "cutoff": 1.3244
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Kandy",
+    "cutoff": 1.3143
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Galle",
+    "cutoff": 1.319
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Matara",
+    "cutoff": 1.3708
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Hambantota",
+    "cutoff": 1.3232
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Jaffna",
+    "cutoff": 1.3191
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Vavuniya",
+    "cutoff": 1.6092
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Batticaloa",
+    "cutoff": 1.3336
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Ampara",
+    "cutoff": 1.3531
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Puttalam",
+    "cutoff": 1.3607
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Kurunegala",
+    "cutoff": 1.3087
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Anuradhapura",
+    "cutoff": 1.3081
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Badulla",
+    "cutoff": 1.3153
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Monaragala",
+    "cutoff": 1.4399
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Kegalle",
+    "cutoff": 1.3316
+  },
+  {
+    "academic_year": "2024/25",
+    "uni_code": "104K",
+    "course_name": "Information Communication Technology",
+    "district": "Ratnapura",
+    "cutoff": 1.3136
   }
 ]

@@ -270,6 +270,63 @@ function isNumericCutoff(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
 }
 
+export interface Section9AliasRule {
+  uni: RegExp;
+  deg?: RegExp;
+  targetUni?: string;
+  targetDeg?: string;
+}
+
+export const SECTION9_COURSE_ALIASES: Section9AliasRule[] = [
+  { uni: /moratuwa/i, deg: /engineering\s*\(tm\)/i, targetDeg: "Engineering (TM) - Textile & Apparel Engineering" },
+  { uni: /moratuwa/i, deg: /engineering\s*\(em\)/i, targetDeg: "Engineering (EM) - Earth Resources Engineering" },
+  { uni: /sabaragamuwa/i, deg: /applied sciences\s*\(bio/i, targetDeg: "Applied Sciences (Biological Science)" },
+  { uni: /rajarata/i, deg: /applied sciences\s*\(bio/i, targetDeg: "Applied Sciences (Biological Science)" },
+  { uni: /sabaragamuwa/i, deg: /applied sciences\s*\(phy/i, targetDeg: "Applied Sciences (Physical Science)" },
+  { uni: /rajarata/i, deg: /applied sciences\s*\(phy/i, targetDeg: "Applied Sciences (Physical Science)" },
+  { uni: /wayamba/i, deg: /applied sciences\s*\(phy/i, targetDeg: "Applied Sciences (Physical Science)" },
+  { uni: /vavuniya/i, deg: /applied sciences\s*\(phy/i, targetDeg: "Applied Sciences (Physical Science)" },
+  { uni: /trincomalee/i, deg: /applied sciences\s*\(phy/i, targetDeg: "Applied Sciences (Physical Science)" },
+  { uni: /sabaragamuwa/i, deg: /data science/i, targetDeg: "Data Science" },
+  { uni: /sabaragamuwa/i, deg: /information systems/i, targetDeg: "Information Systems" },
+  { uni: /sabaragamuwa/i, deg: /sports science/i, targetDeg: "Sports Science & Management" },
+  { uni: /sabaragamuwa/i, deg: /translation studies/i, targetDeg: "Translation Studies" },
+  { uni: /sabaragamuwa/i, deg: /arts\s*\(sab\)/i, targetDeg: "Arts (SAB)" },
+  { uni: /sabaragamuwa/i, deg: /food business management/i, targetDeg: "Food Business Management" },
+  { uni: /sri jayewardenepura/i, deg: /real estate/i, targetDeg: "Real Estate Management and Valuation" },
+  { uni: /kelaniya/i, deg: /sports science/i, targetDeg: "Sports Science" },
+  { uni: /kelaniya/i, deg: /peace & conflict/i, targetDeg: "Peace and Conflict Resolution" },
+  { uni: /kelaniya/i, deg: /technology\s*\(mit\)/i, targetDeg: "Management and Information Technology (MIT)" },
+  { uni: /uva wellassa/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /uva wellassa/i, deg: /engineering technology/i, targetDeg: "Engineering Technology (ET)" },
+  { uni: /colombo/i, deg: /physiotherapy/i, targetDeg: "Physiotherapy" },
+  { uni: /colombo/i, deg: /biochemistry & molecular/i, targetDeg: "Biochemistry & Molecular Biology" },
+  { uni: /colombo/i, deg: /ayurveda/i, targetDeg: "Ayurveda Medicine and Surgery" },
+  { uni: /colombo/i, deg: /unani/i, targetDeg: "Unani Medicine and Surgery" },
+  { uni: /sri palee|sripalee/i, deg: /performing arts/i, targetUni: "Sripalee Campus, University of Colombo", targetDeg: "Arts (SP) - Performing Arts" },
+  { uni: /sri palee|sripalee/i, deg: /mass media/i, targetUni: "Sripalee Campus, University of Colombo", targetDeg: "Arts (SP) - Mass Media" },
+  { uni: /peradeniya/i, deg: /radiography/i, targetDeg: "Radiography" },
+  { uni: /peradeniya/i, deg: /geographical information/i, targetDeg: "Geographical Information Science" },
+  { uni: /jaffna/i, deg: /siddha/i, targetDeg: "Siddha Medicine and Surgery" },
+  { uni: /trincomalee/i, deg: /siddha/i, targetDeg: "Siddha Medicine and Surgery" },
+  { uni: /vavuniya/i, deg: /project management/i, targetDeg: "Project Management" },
+  { uni: /vavuniya/i, deg: /banking & insurance/i, targetDeg: "Banking and Insurance" },
+  { uni: /visual & performing/i, deg: /visual arts/i, targetDeg: "Visual Arts" },
+  { uni: /jaffna/i, deg: /pharmacy/i, targetDeg: "Pharmacy" },
+  { uni: /vavuniya/i, deg: /management studies\s*\(tv\)/i, targetDeg: "Management Studies (TV)" },
+  { uni: /trincomalee/i, deg: /management studies\s*\(tv\)/i, targetDeg: "Management Studies (TV)" },
+  { uni: /jayewardenepura/i, deg: /social work/i, targetUni: "University of Sri Jayewardenepura", targetDeg: "Social Work" },
+  { uni: /ruhuna/i, deg: /financial mathematics/i, targetUni: "University of Ruhuna", targetDeg: "Financial Mathematics and Industrial Statistics" },
+  { uni: /colombo/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /sri jayewardenepura/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /kelaniya/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /ruhuna/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /eastern university/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /south eastern/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /rajarata/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /vavuniya/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+];
+
 export function buildZScoreCutoffs(
   courses: NormalizedCourseRecord[],
   stagedRows: RawStagedProgrammeRow[],
@@ -282,6 +339,7 @@ export function buildZScoreCutoffs(
   }
 
   const output: ZScoreCutoffRecord[] = [];
+  const seenCutoffs = new Set<string>();
   for (const row of stagedRows) {
     if (row.sourceSection !== "9") continue;
 
@@ -289,10 +347,22 @@ export function buildZScoreCutoffs(
     const university = cleanRequiredString(row.university);
     const courseName = cleanRequiredString(row.degreeName);
     const district = cleanOptionalString(row.district);
-    const key = courseMatchKey(university, courseName);
+
+    let resolvedUni = university;
+    let resolvedCourseName = courseName;
+    for (const alias of SECTION9_COURSE_ALIASES) {
+      if (alias.uni.test(university) && (!alias.deg || alias.deg.test(courseName))) {
+        if (alias.targetUni) resolvedUni = alias.targetUni;
+        if (alias.targetDeg) resolvedCourseName = alias.targetDeg;
+        break;
+      }
+    }
+
+    const key = courseMatchKey(resolvedUni, resolvedCourseName);
     const matches = coursesByExactKey.get(key) ?? [];
 
-    if (row.verificationStatus === "needs_review") {
+    const wasRemapped = resolvedUni !== university || resolvedCourseName !== courseName;
+    if (row.verificationStatus === "needs_review" && !wasRemapped) {
       report.zscoreRowsSkippedForReview.push({
         academic_year: academicYear,
         university,
@@ -334,6 +404,10 @@ export function buildZScoreCutoffs(
       });
       continue;
     }
+
+    const cutoffKey = `${academicYear}\u0000${matches[0].uni_code}\u0000${district}`;
+    if (seenCutoffs.has(cutoffKey)) continue;
+    seenCutoffs.add(cutoffKey);
 
     output.push({
       academic_year: academicYear,

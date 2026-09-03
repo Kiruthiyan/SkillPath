@@ -6,7 +6,7 @@
 - Source eligibility rule groups: 50
 - Expanded eligibility rows: 112
 - Source Section 9 cutoff rows: 6150
-- Normalized numeric cutoff rows: 3913
+- Normalized numeric cutoff rows: 4932
 
 ## Not Available Replacements
 - faculty: 220
@@ -175,61 +175,11 @@
 - Electronic and Intelligent Systems Engineering
 
 ## Cutoff Mapping Issues
-- Rows without unique course identity: 175
-- Rows with non-numeric official markers: 812
-- Rows skipped because extraction requires review: 1250
+- Rows without unique course identity: 125
+- Rows with non-numeric official markers: 980
+- Rows skipped because extraction requires review: 25
 
 ### First 200 Rows Without Unique Course Identity
-- 2024/25 | University of Jayewardenepura | Social Work | Colombo | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Gampaha | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Kalutara | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Matale | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Kandy | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Nuwara Eliya | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Galle | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Matara | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Hambantota | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Jaffna | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Kilinochchi | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Mannar | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Mullaitivu | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Vavuniya | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Trincomalee | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Batticaloa | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Ampara | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Puttalam | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Kurunegala | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Anuradhapura | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Polonnaruwa | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Badulla | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Monaragala | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Kegalle | missing_match
-- 2024/25 | University of Jayewardenepura | Social Work | Ratnapura | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Colombo | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Gampaha | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Kalutara | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Matale | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Kandy | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Nuwara Eliya | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Galle | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Matara | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Hambantota | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Jaffna | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Kilinochchi | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Mannar | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Mullaitivu | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Vavuniya | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Trincomalee | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Batticaloa | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Ampara | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Puttalam | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Kurunegala | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Anuradhapura | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Polonnaruwa | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Badulla | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Monaragala | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Kegalle | missing_match
-- 2024/25 | University of Kelaniya | Sports Science & Management | Ratnapura | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Colombo | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Gampaha | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Kalutara | missing_match
@@ -559,203 +509,28 @@
 - 2024/25 | University of Sri Jayewardenepura | Computer Science | Kandy | NQC
 
 ### First 200 Cutoff Rows Requiring Review
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Colombo
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Gampaha
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kalutara
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Matale
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kandy
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Nuwara Eliya
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Galle
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Matara
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Hambantota
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Jaffna
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kilinochchi
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Mannar
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Mullaitivu
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Vavuniya
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Trincomalee
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Batticaloa
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Ampara
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Puttalam
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kurunegala
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Anuradhapura
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Polonnaruwa
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Badulla
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Monaragala
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Kegalle
-- 2024/25 | University of Colombo | BIOCHEMISTRY & MOLECULAR BIOLOGY ucted. | Ratnapura
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Colombo
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Gampaha
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kalutara
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Matale
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kandy
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Nuwara Eliya
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Galle
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Matara
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Hambantota
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Jaffna
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kilinochchi
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Mannar
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Mullaitivu
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Vavuniya
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Trincomalee
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Batticaloa
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Ampara
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Puttalam
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kurunegala
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Anuradhapura
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Polonnaruwa
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Badulla
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Monaragala
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Kegalle
-- 2024/25 | University of Moratuwa | ENGINEERING (TM) | Ratnapura
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Colombo
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Gampaha
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kalutara
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Matale
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kandy
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Nuwara Eliya
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Galle
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Matara
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Hambantota
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Jaffna
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kilinochchi
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Mannar
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Mullaitivu
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Vavuniya
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Trincomalee
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Batticaloa
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Ampara
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Puttalam
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kurunegala
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Anuradhapura
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Polonnaruwa
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Badulla
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Monaragala
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Kegalle
-- 2024/25 | University of Moratuwa | ENGINEERING (EM) | Ratnapura
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Colombo
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Gampaha
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kalutara
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matale
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kandy
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Nuwara Eliya
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Galle
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matara
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Hambantota
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Jaffna
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kilinochchi
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mannar
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mullaitivu
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Vavuniya
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Trincomalee
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Batticaloa
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ampara
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Puttalam
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kurunegala
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Anuradhapura
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Polonnaruwa
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Badulla
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Monaragala
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kegalle
-- 2024/25 | Sabaragamuwa University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ratnapura
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Colombo
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Gampaha
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kalutara
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matale
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kandy
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Nuwara Eliya
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Galle
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matara
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Hambantota
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Jaffna
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kilinochchi
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mannar
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mullaitivu
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Vavuniya
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Trincomalee
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Batticaloa
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ampara
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Puttalam
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kurunegala
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Anuradhapura
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Polonnaruwa
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Badulla
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Monaragala
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kegalle
-- 2024/25 | Rajarata University of Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ratnapura
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Colombo
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Gampaha
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kalutara
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Matale
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kandy
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Nuwara Eliya
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Galle
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Matara
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Hambantota
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Jaffna
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kilinochchi
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Mannar
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Mullaitivu
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Vavuniya
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Trincomalee
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Batticaloa
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Ampara
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Puttalam
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kurunegala
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Anuradhapura
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Polonnaruwa
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Badulla
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Monaragala
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Kegalle
-- 2024/25 | University of Sri Jayewardenepura | REAL ESTATE MANAGEMENT & VALUATION | Ratnapura
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Colombo
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Gampaha
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kalutara
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Matale
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kandy
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Nuwara Eliya
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Galle
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Matara
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Hambantota
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Jaffna
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kilinochchi
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Mannar
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Mullaitivu
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Vavuniya
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Trincomalee
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Batticaloa
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Ampara
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Puttalam
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kurunegala
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Anuradhapura
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Polonnaruwa
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Badulla
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Monaragala
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Kegalle
-- 2024/25 | Trincomalee Campus, Eastern University, Sri Lanka | APPLIED SCIENCES (PHY.SC) Tes Practical district. that oriented of students subject the the by filled which reasons. been for ady udy ng | Ratnapura
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Colombo
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Gampaha
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kalutara
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Matale
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kandy
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Nuwara Eliya
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Galle
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Matara
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Hambantota
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Jaffna
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kilinochchi
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Mannar
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Mullaitivu
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Vavuniya
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Trincomalee
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Batticaloa
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Ampara
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Puttalam
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kurunegala
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Anuradhapura
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Polonnaruwa
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Badulla
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Monaragala
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Kegalle
-- 2024/25 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (PHY.SC) | Ratnapura
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Colombo
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Gampaha
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kalutara
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Matale
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kandy
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Nuwara Eliya
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Galle
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Matara
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Hambantota
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Jaffna
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kilinochchi
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Mannar
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Mullaitivu
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Vavuniya
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Trincomalee
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Batticaloa
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Ampara
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Puttalam
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kurunegala
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Anuradhapura
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Polonnaruwa
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Badulla
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Monaragala
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kegalle
+- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Ratnapura

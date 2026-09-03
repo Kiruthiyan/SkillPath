@@ -529,9 +529,20 @@ export async function getOfficialCheckerRecommendations(input: {
     const manualSubjects = subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
 
     const meetsHandbookRequirements = missingSubjects.length === 0;
-    const handbookStatusReason = meetsHandbookRequirements
-      ? "Meets Handbook Requirements"
-      : `Missing required subject pass: ${missingSubjects.join(", ")}`;
+    const zscoreDiff = row.latest_cutoff == null ? null : input.zscore - row.latest_cutoff;
+    const meetsCutoff = zscoreDiff != null && zscoreDiff >= -0.0001;
+    const isEligible = meetsHandbookRequirements && meetsCutoff;
+
+    let handbookStatusReason: string;
+    if (!meetsHandbookRequirements) {
+      handbookStatusReason = `Missing required subject pass: ${missingSubjects.join(", ")}`;
+    } else if (row.latest_cutoff == null) {
+      handbookStatusReason = "No District Cutoff Available";
+    } else if (meetsCutoff) {
+      handbookStatusReason = `Qualified (+${zscoreDiff.toFixed(3)})`;
+    } else {
+      handbookStatusReason = `Below Cutoff (${zscoreDiff.toFixed(3)})`;
+    }
 
     const reasons: string[] = [handbookStatusReason];
     if (manualSubjects.length > 0) {
@@ -549,8 +560,6 @@ export async function getOfficialCheckerRecommendations(input: {
     } else {
       reasons.push(`Official cutoff ${row.latest_cutoff} for ${input.district}`);
     }
-
-    const zscoreDiff = row.latest_cutoff == null ? null : input.zscore - row.latest_cutoff;
 
     const recommendation: OfficialCheckerRecommendation = {
       programmeId: officialCourseApiId(row.uni_code),
@@ -584,7 +593,7 @@ export async function getOfficialCheckerRecommendations(input: {
       reasons,
     };
 
-    if (meetsHandbookRequirements) {
+    if (isEligible) {
       groups.eligible.push(recommendation);
     } else {
       groups.notEligible.push(recommendation);
