@@ -211,21 +211,35 @@ async function importZScoreCutoffs(client: PoolClient, cutoffs: ZScoreCutoff[]) 
     SOURCE_HANDBOOK_YEAR,
   ]);
 
-  for (const cutoff of cutoffs) {
+  const chunkSize = 200;
+  for (let i = 0; i < cutoffs.length; i += chunkSize) {
+    const chunk = cutoffs.slice(i, i + chunkSize);
+    const values: unknown[] = [];
+    const placeholders: string[] = [];
+
+    chunk.forEach((c, idx) => {
+      const offset = idx * 6;
+      placeholders.push(`($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, now())`);
+      values.push(
+        SOURCE_HANDBOOK_YEAR,
+        required(c.academic_year, "academic_year"),
+        required(c.uni_code, "uni_code"),
+        required(c.course_name, "course_name"),
+        required(c.district, "district"),
+        c.cutoff,
+      );
+    });
+
     await client.query(
       `
         insert into official_handbook_zscore_cutoffs
           (source_handbook_year, academic_year, uni_code, course_name, district, cutoff, imported_at)
-        values ($1, $2, $3, $4, $5, $6, now())
+        values ${placeholders.join(", ")}
+        on conflict (source_handbook_year, academic_year, uni_code, district) do update set
+          cutoff = excluded.cutoff,
+          imported_at = now()
       `,
-      [
-        SOURCE_HANDBOOK_YEAR,
-        required(cutoff.academic_year, "academic_year"),
-        required(cutoff.uni_code, "uni_code"),
-        required(cutoff.course_name, "course_name"),
-        required(cutoff.district, "district"),
-        cutoff.cutoff,
-      ],
+      values,
     );
   }
 }
