@@ -6,7 +6,6 @@ import {
   Building2,
   Clock,
   GraduationCap,
-  Sparkles,
   Info,
 } from "lucide-react";
 
@@ -112,16 +111,14 @@ export default function CourseDetail() {
                     ? `${t.courses.districtCutoff}: ${course.minimumZScore}${course.officialAcademicYear ? ` (${course.officialAcademicYear})` : ""}`
                     : "Cutoff not mapped"}
                 </Badge>
-                {course.confidence && <Badge variant="secondary">{course.confidence} confidence</Badge>}
               </div>
               <h1 className="text-3xl font-bold">{course.degreeName}</h1>
-              <p className="text-muted-foreground mt-2 flex flex-wrap items-center gap-2">
-                <Building2 className="h-4 w-4" />
+              <p className="text-muted-foreground mt-2 flex items-center gap-2">
+                <Building2 className="h-4 w-4 shrink-0" />
                 <Link href={`/universities/${course.universityId}`} className="hover:text-primary">
                   {course.universityName}
                 </Link>
-                <span>{course.faculty ?? "Faculty"}</span>
-                <span>({district} quota)</span>
+                <Badge variant="outline" className="text-xs font-normal">{district} quota</Badge>
               </p>
             </div>
 
@@ -158,7 +155,7 @@ export default function CourseDetail() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
+                    <Info className="h-5 w-5 text-primary" />
                     {t.courses.aiPrediction}
                   </CardTitle>
                   <CardDescription>{insight?.handbookAttribution}</CardDescription>
@@ -248,7 +245,7 @@ export default function CourseDetail() {
                   </div>
                 )}
                 <Button variant="secondary" className="w-full" onClick={handleAskAi}>
-                  <Sparkles className="h-4 w-4 mr-2" /> {t.courses.getPrediction}
+                  <Info className="h-4 w-4 mr-2" /> {t.courses.getPrediction}
                 </Button>
                 <Button variant="default" className="w-full" asChild>
                   <Link href={`/roadmap?courseId=${course.id}`}>

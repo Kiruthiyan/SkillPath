@@ -390,6 +390,7 @@ universityId?: number;
 degreeType?: string;
 duration?: number;
 faculty?: string;
+medium?: string;
 /**
  * District quota (required when zscore is provided)
  */
