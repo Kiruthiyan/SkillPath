@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { motion } from "framer-motion";
-import { Search, GraduationCap, Building2, Clock, Target } from "lucide-react";
+import { Search, GraduationCap, Building2, Clock, Target, CheckCircle2, XCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import {
   useListCourses,
@@ -69,8 +70,9 @@ export default function Courses() {
   const [search, setSearch] = useState("");
 
   const [streamFilter, setStreamFilter] = useState<string>(
-    () => getQueryParam(urlSearch, "stream") ?? "all",
+    () => getQueryParam(urlSearch, "stream") ?? profile.stream ?? "all",
   );
+  const [eligibilityFilter, setEligibilityFilter] = useState<string>("all");
   const [universityFilter, setUniversityFilter] = useState<string>(
     () => getQueryParam(urlSearch, "universityId") ?? "all",
   );
@@ -112,18 +114,39 @@ export default function Courses() {
 
   const { mutate: recordSearch } = useRecordSearch();
 
+  const eligibleCourses = useMemo(
+    () => (courses ?? []).filter((c) => c.eligibility === "likely" || c.eligibility === "borderline"),
+    [courses],
+  );
+  const reachCourses = useMemo(
+    () => (courses ?? []).filter((c) => c.eligibility === "reach"),
+    [courses],
+  );
+  const unlikelyCourses = useMemo(
+    () => (courses ?? []).filter((c) => c.eligibility === "unlikely"),
+    [courses],
+  );
+
   const filtered = useMemo(() => {
     if (!courses) return [];
-    if (!search.trim()) return courses;
+    let list = courses;
+    if (eligibilityFilter === "eligible") {
+      list = list.filter((c) => c.eligibility === "likely" || c.eligibility === "borderline");
+    } else if (eligibilityFilter === "reach") {
+      list = list.filter((c) => c.eligibility === "reach");
+    } else if (eligibilityFilter === "unlikely") {
+      list = list.filter((c) => c.eligibility === "unlikely");
+    }
+    if (!search.trim()) return list;
     const q = search.toLowerCase();
-    return courses.filter(
+    return list.filter(
       (c) =>
         c.degreeName.toLowerCase().includes(q) ||
         c.universityName.toLowerCase().includes(q) ||
         (c.faculty ?? "").toLowerCase().includes(q) ||
         (c.uniCode ?? "").toLowerCase().includes(q),
     );
-  }, [courses, search]);
+  }, [courses, search, eligibilityFilter]);
 
   function handleSearch(value: string) {
     setSearch(value);
@@ -153,6 +176,64 @@ export default function Courses() {
         <p className="text-muted-foreground mt-2">{t.courses.subtitle}</p>
       </div>
 
+      {profile.zscore != null && (
+        <div className="flex flex-wrap items-center gap-2 p-2 bg-muted/60 rounded-xl border border-[hsl(var(--border))]">
+          <span className="text-xs font-semibold text-muted-foreground mr-1">
+            Z-Score ({profile.zscore}):
+          </span>
+          <button
+            type="button"
+            onClick={() => setEligibilityFilter("all")}
+            className={cn(
+              "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-xs",
+              eligibilityFilter === "all"
+                ? "bg-card text-foreground border shadow-xs"
+                : "text-muted-foreground hover:text-foreground hover:bg-card/50",
+            )}
+          >
+            All ({courses?.length ?? 0})
+          </button>
+          <button
+            type="button"
+            onClick={() => setEligibilityFilter("eligible")}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-xs",
+              eligibilityFilter === "eligible"
+                ? "bg-card text-emerald-700 dark:text-emerald-300 border-2 border-emerald-500 shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-card/50",
+            )}
+          >
+            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+            <span>Eligible Only ({eligibleCourses.length})</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setEligibilityFilter("reach")}
+            className={cn(
+              "px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-xs",
+              eligibilityFilter === "reach"
+                ? "bg-card text-amber-700 dark:text-amber-300 border-2 border-amber-500 shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-card/50",
+            )}
+          >
+            Near Range ({reachCourses.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setEligibilityFilter("unlikely")}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-xs",
+              eligibilityFilter === "unlikely"
+                ? "bg-card text-red-700 dark:text-red-300 border-2 border-red-500 shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-card/50",
+            )}
+          >
+            <XCircle className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
+            <span>Below Cutoff ({unlikelyCourses.length})</span>
+          </button>
+        </div>
+      )}
+
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -163,6 +244,19 @@ export default function Courses() {
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
+        {profile.zscore != null && (
+          <Select value={eligibilityFilter} onValueChange={setEligibilityFilter}>
+            <SelectTrigger className="w-full md:w-48">
+              <SelectValue placeholder="Eligibility" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Eligibility</SelectItem>
+              <SelectItem value="eligible">Eligible Only ({eligibleCourses.length})</SelectItem>
+              <SelectItem value="reach">Near Range ({reachCourses.length})</SelectItem>
+              <SelectItem value="unlikely">Below Cutoff ({unlikelyCourses.length})</SelectItem>
+            </SelectContent>
+          </Select>
+        )}
         <Select value={streamFilter} onValueChange={setStreamFilter}>
           <SelectTrigger className="w-full md:w-52">
             <SelectValue placeholder="All Streams" />

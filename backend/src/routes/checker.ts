@@ -47,8 +47,13 @@ router.post("/checker/recommendations", async (req, res) => {
     return;
   }
 
-  const recommendations = await getOfficialCheckerRecommendations(parsed.data);
-  res.json(recommendations);
+  try {
+    const recommendations = await getOfficialCheckerRecommendations(parsed.data);
+    res.json(recommendations);
+  } catch (err) {
+    console.error("Checker recommendations error:", err);
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
+  }
 });
 
 router.get("/checker/programmes", async (req, res) => {

@@ -30,8 +30,9 @@ function ResultDetailsModal({
 
   if (!result) return null;
 
-  const ReasonIcon = result.meetsHandbookRequirements ? CheckCircle2 : XCircle;
-  const reasonIconClass = result.meetsHandbookRequirements
+  const isEligible = result.meetsHandbookRequirements && result.zscoreDiff != null && result.zscoreDiff >= -0.0001;
+  const ReasonIcon = isEligible ? CheckCircle2 : XCircle;
+  const reasonIconClass = isEligible
     ? "text-emerald-600 dark:text-emerald-400"
     : "text-red-500";
 
@@ -121,7 +122,7 @@ function ResultCard({
   modeLabel: string;
   onViewDetails: () => void;
 }) {
-  const meets = result.meetsHandbookRequirements;
+  const meets = result.meetsHandbookRequirements && result.zscoreDiff != null && result.zscoreDiff >= -0.0001;
   const diff = result.zscoreDiff;
 
   return (
@@ -143,7 +144,9 @@ function ResultCard({
                 "text-xs font-semibold",
                 meets
                   ? "bg-emerald-500/15 text-emerald-700 border-emerald-500/30 dark:text-emerald-400"
-                  : "bg-amber-500/15 text-amber-800 border-amber-500/30 dark:text-amber-400"
+                  : diff == null
+                    ? "bg-muted text-muted-foreground border-muted-foreground/30"
+                    : "bg-red-500/15 text-red-700 border-red-500/30 dark:text-red-400"
               )}
             >
               {result.handbookStatusReason}
