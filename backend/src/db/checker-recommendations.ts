@@ -609,7 +609,8 @@ export async function buildCheckerRecommendations(
       if (Math.abs(distA - distB) > 0.0001) {
         return distA - distB;
       }
-      return cutoffB - cutoffA;
+      if (cutoffB !== cutoffA) return cutoffB - cutoffA;
+      return a.courseName.localeCompare(b.courseName);
     });
 
   groups.competitiveOptions = sortByNearestZScore(groups.competitiveOptions);

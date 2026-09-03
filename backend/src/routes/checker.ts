@@ -172,9 +172,23 @@ router.post("/checker/programmes/:id/eligibility", async (req, res) => {
   }
 
   const streamPass = detail.eligibleStreams.includes(parsed.data.stream);
-  const missingSubjects = detail.subjects
-    .filter(isSimpleSubjectRequirement)
-    .filter((subject) => !isPassingGrade(parsed.data.subjectGrades[subject]));
+  const hasSubjectGrades = Object.keys(parsed.data.subjectGrades || {}).some(
+    (k) => parsed.data.subjectGrades[k] && parsed.data.subjectGrades[k].trim() !== ""
+  );
+  const missingSubjects = hasSubjectGrades
+    ? detail.subjects
+        .filter(isSimpleSubjectRequirement)
+        .filter((subject) => {
+          const grade = parsed.data.subjectGrades[subject];
+          if (!grade) {
+            const totalEntered = Object.keys(parsed.data.subjectGrades).filter(
+              (k) => parsed.data.subjectGrades[k]?.trim()
+            ).length;
+            return totalEntered >= 3;
+          }
+          return !isPassingGrade(grade);
+        })
+    : [];
   const zscorePass =
     detail.officialMinimumZScore == null ? false : parsed.data.zscore >= detail.officialMinimumZScore;
 

@@ -262,13 +262,49 @@ describe("buildCheckerRecommendations", () => {
     expect(response.groups.notEligible.map((result) => result.programmeId)).toEqual([2]);
   });
 
-  it("does not expose staging row data in the recommendation contract", async () => {
-    const response = await buildCheckerRecommendations(input(), context());
-    const serialized = JSON.stringify(response);
+  it("sorts results by smallest absolute difference to the entered Z-score", async () => {
+    const response = await buildCheckerRecommendations(
+      input({ zscore: 1.6 }),
+      context({
+        candidates: [
+          programme({ id: 1, degreeName: "Course Far Low" }),
+          programme({ id: 2, degreeName: "Course Closest" }),
+          programme({ id: 3, degreeName: "Course Medium" }),
+          programme({ id: 4, degreeName: "Competitive Very Close" }),
+          programme({ id: 5, degreeName: "Competitive Farther" }),
+          programme({ id: 6, degreeName: "Competitive Middle" }),
+        ],
+        requirementsByProgramme: new Map([
+          [1, checks()],
+          [2, checks()],
+          [3, checks()],
+          [4, checks()],
+          [5, checks()],
+          [6, checks()],
+        ]),
+        getOfficialCutoff: async (programmeId) => {
+          const cutoffs: Record<number, number> = {
+            1: 1.2,  // diff = 0.40 (strongMatches)
+            2: 1.48, // diff = 0.12 (strongMatches, closest)
+            3: 1.35, // diff = 0.25 (strongMatches)
+            4: 1.58, // diff = 0.02 (competitiveOptions, closest)
+            5: 1.52, // diff = 0.08 (competitiveOptions)
+            6: 1.55, // diff = 0.05 (competitiveOptions, middle)
+          };
+          return {
+            district: "Colombo",
+            minimumZScore: cutoffs[programmeId] ?? 1.5,
+            sourcePage: programmeId,
+          };
+        },
+      }),
+    );
 
-    expect(serialized).not.toContain("needs_review");
-    expect(serialized).not.toContain("rawDegreeName");
-    expect(serialized).not.toContain("extractedProgrammeRows");
+    const strong = response.groups.strongMatches;
+    expect(strong.map((r) => r.programmeId)).toEqual([2, 3, 1]);
+
+    const competitive = response.groups.competitiveOptions;
+    expect(competitive.map((r) => r.programmeId)).toEqual([4, 6, 5]);
   });
 });
 

@@ -508,9 +508,24 @@ export async function getOfficialCheckerRecommendations(input: {
     const specialRequirements = asStringList(row.special_requirements);
     const medium = asMedium(row.medium);
 
-    const missingSubjects = subjects
-      .filter(isSimpleSubjectRequirement)
-      .filter((subject) => !isPassingGrade(input.subjectGrades[subject]));
+    const hasSubjectGrades = Object.keys(input.subjectGrades || {}).some(
+      (k) => input.subjectGrades[k] && input.subjectGrades[k].trim() !== ""
+    );
+
+    const missingSubjects = hasSubjectGrades
+      ? subjects
+          .filter(isSimpleSubjectRequirement)
+          .filter((subject) => {
+            const grade = input.subjectGrades[subject];
+            if (!grade) {
+              const totalEntered = Object.keys(input.subjectGrades).filter(
+                (k) => input.subjectGrades[k]?.trim()
+              ).length;
+              return totalEntered >= 3;
+            }
+            return !isPassingGrade(grade);
+          })
+      : [];
     const manualSubjects = subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
 
     const meetsHandbookRequirements = missingSubjects.length === 0;
@@ -578,10 +593,17 @@ export async function getOfficialCheckerRecommendations(input: {
 
   const sortByBestZScore = (items: OfficialCheckerRecommendation[]) =>
     [...items].sort((a, b) => {
-      if (a.zscoreDiff == null && b.zscoreDiff == null) return a.courseName.localeCompare(b.courseName);
-      if (a.zscoreDiff == null) return 1;
-      if (b.zscoreDiff == null) return -1;
-      if (a.zscoreDiff !== b.zscoreDiff) return b.zscoreDiff - a.zscoreDiff;
+      const cutoffA = a.officialCutoff ?? a.estimatedCenter ?? (a.estimatedMin != null && a.estimatedMax != null ? (a.estimatedMin + a.estimatedMax) / 2 : null);
+      const cutoffB = b.officialCutoff ?? b.estimatedCenter ?? (b.estimatedMin != null && b.estimatedMax != null ? (b.estimatedMin + b.estimatedMax) / 2 : null);
+      if (cutoffA == null && cutoffB == null) return 0;
+      if (cutoffA == null) return 1;
+      if (cutoffB == null) return -1;
+      const distA = Math.abs(input.zscore - cutoffA);
+      const distB = Math.abs(input.zscore - cutoffB);
+      if (Math.abs(distA - distB) > 0.0001) {
+        return distA - distB;
+      }
+      if (cutoffB !== cutoffA) return cutoffB - cutoffA;
       return a.courseName.localeCompare(b.courseName);
     });
 

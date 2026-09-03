@@ -221,37 +221,38 @@ export function CheckerResults({
   const [searchQuery, setSearchQuery] = useState("");
   const [detailsFor, setDetailsFor] = useState<CheckerRecommendation | null>(null);
 
-  // Sort by best Z-score match first (highest difference above cutoff first, near-cutoff
-  // next, no-cutoff-data courses last). The server already returns this order, but we
-  // re-sort here too so the UI's order never silently depends on the API's order.
-  const byBestZScore = (a: CheckerRecommendation, b: CheckerRecommendation) => {
+  // Sort by closest distance to the user's entered Z-score (smallest absolute difference first, no-cutoff last)
+  const byZScoreCloseness = (a: CheckerRecommendation, b: CheckerRecommendation) => {
     if (a.zscoreDiff == null && b.zscoreDiff == null) return a.courseName.localeCompare(b.courseName);
     if (a.zscoreDiff == null) return 1;
     if (b.zscoreDiff == null) return -1;
+    const distA = Math.abs(a.zscoreDiff);
+    const distB = Math.abs(b.zscoreDiff);
+    if (Math.abs(distA - distB) > 0.0001) return distA - distB;
     if (a.zscoreDiff !== b.zscoreDiff) return b.zscoreDiff - a.zscoreDiff;
     return a.courseName.localeCompare(b.courseName);
   };
 
   const eligible = useMemo(
-    () => [...(res?.groups?.eligible ?? [])].sort(byBestZScore),
+    () => [...(res?.groups?.eligible ?? [])].sort(byZScoreCloseness),
     [res],
   );
   const notEligible = useMemo(
-    () => [...(res?.groups?.notEligible ?? [])].sort(byBestZScore),
+    () => [...(res?.groups?.notEligible ?? [])].sort(byZScoreCloseness),
     [res],
   );
   const eligibleCount = eligible.length;
   const nonEligibleCount = notEligible.length;
   const totalCount = eligibleCount + nonEligibleCount;
 
-  // "all" is eligible-first (each tier internally sorted by best Z-score match) per the required sort order.
+  // "all" sorts all courses together by closeness to the user's entered Z-score
   const baseList = useMemo<Array<{ result: CheckerRecommendation; group: CheckerResultGroup }>>(() => {
     if (filterStatus === "eligible") return eligible.map((result) => ({ result, group: "eligible" as const }));
     if (filterStatus === "non-eligible") return notEligible.map((result) => ({ result, group: "notEligible" as const }));
     return [
       ...eligible.map((result) => ({ result, group: "eligible" as const })),
       ...notEligible.map((result) => ({ result, group: "notEligible" as const })),
-    ];
+    ].sort((a, b) => byZScoreCloseness(a.result, b.result));
   }, [eligible, notEligible, filterStatus]);
 
   const displayedResults = useMemo(() => {
@@ -267,7 +268,7 @@ export function CheckerResults({
     return [
       ...eligible.map((result) => ({ result, group: "eligible" as const })),
       ...notEligible.map((result) => ({ result, group: "notEligible" as const })),
-    ].filter(matches);
+    ].filter(matches).sort((a, b) => byZScoreCloseness(a.result, b.result));
   }, [baseList, eligible, notEligible, searchQuery]);
 
   if (!res || !res.groups) {
@@ -297,7 +298,7 @@ export function CheckerResults({
 
       <p className="text-sm text-muted-foreground">{res.disclaimer}</p>
 
-      {/* Prominent Filter: Eligible vs Non-Eligible vs All */}
+      {/* Filter Tabs: Eligible vs Non-Eligible vs All */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-2 bg-muted/60 rounded-xl border border-[hsl(var(--border))]">
         <div className="flex flex-wrap items-center gap-2">
           {/* ELIGIBLE BUTTON (Default) */}
@@ -374,7 +375,7 @@ export function CheckerResults({
             <span>
               Showing <strong>{displayedResults.length}</strong> courses that meet handbook requirements —{" "}
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                best Z-score match appears first
+                closest to your Z-Score appears first
               </span>
             </span>
           )}
@@ -385,7 +386,7 @@ export function CheckerResults({
           )}
           {filterStatus === "all" && (
             <span>
-              Showing all <strong>{displayedResults.length}</strong> evaluated courses — eligible courses first, best Z-score match first
+              Showing all <strong>{displayedResults.length}</strong> evaluated courses — ranked by closeness to your Z-score
             </span>
           )}
         </div>
