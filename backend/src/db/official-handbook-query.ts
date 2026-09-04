@@ -120,10 +120,12 @@ export interface OfficialCheckerRecommendationsResponse {
   district: string;
   disclaimer: string;
   groups: {
-    /** Meets handbook stream + subject requirements, sorted by best Z-score match first. */
+    /** Meets handbook stream + subject requirements and meets cutoff, sorted by best Z-score match first. */
     eligible: OfficialCheckerRecommendation[];
-    /** Does not meet handbook stream + subject requirements. */
+    /** Does not meet handbook stream + subject requirements or falls below cutoff. */
     notEligible: OfficialCheckerRecommendation[];
+    /** Meets stream & subject requirements, but no cutoff exists for this district (NQC or New course). */
+    cutoffUnavailable: OfficialCheckerRecommendation[];
   };
 }
 
@@ -215,6 +217,13 @@ export const SECTION9_STREAM_MAPPINGS: Record<string, string[]> = {
   "Mineral Resources and Technology": ["Physical Science"],
   // Science and Technology
   "Science and Technology": ["Physical Science"],
+  // Creative Music Technology and Production
+  "Creative Music Technology and Production": ["Arts"],
+  // Aesthetic Studies (Music, Dance, Drama & Theatre, Visual & Technological Arts)
+  "Music": ["Arts"],
+  "Dance": ["Arts"],
+  "Drama & Theatre": ["Arts"],
+  "Visual & Technological Arts": ["Arts"],
 };
 
 export function getCourseEligibleStreams(row: { course_name?: string | null; eligible_streams?: unknown }): string[] {
@@ -475,6 +484,7 @@ function emptyRecommendationGroups(): OfficialCheckerRecommendationsResponse["gr
   return {
     eligible: [],
     notEligible: [],
+    cutoffUnavailable: [],
   };
 }
 
@@ -529,19 +539,21 @@ export async function getOfficialCheckerRecommendations(input: {
     const manualSubjects = subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
 
     const meetsHandbookRequirements = missingSubjects.length === 0;
-    const zscoreDiff = row.latest_cutoff == null ? null : input.zscore - row.latest_cutoff;
+    const hasCutoff = row.latest_cutoff != null;
+    const zscoreDiff = hasCutoff ? input.zscore - row.latest_cutoff! : null;
     const meetsCutoff = zscoreDiff != null && zscoreDiff >= -0.0001;
-    const isEligible = meetsHandbookRequirements && meetsCutoff;
 
     let handbookStatusReason: string;
     if (!meetsHandbookRequirements) {
       handbookStatusReason = `Missing required subject pass: ${missingSubjects.join(", ")}`;
-    } else if (row.latest_cutoff == null) {
+    } else if (!hasCutoff) {
       handbookStatusReason = "No District Cutoff Available";
-    } else if (meetsCutoff) {
+    } else if (meetsCutoff && zscoreDiff != null) {
       handbookStatusReason = `Qualified (+${zscoreDiff.toFixed(3)})`;
-    } else {
+    } else if (zscoreDiff != null) {
       handbookStatusReason = `Below Cutoff (${zscoreDiff.toFixed(3)})`;
+    } else {
+      handbookStatusReason = "No District Cutoff Available";
     }
 
     const reasons: string[] = [handbookStatusReason];
@@ -555,8 +567,8 @@ export async function getOfficialCheckerRecommendations(input: {
       reasons.push(`Special requirement: ${specialRequirements.join("; ")}`);
     }
 
-    if (row.latest_cutoff == null) {
-      reasons.push(`No exact official cutoff mapping for ${input.district}`);
+    if (!hasCutoff) {
+      reasons.push(`No exact official cutoff for ${input.district} (NQC or New course)`);
     } else {
       reasons.push(`Official cutoff ${row.latest_cutoff} for ${input.district}`);
     }
@@ -593,7 +605,11 @@ export async function getOfficialCheckerRecommendations(input: {
       reasons,
     };
 
-    if (isEligible) {
+    if (!meetsHandbookRequirements) {
+      groups.notEligible.push(recommendation);
+    } else if (!hasCutoff) {
+      groups.cutoffUnavailable.push(recommendation);
+    } else if (meetsCutoff) {
       groups.eligible.push(recommendation);
     } else {
       groups.notEligible.push(recommendation);
@@ -604,7 +620,7 @@ export async function getOfficialCheckerRecommendations(input: {
     [...items].sort((a, b) => {
       const cutoffA = a.officialCutoff ?? a.estimatedCenter ?? (a.estimatedMin != null && a.estimatedMax != null ? (a.estimatedMin + a.estimatedMax) / 2 : null);
       const cutoffB = b.officialCutoff ?? b.estimatedCenter ?? (b.estimatedMin != null && b.estimatedMax != null ? (b.estimatedMin + b.estimatedMax) / 2 : null);
-      if (cutoffA == null && cutoffB == null) return 0;
+      if (cutoffA == null && cutoffB == null) return a.courseName.localeCompare(b.courseName);
       if (cutoffA == null) return 1;
       if (cutoffB == null) return -1;
       const distA = Math.abs(input.zscore - cutoffA);
@@ -618,6 +634,7 @@ export async function getOfficialCheckerRecommendations(input: {
 
   groups.eligible = sortByBestZScore(groups.eligible);
   groups.notEligible = sortByBestZScore(groups.notEligible);
+  groups.cutoffUnavailable = [...groups.cutoffUnavailable].sort((a, b) => a.courseName.localeCompare(b.courseName));
 
   return {
     mode: "historical_estimate",

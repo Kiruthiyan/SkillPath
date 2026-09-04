@@ -6,7 +6,7 @@
 - Source eligibility rule groups: 50
 - Expanded eligibility rows: 112
 - Source Section 9 cutoff rows: 6150
-- Normalized numeric cutoff rows: 4932
+- Normalized numeric cutoff rows: 5017
 
 ## Not Available Replacements
 - faculty: 220
@@ -175,9 +175,9 @@
 - Electronic and Intelligent Systems Engineering
 
 ## Cutoff Mapping Issues
-- Rows without unique course identity: 125
-- Rows with non-numeric official markers: 980
-- Rows skipped because extraction requires review: 25
+- Rows without unique course identity: 25
+- Rows with non-numeric official markers: 1020
+- Rows skipped because extraction requires review: 0
 
 ### First 200 Rows Without Unique Course Identity
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Colombo | missing_match
@@ -205,106 +205,6 @@
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Monaragala | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Kegalle | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Ratnapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Colombo | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Gampaha | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kalutara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Matale | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kandy | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Nuwara Eliya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Galle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Matara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Hambantota | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Jaffna | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kilinochchi | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Mannar | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Mullaitivu | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Vavuniya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Trincomalee | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Batticaloa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Ampara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Puttalam | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kurunegala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Anuradhapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Polonnaruwa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Badulla | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Monaragala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Kegalle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Drama & Theatre | Ratnapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Colombo | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Gampaha | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kalutara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Matale | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kandy | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Nuwara Eliya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Galle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Matara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Hambantota | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Jaffna | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kilinochchi | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Mannar | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Mullaitivu | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Vavuniya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Trincomalee | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Batticaloa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Ampara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Puttalam | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kurunegala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Anuradhapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Polonnaruwa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Badulla | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Monaragala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Kegalle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Dance | Ratnapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Colombo | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Gampaha | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kalutara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Matale | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kandy | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Nuwara Eliya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Galle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Matara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Hambantota | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Jaffna | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kilinochchi | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Mannar | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Mullaitivu | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Vavuniya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Trincomalee | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Batticaloa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Ampara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Puttalam | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kurunegala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Anuradhapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Polonnaruwa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Badulla | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Monaragala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Kegalle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Music | Ratnapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Colombo | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Gampaha | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kalutara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Matale | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kandy | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Nuwara Eliya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Galle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Matara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Hambantota | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Jaffna | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kilinochchi | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Mannar | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Mullaitivu | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Vavuniya | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Trincomalee | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Batticaloa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Ampara | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Puttalam | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kurunegala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Anuradhapura | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Polonnaruwa | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Badulla | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Monaragala | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Kegalle | missing_match
-- 2024/25 | Swami Vipulananda Institute of Aesthetic Studies | Visual & Technological Arts | Ratnapura | missing_match
 
 ### First 200 Non-Numeric Cutoff Markers
 - 2024/25 | University of Colombo | Biological Science | Gampaha | NQC
@@ -509,28 +409,4 @@
 - 2024/25 | University of Sri Jayewardenepura | Computer Science | Kandy | NQC
 
 ### First 200 Cutoff Rows Requiring Review
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Colombo
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Gampaha
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kalutara
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Matale
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kandy
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Nuwara Eliya
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Galle
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Matara
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Hambantota
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Jaffna
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kilinochchi
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Mannar
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Mullaitivu
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Vavuniya
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Trincomalee
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Batticaloa
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Ampara
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Puttalam
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kurunegala
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Anuradhapura
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Polonnaruwa
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Badulla
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Monaragala
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Kegalle
-- 2024/25 | University of Sri Jayewardenepura | CREATIVE MUSIC TECHNOLOGY & PRODUCTION | Ratnapura
+- No cutoff rows require review.
