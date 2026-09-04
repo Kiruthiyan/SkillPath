@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { BookOpen, Building2, CheckCircle2, Clock, GraduationCap, Search, Target, X, XCircle } from "lucide-react";
+import { BookOpen, Building2, CheckCircle2, Clock, GraduationCap, HelpCircle, Search, Target, X, XCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,10 +31,13 @@ function ResultDetailsModal({
   if (!result) return null;
 
   const isEligible = result.meetsHandbookRequirements && result.zscoreDiff != null && result.zscoreDiff >= -0.0001;
-  const ReasonIcon = isEligible ? CheckCircle2 : XCircle;
+  const isCutoffUnavailable = result.meetsHandbookRequirements && result.officialCutoff == null;
+  const ReasonIcon = isEligible ? CheckCircle2 : isCutoffUnavailable ? HelpCircle : XCircle;
   const reasonIconClass = isEligible
     ? "text-emerald-600 dark:text-emerald-400"
-    : "text-red-500";
+    : isCutoffUnavailable
+      ? "text-amber-500"
+      : "text-red-500";
 
   return (
     <div
@@ -122,19 +125,28 @@ function ResultCard({
   modeLabel: string;
   onViewDetails: () => void;
 }) {
+  const isCutoffUnavailable = result.meetsHandbookRequirements && result.officialCutoff == null;
   const meets = result.meetsHandbookRequirements && result.zscoreDiff != null && result.zscoreDiff >= -0.0001;
   const diff = result.zscoreDiff;
 
   return (
     <Card className={cn(
       "transition-all hover:shadow-md border",
-      meets ? "hover:border-emerald-500/50 border-emerald-500/20" : "hover:border-red-500/40 border-[hsl(var(--border))]"
+      meets
+        ? "hover:border-emerald-500/50 border-emerald-500/20"
+        : isCutoffUnavailable
+          ? "hover:border-amber-500/50 border-amber-500/20"
+          : "hover:border-red-500/40 border-[hsl(var(--border))]"
     )}>
       <CardHeader className="space-y-2 pb-3">
         <div className="flex items-start justify-between gap-2">
           <GraduationCap className={cn(
             "h-6 w-6 shrink-0",
-            meets ? "text-primary" : "text-muted-foreground"
+            meets
+              ? "text-primary"
+              : isCutoffUnavailable
+                ? "text-amber-500"
+                : "text-muted-foreground"
           )} />
           <div className="flex flex-wrap items-center gap-1.5 justify-end">
             <Badge variant="outline" className="text-[11px]">{modeLabel}</Badge>
@@ -144,8 +156,8 @@ function ResultCard({
                 "text-xs font-semibold",
                 meets
                   ? "bg-emerald-500/15 text-emerald-700 border-emerald-500/30 dark:text-emerald-400"
-                  : diff == null
-                    ? "bg-muted text-muted-foreground border-muted-foreground/30"
+                  : isCutoffUnavailable
+                    ? "bg-amber-500/15 text-amber-700 border-amber-500/30 dark:text-amber-400"
                     : "bg-red-500/15 text-red-700 border-red-500/30 dark:text-red-400"
               )}
             >
@@ -220,7 +232,7 @@ export function CheckerResults({
 }) {
   const { language } = useTranslations();
   const res = response || recommendations;
-  const [filterStatus, setFilterStatus] = useState<"eligible" | "non-eligible" | "all">("eligible");
+  const [filterStatus, setFilterStatus] = useState<"eligible" | "non-eligible" | "cutoff-unavailable" | "all">("eligible");
   const [searchQuery, setSearchQuery] = useState("");
   const [detailsFor, setDetailsFor] = useState<CheckerRecommendation | null>(null);
 
@@ -244,19 +256,26 @@ export function CheckerResults({
     () => [...(res?.groups?.notEligible ?? [])].sort(byZScoreCloseness),
     [res],
   );
+  const cutoffUnavailable = useMemo(
+    () => [...(res?.groups?.cutoffUnavailable ?? [])].sort((a, b) => a.courseName.localeCompare(b.courseName)),
+    [res],
+  );
   const eligibleCount = eligible.length;
   const nonEligibleCount = notEligible.length;
-  const totalCount = eligibleCount + nonEligibleCount;
+  const cutoffUnavailableCount = cutoffUnavailable.length;
+  const totalCount = eligibleCount + nonEligibleCount + cutoffUnavailableCount;
 
   // "all" sorts all courses together by closeness to the user's entered Z-score
   const baseList = useMemo<Array<{ result: CheckerRecommendation; group: CheckerResultGroup }>>(() => {
     if (filterStatus === "eligible") return eligible.map((result) => ({ result, group: "eligible" as const }));
     if (filterStatus === "non-eligible") return notEligible.map((result) => ({ result, group: "notEligible" as const }));
+    if (filterStatus === "cutoff-unavailable") return cutoffUnavailable.map((result) => ({ result, group: "cutoffUnavailable" as const }));
     return [
       ...eligible.map((result) => ({ result, group: "eligible" as const })),
       ...notEligible.map((result) => ({ result, group: "notEligible" as const })),
+      ...cutoffUnavailable.map((result) => ({ result, group: "cutoffUnavailable" as const })),
     ].sort((a, b) => byZScoreCloseness(a.result, b.result));
-  }, [eligible, notEligible, filterStatus]);
+  }, [eligible, notEligible, cutoffUnavailable, filterStatus]);
 
   const displayedResults = useMemo(() => {
     if (!searchQuery.trim()) return baseList;
@@ -271,8 +290,9 @@ export function CheckerResults({
     return [
       ...eligible.map((result) => ({ result, group: "eligible" as const })),
       ...notEligible.map((result) => ({ result, group: "notEligible" as const })),
+      ...cutoffUnavailable.map((result) => ({ result, group: "cutoffUnavailable" as const })),
     ].filter(matches).sort((a, b) => byZScoreCloseness(a.result, b.result));
-  }, [baseList, eligible, notEligible, searchQuery]);
+  }, [baseList, eligible, notEligible, cutoffUnavailable, searchQuery]);
 
   if (!res || !res.groups) {
     return null;
@@ -301,7 +321,7 @@ export function CheckerResults({
 
       <p className="text-sm text-muted-foreground">{res.disclaimer}</p>
 
-      {/* Filter Tabs: Eligible vs Non-Eligible vs All */}
+      {/* Filter Tabs: Eligible vs Non-Eligible vs Cutoff Unavailable vs All */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-2 bg-muted/60 rounded-xl border border-[hsl(var(--border))]">
         <div className="flex flex-wrap items-center gap-2">
           {/* ELIGIBLE BUTTON (Default) */}
@@ -337,6 +357,24 @@ export function CheckerResults({
             <span>Non-Eligible</span>
             <Badge variant="secondary" className="bg-red-500/15 text-red-800 dark:text-red-200 font-bold ml-1">
               {nonEligibleCount}
+            </Badge>
+          </button>
+
+          {/* CUTOFF UNAVAILABLE / NQC BUTTON */}
+          <button
+            type="button"
+            onClick={() => setFilterStatus("cutoff-unavailable")}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-xs",
+              filterStatus === "cutoff-unavailable"
+                ? "bg-card text-amber-700 dark:text-amber-300 border-2 border-amber-500 shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-card/50"
+            )}
+          >
+            <HelpCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <span>Cutoff Unavailable / NQC</span>
+            <Badge variant="secondary" className="bg-amber-500/15 text-amber-800 dark:text-amber-200 font-bold ml-1">
+              {cutoffUnavailableCount}
             </Badge>
           </button>
 
@@ -384,7 +422,12 @@ export function CheckerResults({
           )}
           {filterStatus === "non-eligible" && (
             <span>
-              Showing <strong>{displayedResults.length}</strong> courses that do not meet handbook requirements
+              Showing <strong>{displayedResults.length}</strong> courses that do not meet handbook requirements or fall below cutoff
+            </span>
+          )}
+          {filterStatus === "cutoff-unavailable" && (
+            <span>
+              Showing <strong>{displayedResults.length}</strong> courses where handbook requirements are met, but no district cutoff exists (NQC or New course)
             </span>
           )}
           {filterStatus === "all" && (

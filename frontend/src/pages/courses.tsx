@@ -234,92 +234,119 @@ export default function Courses() {
         </div>
       )}
 
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder={t.courses.searchPlaceholder}
-            className="pl-10"
-            value={search}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
+      <div className="space-y-3">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder={t.courses.searchPlaceholder}
+              className="pl-10"
+              value={search}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+          </div>
+          {profile.zscore != null && (
+            <Select value={eligibilityFilter} onValueChange={setEligibilityFilter}>
+              <SelectTrigger className="w-full sm:w-48">
+                <SelectValue placeholder="Eligibility" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Eligibility</SelectItem>
+                <SelectItem value="eligible">Eligible Only ({eligibleCourses.length})</SelectItem>
+                <SelectItem value="reach">Near Range ({reachCourses.length})</SelectItem>
+                <SelectItem value="unlikely">Below Cutoff ({unlikelyCourses.length})</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
         </div>
-        {profile.zscore != null && (
-          <Select value={eligibilityFilter} onValueChange={setEligibilityFilter}>
-            <SelectTrigger className="w-full md:w-48">
-              <SelectValue placeholder="Eligibility" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <Select value={streamFilter} onValueChange={setStreamFilter}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="All Streams" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Eligibility</SelectItem>
-              <SelectItem value="eligible">Eligible Only ({eligibleCourses.length})</SelectItem>
-              <SelectItem value="reach">Near Range ({reachCourses.length})</SelectItem>
-              <SelectItem value="unlikely">Below Cutoff ({unlikelyCourses.length})</SelectItem>
+              <SelectItem value="all">All Streams</SelectItem>
+              {STREAMS.map((s) => (
+                <SelectItem key={s} value={s}>{s}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
-        )}
-        <Select value={streamFilter} onValueChange={setStreamFilter}>
-          <SelectTrigger className="w-full md:w-52">
-            <SelectValue placeholder="All Streams" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Streams</SelectItem>
-            {STREAMS.map((s) => (
-              <SelectItem key={s} value={s}>{s}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={universityFilter} onValueChange={setUniversityFilter}>
-          <SelectTrigger className="w-full md:w-56">
-            <SelectValue placeholder={t.courses.filterByUni} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t.courses.allUniversities}</SelectItem>
-            {universities?.map((u) => (
-              <SelectItem key={u.id} value={String(u.id)}>{u.shortName}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={facultyFilter} onValueChange={setFacultyFilter}>
-          <SelectTrigger className="w-full md:w-52">
-            <SelectValue placeholder="All Faculties" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Faculties</SelectItem>
-            {FACULTIES.map((f) => (
-              <SelectItem key={f} value={f}>{f}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={mediumFilter} onValueChange={setMediumFilter}>
-          <SelectTrigger className="w-full md:w-40">
-            <SelectValue placeholder="All Mediums" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Mediums</SelectItem>
-            {MEDIUMS.map((m) => (
-              <SelectItem key={m} value={m}>{m}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={academicYearFilter} onValueChange={setAcademicYearFilter}>
-          <SelectTrigger className="w-full md:w-44">
-            <SelectValue placeholder="All Academic Years" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Academic Years</SelectItem>
-            {academicYears?.map((y) => (
-              <SelectItem key={y.academicYear} value={y.academicYear}>{y.academicYear}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          <Select value={universityFilter} onValueChange={setUniversityFilter}>
+            <SelectTrigger className="w-full" title={universities?.find((u) => String(u.id) === universityFilter)?.name}>
+              <SelectValue placeholder={t.courses.filterByUni} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t.courses.allUniversities}</SelectItem>
+              {universities?.map((u) => (
+                <SelectItem key={u.id} value={String(u.id)} title={u.name}>
+                  {u.shortName || u.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={facultyFilter} onValueChange={setFacultyFilter}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="All Faculties" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Faculties</SelectItem>
+              {FACULTIES.map((f) => (
+                <SelectItem key={f} value={f}>{f}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={mediumFilter} onValueChange={setMediumFilter}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="All Mediums" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Mediums</SelectItem>
+              {MEDIUMS.map((m) => (
+                <SelectItem key={m} value={m}>{m}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={academicYearFilter} onValueChange={setAcademicYearFilter}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="All Academic Years" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Academic Years</SelectItem>
+              {academicYears?.map((y) => (
+                <SelectItem key={y.academicYear} value={y.academicYear}>{y.academicYear}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {isError && <QueryError onRetry={() => refetch()} />}
 
       {!isLoading && !isError && (
-        <p className="text-sm text-muted-foreground">
-          Showing {filtered.length} course{filtered.length === 1 ? "" : "s"}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-muted-foreground">
+            Showing {filtered.length} course{filtered.length === 1 ? "" : "s"}
+          </p>
+          {(streamFilter !== "all" || universityFilter !== "all" || facultyFilter !== "all" || mediumFilter !== "all" || academicYearFilter !== "all" || eligibilityFilter !== "all" || search.trim() !== "") && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setStreamFilter("all");
+                setUniversityFilter("all");
+                setFacultyFilter("all");
+                setMediumFilter("all");
+                setAcademicYearFilter("all");
+                setEligibilityFilter("all");
+                setSearch("");
+              }}
+              className="text-xs text-muted-foreground hover:text-foreground"
+            >
+              Reset Filters
+            </Button>
+          )}
+        </div>
       )}
 
       {isLoading ? (
@@ -389,9 +416,29 @@ export default function Courses() {
       )}
 
       {!isLoading && filtered.length === 0 && (
-        <p className="text-center text-muted-foreground py-12">
-          {t.courses.noCoursesFound}
-        </p>
+        <div className="text-center py-12 px-4 rounded-xl border border-dashed border-[hsl(var(--border))] bg-card/40 space-y-3">
+          <p className="text-muted-foreground font-medium">
+            {t.courses.noCoursesFound}
+          </p>
+          <p className="text-xs text-muted-foreground max-w-md mx-auto">
+            This university or faculty might not offer undergraduate courses in the selected stream. Try changing the stream or university filter.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              setStreamFilter("all");
+              setUniversityFilter("all");
+              setFacultyFilter("all");
+              setMediumFilter("all");
+              setAcademicYearFilter("all");
+              setEligibilityFilter("all");
+              setSearch("");
+            }}
+          >
+            Clear All Filters
+          </Button>
+        </div>
       )}
     </div>
   );
