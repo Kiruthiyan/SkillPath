@@ -325,6 +325,8 @@ export const SECTION9_COURSE_ALIASES: Section9AliasRule[] = [
   { uni: /south eastern/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
   { uni: /rajarata/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
   { uni: /vavuniya/i, deg: /information communication/i, targetDeg: "Information Communication Technology" },
+  { uni: /sri jayewardenepura/i, deg: /creative music/i, targetDeg: "Creative Music Technology and Production" },
+  { uni: /vipulananda/i, targetUni: "Swamy Vipulananda Institute of Aesthetic Studies, Eastern University, Sri Lanka" },
 ];
 
 export function buildZScoreCutoffs(
