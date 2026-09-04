@@ -100,7 +100,7 @@ export interface StudentAnswers {
 }
 
 export type CheckerResultMode = "official" | "historical_estimate";
-export type CheckerResultGroup = "eligible" | "notEligible";
+export type CheckerResultGroup = "eligible" | "notEligible" | "cutoffUnavailable";
 export type ZScoreStatus = "above" | "near" | "below" | "unavailable";
 
 export interface CheckerRecommendation {
