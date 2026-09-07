@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { db } from "../db";
-import { degreeProgrammesTable, universitiesTable, roadmapsTable } from "../db";
-import { eq } from "drizzle-orm";
+import { roadmapsTable } from "../db";
 import { GenerateRoadmapBody } from "../api-zod";
 import { optionalAuth } from "../middleware/auth";
 import { aiRateLimiter, requireAiAuth } from "../middleware/ai";
 import { generateRoadmapWithAI } from "../lib/gemini";
+import { getOfficialCourseDetail } from "../db/official-handbook-query";
 
 const router = Router();
 
@@ -170,6 +170,11 @@ const ROADMAPS: Record<
   },
 };
 
+function parseDurationYears(duration: string | null): number {
+  const match = duration?.match(/\d+/);
+  return match ? Number.parseInt(match[0], 10) : 4;
+}
+
 function getTemplateRoadmap(degreeType: string) {
   if (degreeType in ROADMAPS) return ROADMAPS[degreeType]!;
   if (degreeType.toLowerCase().includes("it") || degreeType.toLowerCase().includes("computing"))
@@ -189,52 +194,42 @@ router.post("/roadmaps/generate", aiRateLimiter, requireAiAuth, optionalAuth, as
 
   const { courseId, stream, zscore } = parsed.data;
 
-  const [courseRow] = await db
-    .select({
-      degreeName: degreeProgrammesTable.degreeName,
-      durationYears: degreeProgrammesTable.durationYears,
-      degreeType: degreeProgrammesTable.degreeType,
-      faculty: degreeProgrammesTable.faculty,
-      universityName: universitiesTable.name,
-    })
-    .from(degreeProgrammesTable)
-    .leftJoin(
-      universitiesTable,
-      eq(degreeProgrammesTable.universityId, universitiesTable.id),
-    )
-    .where(eq(degreeProgrammesTable.id, courseId));
+  const courseRow = await getOfficialCourseDetail(courseId, { district: "All Island" });
 
   if (!courseRow) {
     res.status(404).json({ error: "Course not found" });
     return;
   }
 
+  const durationYears = parseDurationYears(courseRow.duration);
+  const templateCategory = courseRow.faculty ?? courseRow.degreeName;
+
   let years: Array<{ year: number; milestones: string[] }>;
   let afterGraduation: Array<{ timeframe: string; role: string }>;
 
   const aiRoadmap = await generateRoadmapWithAI({
     degreeName: courseRow.degreeName,
-    degreeType: courseRow.degreeType,
-    faculty: courseRow.faculty,
+    degreeType: templateCategory,
+    faculty: courseRow.faculty ?? "",
     universityName: courseRow.universityName ?? "",
-    durationYears: courseRow.durationYears,
+    durationYears,
     stream,
     zscore,
   });
 
   if (aiRoadmap) {
-    years = aiRoadmap.years.slice(0, courseRow.durationYears);
+    years = aiRoadmap.years.slice(0, durationYears);
     afterGraduation = aiRoadmap.afterGraduation;
   } else {
-    const template = getTemplateRoadmap(courseRow.degreeType);
-    years = template.years.slice(0, courseRow.durationYears).map((y, i) => ({
+    const template = getTemplateRoadmap(templateCategory);
+    years = template.years.slice(0, durationYears).map((y, i) => ({
       year: i + 1,
       milestones: y.milestones,
     }));
     afterGraduation = template.afterGraduation;
   }
 
-  while (years.length < courseRow.durationYears) {
+  while (years.length < durationYears) {
     years.push({
       year: years.length + 1,
       milestones: ["Advanced coursework", "Professional development", "Research and projects"],

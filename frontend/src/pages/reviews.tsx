@@ -85,9 +85,11 @@ export default function Reviews() {
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <CardTitle className="text-base">{review.authorName}</CardTitle>
+                      <CardTitle className="text-base">{review.reviewerName}</CardTitle>
                       {review.isVerified && (
-                        <BadgeCheck className="h-4 w-4 text-primary" title={t.reviews.verifiedAlumni} />
+                        <BadgeCheck className="h-4 w-4 text-primary" aria-label={t.reviews.verifiedAlumni}>
+                          <title>{t.reviews.verifiedAlumni}</title>
+                        </BadgeCheck>
                       )}
                     </div>
                     <CardDescription>
@@ -104,16 +106,6 @@ export default function Reviews() {
               </CardHeader>
               <CardContent className="space-y-2">
                 <p className="text-sm">{review.reviewText}</p>
-                {review.pros && (
-                  <p className="text-xs text-green-600">
-                    <span className="font-medium">+ </span>{review.pros}
-                  </p>
-                )}
-                {review.cons && (
-                  <p className="text-xs text-red-500">
-                    <span className="font-medium">- </span>{review.cons}
-                  </p>
-                )}
               </CardContent>
             </Card>
           ))}

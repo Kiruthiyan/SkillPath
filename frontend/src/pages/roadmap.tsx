@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Map, Download, Sparkles } from "lucide-react";
 import { jsPDF } from "jspdf";
 
-import { useListCourses, useGenerateRoadmap } from "@/api";
+import { useListCourses, useGenerateRoadmap, ApiError } from "@/api";
 import type { Roadmap } from "@/api";
 import { useProfileStore } from "@/hooks/use-profile";
 import { usePageTitle } from "@/hooks/use-page-title";
@@ -61,7 +61,7 @@ function downloadRoadmapPdf(roadmap: Roadmap) {
 }
 
 export default function RoadmapPage() {
-  const { t, language } = useTranslations();
+  const { t } = useTranslations();
   usePageTitle(t.roadmap.title);
   const search = useSearch();
   const courseIdParam = getQueryParam(search, "courseId");
@@ -81,10 +81,16 @@ export default function RoadmapPage() {
         setRoadmap(data);
         toast({ title: t.roadmap.generatedSuccess });
       },
-      onError: () => {
+      onError: (error) => {
+        const description =
+          error instanceof ApiError && error.status === 404
+            ? "This course could not be found. Please pick a different course."
+            : error instanceof ApiError && error.status === 429
+              ? "Too many requests. Please wait a moment and try again."
+              : "Something went wrong while generating the roadmap. Please try again.";
         toast({
           title: "Failed to generate roadmap",
-          description: "Please select a course and try again.",
+          description,
           variant: "destructive",
         });
       },
@@ -99,13 +105,10 @@ export default function RoadmapPage() {
 
   useEffect(() => {
     if (selectedCourseId && !roadmap) {
-      const langName = language === "si" ? "Sinhala" : language === "ta" ? "Tamil" : "English";
       generateRoadmap({
         data: {
           courseId: parseInt(selectedCourseId),
           stream: profile.stream || undefined,
-          targetCareer: undefined,
-          additionalContext: `Please generate the roadmap steps and advice in ${langName}.`,
         },
       });
     }
@@ -113,13 +116,10 @@ export default function RoadmapPage() {
 
   function handleGenerate() {
     if (!selectedCourseId) return;
-    const langName = language === "si" ? "Sinhala" : language === "ta" ? "Tamil" : "English";
     generateRoadmap({
       data: {
         courseId: parseInt(selectedCourseId),
         stream: profile.stream || undefined,
-        targetCareer: undefined,
-        additionalContext: `Please generate the roadmap steps and advice in ${langName}.`,
       },
     });
   }
@@ -181,9 +181,6 @@ export default function RoadmapPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold">{roadmap.degreeName}</h2>
-              {roadmap.targetCareer && (
-                <p className="text-muted-foreground">Target: {roadmap.targetCareer}</p>
-              )}
             </div>
             <Button variant="outline" size="sm" onClick={() => downloadRoadmapPdf(roadmap)}>
               <Download className="h-4 w-4 mr-2" /> {t.roadmap.downloadPdfBtn}
