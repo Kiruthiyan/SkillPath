@@ -5,8 +5,8 @@
 - Normalized course rows: 254
 - Source eligibility rule groups: 50
 - Expanded eligibility rows: 112
-- Source Section 9 cutoff rows: 6150
-- Normalized numeric cutoff rows: 5017
+- Source Section 9 cutoff rows: 18350
+- Normalized numeric cutoff rows: 14458
 
 ## Not Available Replacements
 - faculty: 220
@@ -175,9 +175,9 @@
 - Electronic and Intelligent Systems Engineering
 
 ## Cutoff Mapping Issues
-- Rows without unique course identity: 25
-- Rows with non-numeric official markers: 1020
-- Rows skipped because extraction requires review: 0
+- Rows without unique course identity: 450
+- Rows with non-numeric official markers: 2945
+- Rows skipped because extraction requires review: 250
 
 ### First 200 Rows Without Unique Course Identity
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Colombo | missing_match
@@ -205,6 +205,181 @@
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Monaragala | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Kegalle | missing_match
 - 2024/25 | University of Colombo | Engineering Technology (ET) | Ratnapura | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Colombo | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Gampaha | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Kalutara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Matale | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Kandy | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Nuwara Eliya | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Galle | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Matara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Hambantota | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Jaffna | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Kilinochchi | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Mannar | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Mullaitivu | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Vavuniya | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Trincomalee | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Batticaloa | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Ampara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Puttalam | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Kurunegala | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Anuradhapura | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Polonnaruwa | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Badulla | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Monaragala | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Kegalle | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | Computer Science | Ratnapura | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Colombo | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Gampaha | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Kalutara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Matale | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Kandy | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Nuwara Eliya | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Galle | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Matara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Hambantota | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Jaffna | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Kilinochchi | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Mannar | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Mullaitivu | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Vavuniya | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Trincomalee | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Batticaloa | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Ampara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Puttalam | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Kurunegala | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Anuradhapura | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Polonnaruwa | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Badulla | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Monaragala | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Kegalle | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | APPLIED SCIENCES (PHY.SC) district. Practica that oriented of students subject the the by filled which reasons. been for already Study owing of s | Ratnapura | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Colombo | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Gampaha | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Kalutara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Matale | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Kandy | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Nuwara Eliya | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Galle | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Matara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Hambantota | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Jaffna | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Kilinochchi | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Mannar | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Mullaitivu | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Vavuniya | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Trincomalee | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Batticaloa | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Ampara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Puttalam | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Kurunegala | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Anuradhapura | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Polonnaruwa | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Badulla | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Monaragala | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Kegalle | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | Communication Studies | Ratnapura | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Colombo | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Gampaha | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Kalutara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Matale | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Kandy | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Nuwara Eliya | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Galle | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Matara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Hambantota | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Jaffna | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Kilinochchi | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Mannar | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Mullaitivu | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Vavuniya | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Trincomalee | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Batticaloa | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Ampara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Puttalam | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Kurunegala | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Anuradhapura | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Polonnaruwa | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Badulla | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Monaragala | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Kegalle | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Any subject combination] MANAGEMENT STUDIES (TV) - B | Ratnapura | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Colombo | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Gampaha | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Kalutara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Matale | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Kandy | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Nuwara Eliya | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Galle | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Matara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Hambantota | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Jaffna | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Kilinochchi | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Mannar | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Mullaitivu | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Vavuniya | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Trincomalee | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Batticaloa | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Ampara | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Puttalam | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Kurunegala | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Anuradhapura | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Polonnaruwa | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Badulla | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Monaragala | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Kegalle | missing_match
+- 2023/24 | Eastern University -Trincomalee Campus | [Commerce Stream] MANAGEMENT STUDIES (TV) - A | Ratnapura | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Colombo | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Gampaha | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Kalutara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Matale | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Kandy | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Nuwara Eliya | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Galle | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Matara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Hambantota | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Jaffna | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Kilinochchi | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Mannar | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Mullaitivu | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Vavuniya | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Trincomalee | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Batticaloa | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Ampara | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Puttalam | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Kurunegala | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Anuradhapura | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Polonnaruwa | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Badulla | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Monaragala | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Kegalle | missing_match
+- 2023/24 | Eastern University - Trincomalee Campus | SIDDHA MEDICINE & SURGERY w Tests Aptitude / | Ratnapura | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Colombo | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Gampaha | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Kalutara | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Matale | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Kandy | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Nuwara Eliya | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Galle | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Matara | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Hambantota | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Jaffna | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Kilinochchi | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Mannar | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Mullaitivu | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Vavuniya | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Trincomalee | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Batticaloa | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Ampara | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Puttalam | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Kurunegala | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Anuradhapura | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Polonnaruwa | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Badulla | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Monaragala | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Kegalle | missing_match
+- 2023/24 | University of Colombo | Engineering Technology (ET) | Ratnapura | missing_match
 
 ### First 200 Non-Numeric Cutoff Markers
 - 2024/25 | University of Colombo | Biological Science | Gampaha | NQC
@@ -409,4 +584,203 @@
 - 2024/25 | University of Sri Jayewardenepura | Computer Science | Kandy | NQC
 
 ### First 200 Cutoff Rows Requiring Review
-- No cutoff rows require review.
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Colombo
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Gampaha
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kalutara
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Matale
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kandy
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Nuwara Eliya
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Galle
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Matara
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Hambantota
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Jaffna
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kilinochchi
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Mannar
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Mullaitivu
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Vavuniya
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Trincomalee
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Batticaloa
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Ampara
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Puttalam
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kurunegala
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Anuradhapura
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Polonnaruwa
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Badulla
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Monaragala
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kegalle
+- 2023/24 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Ratnapura
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Colombo
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Gampaha
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Kalutara
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Matale
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Kandy
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Nuwara Eliya
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Galle
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Matara
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Hambantota
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Jaffna
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Kilinochchi
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Mannar
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Mullaitivu
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Vavuniya
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Trincomalee
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Batticaloa
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Ampara
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Puttalam
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Kurunegala
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Anuradhapura
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Polonnaruwa
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Badulla
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Monaragala
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Kegalle
+- 2023/24 | University of Ruhuna | MARINE AND FRESHWATER SCIENCES | Ratnapura
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Colombo
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Gampaha
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Kalutara
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Matale
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Kandy
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Nuwara Eliya
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Galle
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Matara
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Hambantota
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Jaffna
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Kilinochchi
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Mannar
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Mullaitivu
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Vavuniya
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Trincomalee
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Batticaloa
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Ampara
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Puttalam
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Kurunegala
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Anuradhapura
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Polonnaruwa
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Badulla
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Monaragala
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Kegalle
+- 2023/24 | University of Kelaniya | OCCUPATIONAL THERAPY cond were | Ratnapura
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Colombo
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Gampaha
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Kalutara
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Matale
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Kandy
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Nuwara Eliya
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Galle
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Matara
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Hambantota
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Jaffna
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Kilinochchi
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Mannar
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Mullaitivu
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Vavuniya
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Trincomalee
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Batticaloa
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Ampara
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Puttalam
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Kurunegala
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Anuradhapura
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Polonnaruwa
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Badulla
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Monaragala
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Kegalle
+- 2023/24 | Uva Wellassa University of Sri Lanka | ENTREPRENEURSHIP AND MANAGEMENT d. | Ratnapura
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Colombo
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Gampaha
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Kalutara
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Matale
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Kandy
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Nuwara Eliya
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Galle
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Matara
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Hambantota
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Jaffna
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Kilinochchi
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Mannar
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Mullaitivu
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Vavuniya
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Trincomalee
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Batticaloa
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Ampara
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Puttalam
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Kurunegala
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Anuradhapura
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Polonnaruwa
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Badulla
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Monaragala
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Kegalle
+- 2023/24 | University of the Visual & Performing Arts | DRAMA & THEATRE # conducte e | Ratnapura
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Colombo
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Gampaha
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Kalutara
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Matale
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Kandy
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Nuwara Eliya
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Galle
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Matara
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Hambantota
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Jaffna
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Kilinochchi
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Mannar
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Mullaitivu
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Vavuniya
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Trincomalee
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Batticaloa
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Ampara
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Puttalam
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Kurunegala
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Anuradhapura
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Polonnaruwa
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Badulla
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Monaragala
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Kegalle
+- 2023/24 | University of the Visual & Performing Arts | MUSIC # Aptitude / | Ratnapura
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Colombo
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Gampaha
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kalutara
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matale
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kandy
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Nuwara Eliya
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Galle
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Matara
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Hambantota
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Jaffna
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kilinochchi
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mannar
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Mullaitivu
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Vavuniya
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Trincomalee
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Batticaloa
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ampara
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Puttalam
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kurunegala
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Anuradhapura
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Polonnaruwa
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Badulla
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Monaragala
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Kegalle
+- 2022/23 | University of Vavuniya, Sri Lanka | APPLIED SCIENCES (BIO.SC) | Ratnapura
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Colombo
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Gampaha
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kalutara
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Matale
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kandy
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Nuwara Eliya
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Galle
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Matara
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Hambantota
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Jaffna
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kilinochchi
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Mannar
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Mullaitivu
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Vavuniya
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Trincomalee
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Batticaloa
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Ampara
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Puttalam
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kurunegala
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Anuradhapura
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Polonnaruwa
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Badulla
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Monaragala
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Kegalle
+- 2022/23 | University of Colombo | AYURVEDIC MEDICINE & SURGERY | Ratnapura

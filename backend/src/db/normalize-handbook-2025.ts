@@ -17,7 +17,12 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const WORKSPACE_ROOT = join(__dirname, "../../..");
 const HANDBOOK_2025_DIR = join(WORKSPACE_ROOT, "HandBook", "2025");
-const STAGING_FILE = join(WORKSPACE_ROOT, "backend", "data", "handbooks", "staging", "2025_26_en.json");
+const STAGING_DIR = join(WORKSPACE_ROOT, "backend", "data", "handbooks", "staging");
+const STAGING_FILES = [
+  join(STAGING_DIR, "2025_26_en.json"), // Section 9 cutoffs for 2024/25
+  join(STAGING_DIR, "2024_25_en.json"), // Section 9 cutoffs for 2023/24
+  join(STAGING_DIR, "2023_24_en.json"), // Section 9 cutoffs for 2022/23
+];
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf-8")) as T;
@@ -31,9 +36,14 @@ function main() {
   const rawCoursesFile = readJson<{ courses: RawCourseRecord[] }>(join(HANDBOOK_2025_DIR, "courses.json"));
   const rawUniversitiesFile = readJson<unknown>(join(HANDBOOK_2025_DIR, "universities.json"));
   const rawEligibilityRules = readJson<RawEligibilityRule[]>(join(HANDBOOK_2025_DIR, "eligibility_rules.json"));
-  const stagedRows = existsSync(STAGING_FILE)
-    ? readJson<{ programmes: RawStagedProgrammeRow[] }>(STAGING_FILE).programmes
-    : [];
+
+  const stagedRows: RawStagedProgrammeRow[] = [];
+  for (const stagingPath of STAGING_FILES) {
+    if (existsSync(stagingPath)) {
+      const file = readJson<{ programmes: RawStagedProgrammeRow[] }>(stagingPath);
+      stagedRows.push(...file.programmes);
+    }
+  }
 
   const rawCourses = rawCoursesFile.courses;
   const courses = rawCourses.map((course) => normalizeCourseRecord(course));

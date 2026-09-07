@@ -4,9 +4,13 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft,
   Building2,
+  Calendar,
   Clock,
   GraduationCap,
   Info,
+  Minus,
+  TrendingDown,
+  TrendingUp,
 } from "lucide-react";
 
 import {
@@ -132,20 +136,67 @@ export default function CourseDetail() {
             {course.cutoffHistory && course.cutoffHistory.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>{t.courses.cutoffHistory} ({district})</CardTitle>
-                  <CardDescription>Official handbook minimum Z-scores by year</CardDescription>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-2">
+                      <Calendar className="h-5 w-5 text-primary" />
+                      {t.courses.cutoffHistory} ({district})
+                    </CardTitle>
+                    <Badge variant="secondary" className="text-xs font-normal">
+                      {course.cutoffHistory.length} Years of Handbook Data
+                    </Badge>
+                  </div>
+                  <CardDescription>Official minimum Z-score cutoffs published in university admissions handbooks</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2">
-                    {course.cutoffHistory.map((point) => (
-                      <div
-                        key={point.academicYear}
-                        className="flex justify-between items-center py-2 border-b border-[hsl(var(--border))] last:border-0"
-                      >
-                        <span className="text-sm font-medium">{point.academicYear}</span>
-                        <span className="font-mono font-semibold">{point.minimumZScore.toFixed(3)}</span>
-                      </div>
-                    ))}
+                  <div className="divide-y divide-[hsl(var(--border))] rounded-lg border border-[hsl(var(--border))] bg-card">
+                    {course.cutoffHistory.map((point, index) => {
+                      const nextPoint = course.cutoffHistory?.[index + 1];
+                      const diff = nextPoint != null ? point.minimumZScore - nextPoint.minimumZScore : null;
+
+                      return (
+                        <div
+                          key={point.academicYear}
+                          className="flex justify-between items-center px-4 py-3 text-sm transition-colors hover:bg-muted/40"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-foreground">{point.academicYear}</span>
+                            {index === 0 && (
+                              <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-primary/40 text-primary">
+                                Latest
+                              </Badge>
+                            )}
+                          </div>
+
+                          <div className="flex items-center gap-3">
+                            {diff != null && (
+                              <span
+                                className={`text-xs flex items-center font-mono ${
+                                  diff > 0
+                                    ? "text-emerald-600 dark:text-emerald-400"
+                                    : diff < 0
+                                    ? "text-amber-600 dark:text-amber-400"
+                                    : "text-muted-foreground"
+                                }`}
+                                title={`Change from ${nextPoint?.academicYear}: ${diff > 0 ? "+" : ""}${diff.toFixed(4)}`}
+                              >
+                                {diff > 0 ? (
+                                  <TrendingUp className="h-3.5 w-3.5 mr-0.5 inline" />
+                                ) : diff < 0 ? (
+                                  <TrendingDown className="h-3.5 w-3.5 mr-0.5 inline" />
+                                ) : (
+                                  <Minus className="h-3.5 w-3.5 mr-0.5 inline" />
+                                )}
+                                {diff > 0 ? "+" : ""}
+                                {diff.toFixed(4)}
+                              </span>
+                            )}
+                            <span className="font-mono font-bold text-base text-foreground">
+                              {point.minimumZScore.toFixed(4)}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>
