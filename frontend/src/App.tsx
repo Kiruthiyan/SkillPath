@@ -13,6 +13,7 @@ import "@/hooks/use-auth";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Profile from "@/pages/profile";
+import Settings from "@/pages/settings";
 import Dashboard from "@/pages/dashboard";
 import Courses from "@/pages/courses";
 import CourseDetail from "@/pages/course-detail";
@@ -117,6 +118,7 @@ function Router() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/profile" component={Profile} />
+        <Route path="/settings" component={Settings} />
         <Route path="/dashboard" component={ProtectedDashboard} />
         <Route path="/universities/:id" component={Universities} />
         <Route path="/universities" component={Universities} />

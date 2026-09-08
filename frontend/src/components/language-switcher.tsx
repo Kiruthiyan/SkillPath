@@ -49,16 +49,19 @@ export function LanguageSwitcher({ className, variant = "select" }: LanguageSwit
   }
 
   return (
-    <div className={cn("flex items-center gap-1.5", className)}>
-      <Globe className="h-4 w-4 text-muted-foreground shrink-0" />
+    <div className={cn("relative inline-flex items-center", className)}>
       <Select value={language} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="h-8 w-[110px] text-xs bg-card/60 border-[hsl(var(--border))]">
-          <SelectValue placeholder="Language" />
+        <SelectTrigger
+          className="h-8 px-2 rounded-full border border-border bg-card hover:bg-muted/80 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20 gap-1"
+          aria-label="Select language"
+          title="Select language"
+        >
+          <Globe className="h-4 w-4 text-foreground shrink-0" />
         </SelectTrigger>
-        <SelectContent align="end">
+        <SelectContent align="end" className="min-w-[130px]">
           {supportedLanguages.map((lang) => (
-            <SelectItem key={lang.code} value={lang.code} className="text-xs">
-              <span className="font-medium">{lang.nativeName}</span>{" "}
+            <SelectItem key={lang.code} value={lang.code} className="text-xs cursor-pointer py-1.5">
+              <span className="font-semibold">{lang.nativeName}</span>{" "}
               <span className="text-muted-foreground text-[10px]">({lang.label})</span>
             </SelectItem>
           ))}

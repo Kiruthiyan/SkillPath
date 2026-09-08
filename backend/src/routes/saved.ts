@@ -229,16 +229,26 @@ router.get("/dashboard/recent-searches", requireAuth, async (req, res) => {
     .from(recentSearchesTable)
     .where(eq(recentSearchesTable.userId, req.user!.userId))
     .orderBy(desc(recentSearchesTable.createdAt))
-    .limit(10);
+    .limit(20);
 
-  res.json(
-    rows.map((r) => ({
-      id: r.id,
-      query: r.query,
-      filters: r.filters ? JSON.parse(r.filters) : null,
-      createdAt: r.createdAt,
-    })),
-  );
+  // Deduplicate by query text (case-insensitive) and return at most 5
+  const seen = new Set<string>();
+  const uniqueSearches = [];
+  for (const r of rows) {
+    const norm = r.query.trim().toLowerCase();
+    if (!seen.has(norm)) {
+      seen.add(norm);
+      uniqueSearches.push({
+        id: r.id,
+        query: r.query,
+        filters: r.filters ? JSON.parse(r.filters) : null,
+        createdAt: r.createdAt,
+      });
+      if (uniqueSearches.length >= 5) break;
+    }
+  }
+
+  res.json(uniqueSearches);
 });
 
 router.post("/dashboard/recent-searches", requireAuth, async (req, res) => {
@@ -248,11 +258,17 @@ router.post("/dashboard/recent-searches", requireAuth, async (req, res) => {
     return;
   }
 
+  const queryTrimmed = parsed.data.query.trim();
+  if (queryTrimmed.length < 2) {
+    res.status(400).json({ error: "Search query too short" });
+    return;
+  }
+
   const [search] = await db
     .insert(recentSearchesTable)
     .values({
       userId: req.user!.userId,
-      query: parsed.data.query,
+      query: queryTrimmed,
       filters: parsed.data.filters ? JSON.stringify(parsed.data.filters) : null,
     })
     .returning();
@@ -263,6 +279,14 @@ router.post("/dashboard/recent-searches", requireAuth, async (req, res) => {
     filters: parsed.data.filters ?? null,
     createdAt: search!.createdAt,
   });
+});
+
+router.delete("/dashboard/recent-searches", requireAuth, async (req, res) => {
+  await db
+    .delete(recentSearchesTable)
+    .where(eq(recentSearchesTable.userId, req.user!.userId));
+
+  res.json({ success: true });
 });
 
 export default router;
