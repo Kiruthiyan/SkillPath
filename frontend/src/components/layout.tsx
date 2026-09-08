@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import {
   GraduationCap,
@@ -13,6 +14,8 @@ import {
   LogOut,
   LogIn,
   Target,
+  Settings,
+  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -25,7 +28,7 @@ function SkipLink() {
   return (
     <a
       href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+      className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:shadow-md"
     >
       {t.nav.skipToMain}
     </a>
@@ -35,7 +38,6 @@ function SkipLink() {
 function getNavItems(t: ReturnType<typeof useTranslations>["t"]) {
   return [
     { href: "/dashboard", label: t.nav.dashboard, icon: LayoutDashboard },
-    { href: "/profile", label: t.nav.profile, icon: User },
     { href: "/courses", label: t.nav.courses, icon: BookOpen },
     { href: "/checker", label: t.nav.checker, icon: Target },
     { href: "/universities", label: t.nav.universities, icon: Building2 },
@@ -44,7 +46,98 @@ function getNavItems(t: ReturnType<typeof useTranslations>["t"]) {
     { href: "/reviews", label: t.nav.reviews, icon: Star },
     { href: "/stories", label: t.nav.stories, icon: Trophy },
     { href: "/chat", label: t.nav.chat, icon: MessageSquare },
+    { href: "/settings", label: t.nav.settings, icon: Settings },
   ];
+}
+
+function UserMenu() {
+  const [open, setOpen] = useState(false);
+  const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
+  const { t } = useTranslations();
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
+  const initials = user?.name
+    ? user.name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)
+    : "U";
+
+  return (
+    <div className="relative" ref={menuRef}>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1.5 rounded-full p-1 hover:bg-muted/80 border border-border transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20"
+        title={user?.name || "Profile"}
+        aria-label="User menu"
+      >
+        <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-xs shrink-0 shadow-sm">
+          {initials}
+        </div>
+        <ChevronDown className="h-3.5 w-3.5 text-muted-foreground mr-1" />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-56 rounded-xl border border-border bg-card p-1.5 shadow-lg z-50 animate-in fade-in zoom-in-95 duration-100">
+          <div className="px-3 py-2 border-b border-border/60 mb-1">
+            <p className="text-sm font-semibold text-foreground truncate">{user?.name}</p>
+            <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+          </div>
+
+          <div className="space-y-0.5">
+            <Link
+              href="/settings?tab=profile"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-foreground hover:bg-muted transition-colors"
+            >
+              <User className="h-4 w-4 text-primary" />
+              {t.settings.tabProfile}
+            </Link>
+            <Link
+              href="/settings?tab=preferences"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-foreground hover:bg-muted transition-colors"
+            >
+              <Settings className="h-4 w-4 text-primary" />
+              {t.settings.title}
+            </Link>
+          </div>
+
+          <div className="border-t border-border/60 mt-1 pt-1">
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                logout();
+              }}
+              className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors text-left"
+            >
+              <LogOut className="h-4 w-4" />
+              {t.nav.logout}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 function MarketingHeader() {
@@ -70,13 +163,10 @@ function MarketingHeader() {
           <LanguageSwitcher variant="select" />
           {isAuthenticated ? (
             <>
-              <span className="text-sm text-muted-foreground hidden sm:inline">{t.nav.hi}, {user?.name}</span>
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
                 <Link href="/dashboard">{t.nav.dashboard}</Link>
               </Button>
-              <Button variant="ghost" size="sm" onClick={logout}>
-                <LogOut className="h-4 w-4 mr-1" /> {t.nav.logout}
-              </Button>
+              <UserMenu />
             </>
           ) : (
             <Button size="sm" asChild>
@@ -91,9 +181,7 @@ function MarketingHeader() {
 
 function AppShell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
-  const user = useAuthStore((s) => s.user);
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
-  const logout = useAuthStore((s) => s.logout);
   const { t } = useTranslations();
   const navItems = getNavItems(t);
 
@@ -123,20 +211,6 @@ function AppShell({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </nav>
-        <div className="p-4 border-t border-[hsl(var(--border))] shrink-0">
-          {isAuthenticated ? (
-            <div className="space-y-2">
-              <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
-              <Button variant="outline" size="sm" className="w-full" onClick={logout}>
-                <LogOut className="h-4 w-4 mr-2" /> {t.nav.logout}
-              </Button>
-            </div>
-          ) : (
-            <Button size="sm" className="w-full" asChild>
-              <Link href="/login">{t.nav.signIn}</Link>
-            </Button>
-          )}
-        </div>
       </aside>
       <div className="flex-1 flex flex-col min-w-0">
         <header className="border-b border-[hsl(var(--border))] bg-card px-4 md:px-6 py-3 flex items-center justify-between">
@@ -147,11 +221,9 @@ function AppShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-3">
             <LanguageSwitcher variant="select" />
             {isAuthenticated ? (
-              <Button variant="ghost" size="sm" onClick={logout} className="lg:hidden">
-                <LogOut className="h-4 w-4 mr-1" /> {t.nav.logout}
-              </Button>
+              <UserMenu />
             ) : (
-              <Button size="sm" asChild className="lg:hidden">
+              <Button size="sm" asChild>
                 <Link href="/login">{t.nav.signIn}</Link>
               </Button>
             )}

@@ -31,6 +31,32 @@
   --button-outline: hsl(var(--border));
 }
 
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 13%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 13%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 222 47% 11%;
+  --primary-border: 217 91% 50%;
+  --secondary: 199 89% 48%;
+  --secondary-foreground: 210 40% 98%;
+  --secondary-border: 199 89% 40%;
+  --muted: 217 33% 18%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 262 52% 55%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62% 45%;
+  --destructive-foreground: 210 40% 98%;
+  --destructive-border: 0 62% 40%;
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 217 91% 60%;
+  --button-outline: hsl(var(--border));
+}
+
 * {
   border-color: hsl(var(--border));
 }

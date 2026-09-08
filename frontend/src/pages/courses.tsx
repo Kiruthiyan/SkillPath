@@ -67,12 +67,16 @@ export default function Courses() {
 
   const profile = useProfileStore();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(
+    () => getQueryParam(urlSearch, "search") ?? "",
+  );
 
   const [streamFilter, setStreamFilter] = useState<string>(
     () => getQueryParam(urlSearch, "stream") ?? profile.stream ?? "all",
   );
-  const [eligibilityFilter, setEligibilityFilter] = useState<string>("all");
+  const [eligibilityFilter, setEligibilityFilter] = useState<string>(
+    () => getQueryParam(urlSearch, "filter") ?? "all",
+  );
   const [universityFilter, setUniversityFilter] = useState<string>(
     () => getQueryParam(urlSearch, "universityId") ?? "all",
   );
@@ -150,8 +154,18 @@ export default function Courses() {
 
   function handleSearch(value: string) {
     setSearch(value);
-    if (value.trim() && isAuthenticated) {
-      recordSearch({ data: { query: value, filters: params } });
+  }
+
+  function submitSearch(value: string) {
+    const trimmed = value.trim();
+    if (trimmed && isAuthenticated && trimmed.length >= 2) {
+      recordSearch({ data: { query: trimmed, filters: params } });
+    }
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      submitSearch(search);
     }
   }
 
@@ -243,6 +257,7 @@ export default function Courses() {
               className="pl-10"
               value={search}
               onChange={(e) => handleSearch(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
           {profile.zscore != null && (
