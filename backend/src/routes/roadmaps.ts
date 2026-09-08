@@ -206,16 +206,24 @@ router.post("/roadmaps/generate", aiRateLimiter, requireAiAuth, optionalAuth, as
 
   let years: Array<{ year: number; milestones: string[] }>;
   let afterGraduation: Array<{ timeframe: string; role: string }>;
+  let aiRoadmap: Awaited<ReturnType<typeof generateRoadmapWithAI>> = null;
 
-  const aiRoadmap = await generateRoadmapWithAI({
-    degreeName: courseRow.degreeName,
-    degreeType: templateCategory,
-    faculty: courseRow.faculty ?? "",
-    universityName: courseRow.universityName ?? "",
-    durationYears,
-    stream,
-    zscore,
-  });
+  console.log("[roadmaps] Generating roadmap for:", courseRow.degreeName, "Faculty:", templateCategory);
+  try {
+    aiRoadmap = await generateRoadmapWithAI({
+      degreeName: courseRow.degreeName,
+      degreeType: templateCategory,
+      faculty: courseRow.faculty ?? "",
+      universityName: courseRow.universityName ?? "",
+      durationYears,
+      stream,
+      zscore,
+    });
+    console.log("[roadmaps] Gemini AI completed successfully:", !!aiRoadmap);
+  } catch (err) {
+    console.error("[roadmaps] AI generation error:", err);
+    aiRoadmap = null;
+  }
 
   if (aiRoadmap) {
     years = aiRoadmap.years.slice(0, durationYears);

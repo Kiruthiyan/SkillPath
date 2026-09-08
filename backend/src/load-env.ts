@@ -12,8 +12,9 @@ if (existsSync(envPath)) {
     const match = line.match(/^\s*([^#][^=]+)=(.*)$/);
     if (!match) continue;
     const key = match[1].trim();
-    if (process.env[key] === undefined) {
-      process.env[key] = match[2].trim();
+    const val = match[2].trim();
+    if (process.env[key] === undefined || process.env[key] === "") {
+      process.env[key] = val;
     }
   }
 }
