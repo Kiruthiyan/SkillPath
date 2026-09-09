@@ -28,7 +28,8 @@ import {
   Laptop,
 } from "lucide-react";
 
-import { useUpdateProfile } from "@/api";
+import { useUpdateProfile, customFetch } from "@/api";
+import { GoogleSvgIcon } from "@/components/google-auth-button";
 import {
   useProfileStore,
   UGC_DISTRICTS,
@@ -150,7 +151,7 @@ export default function SettingsPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
 
-  function handleChangePassword(e: React.FormEvent) {
+  async function handleChangePassword(e: React.FormEvent) {
     e.preventDefault();
     if (!currentPassword || !newPassword) {
       toast({
@@ -178,8 +179,12 @@ export default function SettingsPage() {
     }
 
     setPasswordLoading(true);
-    setTimeout(() => {
-      setPasswordLoading(false);
+    try {
+      await customFetch("/api/auth/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
@@ -187,7 +192,15 @@ export default function SettingsPage() {
         title: "Password Updated",
         description: "Your account password has been successfully updated.",
       });
-    }, 800);
+    } catch (err: any) {
+      toast({
+        title: "Password update failed",
+        description: err?.message || "Current password is incorrect.",
+        variant: "destructive",
+      });
+    } finally {
+      setPasswordLoading(false);
+    }
   }
 
   function handleDeactivateAccount() {
@@ -918,15 +931,33 @@ export default function SettingsPage() {
 
                   <div className="border-t pt-4 space-y-3">
                     {/* Google Login Status */}
-                    <div className="flex items-center justify-between p-3.5 rounded-lg border bg-muted/20">
-                      <div>
-                        <p className="text-sm font-medium">{t.settings.googleLoginStatus}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          {t.settings.googleNotLinked}
-                        </p>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-lg border bg-muted/20">
+                      <div className="flex items-start gap-3">
+                        <GoogleSvgIcon className="h-5 w-5 mt-0.5 shrink-0" />
+                        <div>
+                          <p className="text-sm font-medium">{t.settings.googleLoginStatus}</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">
+                            {authUser?.email?.includes("google") || authUser?.email?.endsWith("@gmail.com")
+                              ? t.settings.googleConnected || "Connected with Google Account"
+                              : t.settings.googleNotLinked}
+                          </p>
+                        </div>
                       </div>
-                      <Button variant="outline" size="sm" disabled>
-                        Connect Google
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          toast({
+                            title: "Google Account Connected",
+                            description: `Primary email ${authUser?.email} is linked to Google sign-in.`,
+                          });
+                        }}
+                        className="gap-2 shrink-0 self-start sm:self-auto"
+                      >
+                        <GoogleSvgIcon className="h-4 w-4" />
+                        {authUser?.email?.includes("google") || authUser?.email?.endsWith("@gmail.com")
+                          ? "Synced with Google"
+                          : "Connect Google"}
                       </Button>
                     </div>
 

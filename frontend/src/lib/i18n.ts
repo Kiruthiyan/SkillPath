@@ -310,6 +310,15 @@ export const translations = {
       registerBtn: "Create Account",
       alreadyHaveAccount: "Already have an account? Sign in",
       dontHaveAccount: "Don't have an account? Register free",
+      continueWithGoogle: "Continue with Google",
+      orDivider: "or continue with email",
+      quickDemoStudent: "Quick Demo as Student",
+      quickDemoAdmin: "Quick Demo as Admin",
+      showPassword: "Show password",
+      hidePassword: "Hide password",
+      googleSigningIn: "Authenticating with Google...",
+      googleSuccess: "Successfully signed in with Google!",
+      googleFailed: "Google sign-in could not be completed. Please try again or use email.",
     },
     // Streams
     streams: {
@@ -616,6 +625,15 @@ export const translations = {
       registerBtn: "ගිණුම සාදන්න",
       alreadyHaveAccount: "දැනටමත් ගිණුමක් තිබේද? ඇතුල් වන්න",
       dontHaveAccount: "ගිණුමක් නොමැතිද? නොමිලේ ලියාපදිංචි වන්න",
+      continueWithGoogle: "Google මඟින් ඇතුල් වන්න",
+      orDivider: "හෝ විද්‍යුත් තැපෑලෙන් ඉදිරියට යන්න",
+      quickDemoStudent: "ශිෂ්‍ය Demo ගිණුමෙන් පිවිසෙන්න",
+      quickDemoAdmin: "පරිපාලක Demo ගිණුමෙන් පිවිසෙන්න",
+      showPassword: "මුරපදය පෙන්වන්න",
+      hidePassword: "මුරපදය සඟවන්න",
+      googleSigningIn: "Google සමඟ සම්බන්ධ වෙමින්...",
+      googleSuccess: "Google මඟින් සාර්ථකව ඇතුල් විය!",
+      googleFailed: "Google මඟින් ඇතුල් වීමට නොහැකි විය. කරුණාකර නැවත උත්සාහ කරන්න.",
     },
     // Streams
     streams: {
@@ -922,6 +940,15 @@ export const translations = {
       registerBtn: "கணக்கை உருவாக்கு",
       alreadyHaveAccount: "ஏற்கனவே கணக்கு உள்ளதா? உள்நுழைக",
       dontHaveAccount: "கணக்கு இல்லையா? இலவசமாக பதிவு செய்க",
+      continueWithGoogle: "Google மூலம் தொடரவும்",
+      orDivider: "அல்லது மின்னஞ்சல் மூலம் தொடரவும்",
+      quickDemoStudent: "மாணவர் டெமோ உள்நுழைவு",
+      quickDemoAdmin: "நிர்வாகி டெமோ உள்நுழைவு",
+      showPassword: "கடவுச்சொல்லைக் காட்டு",
+      hidePassword: "கடவுச்சொல்லை மறை",
+      googleSigningIn: "Google மூலம் சரிபார்க்கப்படுகிறது...",
+      googleSuccess: "Google மூலம் வெற்றிகரமாக உள்நுழைந்தது!",
+      googleFailed: "Google உள்நுழைவு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.",
     },
     // Streams
     streams: {
