@@ -2,10 +2,11 @@ import { Router } from "express";
 import { db } from "../db";
 import { roadmapsTable } from "../db";
 import { GenerateRoadmapBody } from "../api-zod";
-import { optionalAuth } from "../middleware/auth";
-import { aiRateLimiter, requireAiAuth } from "../middleware/ai";
+import { requireAuth } from "../middleware/auth";
+import { aiRateLimiter } from "../middleware/ai";
 import { generateRoadmapWithAI } from "../lib/gemini";
 import { getOfficialCourseDetail } from "../db/official-handbook-query";
+import { logger } from "../lib/logger";
 
 const router = Router();
 
@@ -185,7 +186,7 @@ function getTemplateRoadmap(degreeType: string) {
   return ROADMAPS.Science!;
 }
 
-router.post("/roadmaps/generate", aiRateLimiter, requireAiAuth, optionalAuth, async (req, res) => {
+router.post("/roadmaps/generate", aiRateLimiter, requireAuth, async (req, res) => {
   const parsed = GenerateRoadmapBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
@@ -208,7 +209,10 @@ router.post("/roadmaps/generate", aiRateLimiter, requireAiAuth, optionalAuth, as
   let afterGraduation: Array<{ timeframe: string; role: string }>;
   let aiRoadmap: Awaited<ReturnType<typeof generateRoadmapWithAI>> = null;
 
-  console.log("[roadmaps] Generating roadmap for:", courseRow.degreeName, "Faculty:", templateCategory);
+  logger.info(
+    { degreeName: courseRow.degreeName, faculty: templateCategory },
+    "Generating roadmap",
+  );
   try {
     aiRoadmap = await generateRoadmapWithAI({
       degreeName: courseRow.degreeName,
@@ -219,9 +223,9 @@ router.post("/roadmaps/generate", aiRateLimiter, requireAiAuth, optionalAuth, as
       stream,
       zscore,
     });
-    console.log("[roadmaps] Gemini AI completed successfully:", !!aiRoadmap);
+    logger.info({ succeeded: !!aiRoadmap }, "Gemini roadmap generation completed");
   } catch (err) {
-    console.error("[roadmaps] AI generation error:", err);
+    logger.error({ err }, "AI roadmap generation error");
     aiRoadmap = null;
   }
 

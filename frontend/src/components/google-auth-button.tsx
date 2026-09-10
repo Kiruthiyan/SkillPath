@@ -37,7 +37,7 @@ declare global {
 
 interface GoogleAuthButtonProps {
   mode?: "signin" | "signup" | "connect";
-  onSuccess?: () => void;
+  onSuccess?: (user?: any) => void;
   className?: string;
 }
 
@@ -64,6 +64,20 @@ export function GoogleAuthButton({
   }) {
     setIsLoading(true);
     try {
+      if (mode === "connect") {
+        await customFetch<{ message: string }>("/api/auth/google/link", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ credential: payload.credential }),
+        });
+        toast({
+          title: "Google account linked",
+          description: "Your account is now connected to Google sign-in.",
+        });
+        if (onSuccess) onSuccess();
+        return;
+      }
+
       const res = await customFetch<{
         token: string;
         user: any;
@@ -79,11 +93,11 @@ export function GoogleAuthButton({
         description: `${res.user.name} (${res.user.email})`,
       });
       if (onSuccess) {
-        onSuccess();
+        onSuccess(res.user);
       }
     } catch (err: any) {
       toast({
-        title: "Google Sign-In",
+        title: mode === "connect" ? "Google linking failed" : "Google Sign-In",
         description:
           err?.message ||
           t.auth.googleFailed ||
@@ -141,7 +155,7 @@ export function GoogleAuthButton({
         type: "standard",
         theme: "outline",
         size: "large",
-        text: mode === "signup" ? "signup_with" : "continue_with",
+        text: mode === "signup" ? "signup_with" : "signin_with",
         shape: "rectangular",
         width: 380,
       });
@@ -150,26 +164,20 @@ export function GoogleAuthButton({
     }
   }, [gisLoaded, googleClientId, mode]);
 
-  // If no Google Client ID is configured in .env, provide an interactive one-click Google demo account
-  const handleFallbackClick = () => {
-    // If client ID is present and GIS is loaded, trigger prompt
+  const handlePromptClick = () => {
     if (googleClientId && window.google?.accounts?.id) {
       window.google.accounts.id.prompt();
-      return;
     }
-
-    // Interactive simulated Google account prompt or instant sign-in
-    const sampleEmail = "student.google@skillpath.lk";
-    const sampleName = "Saman Perera (Google Student)";
-
-    handleGoogleLogin({
-      email: sampleEmail,
-      name: sampleName,
-    });
   };
 
   return (
     <div className={`w-full flex flex-col items-center ${className}`}>
+      {!googleClientId && import.meta.env.DEV && (
+        <p className="text-xs text-muted-foreground text-center">
+          Google sign-in disabled: VITE_GOOGLE_CLIENT_ID is not set.
+        </p>
+      )}
+
       {/* Hidden container where GIS renders official button if configured */}
       {googleClientId && gisLoaded && (
         <div
@@ -178,13 +186,13 @@ export function GoogleAuthButton({
         />
       )}
 
-      {/* Styled Google Sign-In Button */}
-      {(!googleClientId || !gisLoaded) && (
+      {/* Styled Google Sign-In Button (shown while GIS script loads, or as a manual prompt trigger) */}
+      {googleClientId && !gisLoaded && (
         <Button
           type="button"
           variant="outline"
           disabled={isLoading}
-          onClick={handleFallbackClick}
+          onClick={handlePromptClick}
           className="w-full h-11 flex items-center justify-center gap-3 border-border hover:bg-muted/60 transition-all text-sm font-medium shadow-xs"
         >
           {isLoading ? (
@@ -193,15 +201,13 @@ export function GoogleAuthButton({
             <GoogleSvgIcon className="h-5 w-5 shrink-0" />
           )}
           <span>
-            {isLoading ? t.auth.googleSigningIn : t.auth.continueWithGoogle}
+            {isLoading
+              ? t.auth.googleSigningIn
+              : mode === "signup"
+                ? t.auth.continueWithGoogle
+                : t.auth.signInWithGoogle}
           </span>
         </Button>
-      )}
-
-      {!googleClientId && (
-        <p className="text-[11px] text-muted-foreground/80 mt-1 text-center">
-          Instant Google OAuth ready (dev mode / 1-click)
-        </p>
       )}
     </div>
   );

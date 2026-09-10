@@ -51,8 +51,8 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Button size="lg" variant="secondary" asChild>
-                <Link href="/profile">
-                  {t.actions.setUpProfile} <ArrowRight className="ml-2 h-4 w-4" />
+                <Link href="/checker">
+                  {t.nav.checker} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
@@ -94,6 +94,12 @@ export default function Home() {
           <Button size="lg" asChild>
             <Link href="/register">{t.actions.getStarted}</Link>
           </Button>
+          <p className="text-sm text-muted-foreground mt-4">
+            {t.auth.alreadyHaveAccount}{" "}
+            <Link href="/login" className="text-primary font-semibold hover:underline">
+              {t.nav.signIn}
+            </Link>
+          </p>
         </div>
       </section>
     </div>

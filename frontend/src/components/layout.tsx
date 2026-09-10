@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   GraduationCap,
   LayoutDashboard,
@@ -11,6 +12,9 @@ import {
   Star,
   Trophy,
   Building2,
+  Landmark,
+  ShieldCheck,
+  Users,
   LogOut,
   LogIn,
   Target,
@@ -22,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/hooks/use-auth";
 import { useTranslations } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { getDashboardPath, getNavForRole } from "@/lib/rbac";
 
 function SkipLink() {
   const { t } = useTranslations();
@@ -35,27 +40,13 @@ function SkipLink() {
   );
 }
 
-function getNavItems(t: ReturnType<typeof useTranslations>["t"]) {
-  return [
-    { href: "/dashboard", label: t.nav.dashboard, icon: LayoutDashboard },
-    { href: "/courses", label: t.nav.courses, icon: BookOpen },
-    { href: "/checker", label: t.nav.checker, icon: Target },
-    { href: "/universities", label: t.nav.universities, icon: Building2 },
-    { href: "/careers", label: t.nav.careers, icon: Briefcase },
-    { href: "/roadmap", label: t.nav.roadmap, icon: Map },
-    { href: "/reviews", label: t.nav.reviews, icon: Star },
-    { href: "/stories", label: t.nav.stories, icon: Trophy },
-    { href: "/chat", label: t.nav.chat, icon: MessageSquare },
-    { href: "/settings", label: t.nav.settings, icon: Settings },
-  ];
-}
-
 function UserMenu() {
   const [open, setOpen] = useState(false);
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
   const { t } = useTranslations();
   const menuRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -127,6 +118,7 @@ function UserMenu() {
               onClick={() => {
                 setOpen(false);
                 logout();
+                queryClient.clear();
               }}
               className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors text-left"
             >
@@ -164,7 +156,7 @@ function MarketingHeader() {
           {isAuthenticated ? (
             <>
               <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
-                <Link href="/dashboard">{t.nav.dashboard}</Link>
+                <Link href={getDashboardPath(user?.role)}>{t.nav.dashboard}</Link>
               </Button>
               <UserMenu />
             </>
@@ -182,8 +174,11 @@ function MarketingHeader() {
 function AppShell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
+  const role = useAuthStore((s) => s.user?.role);
   const { t } = useTranslations();
-  const navItems = getNavItems(t);
+  // Navigation follows the authenticated user's role, never the URL. A role's
+  // items are its own; nothing is inherited from the student navigation.
+  const navItems = getNavForRole(role, t);
 
   return (
     <div className="min-h-screen flex">
@@ -256,7 +251,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const { t } = useTranslations();
   const isHome = location === "/";
-  const isAuthPage = location === "/login" || location === "/register";
+  // Pages that must render without app chrome. A user in the forced
+  // password-change or invite-acceptance flow has no business seeing a sidebar.
+  const isAuthPage =
+    location === "/login" ||
+    location === "/register" ||
+    location === "/forgot-password" ||
+    location === "/change-password" ||
+    location === "/accept-invite";
 
   if (isHome) {
     return (

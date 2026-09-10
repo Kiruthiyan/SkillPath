@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { z } from "zod";
-import { and, eq, asc } from "drizzle-orm";
+import { and, eq, asc, desc, gte, ilike, or, isNotNull, count, sql } from "drizzle-orm";
 import { db } from "../db/client";
 import {
   universitiesTable,
@@ -9,6 +9,11 @@ import {
   admissionRulesTable,
   admissionCutoffsTable,
   usersTable,
+  careerPathsTable,
+  alumniReviewsTable,
+  successStoriesTable,
+  roadmapsTable,
+  universityAdminsTable,
 } from "../db/schema/index";
 import {
   listExtractionBatches,
@@ -17,7 +22,11 @@ import {
   rejectExtractedRow,
   bulkApproveBatch,
 } from "../db/admin-review";
-import { requireAdmin } from "../middleware/auth";
+import { listOfficialCourses, listOfficialUniversities } from "../db/official-handbook-query";
+import { requireAdmin, signInviteToken } from "../middleware/auth";
+import { ROLES, ADMIN_ASSIGNABLE_ROLES, type Role } from "../lib/roles";
+import { logAudit } from "../lib/audit";
+import { sendInviteEmail } from "../lib/mailer";
 
 const router = Router();
 
@@ -98,11 +107,43 @@ router.get("/admin/universities", async (_req, res) => {
   res.json(await db.select().from(universitiesTable).orderBy(asc(universitiesTable.name)));
 });
 
+const universityCreateBody = z.object({
+  name: z.string().min(1),
+  shortName: z.string().min(1),
+  location: z.string().min(1),
+  foundedYear: z.number().int(),
+  logoColor: z.string().min(1),
+  ranking: z.number().int(),
+  description: z.string().nullable().optional(),
+  contactEmail: z.string().email().nullable().optional(),
+  contactPhone: z.string().nullable().optional(),
+  website: z.string().url().nullable().optional(),
+  address: z.string().nullable().optional(),
+});
+
+router.post("/admin/universities", async (req, res) => {
+  const parsed = universityCreateBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "Invalid request body" });
+    return;
+  }
+  const [row] = await db
+    .insert(universitiesTable)
+    .values({ ...parsed.data, status: "pending_verification" })
+    .returning();
+  await logAudit(req.user!.userId, "university.created", { type: "university", id: row!.id });
+  res.status(201).json(row);
+});
+
 const universityPatchBody = z.object({
   name: z.string().optional(),
   shortName: z.string().optional(),
   location: z.string().optional(),
   description: z.string().nullable().optional(),
+  contactEmail: z.string().email().nullable().optional(),
+  contactPhone: z.string().nullable().optional(),
+  website: z.string().url().nullable().optional(),
+  address: z.string().nullable().optional(),
 });
 
 router.patch("/admin/universities/:id", async (req, res) => {
@@ -119,6 +160,114 @@ router.patch("/admin/universities/:id", async (req, res) => {
     return;
   }
   res.json(row);
+});
+
+const universityStatusBody = z.object({
+  status: z.enum(["pending_verification", "verified", "published", "suspended", "archived"]),
+});
+
+router.patch("/admin/universities/:id/status", async (req, res) => {
+  const id = Number(req.params.id);
+  const parsed = universityStatusBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "Invalid request body" });
+    return;
+  }
+  const [existing] = await db
+    .select({ id: universitiesTable.id, status: universitiesTable.status })
+    .from(universitiesTable)
+    .where(eq(universitiesTable.id, id));
+  if (!existing) {
+    res.status(404).json({ error: "University not found" });
+    return;
+  }
+  await db.update(universitiesTable).set({ status: parsed.data.status }).where(eq(universitiesTable.id, id));
+  await logAudit(req.user!.userId, "university.status_changed", { type: "university", id }, {
+    from: existing.status,
+    to: parsed.data.status,
+  });
+  const [row] = await db.select().from(universitiesTable).where(eq(universitiesTable.id, id));
+  res.json(row);
+});
+
+const universityAdminInviteBody = z.object({
+  email: z.string().email(),
+  universityId: z.number(),
+});
+
+router.post("/admin/university-admins/invite", async (req, res) => {
+  const parsed = universityAdminInviteBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "Invalid request body" });
+    return;
+  }
+  const [university] = await db
+    .select({ id: universitiesTable.id })
+    .from(universitiesTable)
+    .where(eq(universitiesTable.id, parsed.data.universityId));
+  if (!university) {
+    res.status(404).json({ error: "University not found" });
+    return;
+  }
+
+  const token = signInviteToken({
+    email: parsed.data.email.toLowerCase(),
+    role: "university_admin",
+    universityId: parsed.data.universityId,
+  });
+  await sendInviteEmail(parsed.data.email, token, "university_admin");
+  await logAudit(req.user!.userId, "university_admin.invited", {
+    type: "university",
+    id: parsed.data.universityId,
+  }, { email: parsed.data.email });
+
+  res.status(202).json({ message: "Invite sent." });
+});
+
+const mentorInviteBody = z.object({ email: z.string().email() });
+
+router.post("/admin/mentors/invite", async (req, res) => {
+  const parsed = mentorInviteBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "Invalid request body" });
+    return;
+  }
+
+  const token = signInviteToken({ email: parsed.data.email.toLowerCase(), role: "mentor" });
+  await sendInviteEmail(parsed.data.email, token, "mentor");
+  await logAudit(req.user!.userId, "mentor.invited", undefined, { email: parsed.data.email });
+
+  res.status(202).json({ message: "Invite sent." });
+});
+
+router.get("/admin/university-admins", async (req, res) => {
+  const universityId = req.query.universityId ? Number(req.query.universityId) : undefined;
+  const rows = await db
+    .select({
+      id: universityAdminsTable.id,
+      userId: universityAdminsTable.userId,
+      universityId: universityAdminsTable.universityId,
+      createdAt: universityAdminsTable.createdAt,
+      email: usersTable.email,
+      name: usersTable.name,
+    })
+    .from(universityAdminsTable)
+    .innerJoin(usersTable, eq(usersTable.id, universityAdminsTable.userId))
+    .where(universityId != null ? eq(universityAdminsTable.universityId, universityId) : undefined);
+  res.json(rows);
+});
+
+router.delete("/admin/university-admins/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const [row] = await db.delete(universityAdminsTable).where(eq(universityAdminsTable.id, id)).returning();
+  if (!row) {
+    res.status(404).json({ error: "Assignment not found" });
+    return;
+  }
+  await logAudit(req.user!.userId, "university_admin.revoked", { type: "university", id: row.universityId }, {
+    userId: row.userId,
+  });
+  res.status(204).end();
 });
 
 router.get("/admin/programmes", async (_req, res) => {
@@ -306,7 +455,8 @@ router.patch("/admin/cutoffs/:id", async (req, res) => {
 
 // --- User role management ---------------------------------------------------
 
-const roleBody = z.object({ role: z.enum(["user", "admin"]) });
+const roleBody = z.object({ role: z.enum(ROLES) });
+const ELEVATED_ROLES: readonly Role[] = ["admin", "super_admin"];
 
 router.patch("/admin/users/:id/role", async (req, res) => {
   const id = Number(req.params.id);
@@ -315,16 +465,187 @@ router.patch("/admin/users/:id/role", async (req, res) => {
     res.status(400).json({ error: "Invalid request body" });
     return;
   }
-  await db.update(usersTable).set({ role: parsed.data.role }).where(eq(usersTable.id, id));
+  const nextRole = parsed.data.role;
+
+  if (id === req.user!.userId) {
+    res.status(400).json({ error: "You cannot change your own role." });
+    return;
+  }
+
+  const [existing] = await db
+    .select({ id: usersTable.id, role: usersTable.role })
+    .from(usersTable)
+    .where(eq(usersTable.id, id));
+  if (!existing) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+  const previousRole = existing.role as Role;
+
+  const [actor] = await db
+    .select({ role: usersTable.role })
+    .from(usersTable)
+    .where(eq(usersTable.id, req.user!.userId));
+  const actorIsSuperAdmin = actor?.role === "super_admin";
+
+  // Only a super_admin may grant or revoke admin/super_admin roles.
+  if (
+    !actorIsSuperAdmin &&
+    (ELEVATED_ROLES.includes(nextRole) || ELEVATED_ROLES.includes(previousRole))
+  ) {
+    res.status(403).json({ error: "Only a super admin can assign or remove elevated roles." });
+    return;
+  }
+  if (!actorIsSuperAdmin && !ADMIN_ASSIGNABLE_ROLES.includes(nextRole as (typeof ADMIN_ASSIGNABLE_ROLES)[number])) {
+    res.status(403).json({ error: "Insufficient permissions to assign this role." });
+    return;
+  }
+
+  for (const guardedRole of ["admin", "super_admin"] as const) {
+    if (previousRole === guardedRole && nextRole !== guardedRole) {
+      const [{ count }] = await db
+        .select({ count: sql<number>`count(*)::int` })
+        .from(usersTable)
+        .where(eq(usersTable.role, guardedRole));
+      if (count <= 1) {
+        res.status(400).json({ error: `Cannot demote the last remaining ${guardedRole.replace("_", " ")}.` });
+        return;
+      }
+    }
+  }
+
+  await db.update(usersTable).set({ role: nextRole }).where(eq(usersTable.id, id));
   const [row] = await db
     .select({ id: usersTable.id, email: usersTable.email, role: usersTable.role })
     .from(usersTable)
     .where(eq(usersTable.id, id));
+
+  await logAudit(req.user!.userId, "user.role_changed", { type: "user", id }, { from: previousRole, to: nextRole });
+
+  res.json(row);
+});
+
+router.get("/admin/users", async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 20));
+  const role = req.query.role as string | undefined;
+  const isActiveParam = req.query.isActive as string | undefined;
+  const search = req.query.search as string | undefined;
+
+  const conditions = [];
+  if (role && (ROLES as readonly string[]).includes(role)) conditions.push(eq(usersTable.role, role));
+  if (isActiveParam === "true") conditions.push(eq(usersTable.isActive, true));
+  if (isActiveParam === "false") conditions.push(eq(usersTable.isActive, false));
+  if (search) {
+    conditions.push(or(ilike(usersTable.email, `%${search}%`), ilike(usersTable.name, `%${search}%`)));
+  }
+  const where = conditions.length > 0 ? and(...conditions) : undefined;
+
+  const [rows, [{ total }]] = await Promise.all([
+    db
+      .select({
+        id: usersTable.id,
+        email: usersTable.email,
+        name: usersTable.name,
+        role: usersTable.role,
+        isActive: usersTable.isActive,
+        googleId: usersTable.googleId,
+        createdAt: usersTable.createdAt,
+      })
+      .from(usersTable)
+      .where(where)
+      .orderBy(desc(usersTable.createdAt))
+      .limit(pageSize)
+      .offset((page - 1) * pageSize),
+    db.select({ total: count() }).from(usersTable).where(where),
+  ]);
+
+  const users = rows.map(({ googleId, ...u }) => ({ ...u, googleLinked: !!googleId }));
+  res.json({ users, total: Number(total), page, pageSize });
+});
+
+router.post("/admin/users/:id/deactivate", async (req, res) => {
+  const id = Number(req.params.id);
+  if (id === req.user!.userId) {
+    res.status(400).json({ error: "You cannot deactivate your own account from here." });
+    return;
+  }
+  const [row] = await db
+    .update(usersTable)
+    .set({ isActive: false })
+    .where(eq(usersTable.id, id))
+    .returning({ id: usersTable.id, email: usersTable.email, isActive: usersTable.isActive });
   if (!row) {
     res.status(404).json({ error: "User not found" });
     return;
   }
   res.json(row);
+});
+
+router.post("/admin/users/:id/reactivate", async (req, res) => {
+  const id = Number(req.params.id);
+  const [row] = await db
+    .update(usersTable)
+    .set({ isActive: true })
+    .where(eq(usersTable.id, id))
+    .returning({ id: usersTable.id, email: usersTable.email, isActive: usersTable.isActive });
+  if (!row) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+  res.json(row);
+});
+
+// --- Platform metrics ---------------------------------------------------
+
+router.get("/admin/metrics", async (_req, res) => {
+  const now = new Date();
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  const [
+    [{ totalUsers }],
+    [{ activeUsers }],
+    [{ googleLinkedUsers }],
+    [{ newUsersLast7d }],
+    [{ newUsersLast30d }],
+    [{ totalCareers }],
+    [{ totalReviews }],
+    [{ totalStories }],
+    [{ roadmapsGenerated }],
+    universities,
+    courses,
+    recentBatches,
+  ] = await Promise.all([
+    db.select({ totalUsers: count() }).from(usersTable),
+    db.select({ activeUsers: count() }).from(usersTable).where(eq(usersTable.isActive, true)),
+    db.select({ googleLinkedUsers: count() }).from(usersTable).where(isNotNull(usersTable.googleId)),
+    db.select({ newUsersLast7d: count() }).from(usersTable).where(gte(usersTable.createdAt, sevenDaysAgo)),
+    db.select({ newUsersLast30d: count() }).from(usersTable).where(gte(usersTable.createdAt, thirtyDaysAgo)),
+    db.select({ totalCareers: count() }).from(careerPathsTable),
+    db.select({ totalReviews: count() }).from(alumniReviewsTable),
+    db.select({ totalStories: count() }).from(successStoriesTable),
+    db.select({ roadmapsGenerated: count() }).from(roadmapsTable),
+    listOfficialUniversities(),
+    listOfficialCourses({}),
+    listExtractionBatches(),
+  ]);
+
+  res.json({
+    totalUsers: Number(totalUsers),
+    activeUsers: Number(activeUsers),
+    deactivatedUsers: Number(totalUsers) - Number(activeUsers),
+    googleLinkedUsers: Number(googleLinkedUsers),
+    newUsersLast7d: Number(newUsersLast7d),
+    newUsersLast30d: Number(newUsersLast30d),
+    totalUniversities: universities.length,
+    totalCourses: courses.length,
+    totalCareers: Number(totalCareers),
+    totalReviews: Number(totalReviews),
+    totalStories: Number(totalStories),
+    roadmapsGenerated: Number(roadmapsGenerated),
+    recentBatches: recentBatches.slice(0, 5),
+  });
 });
 
 export default router;

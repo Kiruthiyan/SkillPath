@@ -11,7 +11,6 @@ import {
   Sparkles,
   Globe,
   ShieldCheck,
-  LogIn,
   LogOut,
   Save,
   KeyRound,
@@ -26,10 +25,19 @@ import {
   Sun,
   Moon,
   Laptop,
+  Loader2,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
-import { useUpdateProfile, customFetch } from "@/api";
-import { GoogleSvgIcon } from "@/components/google-auth-button";
+import {
+  useUpdateProfile,
+  useChangePassword,
+  useDeactivateAccount,
+  useDeleteAccount,
+} from "@/api";
+import { GoogleAuthButton, GoogleSvgIcon } from "@/components/google-auth-button";
+import { getDashboardPath } from "@/lib/role-routes";
 import {
   useProfileStore,
   UGC_DISTRICTS,
@@ -43,6 +51,18 @@ import { useTranslations, type SupportedLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Form,
   FormControl,
@@ -61,7 +81,6 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { Link } from "wouter";
 
 const profileSchema = z.object({
   fullName: z.string().optional().default(""),
@@ -75,6 +94,29 @@ const profileSchema = z.object({
 });
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
+
+const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "Enter your current password"),
+    newPassword: z.string().min(8, "New password must be at least 8 characters"),
+    confirmPassword: z.string().min(1, "Confirm your new password"),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  })
+  .refine((data) => data.newPassword !== data.currentPassword, {
+    message: "New password must be different from your current password",
+    path: ["newPassword"],
+  });
+
+type ChangePasswordValues = z.infer<typeof changePasswordSchema>;
+
+const deleteAccountSchema = z.object({
+  password: z.string().optional(),
+});
+
+type DeleteAccountValues = z.infer<typeof deleteAccountSchema>;
 
 const STREAMS = ["Physical Science", "Biological Science", "Commerce", "Arts", "Technology"];
 
@@ -130,7 +172,6 @@ export default function SettingsPage() {
   const authUser = useAuthStore((s) => s.user);
   const token = useAuthStore((s) => s.token);
   const logout = useAuthStore((s) => s.logout);
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
@@ -146,88 +187,93 @@ export default function SettingsPage() {
     },
   });
 
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordLoading, setPasswordLoading] = useState(false);
+  const passwordForm = useForm<ChangePasswordValues>({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: { currentPassword: "", newPassword: "", confirmPassword: "" },
+  });
 
-  async function handleChangePassword(e: React.FormEvent) {
-    e.preventDefault();
-    if (!currentPassword || !newPassword) {
-      toast({
-        title: "Missing fields",
-        description: "Please enter your current and new password.",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (newPassword.length < 6) {
-      toast({
-        title: "Password too short",
-        description: "New password must be at least 6 characters.",
-        variant: "destructive",
-      });
-      return;
-    }
-    if (newPassword !== confirmPassword) {
-      toast({
-        title: "Passwords do not match",
-        description: "New password and confirmation do not match.",
-        variant: "destructive",
-      });
-      return;
-    }
+  const deleteForm = useForm<DeleteAccountValues>({
+    resolver: zodResolver(deleteAccountSchema),
+    defaultValues: { password: "" },
+  });
 
-    setPasswordLoading(true);
-    try {
-      await customFetch("/api/auth/change-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ currentPassword, newPassword }),
-      });
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
-      toast({
-        title: "Password Updated",
-        description: "Your account password has been successfully updated.",
-      });
-    } catch (err: any) {
-      toast({
-        title: "Password update failed",
-        description: err?.message || "Current password is incorrect.",
-        variant: "destructive",
-      });
-    } finally {
-      setPasswordLoading(false);
-    }
+  const { mutate: changePassword, isPending: isChangingPassword } = useChangePassword();
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { mutate: deactivateAccount, isPending: isDeactivating } = useDeactivateAccount();
+  const { mutate: deleteAccount, isPending: isDeleting } = useDeleteAccount();
+
+  function onChangePassword(data: ChangePasswordValues) {
+    changePassword(
+      { currentPassword: data.currentPassword, newPassword: data.newPassword },
+      {
+        onSuccess: () => {
+          passwordForm.reset();
+          toast({
+            title: "Password updated",
+            description: "Your password has been changed. Please sign in again.",
+          });
+          // The backend invalidates every token issued before this change,
+          // including the one this tab is holding, so the session is dead now
+          // regardless of what the client does — reflect that immediately
+          // instead of leaving the user on a page whose next request will 401.
+          logout();
+          setLocation("/login?passwordChanged=1");
+        },
+        onError: (err: any) => {
+          toast({
+            title: "Password update failed",
+            description: err?.data?.error || err?.message || "Current password is incorrect.",
+            variant: "destructive",
+          });
+        },
+      },
+    );
   }
 
   function handleDeactivateAccount() {
-    const confirmed = window.confirm(
-      "Are you sure you want to deactivate your account? You will be signed out.",
-    );
-    if (!confirmed) return;
-    logout();
-    toast({
-      title: "Account Deactivated",
-      description: "Your account has been deactivated. Sign in anytime to reactivate.",
+    deactivateAccount(undefined, {
+      onSuccess: () => {
+        toast({
+          title: "Account Deactivated",
+          description: "Your account has been deactivated. Sign in anytime to reactivate.",
+        });
+        logout();
+        setLocation("/");
+      },
+      onError: (err: any) => {
+        toast({
+          title: "Failed to deactivate account",
+          description: err?.message || "Please try again.",
+          variant: "destructive",
+        });
+      },
     });
-    setLocation("/");
   }
 
-  function handleDeleteAccount() {
-    const confirmed = window.confirm(
-      "WARNING: This action is permanent. All your saved courses, profile data, and history will be deleted. Do you wish to proceed?",
+  function onDeleteAccount(data: DeleteAccountValues) {
+    deleteAccount(
+      { password: data.password },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Account Deleted",
+            description: "Your account has been permanently removed.",
+            variant: "destructive",
+          });
+          logout();
+          setLocation("/");
+        },
+        onError: (err: any) => {
+          toast({
+            title: "Failed to delete account",
+            description: err?.message || "Please check your password and try again.",
+            variant: "destructive",
+          });
+        },
+      },
     );
-    if (!confirmed) return;
-    logout();
-    toast({
-      title: "Account Deleted",
-      description: "Your account has been permanently removed.",
-      variant: "destructive",
-    });
-    setLocation("/");
   }
 
   const { mutate: updateProfile, isPending } = useUpdateProfile();
@@ -313,7 +359,7 @@ export default function SettingsPage() {
               title: t.profile.savedToast,
               description: "Your student profile has been updated.",
             });
-            setLocation("/dashboard");
+            setLocation(getDashboardPath(updatedUser.role));
           },
           onError: () => {
             toast({
@@ -331,7 +377,7 @@ export default function SettingsPage() {
       title: t.profile.savedToast,
       description: "Sign in to sync your profile across devices.",
     });
-    setLocation("/dashboard");
+    setLocation(getDashboardPath(authUser?.role));
   }
 
   return (
@@ -762,21 +808,16 @@ export default function SettingsPage() {
                     <p className="font-medium text-sm text-foreground">{item.title}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
                   </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={!!notifications[item.key]}
-                      onChange={(e) => {
-                        setNotification(item.key, e.target.checked);
-                        toast({
-                          title: "Notification setting updated",
-                          description: `${item.title} ${e.target.checked ? "enabled" : "disabled"}.`,
-                        });
-                      }}
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-muted peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                  </label>
+                  <Switch
+                    checked={!!notifications[item.key]}
+                    onCheckedChange={(checked) => {
+                      setNotification(item.key, checked);
+                      toast({
+                        title: "Notification setting updated",
+                        description: `${item.title} ${checked ? "enabled" : "disabled"}.`,
+                      });
+                    }}
+                  />
                 </div>
               ))}
             </CardContent>
@@ -831,7 +872,7 @@ export default function SettingsPage() {
 
         {/* Tab 3: Account */}
         <TabsContent value="account" className="space-y-6">
-          {isAuthenticated && authUser ? (
+          {authUser && (
             <>
               {/* 1. Account Information */}
               <Card className="shadow-sm border border-[hsl(var(--border))]">
@@ -884,50 +925,130 @@ export default function SettingsPage() {
                 </CardHeader>
                 <CardContent className="pt-5 space-y-6">
                   {/* Change Password Sub-section */}
-                  <form onSubmit={handleChangePassword} className="space-y-4">
-                    <div className="flex items-center gap-2 font-medium text-sm text-foreground">
-                      <KeyRound className="h-4 w-4 text-primary" />
-                      {t.settings.changePassword}
-                    </div>
-                    <div className="grid sm:grid-cols-3 gap-3">
-                      <div>
-                        <label className="text-xs text-muted-foreground mb-1 block">
-                          {t.settings.currentPasswordLabel}
-                        </label>
-                        <Input
-                          type="password"
-                          value={currentPassword}
-                          onChange={(e) => setCurrentPassword(e.target.value)}
-                          placeholder="••••••••"
+                  <Form {...passwordForm}>
+                    <form
+                      onSubmit={passwordForm.handleSubmit(onChangePassword)}
+                      className="space-y-4"
+                    >
+                      <div className="flex items-center gap-2 font-medium text-sm text-foreground">
+                        <KeyRound className="h-4 w-4 text-primary" />
+                        {t.settings.changePassword}
+                      </div>
+                      <div className="grid sm:grid-cols-3 gap-3">
+                        <FormField
+                          control={passwordForm.control}
+                          name="currentPassword"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs text-muted-foreground">
+                                {t.settings.currentPasswordLabel}
+                              </FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    type={showCurrentPassword ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    className="pr-9"
+                                    {...field}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => setShowCurrentPassword((v) => !v)}
+                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                    aria-label={
+                                      showCurrentPassword ? t.auth.hidePassword : t.auth.showPassword
+                                    }
+                                  >
+                                    {showCurrentPassword ? (
+                                      <EyeOff className="h-4 w-4" />
+                                    ) : (
+                                      <Eye className="h-4 w-4" />
+                                    )}
+                                  </button>
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={passwordForm.control}
+                          name="newPassword"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs text-muted-foreground">
+                                {t.settings.newPasswordLabel}
+                              </FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    type={showNewPassword ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    className="pr-9"
+                                    {...field}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => setShowNewPassword((v) => !v)}
+                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                    aria-label={showNewPassword ? t.auth.hidePassword : t.auth.showPassword}
+                                  >
+                                    {showNewPassword ? (
+                                      <EyeOff className="h-4 w-4" />
+                                    ) : (
+                                      <Eye className="h-4 w-4" />
+                                    )}
+                                  </button>
+                                </div>
+                              </FormControl>
+                              <p className="text-[11px] text-muted-foreground">At least 8 characters.</p>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={passwordForm.control}
+                          name="confirmPassword"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-xs text-muted-foreground">
+                                {t.settings.confirmPasswordLabel}
+                              </FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    className="pr-9"
+                                    {...field}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => setShowConfirmPassword((v) => !v)}
+                                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                    aria-label={
+                                      showConfirmPassword ? t.auth.hidePassword : t.auth.showPassword
+                                    }
+                                  >
+                                    {showConfirmPassword ? (
+                                      <EyeOff className="h-4 w-4" />
+                                    ) : (
+                                      <Eye className="h-4 w-4" />
+                                    )}
+                                  </button>
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
                         />
                       </div>
-                      <div>
-                        <label className="text-xs text-muted-foreground mb-1 block">
-                          {t.settings.newPasswordLabel}
-                        </label>
-                        <Input
-                          type="password"
-                          value={newPassword}
-                          onChange={(e) => setNewPassword(e.target.value)}
-                          placeholder="••••••••"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs text-muted-foreground mb-1 block">
-                          {t.settings.confirmPasswordLabel}
-                        </label>
-                        <Input
-                          type="password"
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="••••••••"
-                        />
-                      </div>
-                    </div>
-                    <Button type="submit" size="sm" disabled={passwordLoading}>
-                      {passwordLoading ? t.actions.saving : t.settings.updatePasswordBtn}
-                    </Button>
-                  </form>
+                      <Button type="submit" size="sm" disabled={isChangingPassword}>
+                        {isChangingPassword && <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />}
+                        {isChangingPassword ? t.actions.saving : t.settings.updatePasswordBtn}
+                      </Button>
+                    </form>
+                  </Form>
 
                   <div className="border-t pt-4 space-y-3">
                     {/* Google Login Status */}
@@ -937,31 +1058,37 @@ export default function SettingsPage() {
                         <div>
                           <p className="text-sm font-medium">{t.settings.googleLoginStatus}</p>
                           <p className="text-xs text-muted-foreground mt-0.5">
-                            {authUser?.email?.includes("google") || authUser?.email?.endsWith("@gmail.com")
+                            {authUser?.googleLinked
                               ? t.settings.googleConnected || "Connected with Google Account"
                               : t.settings.googleNotLinked}
                           </p>
                         </div>
                       </div>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          toast({
-                            title: "Google Account Connected",
-                            description: `Primary email ${authUser?.email} is linked to Google sign-in.`,
-                          });
-                        }}
-                        className="gap-2 shrink-0 self-start sm:self-auto"
-                      >
-                        <GoogleSvgIcon className="h-4 w-4" />
-                        {authUser?.email?.includes("google") || authUser?.email?.endsWith("@gmail.com")
-                          ? "Synced with Google"
-                          : "Connect Google"}
-                      </Button>
+                      {authUser?.googleLinked ? (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled
+                          className="gap-2 shrink-0 self-start sm:self-auto"
+                        >
+                          <GoogleSvgIcon className="h-4 w-4" />
+                          Synced with Google
+                        </Button>
+                      ) : (
+                        <div className="shrink-0 self-start sm:self-auto">
+                          <GoogleAuthButton
+                            mode="connect"
+                            onSuccess={() => {
+                              if (token && authUser) {
+                                setAuth(token, { ...authUser, googleLinked: true });
+                              }
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
 
-                    {/* Active Sessions (future) */}
+                    {/* Session status */}
                     <div className="flex items-center justify-between p-3.5 rounded-lg border bg-muted/20">
                       <div className="flex items-start gap-2.5">
                         <Smartphone className="h-4 w-4 text-muted-foreground mt-0.5" />
@@ -973,7 +1100,7 @@ export default function SettingsPage() {
                         </div>
                       </div>
                       <span className="text-xs font-medium px-2 py-1 rounded bg-primary/10 text-primary">
-                        1 Active Session
+                        Active on this device
                       </span>
                     </div>
                   </div>
@@ -1002,15 +1129,38 @@ export default function SettingsPage() {
                         {t.settings.deactivateAccountDesc}
                       </p>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={handleDeactivateAccount}
-                      className="border-destructive/40 text-destructive hover:bg-destructive/10"
-                    >
-                      <AlertTriangle className="h-4 w-4 mr-1.5" />
-                      {t.settings.deactivateBtn}
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border-destructive/40 text-destructive hover:bg-destructive/10"
+                        >
+                          <AlertTriangle className="h-4 w-4 mr-1.5" />
+                          {t.settings.deactivateBtn}
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Deactivate your account?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            You will be signed out immediately. Sign in anytime to reactivate your
+                            account.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            disabled={isDeactivating}
+                            onClick={handleDeactivateAccount}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            {isDeactivating && <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />}
+                            Deactivate
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
 
                   {/* Delete Account */}
@@ -1023,15 +1173,69 @@ export default function SettingsPage() {
                         {t.settings.deleteAccountDesc}
                       </p>
                     </div>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={handleDeleteAccount}
-                      className="bg-destructive hover:bg-destructive/90"
+                    <AlertDialog
+                      onOpenChange={(open) => {
+                        if (!open) deleteForm.reset();
+                      }}
                     >
-                      <Trash2 className="h-4 w-4 mr-1.5" />
-                      {t.settings.deleteBtn}
-                    </Button>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          className="bg-destructive hover:bg-destructive/90"
+                        >
+                          <Trash2 className="h-4 w-4 mr-1.5" />
+                          {t.settings.deleteBtn}
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <Form {...deleteForm}>
+                          <form onSubmit={deleteForm.handleSubmit(onDeleteAccount)}>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Delete your account permanently?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. All your saved courses, profile
+                                data, and history will be deleted.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            {!authUser?.googleLinked && (
+                              <FormField
+                                control={deleteForm.control}
+                                name="password"
+                                render={({ field }) => (
+                                  <FormItem className="pt-4">
+                                    <FormLabel>Confirm your password</FormLabel>
+                                    <FormControl>
+                                      <Input type="password" placeholder="••••••••" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+                            )}
+                            <AlertDialogFooter className="pt-4">
+                              <AlertDialogCancel type="button">Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                type="submit"
+                                disabled={
+                                  isDeleting ||
+                                  (!authUser?.googleLinked && !deleteForm.watch("password"))
+                                }
+                                onClick={(e) => {
+                                  // Let react-hook-form validate/submit instead of closing immediately.
+                                  e.preventDefault();
+                                  deleteForm.handleSubmit(onDeleteAccount)();
+                                }}
+                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                              >
+                                {isDeleting && <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />}
+                                Delete Account
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </form>
+                        </Form>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </CardContent>
               </Card>
@@ -1043,17 +1247,6 @@ export default function SettingsPage() {
                 </Button>
               </div>
             </>
-          ) : (
-            <div className="p-8 text-center space-y-4 rounded-lg border border-dashed bg-card">
-              <p className="text-base font-medium text-foreground">{t.settings.notSignedIn}</p>
-              <p className="text-sm text-muted-foreground max-w-sm mx-auto">{t.settings.signInCta}</p>
-              <Button asChild>
-                <Link href="/login">
-                  <LogIn className="h-4 w-4 mr-2" />
-                  {t.nav.signIn}
-                </Link>
-              </Button>
-            </div>
           )}
         </TabsContent>
       </Tabs>

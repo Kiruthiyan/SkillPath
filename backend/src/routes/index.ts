@@ -13,6 +13,9 @@ import usersRouter from "./users";
 import savedRouter from "./saved";
 import checkerRouter from "./checker";
 import adminRouter from "./admin";
+import universityAdminRouter from "./university-admin";
+import mentorsRouter from "./mentors";
+import opportunitiesRouter from "./opportunities";
 
 const router: IRouter = Router();
 
@@ -29,6 +32,9 @@ router.use(roadmapsRouter);
 router.use(aiRouter);
 router.use(dashboardRouter);
 router.use(checkerRouter);
+router.use(universityAdminRouter);
+router.use(mentorsRouter);
+router.use(opportunitiesRouter);
 router.use(adminRouter);
 
 export default router;

@@ -2,7 +2,13 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { setAuthTokenGetter } from "@/api";
 import type { User } from "@/api";
+import { isTokenExpired } from "@/lib/jwt";
 
+/**
+ * The single source of truth for the authenticated session. `AuthBootstrap`
+ * reconciles `user` against `GET /api/auth/me` on every load, so the persisted
+ * copy is a cache for first paint, not an authority on the user's role.
+ */
 interface AuthState {
   token: string | null;
   user: User | null;
@@ -18,7 +24,10 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       setAuth: (token, user) => set({ token, user }),
       logout: () => set({ token: null, user: null }),
-      isAuthenticated: () => !!get().token,
+      isAuthenticated: () => {
+        const { token } = get();
+        return !!token && !isTokenExpired(token);
+      },
     }),
     { name: "skillpath-auth" },
   ),

@@ -4,12 +4,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "framer-motion";
-import { UserPlus, GraduationCap, Eye, EyeOff } from "lucide-react";
+import { UserPlus, GraduationCap, Eye, EyeOff, Home, Loader2 } from "lucide-react";
 
 import { useRegister } from "@/api";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useTranslations } from "@/lib/i18n";
+import { getDashboardPath } from "@/lib/role-routes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -50,7 +51,7 @@ export default function Register() {
       onSuccess: (data) => {
         setAuth(data.token, data.user);
         toast({ title: "Account created!", description: "Welcome to SkillPath AI." });
-        setLocation("/profile");
+        setLocation(getDashboardPath(data.user.role));
       },
       onError: (err: any) => {
         toast({
@@ -67,7 +68,18 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-10 px-4">
+    <div className="min-h-screen flex flex-col">
+      <div className="px-4 pt-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Home className="h-4 w-4" />
+          {t.nav.home}
+        </Link>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center py-10 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,7 +113,7 @@ export default function Register() {
             {/* Google Authentication Button */}
             <GoogleAuthButton
               mode="signup"
-              onSuccess={() => setLocation("/profile")}
+              onSuccess={(user) => setLocation(getDashboardPath(user?.role))}
             />
 
             {/* Visual Divider */}
@@ -204,6 +216,7 @@ export default function Register() {
                   className="w-full h-10 text-sm font-semibold shadow-sm mt-2"
                   disabled={isPending}
                 >
+                  {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                   {isPending ? t.actions.saving : t.auth.registerBtn}
                 </Button>
               </form>
@@ -218,6 +231,7 @@ export default function Register() {
           </CardContent>
         </Card>
       </motion.div>
+      </div>
     </div>
   );
 }

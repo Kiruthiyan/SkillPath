@@ -19,4 +19,12 @@ export const universitiesTable = pgTable("universities", {
   ranking: integer("ranking").notNull(),
   description: text("description"),
   translations: jsonb("translations").$type<UniversityTranslations>(),
+  contactEmail: text("contact_email"),
+  contactPhone: text("contact_phone"),
+  website: text("website"),
+  address: text("address"),
+  // pending_verification | verified | published | suspended | archived — set only by admin/super_admin.
+  // Defaults to "published" at the DB level so pre-existing catalog rows stay visible; new rows created
+  // through the admin flow explicitly set their own initial status.
+  status: text("status").notNull().default("published"),
 });

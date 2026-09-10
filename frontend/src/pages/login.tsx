@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useLocation, Link } from "wouter";
+import { useState, useEffect } from "react";
+import { useLocation, useSearch, Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "framer-motion";
-import { LogIn, GraduationCap, Eye, EyeOff, Sparkles, Shield } from "lucide-react";
+import { LogIn, GraduationCap, Eye, EyeOff, Home, Loader2 } from "lucide-react";
 
 import { useLogin } from "@/api";
 import { useAuthStore } from "@/hooks/use-auth";
 import { usePageTitle } from "@/hooks/use-page-title";
+import { getDashboardPath } from "@/lib/role-routes";
 import { useTranslations } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,9 +36,28 @@ export default function Login() {
   const { t } = useTranslations();
   usePageTitle(t.auth.signInTitle);
   const [, setLocation] = useLocation();
+  const search = useSearch();
   const { toast } = useToast();
   const setAuth = useAuthStore((s) => s.setAuth);
   const [showPassword, setShowPassword] = useState(false);
+
+  const redirectParam = new URLSearchParams(search).get("redirect");
+  const explicitRedirect =
+    redirectParam && redirectParam.startsWith("/") && !redirectParam.startsWith("//")
+      ? redirectParam
+      : null;
+  const passwordChanged = new URLSearchParams(search).get("passwordChanged") === "1";
+
+  useEffect(() => {
+    if (passwordChanged) {
+      toast({
+        title: "Password updated",
+        description: "Your password was changed. Sign in with your new password.",
+      });
+    }
+    // Only meant to fire once, on arrival from the change-password flow.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -49,7 +69,7 @@ export default function Login() {
       onSuccess: (data) => {
         setAuth(data.token, data.user);
         toast({ title: "Welcome back!", description: `Signed in as ${data.user.name}` });
-        setLocation("/dashboard");
+        setLocation(explicitRedirect ?? getDashboardPath(data.user.role));
       },
       onError: (err: any) => {
         toast({
@@ -65,15 +85,19 @@ export default function Login() {
     login({ data });
   }
 
-  // Quick fill helper for testing demo student account
-  const handleQuickDemoStudent = () => {
-    form.setValue("email", "student@demo.lk");
-    form.setValue("password", "password123");
-    login({ data: { email: "student@demo.lk", password: "password123" } });
-  };
-
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-10 px-4">
+    <div className="min-h-screen flex flex-col">
+      <div className="px-4 pt-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Home className="h-4 w-4" />
+          {t.nav.home}
+        </Link>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center py-10 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -107,7 +131,7 @@ export default function Login() {
             {/* Google Authentication Button */}
             <GoogleAuthButton
               mode="signin"
-              onSuccess={() => setLocation("/dashboard")}
+              onSuccess={(user) => setLocation(explicitRedirect ?? getDashboardPath(user?.role))}
             />
 
             {/* Visual Divider */}
@@ -156,6 +180,12 @@ export default function Login() {
                         <FormLabel className="text-xs font-semibold text-foreground">
                           {t.auth.passwordLabel}
                         </FormLabel>
+                        <Link
+                          href="/forgot-password"
+                          className="text-xs font-medium text-primary hover:underline"
+                        >
+                          {t.auth.forgotPassword}
+                        </Link>
                       </div>
                       <FormControl>
                         <div className="relative">
@@ -191,27 +221,11 @@ export default function Login() {
                   className="w-full h-10 text-sm font-semibold shadow-sm mt-2"
                   disabled={isPending}
                 >
+                  {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                   {isPending ? t.actions.saving : t.auth.signInBtn}
                 </Button>
               </form>
             </Form>
-
-            {/* Quick Demo Options for testing */}
-            <div className="rounded-lg border border-border/70 bg-muted/30 p-3 text-center space-y-2">
-              <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-medium">
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                <span>Testing credentials:</span>
-              </div>
-              <div className="flex justify-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleQuickDemoStudent}
-                  className="text-xs px-2.5 py-1 rounded bg-background hover:bg-muted text-foreground border border-border transition-colors shadow-2xs font-medium"
-                >
-                  {t.auth.quickDemoStudent}
-                </button>
-              </div>
-            </div>
 
             <p className="text-center text-sm text-muted-foreground pt-1">
               {t.auth.dontHaveAccount}{" "}
@@ -222,6 +236,7 @@ export default function Login() {
           </CardContent>
         </Card>
       </motion.div>
+      </div>
     </div>
   );
 }

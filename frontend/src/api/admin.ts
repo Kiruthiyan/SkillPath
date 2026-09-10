@@ -50,6 +50,11 @@ export interface AdminUniversity {
   ranking: number;
   description: string | null;
   translations: unknown;
+  contactEmail: string | null;
+  contactPhone: string | null;
+  website: string | null;
+  address: string | null;
+  status: string;
 }
 
 export interface AdminProgramme {
@@ -171,6 +176,30 @@ export function useListAdminUniversities() {
   });
 }
 
+export function useCreateAdminUniversity() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (
+      data: Pick<AdminUniversity, "name" | "shortName" | "location" | "foundedYear" | "logoColor" | "ranking"> &
+        Partial<Pick<AdminUniversity, "description" | "contactEmail" | "contactPhone" | "website" | "address">>,
+    ) =>
+      customFetch<AdminUniversity>("/api/admin/universities", { method: "POST", body: JSON.stringify(data) }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "universities"] }),
+  });
+}
+
+export function useSetUniversityStatus() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, status }: { id: number; status: string }) =>
+      customFetch<AdminUniversity>(`/api/admin/universities/${id}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "universities"] }),
+  });
+}
+
 export function useUpdateAdminUniversity() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -268,8 +297,83 @@ export function useUpdateAdminCutoff() {
 // --- User role management ---------------------------------------------------
 
 export function useSetUserRole() {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, role }: { id: number; role: "user" | "admin" }) =>
+    mutationFn: ({ id, role }: { id: number; role: "user" | "mentor" | "university_admin" | "admin" | "super_admin" }) =>
       customFetch(`/api/admin/users/${id}/role`, { method: "PATCH", body: JSON.stringify({ role }) }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+  });
+}
+
+// --- User management (list / deactivate / reactivate) ----------------------
+
+export interface AdminUser {
+  id: number;
+  email: string;
+  name: string;
+  role: string;
+  isActive: boolean;
+  googleLinked: boolean;
+  createdAt: string;
+}
+
+export interface AdminUsersPage {
+  users: AdminUser[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export function useListAdminUsers(params: {
+  page?: number;
+  pageSize?: number;
+  role?: "user" | "admin";
+  isActive?: "true" | "false";
+  search?: string;
+}) {
+  return useQuery({
+    queryKey: ["admin", "users", params],
+    queryFn: () => customFetch<AdminUsersPage>(`/api/admin/users${buildQuery(params)}`),
+  });
+}
+
+export function useDeactivateAdminUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) => customFetch(`/api/admin/users/${id}/deactivate`, { method: "POST" }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+  });
+}
+
+export function useReactivateAdminUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) => customFetch(`/api/admin/users/${id}/reactivate`, { method: "POST" }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+  });
+}
+
+// --- Platform metrics ---------------------------------------------------
+
+export interface AdminMetrics {
+  totalUsers: number;
+  activeUsers: number;
+  deactivatedUsers: number;
+  googleLinkedUsers: number;
+  newUsersLast7d: number;
+  newUsersLast30d: number;
+  totalUniversities: number;
+  totalCourses: number;
+  totalCareers: number;
+  totalReviews: number;
+  totalStories: number;
+  roadmapsGenerated: number;
+  recentBatches: ExtractionBatch[];
+}
+
+export function useAdminMetrics() {
+  return useQuery({
+    queryKey: ["admin", "metrics"],
+    queryFn: () => customFetch<AdminMetrics>("/api/admin/metrics"),
   });
 }

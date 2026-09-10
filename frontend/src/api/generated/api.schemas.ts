@@ -324,6 +324,9 @@ export interface User {
   district?: string | null;
   /** @nullable */
   role?: string | null;
+  isActive?: boolean;
+  googleLinked?: boolean;
+  mustChangePassword?: boolean;
 }
 
 export interface AuthResponse {
