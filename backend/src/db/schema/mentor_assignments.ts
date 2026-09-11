@@ -1,4 +1,5 @@
-import { pgTable, serial, text, integer, timestamp, index } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer, timestamp, index, uniqueIndex } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { usersTable } from "./users";
 
 // requested | accepted | declined | active | completed | cancelled
@@ -33,6 +34,12 @@ export const mentorAssignmentsTable = pgTable(
   (t) => [
     index("mentor_assignments_mentor_idx").on(t.mentorUserId),
     index("mentor_assignments_student_idx").on(t.studentUserId),
+    // Prevents concurrent duplicate requests: only one live (requested/accepted/active)
+    // assignment per mentor+student pair. Declined/completed/cancelled rows are exempt
+    // so a student can re-request after a decline.
+    uniqueIndex("mentor_assignments_live_pair_idx")
+      .on(t.mentorUserId, t.studentUserId)
+      .where(sql`${t.status} in ('requested', 'accepted', 'active')`),
   ],
 );
 

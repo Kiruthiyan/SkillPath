@@ -18,6 +18,8 @@ export const universitiesTable = pgTable("universities", {
   logoColor: text("logo_color").notNull(),
   ranking: integer("ranking").notNull(),
   description: text("description"),
+  // government | private — set by admin, filterable by students.
+  type: text("type").notNull().default("government"),
   translations: jsonb("translations").$type<UniversityTranslations>(),
   contactEmail: text("contact_email"),
   contactPhone: text("contact_phone"),

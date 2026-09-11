@@ -247,7 +247,7 @@ router.post("/auth/google", googleAuthRateLimiter, async (req, res) => {
         passwordHash,
         name: targetName,
         language: "en",
-        role: "user",
+        role: "student",
         googleId: googleSub,
       })
       .returning();

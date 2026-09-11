@@ -13,7 +13,10 @@ import {
   useMyAnnouncements,
   useCreateAnnouncement,
   useDeleteAnnouncement,
+  useMyProgrammes,
+  useUpdateMyProgramme,
   type OwnedUniversity,
+  type OwnedProgramme,
 } from "@/api";
 import { UniversityAdminLayout } from "./layout";
 
@@ -85,6 +88,90 @@ function ProfileEditor({ university }: { university: OwnedUniversity }) {
           rows={3}
         />
         <Button size="sm" disabled={isPending} onClick={save}>Save Profile</Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+function ProgrammeRow({ programme }: { programme: OwnedProgramme }) {
+  const { toast } = useToast();
+  const { mutate: update, isPending } = useUpdateMyProgramme();
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState({
+    degreeName: programme.degreeName,
+    faculty: programme.faculty,
+    degreeType: programme.degreeType,
+    durationYears: programme.durationYears,
+    description: programme.description ?? "",
+  });
+
+  function save() {
+    update(
+      { id: programme.id, data: draft },
+      {
+        onSuccess: () => {
+          toast({ title: "Programme updated" });
+          setEditing(false);
+        },
+        onError: (err: any) => toast({ title: "Could not save", description: err?.message, variant: "destructive" }),
+      },
+    );
+  }
+
+  if (!editing) {
+    return (
+      <div className="flex items-start justify-between gap-3 rounded-md border border-[hsl(var(--border))] p-3">
+        <div>
+          <p className="font-medium text-sm">{programme.degreeName}</p>
+          <p className="text-xs text-muted-foreground">
+            {programme.faculty} · {programme.degreeType} · {programme.durationYears}y · {programme.stream}
+          </p>
+          {programme.description && <p className="text-xs text-muted-foreground mt-1">{programme.description}</p>}
+        </div>
+        <Button size="sm" variant="ghost" onClick={() => setEditing(true)}>Edit</Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2 rounded-md border border-[hsl(var(--border))] p-3">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <Input placeholder="Degree name" value={draft.degreeName} onChange={(e) => setDraft({ ...draft, degreeName: e.target.value })} />
+        <Input placeholder="Faculty" value={draft.faculty} onChange={(e) => setDraft({ ...draft, faculty: e.target.value })} />
+        <Input placeholder="Degree type" value={draft.degreeType} onChange={(e) => setDraft({ ...draft, degreeType: e.target.value })} />
+        <Input
+          type="number"
+          placeholder="Duration (years)"
+          value={draft.durationYears}
+          onChange={(e) => setDraft({ ...draft, durationYears: Number(e.target.value) })}
+        />
+      </div>
+      <Textarea placeholder="Description" value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} rows={2} />
+      <div className="flex gap-2">
+        <Button size="sm" disabled={isPending} onClick={save}>Save</Button>
+        <Button size="sm" variant="outline" onClick={() => setEditing(false)}>Cancel</Button>
+      </div>
+    </div>
+  );
+}
+
+function ProgrammesPanel({ universityId }: { universityId: number }) {
+  const { data: programmes, isLoading } = useMyProgrammes();
+  const ownProgrammes = (programmes ?? []).filter((p) => p.universityId === universityId);
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-base">Degree Programmes</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        {isLoading ? (
+          <Skeleton className="h-16 w-full" />
+        ) : ownProgrammes.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No programmes listed yet.</p>
+        ) : (
+          ownProgrammes.map((p) => <ProgrammeRow key={p.id} programme={p} />)
+        )}
       </CardContent>
     </Card>
   );
@@ -168,6 +255,7 @@ export default function UniversityAdminDashboard() {
           {(universities ?? []).map((u) => (
             <div key={u.id} className="space-y-4">
               <ProfileEditor university={u} />
+              <ProgrammesPanel universityId={u.id} />
               <AnnouncementsPanel universityId={u.id} />
             </div>
           ))}

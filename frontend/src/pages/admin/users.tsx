@@ -46,7 +46,7 @@ function UserRow({ user, currentUserId }: { user: AdminUser; currentUserId: numb
   const isSelf = user.id === currentUserId;
 
   function toggleRole() {
-    const nextRole = user.role === "admin" ? "user" : "admin";
+    const nextRole = user.role === "admin" ? "student" : "admin";
     setRole(
       { id: user.id, role: nextRole },
       {
@@ -123,7 +123,7 @@ function UserRow({ user, currentUserId }: { user: AdminUser; currentUserId: numb
         <div className="flex items-center gap-2 shrink-0">
           <Button size="sm" variant="outline" disabled={isSettingRole} onClick={toggleRole} className="gap-1.5">
             <UserCog className="h-3.5 w-3.5" />
-            {user.role === "admin" ? "Make user" : "Make admin"}
+            {user.role === "admin" ? "Make student" : "Make admin"}
           </Button>
 
           {user.isActive ? (
@@ -181,7 +181,7 @@ export default function AdminUsers() {
   usePageTitle("Admin — Users");
   const currentUser = useAuthStore((s) => s.user);
   const [search, setSearch] = useState("");
-  const [role, setRole] = useState<"all" | "user" | "admin">("all");
+  const [role, setRole] = useState<"all" | "student" | "admin">("all");
   const [status, setStatus] = useState<"all" | "true" | "false">("all");
   const [page, setPage] = useState(1);
 
@@ -223,7 +223,7 @@ export default function AdminUsers() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All roles</SelectItem>
-              <SelectItem value="user">User</SelectItem>
+              <SelectItem value="student">Student</SelectItem>
               <SelectItem value="admin">Admin</SelectItem>
             </SelectContent>
           </Select>

@@ -1,4 +1,5 @@
-import { pool } from "./client";
+import { db, pool } from "./client";
+import { universitiesTable } from "./schema/index";
 
 export const OFFICIAL_HANDBOOK_YEAR = "2025/2026";
 const SOURCE_HANDBOOK_YEAR = "2025/2026";
@@ -78,6 +79,7 @@ export interface OfficialUniversity {
   ranking: number | null;
   description: string | null;
   courseCount?: number;
+  type: "government" | "private";
 }
 
 export type ZScoreStatus = "above" | "near" | "below" | "unavailable";
@@ -391,6 +393,23 @@ export async function getOfficialCourseDetail(
   };
 }
 
+/**
+ * The admin-managed universitiesTable and the handbook-derived catalog below are
+ * separate data sources with no shared id scheme (handbook ids are name hashes).
+ * Match by name containment (same loose-matching approach used in db/seed.ts) to
+ * surface the admin-set Government/Private type on the student-facing catalog.
+ */
+async function loadUniversityTypeByName(): Promise<(handbookName: string) => "government" | "private"> {
+  const rows = await db.select({ name: universitiesTable.name, type: universitiesTable.type }).from(universitiesTable);
+  return (handbookName: string) => {
+    const needle = handbookName.toLowerCase();
+    const match = rows.find(
+      (r) => needle.includes(r.name.toLowerCase()) || r.name.toLowerCase().includes(needle),
+    );
+    return match?.type === "private" ? "private" : "government";
+  };
+}
+
 export async function listOfficialUniversities(): Promise<OfficialUniversity[]> {
   const result = await pool.query<{ university: string; course_count: string }>(
     `
@@ -403,6 +422,8 @@ export async function listOfficialUniversities(): Promise<OfficialUniversity[]> 
     [OFFICIAL_HANDBOOK_YEAR],
   );
 
+  const resolveType = await loadUniversityTypeByName();
+
   return result.rows.map((row) => ({
     id: officialUniversityApiId(row.university),
     name: row.university,
@@ -413,6 +434,7 @@ export async function listOfficialUniversities(): Promise<OfficialUniversity[]> 
     ranking: null,
     description: null,
     courseCount: Number(row.course_count),
+    type: resolveType(row.university),
   }));
 }
 

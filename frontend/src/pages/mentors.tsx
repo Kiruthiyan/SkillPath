@@ -8,7 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useToast } from "@/hooks/use-toast";
 import { useAuthStore } from "@/hooks/use-auth";
-import { useListMentors, useRequestMentor } from "@/api/mentors";
+import { useListMentors, useRequestMentor, useMyOutgoingMentorRequests } from "@/api/mentors";
+
+const LIVE_REQUEST_STATUSES = new Set(["requested", "accepted", "active"]);
 
 function RequestDialog({ mentorId, onClose }: { mentorId: number; onClose: () => void }) {
   const { toast } = useToast();
@@ -52,7 +54,8 @@ export default function Mentors() {
   const [search, setSearch] = useState("");
   const [stream, setStream] = useState("");
   const [requestingId, setRequestingId] = useState<number | null>(null);
-  const { data: mentors, isLoading } = useListMentors({ search: search || undefined, stream: stream || undefined });
+  const { data: mentors, isLoading, isError } = useListMentors({ search: search || undefined, stream: stream || undefined });
+  const { data: myRequests } = useMyOutgoingMentorRequests();
 
   return (
     <div className="space-y-6 pb-10">
@@ -80,6 +83,8 @@ export default function Mentors() {
         <div className="grid gap-4 sm:grid-cols-2">
           {[1, 2, 3, 4].map((i) => <Skeleton key={i} className="h-40 w-full" />)}
         </div>
+      ) : isError ? (
+        <p className="text-sm text-destructive">Could not load mentors. Please try again.</p>
       ) : (mentors ?? []).length === 0 ? (
         <p className="text-sm text-muted-foreground">No mentors found.</p>
       ) : (
@@ -101,15 +106,22 @@ export default function Mentors() {
                   <p className="text-xs text-muted-foreground">{m.yearsExperience} years experience</p>
                 )}
 
-                {token ? (
-                  requestingId === m.id ? (
+                {(() => {
+                  const existing = myRequests?.find(
+                    (r) => r.mentorUserId === m.userId && LIVE_REQUEST_STATUSES.has(r.status),
+                  );
+                  if (existing) {
+                    return <Badge variant="outline">Request {existing.status}</Badge>;
+                  }
+                  if (!token) {
+                    return <p className="text-xs text-muted-foreground">Sign in to request mentorship.</p>;
+                  }
+                  return requestingId === m.id ? (
                     <RequestDialog mentorId={m.id} onClose={() => setRequestingId(null)} />
                   ) : (
                     <Button size="sm" onClick={() => setRequestingId(m.id)}>Request Mentorship</Button>
-                  )
-                ) : (
-                  <p className="text-xs text-muted-foreground">Sign in to request mentorship.</p>
-                )}
+                  );
+                })()}
               </CardContent>
             </Card>
           ))}

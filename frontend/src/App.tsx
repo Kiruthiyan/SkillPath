@@ -95,7 +95,7 @@ queryClient.getQueryCache().config.onError = handleGlobalAuthError;
 
 function ProtectedDashboard() {
   return (
-    <RequireRole roles={["user"]}>
+    <RequireRole roles={["student"]}>
       <Dashboard />
     </RequireRole>
   );

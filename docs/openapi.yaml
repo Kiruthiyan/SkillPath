@@ -717,6 +717,9 @@ components:
           type: integer
         description:
           type: ["string", "null"]
+        type:
+          type: string
+          enum: [government, private]
 
     Course:
       type: object

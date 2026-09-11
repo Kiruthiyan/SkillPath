@@ -23,6 +23,7 @@ export interface University {
   /** @nullable */
   description?: string | null;
   courseCount?: number;
+  type?: "government" | "private";
 }
 
 /**

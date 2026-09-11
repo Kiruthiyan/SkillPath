@@ -48,6 +48,7 @@ export interface AdminUniversity {
   foundedYear: number;
   logoColor: string;
   ranking: number;
+  type: "government" | "private";
   description: string | null;
   translations: unknown;
   contactEmail: string | null;
@@ -181,7 +182,7 @@ export function useCreateAdminUniversity() {
   return useMutation({
     mutationFn: (
       data: Pick<AdminUniversity, "name" | "shortName" | "location" | "foundedYear" | "logoColor" | "ranking"> &
-        Partial<Pick<AdminUniversity, "description" | "contactEmail" | "contactPhone" | "website" | "address">>,
+        Partial<Pick<AdminUniversity, "type" | "description" | "contactEmail" | "contactPhone" | "website" | "address">>,
     ) =>
       customFetch<AdminUniversity>("/api/admin/universities", { method: "POST", body: JSON.stringify(data) }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "universities"] }),
@@ -299,7 +300,7 @@ export function useUpdateAdminCutoff() {
 export function useSetUserRole() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, role }: { id: number; role: "user" | "mentor" | "university_admin" | "admin" | "super_admin" }) =>
+    mutationFn: ({ id, role }: { id: number; role: "student" | "mentor" | "university_admin" | "admin" | "super_admin" }) =>
       customFetch(`/api/admin/users/${id}/role`, { method: "PATCH", body: JSON.stringify({ role }) }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
   });
@@ -327,7 +328,7 @@ export interface AdminUsersPage {
 export function useListAdminUsers(params: {
   page?: number;
   pageSize?: number;
-  role?: "user" | "admin";
+  role?: "student" | "admin";
   isActive?: "true" | "false";
   search?: string;
 }) {

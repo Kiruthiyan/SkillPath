@@ -131,7 +131,7 @@ function ProfileEditor() {
 
 function RequestsPanel() {
   const { toast } = useToast();
-  const { data: requests, isLoading } = useMentorIncomingRequests();
+  const { data: requests, isLoading, isError } = useMentorIncomingRequests();
   const { mutate: respond } = useRespondToMentorRequest();
 
   return (
@@ -142,6 +142,8 @@ function RequestsPanel() {
       <CardContent className="space-y-2">
         {isLoading ? (
           <Skeleton className="h-16 w-full" />
+        ) : isError ? (
+          <p className="text-sm text-destructive">Could not load requests. Please try again.</p>
         ) : (requests ?? []).length === 0 ? (
           <p className="text-sm text-muted-foreground">No requests yet.</p>
         ) : (

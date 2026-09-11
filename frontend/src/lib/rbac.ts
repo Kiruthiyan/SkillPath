@@ -30,7 +30,7 @@ import type { useTranslations } from "@/lib/i18n";
  * (`RequireAuth` / `RequireRole`) and, authoritatively, in the backend.
  * Never rely on an item being absent from a sidebar to keep a user out of a page.
  */
-export const ROLES = ["user", "mentor", "university_admin", "admin", "super_admin"] as const;
+export const ROLES = ["student", "mentor", "university_admin", "admin", "super_admin"] as const;
 
 export type Role = (typeof ROLES)[number];
 
@@ -56,12 +56,12 @@ export const ROLE_DASHBOARD_PATH: Record<Role, string> = {
   admin: "/admin/overview",
   university_admin: "/university-admin",
   mentor: "/mentor",
-  user: "/dashboard",
+  student: "/dashboard",
 };
 
 /**
  * Fallback for a session whose role is missing or unrecognised. It must not be
- * `/dashboard`, which is restricted to the `user` role and would bounce back.
+ * `/dashboard`, which is restricted to the `student` role and would bounce back.
  */
 export const UNKNOWN_ROLE_PATH = "/";
 
@@ -89,6 +89,8 @@ function studentNav(t: Translations): NavItem[] {
     { href: "/courses", label: t.nav.courses, icon: BookOpen },
     { href: "/checker", label: t.nav.checker, icon: Target },
     { href: "/universities", label: t.nav.universities, icon: Building2 },
+    { href: "/mentors", label: t.nav.mentors, icon: Users },
+    { href: "/opportunities", label: t.nav.opportunities, icon: Megaphone },
     { href: "/careers", label: t.nav.careers, icon: Briefcase },
     { href: "/roadmap", label: t.nav.roadmap, icon: Map },
     { href: "/reviews", label: t.nav.reviews, icon: Star },
@@ -101,8 +103,6 @@ function studentNav(t: Translations): NavItem[] {
 function mentorNav(t: Translations): NavItem[] {
   return [
     { href: "/mentor", label: t.nav.mentorDashboard, icon: LayoutDashboard },
-    { href: "/mentors", label: t.nav.mentors, icon: Users },
-    { href: "/opportunities", label: t.nav.opportunities, icon: Megaphone },
     { href: "/settings", label: t.nav.settings, icon: Settings },
   ];
 }
@@ -128,7 +128,7 @@ export function getNavForRole(role: string | null | undefined, t: Translations):
       return mentorNav(t);
     case "university_admin":
       return universityAdminNav(t);
-    case "user":
+    case "student":
     default:
       return studentNav(t);
   }

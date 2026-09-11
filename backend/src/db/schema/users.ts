@@ -11,7 +11,7 @@ export const usersTable = pgTable("users", {
   zscore: real("zscore"),
   district: text("district"),
   language: text("language").default("en"),
-  role: text("role").notNull().default("user"),
+  role: text("role").notNull().default("student"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   resetOtpHash: text("reset_otp_hash"),
   resetOtpExpiresAt: timestamp("reset_otp_expires_at"),

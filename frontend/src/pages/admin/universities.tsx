@@ -17,6 +17,7 @@ import {
 import { AdminLayout } from "./admin-layout";
 
 const STATUS_OPTIONS = ["pending_verification", "verified", "published", "suspended", "archived"] as const;
+const TYPE_OPTIONS = ["government", "private"] as const;
 
 const STATUS_VARIANT: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
   pending_verification: "outline",
@@ -47,6 +48,7 @@ export default function AdminUniversities() {
     foundedYear: new Date().getFullYear(),
     logoColor: "#2563eb",
     ranking: 1,
+    type: "government" as "government" | "private",
   });
 
   function startEdit(u: { id: number; name: string; shortName: string; location: string }) {
@@ -79,7 +81,7 @@ export default function AdminUniversities() {
     create(newUniversity, {
       onSuccess: () => {
         setShowCreate(false);
-        setNewUniversity({ name: "", shortName: "", location: "", foundedYear: new Date().getFullYear(), logoColor: "#2563eb", ranking: 1 });
+        setNewUniversity({ name: "", shortName: "", location: "", foundedYear: new Date().getFullYear(), logoColor: "#2563eb", ranking: 1, type: "government" });
       },
       onError: (err: any) => {
         toast({ title: "Could not create university", description: err?.message, variant: "destructive" });
@@ -119,6 +121,19 @@ export default function AdminUniversities() {
                   value={newUniversity.ranking}
                   onChange={(e) => setNewUniversity({ ...newUniversity, ranking: Number(e.target.value) })}
                 />
+                <Select
+                  value={newUniversity.type}
+                  onValueChange={(type) => setNewUniversity({ ...newUniversity, type: type as "government" | "private" })}
+                >
+                  <SelectTrigger className="h-9 text-sm">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {TYPE_OPTIONS.map((t) => (
+                      <SelectItem key={t} value={t}>{t}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <Button
                 size="sm"
@@ -169,6 +184,7 @@ export default function AdminUniversities() {
                         <div className="flex items-center gap-2">
                           <p className="font-medium">{u.name}</p>
                           <Badge variant={STATUS_VARIANT[u.status] ?? "outline"}>{u.status.replace(/_/g, " ")}</Badge>
+                          <Badge variant="outline" className="capitalize">{u.type}</Badge>
                         </div>
                         <p className="text-xs text-muted-foreground">{u.shortName} · {u.location}</p>
                       </div>
@@ -180,6 +196,16 @@ export default function AdminUniversities() {
                           <SelectContent>
                             {STATUS_OPTIONS.map((s) => (
                               <SelectItem key={s} value={s}>{s.replace(/_/g, " ")}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <Select value={u.type} onValueChange={(type) => update({ id: u.id, data: { type: type as "government" | "private" } })}>
+                          <SelectTrigger className="h-8 w-[8rem] text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {TYPE_OPTIONS.map((t) => (
+                              <SelectItem key={t} value={t}>{t}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>

@@ -219,11 +219,21 @@ router.post("/mentors/:id/request", requireAuth, async (req, res) => {
     return;
   }
 
-  const [row] = await db
-    .insert(mentorAssignmentsTable)
-    .values({ mentorUserId: mentorProfile.userId, studentUserId: req.user!.userId, message: parsed.data.message })
-    .returning();
-  res.status(201).json(row);
+  try {
+    const [row] = await db
+      .insert(mentorAssignmentsTable)
+      .values({ mentorUserId: mentorProfile.userId, studentUserId: req.user!.userId, message: parsed.data.message })
+      .returning();
+    res.status(201).json(row);
+  } catch (err: any) {
+    // Concurrent duplicate request slipping past the check above; DB partial unique
+    // index (mentor_assignments_live_pair_idx) is the real guard against the race.
+    if (err?.code === "23505") {
+      res.status(409).json({ error: "You already have an active request with this mentor." });
+      return;
+    }
+    throw err;
+  }
 });
 
 router.get("/users/me/mentor-requests", requireAuth, async (req, res) => {
