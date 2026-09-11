@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Switch, Route, Redirect, Router as WouterRouter, useLocation } from "wouter";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { ApiError } from "@/api";
+import { queryClient } from "@/lib/query-client";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppLayout } from "@/components/layout";
@@ -76,21 +77,12 @@ function handleGlobalAuthError(error: unknown) {
   if (isCredentialCheck(error.url)) return;
 
   useAuthStore.getState().logout();
-  queryClient.clear();
 }
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-    mutations: {
-      onError: handleGlobalAuthError,
-    },
-  },
+queryClient.setDefaultOptions({
+  ...queryClient.getDefaultOptions(),
+  mutations: { onError: handleGlobalAuthError },
 });
-
 queryClient.getQueryCache().config.onError = handleGlobalAuthError;
 
 function ProtectedDashboard() {

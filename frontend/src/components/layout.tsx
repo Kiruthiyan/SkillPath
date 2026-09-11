@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { useQueryClient } from "@tanstack/react-query";
 import {
   GraduationCap,
   LayoutDashboard,
@@ -46,7 +45,6 @@ function UserMenu() {
   const logout = useAuthStore((s) => s.logout);
   const { t } = useTranslations();
   const menuRef = useRef<HTMLDivElement>(null);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -118,7 +116,6 @@ function UserMenu() {
               onClick={() => {
                 setOpen(false);
                 logout();
-                queryClient.clear();
               }}
               className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors text-left"
             >

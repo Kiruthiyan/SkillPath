@@ -11,6 +11,9 @@ import {
   listOfficialSubjects,
 } from "../db/official-handbook-query";
 
+// All routes below are intentionally public/unauthenticated: they only ever
+// return official-handbook data (streams, subjects, cutoffs, eligibility
+// rules), never anything scoped to a specific user. Do not add auth here.
 const router = Router();
 
 const checkerComputeRateLimiter = rateLimit({
