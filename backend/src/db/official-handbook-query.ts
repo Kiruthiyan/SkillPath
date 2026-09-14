@@ -79,7 +79,7 @@ export interface OfficialUniversity {
   ranking: number | null;
   description: string | null;
   courseCount?: number;
-  type: "government" | "private";
+  type: "government" | "private" | "unknown";
 }
 
 export type ZScoreStatus = "above" | "near" | "below" | "unavailable";
@@ -399,14 +399,17 @@ export async function getOfficialCourseDetail(
  * Match by name containment (same loose-matching approach used in db/seed.ts) to
  * surface the admin-set Government/Private type on the student-facing catalog.
  */
-async function loadUniversityTypeByName(): Promise<(handbookName: string) => "government" | "private"> {
+async function loadUniversityTypeByName(): Promise<(handbookName: string) => "government" | "private" | "unknown"> {
   const rows = await db.select({ name: universitiesTable.name, type: universitiesTable.type }).from(universitiesTable);
   return (handbookName: string) => {
     const needle = handbookName.toLowerCase();
-    const match = rows.find(
-      (r) => needle.includes(r.name.toLowerCase()) || r.name.toLowerCase().includes(needle),
-    );
-    return match?.type === "private" ? "private" : "government";
+    const exact = rows.find((r) => r.name.toLowerCase() === needle);
+    const match =
+      exact ??
+      rows.find((r) => needle.includes(r.name.toLowerCase()) || r.name.toLowerCase().includes(needle));
+    if (match?.type === "private") return "private";
+    if (match?.type === "government") return "government";
+    return "unknown";
   };
 }
 

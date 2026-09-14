@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, ShieldCheck, ShieldOff, UserCog, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ShieldCheck, ShieldOff, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   useListAdminUsers,
   useSetUserRole,
@@ -38,19 +38,45 @@ import { AdminLayout } from "./admin-layout";
 
 const PAGE_SIZE = 20;
 
-function UserRow({ user, currentUserId }: { user: AdminUser; currentUserId: number | undefined }) {
+const ALL_ROLES = ["student", "mentor", "university_admin", "admin", "super_admin"] as const;
+type AppRole = (typeof ALL_ROLES)[number];
+
+function UserRow({
+  user,
+  currentUserId,
+  actorRole,
+}: {
+  user: AdminUser;
+  currentUserId: number | undefined;
+  actorRole: string | undefined;
+}) {
   const { toast } = useToast();
   const { mutate: setRole, isPending: isSettingRole } = useSetUserRole();
   const { mutate: deactivate, isPending: isDeactivating } = useDeactivateAdminUser();
   const { mutate: reactivate, isPending: isReactivating } = useReactivateAdminUser();
   const isSelf = user.id === currentUserId;
+  const isSuperAdmin = actorRole === "super_admin";
 
-  function toggleRole() {
-    const nextRole = user.role === "admin" ? "student" : "admin";
+  const assignableRoles: AppRole[] = isSuperAdmin
+    ? [...ALL_ROLES]
+    : ["student", "mentor", "university_admin"];
+
+  function changeRole(nextRole: AppRole) {
+    if (nextRole === user.role) return;
     setRole(
       { id: user.id, role: nextRole },
       {
-        onSuccess: () => toast({ title: `${user.email} is now ${nextRole}.` }),
+        onSuccess: () => {
+          toast({
+            title: `${user.email} is now ${nextRole}.`,
+            description:
+              nextRole === "mentor"
+                ? "Mentor profiles start pending — verify on the Mentors page before students can see them."
+                : nextRole === "university_admin"
+                  ? "University assignment is required (use university admin invite if this fails)."
+                  : undefined,
+          });
+        },
         onError: (err: any) =>
           toast({
             title: "Could not change role",
@@ -91,12 +117,7 @@ function UserRow({ user, currentUserId }: { user: AdminUser; currentUserId: numb
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <p className="font-medium text-sm truncate">{user.name || user.email}</p>
-            <span
-              className={cn(
-                "text-xs font-medium px-1.5 py-0.5 rounded capitalize",
-                user.role === "admin" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground",
-              )}
-            >
+            <span className="text-xs font-medium px-1.5 py-0.5 rounded capitalize bg-primary/10 text-primary">
               {user.role}
             </span>
             <span
@@ -121,10 +142,28 @@ function UserRow({ user, currentUserId }: { user: AdminUser; currentUserId: numb
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <Button size="sm" variant="outline" disabled={isSettingRole} onClick={toggleRole} className="gap-1.5">
-            <UserCog className="h-3.5 w-3.5" />
-            {user.role === "admin" ? "Make student" : "Make admin"}
-          </Button>
+          <Select
+            value={user.role}
+            disabled={isSelf || isSettingRole}
+            onValueChange={(v) => changeRole(v as AppRole)}
+          >
+            <SelectTrigger className="w-[11rem] h-9">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {assignableRoles.map((r) => (
+                <SelectItem key={r} value={r}>
+                  {r}
+                </SelectItem>
+              ))}
+              {/* Keep current elevated role visible even if actor cannot reassign it */}
+              {!assignableRoles.includes(user.role as AppRole) && (
+                <SelectItem value={user.role} disabled>
+                  {user.role}
+                </SelectItem>
+              )}
+            </SelectContent>
+          </Select>
 
           {user.isActive ? (
             <AlertDialog>
@@ -181,7 +220,7 @@ export default function AdminUsers() {
   usePageTitle("Admin — Users");
   const currentUser = useAuthStore((s) => s.user);
   const [search, setSearch] = useState("");
-  const [role, setRole] = useState<"all" | "student" | "admin">("all");
+  const [role, setRole] = useState<"all" | AppRole>("all");
   const [status, setStatus] = useState<"all" | "true" | "false">("all");
   const [page, setPage] = useState(1);
 
@@ -218,13 +257,16 @@ export default function AdminUsers() {
               setPage(1);
             }}
           >
-            <SelectTrigger className="sm:w-40">
+            <SelectTrigger className="sm:w-48">
               <SelectValue placeholder="Role" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All roles</SelectItem>
-              <SelectItem value="student">Student</SelectItem>
-              <SelectItem value="admin">Admin</SelectItem>
+              {ALL_ROLES.map((r) => (
+                <SelectItem key={r} value={r}>
+                  {r}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           <Select
@@ -256,7 +298,12 @@ export default function AdminUsers() {
         ) : data && data.users.length > 0 ? (
           <div className="space-y-2">
             {data.users.map((u) => (
-              <UserRow key={u.id} user={u} currentUserId={currentUser?.id} />
+              <UserRow
+                key={u.id}
+                user={u}
+                currentUserId={currentUser?.id}
+                actorRole={currentUser?.role ?? undefined}
+              />
             ))}
           </div>
         ) : (

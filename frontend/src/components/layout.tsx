@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/hooks/use-auth";
 import { useTranslations } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { getDashboardPath, getNavForRole } from "@/lib/rbac";
+import { getNavForRole } from "@/lib/rbac";
 
 function SkipLink() {
   const { t } = useTranslations();
@@ -43,6 +43,7 @@ function UserMenu() {
   const [open, setOpen] = useState(false);
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
+  const [, setLocation] = useLocation();
   const { t } = useTranslations();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -116,6 +117,7 @@ function UserMenu() {
               onClick={() => {
                 setOpen(false);
                 logout();
+                setLocation("/login");
               }}
               className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors text-left"
             >
@@ -130,9 +132,7 @@ function UserMenu() {
 }
 
 function MarketingHeader() {
-  const user = useAuthStore((s) => s.user);
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
-  const logout = useAuthStore((s) => s.logout);
   const { t } = useTranslations();
 
   return (
@@ -151,12 +151,7 @@ function MarketingHeader() {
         <div className="flex items-center gap-2.5">
           <LanguageSwitcher variant="select" />
           {isAuthenticated ? (
-            <>
-              <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
-                <Link href={getDashboardPath(user?.role)}>{t.nav.dashboard}</Link>
-              </Button>
-              <UserMenu />
-            </>
+            <UserMenu />
           ) : (
             <Button size="sm" asChild>
               <Link href="/login"><LogIn className="h-4 w-4 mr-1" /> {t.nav.signIn}</Link>

@@ -41,8 +41,12 @@ function RequestDialog({ mentorId, onClose }: { mentorId: number; onClose: () =>
         rows={2}
       />
       <div className="flex gap-2">
-        <Button size="sm" disabled={isPending} onClick={submit}>Send Request</Button>
-        <Button size="sm" variant="outline" onClick={onClose}>Cancel</Button>
+        <Button size="sm" disabled={isPending} onClick={submit}>
+          Send Request
+        </Button>
+        <Button size="sm" variant="outline" onClick={onClose}>
+          Cancel
+        </Button>
       </div>
     </div>
   );
@@ -50,18 +54,24 @@ function RequestDialog({ mentorId, onClose }: { mentorId: number; onClose: () =>
 
 export default function Mentors() {
   usePageTitle("Find a Mentor");
-  const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s) => s.user);
+  const isStudent = user?.role === "student";
   const [search, setSearch] = useState("");
   const [stream, setStream] = useState("");
   const [requestingId, setRequestingId] = useState<number | null>(null);
-  const { data: mentors, isLoading, isError } = useListMentors({ search: search || undefined, stream: stream || undefined });
-  const { data: myRequests } = useMyOutgoingMentorRequests();
+  const { data: mentors, isLoading, isError } = useListMentors({
+    search: search || undefined,
+    stream: stream || undefined,
+  });
+  const { data: myRequests } = useMyOutgoingMentorRequests(isStudent);
 
   return (
     <div className="space-y-6 pb-10">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Find a Mentor</h1>
-        <p className="text-sm text-muted-foreground">Browse verified mentors and request guidance.</p>
+        <p className="text-sm text-muted-foreground">
+          Browse verified mentors and request guidance.
+        </p>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -81,45 +91,61 @@ export default function Mentors() {
 
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2">
-          {[1, 2, 3, 4].map((i) => <Skeleton key={i} className="h-40 w-full" />)}
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="h-40 w-full" />
+          ))}
         </div>
       ) : isError ? (
         <p className="text-sm text-destructive">Could not load mentors. Please try again.</p>
       ) : (mentors ?? []).length === 0 ? (
-        <p className="text-sm text-muted-foreground">No mentors found.</p>
+        <p className="text-sm text-muted-foreground">No verified mentors available.</p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {(mentors ?? []).map((m) => (
             <Card key={m.id}>
               <CardContent className="p-4 space-y-2">
                 <div>
-                  <p className="font-medium">{m.name}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium">{m.name}</p>
+                    <Badge variant="secondary">Verified</Badge>
+                  </div>
                   {m.headline && <p className="text-sm text-muted-foreground">{m.headline}</p>}
                 </div>
                 {m.bio && <p className="text-sm">{m.bio}</p>}
                 <div className="flex flex-wrap gap-1">
                   {(m.expertiseAreas ?? []).map((a) => (
-                    <Badge key={a} variant="secondary">{a}</Badge>
+                    <Badge key={a} variant="secondary">
+                      {a}
+                    </Badge>
                   ))}
                 </div>
                 {m.yearsExperience != null && (
                   <p className="text-xs text-muted-foreground">{m.yearsExperience} years experience</p>
                 )}
+                {m.availability && (
+                  <p className="text-xs text-muted-foreground">Availability: {m.availability}</p>
+                )}
 
                 {(() => {
+                  if (!isStudent) {
+                    return (
+                      <p className="text-xs text-muted-foreground">
+                        Sign in as a student to request mentorship.
+                      </p>
+                    );
+                  }
                   const existing = myRequests?.find(
                     (r) => r.mentorUserId === m.userId && LIVE_REQUEST_STATUSES.has(r.status),
                   );
                   if (existing) {
                     return <Badge variant="outline">Request {existing.status}</Badge>;
                   }
-                  if (!token) {
-                    return <p className="text-xs text-muted-foreground">Sign in to request mentorship.</p>;
-                  }
                   return requestingId === m.id ? (
                     <RequestDialog mentorId={m.id} onClose={() => setRequestingId(null)} />
                   ) : (
-                    <Button size="sm" onClick={() => setRequestingId(m.id)}>Request Mentorship</Button>
+                    <Button size="sm" onClick={() => setRequestingId(m.id)}>
+                      Request Mentorship
+                    </Button>
                   );
                 })()}
               </CardContent>

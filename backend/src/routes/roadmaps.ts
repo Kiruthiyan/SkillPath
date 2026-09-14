@@ -233,12 +233,10 @@ router.post("/roadmaps/generate", aiRateLimiter, requireAuth, async (req, res) =
     years = aiRoadmap.years.slice(0, durationYears);
     afterGraduation = aiRoadmap.afterGraduation;
   } else {
-    const template = getTemplateRoadmap(templateCategory);
-    years = template.years.slice(0, durationYears).map((y, i) => ({
-      year: i + 1,
-      milestones: y.milestones,
-    }));
-    afterGraduation = template.afterGraduation;
+    res.status(503).json({
+      error: "Roadmap generation is temporarily unavailable. Please try again later.",
+    });
+    return;
   }
 
   while (years.length < durationYears) {

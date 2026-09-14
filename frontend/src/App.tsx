@@ -285,9 +285,9 @@ function ProtectedAdminOpportunities() {
 
 function ProtectedMentorsDirectory() {
   return (
-    <RequireAuth>
+    <RequireRole roles={["student"]}>
       <Mentors />
-    </RequireAuth>
+    </RequireRole>
   );
 }
 

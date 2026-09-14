@@ -50,11 +50,40 @@ export interface AdminMentorRow {
   userId: number;
   name: string;
   email: string;
+  isActive: boolean;
+  role: string;
   headline: string | null;
+  bio: string | null;
+  expertiseAreas: string[] | null;
+  yearsExperience: number | null;
+  availability: string | null;
   verificationStatus: string;
   isAcceptingStudents: boolean;
+  verifiedByUserId: number | null;
+  verifiedAt: string | null;
   createdAt: string;
 }
+
+export type AdminMentorCreateInput = {
+  email: string;
+  name: string;
+  headline?: string | null;
+  bio?: string | null;
+  expertiseAreas?: string[];
+  yearsExperience?: number | null;
+  availability?: string | null;
+  isAcceptingStudents?: boolean;
+};
+
+export type AdminMentorPatchInput = {
+  name?: string;
+  headline?: string | null;
+  bio?: string | null;
+  expertiseAreas?: string[];
+  yearsExperience?: number | null;
+  availability?: string | null;
+  isAcceptingStudents?: boolean;
+};
 
 function buildQuery(params: Record<string, string | undefined>): string {
   const search = new URLSearchParams();
@@ -63,6 +92,12 @@ function buildQuery(params: Record<string, string | undefined>): string {
   }
   const qs = search.toString();
   return qs ? `?${qs}` : "";
+}
+
+function invalidateMentorCaches(queryClient: ReturnType<typeof useQueryClient>) {
+  void queryClient.invalidateQueries({ queryKey: ["admin", "mentors"] });
+  void queryClient.invalidateQueries({ queryKey: ["mentors"] });
+  void queryClient.invalidateQueries({ queryKey: ["admin", "metrics"] });
 }
 
 // --- Public browse ------------------------------------------------------------
@@ -91,10 +126,11 @@ export function useRequestMentor() {
   });
 }
 
-export function useMyOutgoingMentorRequests() {
+export function useMyOutgoingMentorRequests(enabled = true) {
   return useQuery({
     queryKey: ["users", "me", "mentor-requests"],
     queryFn: () => customFetch<MyMentorRequest[]>("/api/users/me/mentor-requests"),
+    enabled,
   });
 }
 
@@ -128,7 +164,10 @@ export function useRespondToMentorRequest() {
   return useMutation({
     mutationFn: ({ id, status }: { id: number; status: "accepted" | "declined" }) =>
       customFetch(`/api/mentor/requests/${id}`, { method: "PATCH", body: JSON.stringify({ status }) }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["mentor", "requests"] }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["mentor", "requests"] });
+      void queryClient.invalidateQueries({ queryKey: ["users", "me", "mentor-requests"] });
+    },
   });
 }
 
@@ -141,12 +180,49 @@ export function useAdminMentors(status?: string) {
   });
 }
 
+export function useAdminMentor(id: number | undefined) {
+  return useQuery({
+    queryKey: ["admin", "mentors", "detail", id],
+    queryFn: () => customFetch<AdminMentorRow>(`/api/admin/mentors/${id}`),
+    enabled: id != null,
+  });
+}
+
+export function useCreateAdminMentor() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: AdminMentorCreateInput) =>
+      customFetch<AdminMentorRow>("/api/admin/mentors", { method: "POST", body: JSON.stringify(data) }),
+    onSuccess: () => invalidateMentorCaches(queryClient),
+  });
+}
+
+export function useUpdateAdminMentor() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: AdminMentorPatchInput }) =>
+      customFetch<AdminMentorRow>(`/api/admin/mentors/${id}`, { method: "PATCH", body: JSON.stringify(data) }),
+    onSuccess: () => invalidateMentorCaches(queryClient),
+  });
+}
+
 export function useVerifyMentor() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, status }: { id: number; status: "pending" | "verified" | "rejected" | "suspended" }) =>
-      customFetch(`/api/admin/mentors/${id}/verify`, { method: "PATCH", body: JSON.stringify({ status }) }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "mentors"] }),
+    mutationFn: ({
+      id,
+      status,
+      isAcceptingStudents,
+    }: {
+      id: number;
+      status: "pending" | "verified" | "rejected" | "suspended";
+      isAcceptingStudents?: boolean;
+    }) =>
+      customFetch(`/api/admin/mentors/${id}/verify`, {
+        method: "PATCH",
+        body: JSON.stringify({ status, isAcceptingStudents }),
+      }),
+    onSuccess: () => invalidateMentorCaches(queryClient),
   });
 }
 

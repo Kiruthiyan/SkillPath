@@ -45,7 +45,7 @@ const DEFAULT_PROFILE_FIELDS = {
   educationStage: "A/L Completed",
   stream: "",
   zscore: null,
-  district: "Colombo",
+  district: "",
   interests: [],
   preferredCareers: [],
   skills: [],
@@ -124,6 +124,7 @@ export const EDUCATION_STAGES = [
 ] as const;
 
 export const UGC_DISTRICTS = [
+  "All Island",
   "Colombo",
   "Gampaha",
   "Kalutara",
@@ -134,10 +135,7 @@ export const UGC_DISTRICTS = [
   "Matara",
   "Hambantota",
   "Jaffna",
-  "Kilinochchi",
-  "Mannar",
-  "Mullaitivu",
-  "Vavuniya",
+  "Vanni",
   "Batticaloa",
   "Ampara",
   "Trincomalee",

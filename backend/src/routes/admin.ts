@@ -14,6 +14,7 @@ import {
   successStoriesTable,
   roadmapsTable,
   universityAdminsTable,
+  mentorProfilesTable,
 } from "../db/schema/index";
 import {
   listExtractionBatches,
@@ -266,6 +267,22 @@ router.delete("/admin/university-admins/:id", async (req, res) => {
     res.status(404).json({ error: "Assignment not found" });
     return;
   }
+
+  const remaining = await db
+    .select({ id: universityAdminsTable.id })
+    .from(universityAdminsTable)
+    .where(eq(universityAdminsTable.userId, row.userId))
+    .limit(1);
+  if (remaining.length === 0) {
+    const [user] = await db
+      .select({ role: usersTable.role })
+      .from(usersTable)
+      .where(eq(usersTable.id, row.userId));
+    if (user?.role === "university_admin") {
+      await db.update(usersTable).set({ role: "student" }).where(eq(usersTable.id, row.userId));
+    }
+  }
+
   await logAudit(req.user!.userId, "university_admin.revoked", { type: "university", id: row.universityId }, {
     userId: row.userId,
   });
@@ -516,7 +533,50 @@ router.patch("/admin/users/:id/role", async (req, res) => {
     }
   }
 
-  await db.update(usersTable).set({ role: nextRole }).where(eq(usersTable.id, id));
+  if (
+    nextRole === "university_admin"
+  ) {
+    const assignments = await db
+      .select({ id: universityAdminsTable.id })
+      .from(universityAdminsTable)
+      .where(eq(universityAdminsTable.userId, id))
+      .limit(1);
+    if (assignments.length === 0) {
+      res.status(400).json({
+        error: "Assign this user to a university before setting the university_admin role (use the university admin invite flow).",
+      });
+      return;
+    }
+  }
+
+  await db.transaction(async (tx) => {
+    await tx.update(usersTable).set({ role: nextRole }).where(eq(usersTable.id, id));
+
+    // Role → mentor never implies verification. Ensure a pending profile exists for the admin queue.
+    if (nextRole === "mentor") {
+      const [profile] = await tx
+        .select({ id: mentorProfilesTable.id })
+        .from(mentorProfilesTable)
+        .where(eq(mentorProfilesTable.userId, id))
+        .limit(1);
+      if (!profile) {
+        await tx.insert(mentorProfilesTable).values({
+          userId: id,
+          verificationStatus: "pending",
+          isAcceptingStudents: true,
+        });
+      }
+    }
+
+    // Demoting a mentor: suspend so leftover verified rows cannot become visible if role is restored incorrectly.
+    if (previousRole === "mentor" && nextRole !== "mentor") {
+      await tx
+        .update(mentorProfilesTable)
+        .set({ verificationStatus: "suspended", verifiedByUserId: req.user!.userId, verifiedAt: new Date() })
+        .where(eq(mentorProfilesTable.userId, id));
+    }
+  });
+
   const [row] = await db
     .select({ id: usersTable.id, email: usersTable.email, role: usersTable.role })
     .from(usersTable)
@@ -611,6 +671,11 @@ router.get("/admin/metrics", async (_req, res) => {
     [{ googleLinkedUsers }],
     [{ newUsersLast7d }],
     [{ newUsersLast30d }],
+    [{ studentCount }],
+    [{ activeMentors }],
+    [{ pendingMentorVerification }],
+    [{ governmentUniversities }],
+    [{ privateUniversities }],
     [{ totalCareers }],
     [{ totalReviews }],
     [{ totalStories }],
@@ -624,6 +689,31 @@ router.get("/admin/metrics", async (_req, res) => {
     db.select({ googleLinkedUsers: count() }).from(usersTable).where(isNotNull(usersTable.googleId)),
     db.select({ newUsersLast7d: count() }).from(usersTable).where(gte(usersTable.createdAt, sevenDaysAgo)),
     db.select({ newUsersLast30d: count() }).from(usersTable).where(gte(usersTable.createdAt, thirtyDaysAgo)),
+    db.select({ studentCount: count() }).from(usersTable).where(eq(usersTable.role, "student")),
+    db
+      .select({ activeMentors: count() })
+      .from(mentorProfilesTable)
+      .innerJoin(usersTable, eq(usersTable.id, mentorProfilesTable.userId))
+      .where(
+        and(
+          eq(mentorProfilesTable.verificationStatus, "verified"),
+          eq(mentorProfilesTable.isAcceptingStudents, true),
+          eq(usersTable.role, "mentor"),
+          eq(usersTable.isActive, true),
+        ),
+      ),
+    db
+      .select({ pendingMentorVerification: count() })
+      .from(mentorProfilesTable)
+      .where(eq(mentorProfilesTable.verificationStatus, "pending")),
+    db
+      .select({ governmentUniversities: count() })
+      .from(universitiesTable)
+      .where(eq(universitiesTable.type, "government")),
+    db
+      .select({ privateUniversities: count() })
+      .from(universitiesTable)
+      .where(eq(universitiesTable.type, "private")),
     db.select({ totalCareers: count() }).from(careerPathsTable),
     db.select({ totalReviews: count() }).from(alumniReviewsTable),
     db.select({ totalStories: count() }).from(successStoriesTable),
@@ -640,6 +730,11 @@ router.get("/admin/metrics", async (_req, res) => {
     googleLinkedUsers: Number(googleLinkedUsers),
     newUsersLast7d: Number(newUsersLast7d),
     newUsersLast30d: Number(newUsersLast30d),
+    studentCount: Number(studentCount),
+    activeMentors: Number(activeMentors),
+    pendingMentorVerification: Number(pendingMentorVerification),
+    governmentUniversities: Number(governmentUniversities),
+    privateUniversities: Number(privateUniversities),
     totalUniversities: universities.length,
     totalCourses: courses.length,
     totalCareers: Number(totalCareers),

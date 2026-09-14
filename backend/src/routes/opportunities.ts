@@ -169,6 +169,23 @@ router.patch(
       return;
     }
 
+    const [actor] = await db
+      .select({ role: usersTable.role })
+      .from(usersTable)
+      .where(eq(usersTable.id, req.user!.userId));
+    const role = actor?.role;
+    if (role === "university_admin" && parsed.data.universityId !== undefined) {
+      if (parsed.data.universityId == null) {
+        res.status(403).json({ error: "University admins cannot detach an opportunity from a university." });
+        return;
+      }
+      const owned = await loadOwnedUniversityIds(req.user!.userId);
+      if (!owned.includes(parsed.data.universityId)) {
+        res.status(403).json({ error: "Not authorized for this university" });
+        return;
+      }
+    }
+
     await db
       .update(opportunitiesTable)
       .set({

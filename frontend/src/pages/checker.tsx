@@ -16,8 +16,8 @@ export default function Checker() {
 
   const [form, setForm] = useState<CheckerFormValue>(() => ({
     academicYear: "",
-    stream: profile.stream || "Physical Science",
-    district: profile.district || "Colombo",
+    stream: profile.stream || "",
+    district: profile.district || "",
     zscore: profile.zscore != null ? String(profile.zscore) : "",
     subjectGrades: [],
   }));

@@ -41,11 +41,8 @@ export default function Login() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const [showPassword, setShowPassword] = useState(false);
 
-  const redirectParam = new URLSearchParams(search).get("redirect");
-  const explicitRedirect =
-    redirectParam && redirectParam.startsWith("/") && !redirectParam.startsWith("//")
-      ? redirectParam
-      : null;
+  // Successful login always lands on the role dashboard — never restore a
+  // previous user's last path via ?redirect= (same-device account switch).
   const passwordChanged = new URLSearchParams(search).get("passwordChanged") === "1";
 
   useEffect(() => {
@@ -69,7 +66,7 @@ export default function Login() {
       onSuccess: (data) => {
         setAuth(data.token, data.user);
         toast({ title: "Welcome back!", description: `Signed in as ${data.user.name}` });
-        setLocation(explicitRedirect ?? getDashboardPath(data.user.role));
+        setLocation(getDashboardPath(data.user.role));
       },
       onError: (err: any) => {
         toast({
@@ -131,7 +128,7 @@ export default function Login() {
             {/* Google Authentication Button */}
             <GoogleAuthButton
               mode="signin"
-              onSuccess={(user) => setLocation(explicitRedirect ?? getDashboardPath(user?.role))}
+              onSuccess={(user) => setLocation(getDashboardPath(user?.role))}
             />
 
             {/* Visual Divider */}

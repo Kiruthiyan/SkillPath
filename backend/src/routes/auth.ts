@@ -18,6 +18,7 @@ import {
 import { checkNewPassword, PASSWORD_MIN_LENGTH } from "../lib/password-policy";
 import { sendOtpEmail } from "../lib/mailer";
 import { universityAdminsTable } from "../db";
+import { mentorProfilesTable } from "../db/schema/mentor_profiles";
 
 const router = Router();
 
@@ -687,6 +688,18 @@ router.post("/auth/accept-invite", acceptInviteRateLimiter, async (req, res) => 
       await tx
         .insert(universityAdminsTable)
         .values({ userId: row!.id, universityId: invite.universityId })
+        .onConflictDoNothing();
+    }
+
+    // Mentor invites always land in the admin verification queue as pending.
+    if (invite.role === "mentor") {
+      await tx
+        .insert(mentorProfilesTable)
+        .values({
+          userId: row!.id,
+          verificationStatus: "pending",
+          isAcceptingStudents: true,
+        })
         .onConflictDoNothing();
     }
 

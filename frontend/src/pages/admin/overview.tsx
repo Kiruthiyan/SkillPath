@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import {
   Users,
   UserCheck,
@@ -11,11 +12,19 @@ import {
   BookOpen,
   Map as MapIcon,
   FileClock,
+  UserRound,
+  BadgeCheck,
+  Clock,
+  Landmark,
+  Megaphone,
+  Upload,
+  FileSearch,
   type LucideIcon,
 } from "lucide-react";
 import { useAdminMetrics } from "@/api";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/query-error";
 import { AdminLayout } from "./admin-layout";
@@ -54,6 +63,15 @@ function MetricCard({
   );
 }
 
+const QUICK_ACTIONS: { href: string; label: string; icon: LucideIcon }[] = [
+  { href: "/admin/mentors", label: "Add Mentor", icon: UserRound },
+  { href: "/admin/universities", label: "Add University", icon: Building2 },
+  { href: "/admin/courses", label: "Courses", icon: GraduationCap },
+  { href: "/admin/opportunities", label: "Add Opportunity", icon: Megaphone },
+  { href: "/admin/imports", label: "Import Handbook", icon: Upload },
+  { href: "/admin/review", label: "Review Extracted Data", icon: FileSearch },
+];
+
 export default function AdminOverview() {
   usePageTitle("Admin — Overview");
   const { data, isLoading, isError, refetch } = useAdminMetrics();
@@ -64,9 +82,47 @@ export default function AdminOverview() {
         {isError && <QueryError onRetry={() => refetch()} />}
 
         <div>
+          <h2 className="text-lg font-semibold text-foreground">Quick actions</h2>
+          <div className="flex flex-wrap gap-2 mt-3">
+            {QUICK_ACTIONS.map((a) => (
+              <Button key={a.href} asChild size="sm" variant="outline" className="gap-1.5">
+                <Link href={a.href}>
+                  <a.icon className="h-3.5 w-3.5" />
+                  {a.label}
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-lg font-semibold text-foreground">People</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-3">
+            <MetricCard label="Students" value={data?.studentCount ?? "—"} icon={Users} loading={isLoading} />
+            <MetricCard
+              label="Active Mentors"
+              value={data?.activeMentors ?? "—"}
+              icon={BadgeCheck}
+              loading={isLoading}
+            />
+            <MetricCard
+              label="Pending Mentor Verification"
+              value={data?.pendingMentorVerification ?? "—"}
+              icon={Clock}
+              loading={isLoading}
+            />
+            <MetricCard
+              label="Total Users"
+              value={data?.totalUsers ?? "—"}
+              icon={UserPlus}
+              loading={isLoading}
+            />
+          </div>
+        </div>
+
+        <div>
           <h2 className="text-lg font-semibold text-foreground">Users</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-3">
-            <MetricCard label="Total Users" value={data?.totalUsers ?? "—"} icon={Users} loading={isLoading} />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-3">
             <MetricCard label="Active" value={data?.activeUsers ?? "—"} icon={UserCheck} loading={isLoading} />
             <MetricCard
               label="Deactivated"
@@ -91,10 +147,22 @@ export default function AdminOverview() {
 
         <div>
           <h2 className="text-lg font-semibold text-foreground">Platform</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-3">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-3">
             <MetricCard
-              label="Universities"
+              label="Universities (handbook)"
               value={data?.totalUniversities ?? "—"}
+              icon={Building2}
+              loading={isLoading}
+            />
+            <MetricCard
+              label="Government Universities"
+              value={data?.governmentUniversities ?? "—"}
+              icon={Landmark}
+              loading={isLoading}
+            />
+            <MetricCard
+              label="Private Universities"
+              value={data?.privateUniversities ?? "—"}
               icon={Building2}
               loading={isLoading}
             />
@@ -107,22 +175,10 @@ export default function AdminOverview() {
             <MetricCard label="Careers" value={data?.totalCareers ?? "—"} icon={Briefcase} loading={isLoading} />
             <MetricCard label="Reviews" value={data?.totalReviews ?? "—"} icon={Star} loading={isLoading} />
             <MetricCard label="Stories" value={data?.totalStories ?? "—"} icon={BookOpen} loading={isLoading} />
-          </div>
-        </div>
-
-        <div>
-          <h2 className="text-lg font-semibold text-foreground">Activity</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-3">
             <MetricCard
               label="Roadmaps Generated"
               value={data?.roadmapsGenerated ?? "—"}
               icon={MapIcon}
-              loading={isLoading}
-            />
-            <MetricCard
-              label="New Users (30d)"
-              value={data?.newUsersLast30d ?? "—"}
-              icon={UserPlus}
               loading={isLoading}
             />
           </div>

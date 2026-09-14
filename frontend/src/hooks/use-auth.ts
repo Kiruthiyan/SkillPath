@@ -24,7 +24,17 @@ export const useAuthStore = create<AuthState>()(
     (set, get) => ({
       token: null,
       user: null,
-      setAuth: (token, user) => set({ token, user }),
+      setAuth: (token, user) => {
+        const prev = get().user;
+        // Clear per-user client caches whenever the account changes (including
+        // login-without-logout on the same device) so the previous user's
+        // React Query data and persisted profile never leak across sessions.
+        if (!prev || prev.id !== user.id) {
+          queryClient.clear();
+          useProfileStore.getState().resetProfile();
+        }
+        set({ token, user });
+      },
       // Every per-user client-side cache must be cleared here, not just the
       // token: react-query's cache (dashboard data, profile, etc. keyed
       // without a user id) and the persisted profile store (`use-profile.ts`,

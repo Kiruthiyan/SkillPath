@@ -39,10 +39,11 @@ export interface OwnedProgramme {
   description: string | null;
 }
 
-export function useMyUniversities() {
+export function useMyUniversities(enabled = true) {
   return useQuery({
     queryKey: ["university-admin", "me", "universities"],
     queryFn: () => customFetch<OwnedUniversity[]>("/api/university-admin/me/universities"),
+    enabled,
   });
 }
 

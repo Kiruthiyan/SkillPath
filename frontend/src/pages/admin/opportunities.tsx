@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,6 +19,7 @@ import {
   type OpportunityStatus,
   type OpportunityType,
 } from "@/api/opportunities";
+import { useMyUniversities } from "@/api/university-admin";
 import { AdminLayout } from "./admin-layout";
 
 const STATUS_TABS: { value: OpportunityStatus | "all"; label: string }[] = [
@@ -40,8 +41,6 @@ const STATUS_VARIANT: Record<string, "default" | "secondary" | "destructive" | "
   archived: "outline",
 };
 
-// Next-step actions offered per current status, per role. Illegal transitions are simply not
-// offered here — the backend re-validates via canTransitionOpportunityStatus regardless.
 function nextActions(status: OpportunityStatus, isPrivileged: boolean): { label: string; to: OpportunityStatus }[] {
   if (!isPrivileged) {
     return status === "draft" ? [{ label: "Submit for Review", to: "pending_verification" }] : [];
@@ -67,9 +66,11 @@ export default function AdminOpportunities() {
   const { toast } = useToast();
   const user = useAuthStore((s) => s.user);
   const isPrivileged = user?.role === "admin" || user?.role === "super_admin";
+  const isUniversityAdmin = user?.role === "university_admin";
 
   const [statusTab, setStatusTab] = useState<OpportunityStatus | "all">("all");
   const { data: opportunities, isLoading } = useAdminOpportunities(statusTab === "all" ? undefined : statusTab);
+  const { data: ownedUniversities } = useMyUniversities(isUniversityAdmin);
   const { mutate: create, isPending: isCreating } = useCreateOpportunity();
   const { mutate: remove } = useDeleteOpportunity();
   const { mutate: setStatus } = useSetOpportunityStatus();
@@ -82,9 +83,33 @@ export default function AdminOpportunities() {
     organization: string;
     applicationUrl: string;
     amount: string;
-  }>({ type: "scholarship", title: "", description: "", organization: "", applicationUrl: "", amount: "" });
+    universityId: number | null;
+  }>({
+    type: "scholarship",
+    title: "",
+    description: "",
+    organization: "",
+    applicationUrl: "",
+    amount: "",
+    universityId: null,
+  });
+
+  useEffect(() => {
+    if (!isUniversityAdmin || !ownedUniversities?.length) return;
+    if (draft.universityId == null) {
+      setDraft((d) => ({ ...d, universityId: ownedUniversities[0].id }));
+    }
+  }, [isUniversityAdmin, ownedUniversities, draft.universityId]);
 
   function submitCreate() {
+    if (isUniversityAdmin && draft.universityId == null) {
+      toast({
+        title: "University required",
+        description: "Select your university before creating an opportunity.",
+        variant: "destructive",
+      });
+      return;
+    }
     create(
       {
         type: draft.type,
@@ -93,11 +118,20 @@ export default function AdminOpportunities() {
         organization: draft.organization || null,
         applicationUrl: draft.applicationUrl || null,
         amount: draft.amount || null,
+        universityId: draft.universityId,
       },
       {
         onSuccess: () => {
           setShowCreate(false);
-          setDraft({ type: "scholarship", title: "", description: "", organization: "", applicationUrl: "", amount: "" });
+          setDraft({
+            type: "scholarship",
+            title: "",
+            description: "",
+            organization: "",
+            applicationUrl: "",
+            amount: "",
+            universityId: ownedUniversities?.[0]?.id ?? null,
+          });
         },
         onError: (err: any) => toast({ title: "Could not create", description: err?.message, variant: "destructive" }),
       },
@@ -110,6 +144,12 @@ export default function AdminOpportunities() {
       { onError: (err: any) => toast({ title: "Could not change status", description: err?.message, variant: "destructive" }) },
     );
   }
+
+  const createDisabled =
+    isCreating ||
+    !draft.title ||
+    !draft.description ||
+    (isUniversityAdmin && draft.universityId == null);
 
   return (
     <AdminLayout>
@@ -143,9 +183,26 @@ export default function AdminOpportunities() {
                 <Input placeholder="Title" value={draft.title} onChange={(e) => setDraft({ ...draft, title: e.target.value })} className="sm:col-span-2" />
                 <Input placeholder="Application URL" value={draft.applicationUrl} onChange={(e) => setDraft({ ...draft, applicationUrl: e.target.value })} />
                 <Input placeholder="Amount (e.g. Full tuition)" value={draft.amount} onChange={(e) => setDraft({ ...draft, amount: e.target.value })} />
+                {isUniversityAdmin && (
+                  <Select
+                    value={draft.universityId != null ? String(draft.universityId) : undefined}
+                    onValueChange={(v) => setDraft({ ...draft, universityId: Number(v) })}
+                  >
+                    <SelectTrigger className="h-10 text-sm sm:col-span-2">
+                      <SelectValue placeholder="University" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {(ownedUniversities ?? []).map((u) => (
+                        <SelectItem key={u.id} value={String(u.id)}>
+                          {u.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
               <Textarea placeholder="Description" value={draft.description} onChange={(e) => setDraft({ ...draft, description: e.target.value })} rows={3} />
-              <Button size="sm" disabled={isCreating || !draft.title || !draft.description} onClick={submitCreate}>Create Draft</Button>
+              <Button size="sm" disabled={createDisabled} onClick={submitCreate}>Create Draft</Button>
             </CardContent>
           </Card>
         )}

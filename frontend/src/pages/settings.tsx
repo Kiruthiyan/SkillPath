@@ -180,7 +180,7 @@ export default function SettingsPage() {
       educationStage: educationStage || "A/L Completed",
       stream: stream || authUser?.stream || "",
       zscore: zscore ?? authUser?.zscore ?? 0,
-      district: district || authUser?.district || "Colombo",
+      district: district || authUser?.district || "",
       interests: (interests || []).join(", "),
       preferredCareers: (preferredCareers || []).join(", "),
       skills: (skills || []).join(", "),
@@ -279,18 +279,19 @@ export default function SettingsPage() {
   const { mutate: updateProfile, isPending } = useUpdateProfile();
 
   useEffect(() => {
-    if (authUser?.name && !fullName) {
-      setFullName(authUser.name);
-    }
-    if (authUser?.stream && !stream) setStream(authUser.stream);
-    if (authUser?.zscore != null && zscore === null) setZscore(authUser.zscore);
-    if (authUser?.district && !district) setDistrict(authUser.district);
-    if (authUser?.language) {
+    if (!authUser) return;
+    // Server wins: always mirror /auth/me academic fields into the local store
+    // so stale persisted values cannot override the database after refresh/login.
+    if (authUser.name) setFullName(authUser.name);
+    setStream(authUser.stream ?? "");
+    setZscore(authUser.zscore ?? null);
+    setDistrict(authUser.district ?? "");
+    if (authUser.language) {
       const norm = normalizeLanguage(authUser.language);
       setLanguage(norm);
       setUiLanguage(norm as SupportedLanguage);
     }
-  }, [authUser, fullName, stream, zscore, district, setFullName, setStream, setZscore, setDistrict, setLanguage, setUiLanguage]);
+  }, [authUser?.id, authUser?.name, authUser?.stream, authUser?.zscore, authUser?.district, authUser?.language, setFullName, setStream, setZscore, setDistrict, setLanguage, setUiLanguage]);
 
   useEffect(() => {
     form.reset({
@@ -298,7 +299,7 @@ export default function SettingsPage() {
       educationStage: educationStage || "A/L Completed",
       stream: stream || authUser?.stream || "",
       zscore: zscore ?? authUser?.zscore ?? 0,
-      district: district || authUser?.district || "Colombo",
+      district: district || authUser?.district || "",
       interests: (interests || []).join(", "),
       preferredCareers: (preferredCareers || []).join(", "),
       skills: (skills || []).join(", "),
@@ -1241,7 +1242,14 @@ export default function SettingsPage() {
               </Card>
 
               <div className="pt-2 flex justify-end">
-                <Button variant="outline" onClick={logout} className="text-muted-foreground hover:text-foreground">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    logout();
+                    setLocation("/login");
+                  }}
+                  className="text-muted-foreground hover:text-foreground"
+                >
                   <LogOut className="h-4 w-4 mr-2" />
                   {t.nav.logout}
                 </Button>

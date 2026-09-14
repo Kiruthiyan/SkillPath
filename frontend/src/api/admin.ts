@@ -328,7 +328,7 @@ export interface AdminUsersPage {
 export function useListAdminUsers(params: {
   page?: number;
   pageSize?: number;
-  role?: "student" | "admin";
+  role?: "student" | "mentor" | "university_admin" | "admin" | "super_admin";
   isActive?: "true" | "false";
   search?: string;
 }) {
@@ -363,6 +363,11 @@ export interface AdminMetrics {
   googleLinkedUsers: number;
   newUsersLast7d: number;
   newUsersLast30d: number;
+  studentCount: number;
+  activeMentors: number;
+  pendingMentorVerification: number;
+  governmentUniversities: number;
+  privateUniversities: number;
   totalUniversities: number;
   totalCourses: number;
   totalCareers: number;

@@ -41,7 +41,7 @@ export default function CourseDetail() {
   const parsedId = parseInt(params.id ?? "0", 10);
   const courseId = Number.isNaN(parsedId) ? 0 : parsedId;
   const profile = useProfileStore();
-  const district = profile.district || "Colombo";
+  const district = profile.district || undefined;
   const [showInsight, setShowInsight] = useState(false);
 
   const { data: course, isLoading, isError, refetch } = useGetCourse(
