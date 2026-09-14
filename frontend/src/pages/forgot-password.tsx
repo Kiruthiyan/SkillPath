@@ -232,7 +232,7 @@ export default function ForgotPassword() {
                       disabled={isSendingOtp}
                     >
                       {isSendingOtp && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                      {isSendingOtp ? t.actions.saving : t.auth.sendCodeBtn}
+                      {isSendingOtp ? t.actions.processing : t.auth.sendCodeBtn}
                     </Button>
                   </form>
                 </Form>
@@ -270,7 +270,7 @@ export default function ForgotPassword() {
                       disabled={isVerifyingOtp}
                     >
                       {isVerifyingOtp && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                      {isVerifyingOtp ? t.actions.saving : t.auth.verifyOtpBtn}
+                      {isVerifyingOtp ? t.actions.processing : t.auth.verifyOtpBtn}
                     </Button>
                     <button
                       type="button"
@@ -352,7 +352,7 @@ export default function ForgotPassword() {
                       disabled={isResettingPassword}
                     >
                       {isResettingPassword && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                      {isResettingPassword ? t.actions.saving : t.auth.resetPasswordBtn}
+                      {isResettingPassword ? t.actions.processing : t.auth.resetPasswordBtn}
                     </Button>
                   </form>
                 </Form>

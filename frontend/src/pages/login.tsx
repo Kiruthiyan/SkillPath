@@ -219,7 +219,7 @@ export default function Login() {
                   disabled={isPending}
                 >
                   {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                  {isPending ? t.actions.saving : t.auth.signInBtn}
+                  {isPending ? t.actions.signingIn : t.auth.signInBtn}
                 </Button>
               </form>
             </Form>

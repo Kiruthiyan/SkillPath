@@ -80,6 +80,7 @@ function adminNav(t: Translations): NavItem[] {
     { href: "/admin/opportunities", label: t.nav.opportunities, icon: Megaphone },
     { href: "/admin/courses", label: t.nav.courses, icon: BookOpen },
     { href: "/admin/rules", label: t.nav.rules, icon: Scale },
+    { href: "/admin/zscore", label: t.nav.zscoreData, icon: Target },
   ];
 }
 

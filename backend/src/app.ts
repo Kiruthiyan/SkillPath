@@ -9,6 +9,12 @@ const app = express();
 
 const corsOrigins = process.env.CORS_ORIGINS?.split(",").map((o) => o.trim()).filter(Boolean);
 
+if (process.env.NODE_ENV === "production" && !corsOrigins?.length) {
+  logger.warn(
+    "CORS_ORIGINS is empty in production — reflecting any Origin. Set CORS_ORIGINS to your Vercel URL(s).",
+  );
+}
+
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -33,12 +39,13 @@ app.use("/.well-known", (_req, res) => {
   res.status(204).end();
 });
 
-// Redirect browser traffic on port 5000 to the frontend app
+// Redirect browser traffic on the API origin to the frontend app
 app.get("/", (req, res) => {
+  const webApp = process.env.APP_BASE_URL?.replace(/\/$/, "") || "http://localhost:5173";
   if (req.accepts("html")) {
-    res.redirect("http://localhost:5173");
+    res.redirect(webApp);
   } else {
-    res.json({ status: "ok", message: "SkillPath API Server", webApp: "http://localhost:5173" });
+    res.json({ status: "ok", message: "SkillPath API Server", webApp });
   }
 });
 

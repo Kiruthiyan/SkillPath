@@ -217,7 +217,7 @@ export default function Register() {
                   disabled={isPending}
                 >
                   {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                  {isPending ? t.actions.saving : t.auth.registerBtn}
+                  {isPending ? t.actions.creatingAccount : t.auth.registerBtn}
                 </Button>
               </form>
             </Form>

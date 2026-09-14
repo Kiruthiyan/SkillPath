@@ -79,7 +79,7 @@ export default function Checker() {
         <CardContent className="p-6 space-y-5">
           <CheckerForm value={form} onChange={setForm} />
           <Button onClick={handleSubmit} disabled={!canSubmit || isPending} className="w-full sm:w-auto">
-            {isPending ? t.actions.saving : t.checker.checkBtn}
+            {isPending ? t.actions.processing : t.checker.checkBtn}
           </Button>
         </CardContent>
       </Card>

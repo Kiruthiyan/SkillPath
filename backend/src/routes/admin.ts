@@ -632,9 +632,29 @@ router.post("/admin/users/:id/deactivate", async (req, res) => {
     res.status(400).json({ error: "You cannot deactivate your own account from here." });
     return;
   }
+
+  const [target] = await db
+    .select({ id: usersTable.id, role: usersTable.role, tokenVersion: usersTable.tokenVersion })
+    .from(usersTable)
+    .where(eq(usersTable.id, id));
+  if (!target) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+
+  const [actor] = await db
+    .select({ role: usersTable.role })
+    .from(usersTable)
+    .where(eq(usersTable.id, req.user!.userId));
+  const actorIsSuperAdmin = actor?.role === "super_admin";
+  if (ELEVATED_ROLES.includes(target.role as Role) && !actorIsSuperAdmin) {
+    res.status(403).json({ error: "Only a super admin can deactivate elevated accounts." });
+    return;
+  }
+
   const [row] = await db
     .update(usersTable)
-    .set({ isActive: false })
+    .set({ isActive: false, tokenVersion: (target.tokenVersion ?? 0) + 1 })
     .where(eq(usersTable.id, id))
     .returning({ id: usersTable.id, email: usersTable.email, isActive: usersTable.isActive });
   if (!row) {
@@ -646,6 +666,26 @@ router.post("/admin/users/:id/deactivate", async (req, res) => {
 
 router.post("/admin/users/:id/reactivate", async (req, res) => {
   const id = Number(req.params.id);
+
+  const [target] = await db
+    .select({ id: usersTable.id, role: usersTable.role })
+    .from(usersTable)
+    .where(eq(usersTable.id, id));
+  if (!target) {
+    res.status(404).json({ error: "User not found" });
+    return;
+  }
+
+  const [actor] = await db
+    .select({ role: usersTable.role })
+    .from(usersTable)
+    .where(eq(usersTable.id, req.user!.userId));
+  const actorIsSuperAdmin = actor?.role === "super_admin";
+  if (ELEVATED_ROLES.includes(target.role as Role) && !actorIsSuperAdmin) {
+    res.status(403).json({ error: "Only a super admin can reactivate elevated accounts." });
+    return;
+  }
+
   const [row] = await db
     .update(usersTable)
     .set({ isActive: true })

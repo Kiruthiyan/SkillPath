@@ -2,12 +2,12 @@ import { Router } from "express";
 import { AiChatBody } from "../api-zod";
 import { generateChatResponse } from "../lib/gemini";
 import { aiRateLimiter } from "../middleware/ai";
-import { requireAuth } from "../middleware/auth";
+import { requireActiveSession } from "../middleware/auth";
 import { logger } from "../lib/logger";
 
 const router = Router();
 
-router.post("/ai/chat", aiRateLimiter, requireAuth, async (req, res) => {
+router.post("/ai/chat", aiRateLimiter, requireActiveSession, async (req, res) => {
   const parsed = AiChatBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
