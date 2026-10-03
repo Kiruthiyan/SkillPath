@@ -13,7 +13,6 @@ import {
   Building2,
   Search,
 } from "lucide-react";
-import { jsPDF } from "jspdf";
 
 import { useListCourses, useGenerateRoadmap, ApiError } from "@/api";
 import type { Roadmap } from "@/api";
@@ -39,7 +38,8 @@ function getQueryParam(search: string, key: string): string | null {
   return new URLSearchParams(search).get(key);
 }
 
-function downloadRoadmapPdf(roadmap: Roadmap, universityName?: string) {
+async function downloadRoadmapPdf(roadmap: Roadmap, universityName?: string) {
+  const { jsPDF } = await import("jspdf");
   const doc = new jsPDF();
   let y = 20;
 
@@ -401,7 +401,7 @@ export default function RoadmapPage() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => downloadRoadmapPdf(roadmap, selectedCourse?.universityName)}
+              onClick={() => void downloadRoadmapPdf(roadmap, selectedCourse?.universityName)}
               className="self-start sm:self-center gap-2 shadow-2xs hover:bg-secondary/50"
             >
               <Download className="h-4 w-4" /> {t.roadmap.downloadPdfBtn}

@@ -91,10 +91,10 @@ export default function Chat() {
   }
 
   return (
-    <div className="space-y-6 pb-10 max-w-3xl mx-auto">
+    <div className="mx-auto max-w-3xl min-w-0 space-y-6 pb-10">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
-          <Bot className="h-8 w-8 text-primary" />
+        <h1 className="flex items-center gap-2 text-3xl font-bold tracking-tight">
+          <Bot className="h-8 w-8 shrink-0 text-primary" />
           {t.chat.title}
         </h1>
         <p className="text-muted-foreground mt-2">{t.chat.subtitle}</p>
@@ -106,9 +106,9 @@ export default function Chat() {
             <CardTitle className="text-base">{t.chat.suggestionsTitle}</CardTitle>
             <CardDescription className="text-xs">{t.chat.disclaimer}</CardDescription>
           </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
+            <CardContent className="flex min-w-0 flex-wrap gap-2">
             {suggestions.map((q) => (
-              <Button key={q} variant="outline" size="sm" className="text-xs h-auto py-2 text-left" onClick={() => handleSend(q)}>
+                <Button key={q} variant="outline" size="sm" className="h-auto py-2 text-left text-xs" onClick={() => handleSend(q)}>
                 {q}
               </Button>
             ))}
@@ -122,7 +122,7 @@ export default function Chat() {
             key={i}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}
+            className={`flex min-w-0 gap-3 ${msg.role === "user" ? "justify-end" : ""}`}
           >
             {msg.role === "assistant" && (
               <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center shrink-0">
@@ -130,7 +130,7 @@ export default function Chat() {
               </div>
             )}
             <div
-              className={`rounded-lg px-4 py-3 max-w-[80%] text-sm leading-relaxed ${
+              className={`min-w-0 max-w-[80%] overflow-hidden break-words rounded-lg px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
                 msg.role === "user"
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-foreground"
@@ -146,11 +146,11 @@ export default function Chat() {
           </motion.div>
         ))}
         {isPending && (
-          <div className="flex gap-3">
-            <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+          <div className="flex min-w-0 gap-3">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary">
               <Bot className="h-4 w-4 text-primary-foreground animate-pulse" />
             </div>
-            <div className="rounded-lg px-4 py-3 bg-muted text-sm text-muted-foreground">
+            <div className="min-w-0 overflow-hidden break-words rounded-lg bg-muted px-4 py-3 text-sm text-muted-foreground">
               {language === "si" ? "පිළිතුර සකසමින් පවතී..." : language === "ta" ? "பதிலை உருவாக்குகிறது..." : "Thinking..."}
             </div>
           </div>
@@ -158,7 +158,7 @@ export default function Chat() {
         <div ref={bottomRef} />
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex min-w-0 gap-2">
         <Textarea
           placeholder={t.chat.placeholder}
           value={input}

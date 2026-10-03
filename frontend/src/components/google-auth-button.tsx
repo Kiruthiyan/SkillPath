@@ -51,6 +51,7 @@ export function GoogleAuthButton({
   const setAuth = useAuthStore((s) => s.setAuth);
   const [isLoading, setIsLoading] = useState(false);
   const [gisLoaded, setGisLoaded] = useState(false);
+  const [googleButtonError, setGoogleButtonError] = useState(false);
   const googleBtnContainerRef = useRef<HTMLDivElement>(null);
 
   const googleClientId =
@@ -141,6 +142,12 @@ export function GoogleAuthButton({
       return;
     }
 
+    const container = googleBtnContainerRef.current;
+    container.innerHTML = "";
+    setGoogleButtonError(false);
+
+    let renderCheck: number | undefined;
+
     try {
       window.google.accounts.id.initialize({
         client_id: googleClientId,
@@ -159,9 +166,19 @@ export function GoogleAuthButton({
         shape: "rectangular",
         width: 380,
       });
+
+      renderCheck = window.setTimeout(() => {
+        if (container.childElementCount === 0) {
+          setGoogleButtonError(true);
+        }
+      }, 1500);
     } catch {
-      // Fall back to custom button
+      setGoogleButtonError(true);
     }
+
+    return () => {
+      if (renderCheck) window.clearTimeout(renderCheck);
+    };
   }, [gisLoaded, googleClientId, mode]);
 
   const handlePromptClick = () => {
@@ -184,6 +201,12 @@ export function GoogleAuthButton({
           ref={googleBtnContainerRef}
           className="w-full flex justify-center mb-1 overflow-hidden"
         />
+      )}
+
+      {googleButtonError && (
+        <p className="text-center text-xs text-destructive">
+          Google sign-in is not available for this domain. Use email sign-in or update the Google OAuth allowed origins.
+        </p>
       )}
 
       {/* Styled Google Sign-In Button (shown while GIS script loads, or as a manual prompt trigger) */}

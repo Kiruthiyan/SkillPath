@@ -48,14 +48,14 @@ export function CheckerForm({
 
   return (
     <div className="space-y-5">
-      <div className="grid sm:grid-cols-4 gap-4">
-        <div className="space-y-1.5">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="min-w-0 space-y-1.5">
           <Label>Academic Year</Label>
           <Select
             value={value.academicYear}
             onValueChange={(academicYear) => onChange({ ...value, academicYear })}
           >
-            <SelectTrigger>
+            <SelectTrigger className="min-w-0">
               <SelectValue placeholder="Select year" />
             </SelectTrigger>
             <SelectContent>
@@ -69,10 +69,10 @@ export function CheckerForm({
           </Select>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="min-w-0 space-y-1.5">
           <Label>A/L Stream</Label>
           <Select value={value.stream} onValueChange={(stream) => onChange({ ...value, stream })}>
-            <SelectTrigger>
+            <SelectTrigger className="min-w-0">
               <SelectValue placeholder="Select stream" />
             </SelectTrigger>
             <SelectContent>
@@ -83,10 +83,10 @@ export function CheckerForm({
           </Select>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="min-w-0 space-y-1.5">
           <Label>District (Z-score quota)</Label>
           <Select value={value.district} onValueChange={(district) => onChange({ ...value, district })}>
-            <SelectTrigger>
+            <SelectTrigger className="min-w-0">
               <SelectValue placeholder="Select district" />
             </SelectTrigger>
             <SelectContent>
@@ -97,7 +97,7 @@ export function CheckerForm({
           </Select>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="min-w-0 space-y-1.5">
           <Label>Your Z-Score</Label>
           <Input
             type="number"
@@ -112,9 +112,9 @@ export function CheckerForm({
       <div className="space-y-2">
         <Label>Subjects &amp; Grades</Label>
         {value.subjectGrades.map((row, i) => (
-          <div key={i} className="flex gap-2 items-center">
+          <div key={i} className="grid grid-cols-[minmax(0,1fr)_2.5rem] gap-2 sm:grid-cols-[minmax(0,1fr)_7rem_2.5rem] sm:items-start">
             <Select value={row.subject} onValueChange={(subject) => updateSubjectRow(i, { subject })}>
-              <SelectTrigger className="flex-1">
+              <SelectTrigger className="col-span-2 min-w-0 sm:col-span-1">
                 <SelectValue placeholder="Subject" />
               </SelectTrigger>
               <SelectContent>
@@ -124,7 +124,7 @@ export function CheckerForm({
               </SelectContent>
             </Select>
             <Select value={row.grade} onValueChange={(grade) => updateSubjectRow(i, { grade })}>
-              <SelectTrigger className="w-24">
+              <SelectTrigger className="min-w-0">
                 <SelectValue placeholder="Grade" />
               </SelectTrigger>
               <SelectContent>
@@ -133,7 +133,13 @@ export function CheckerForm({
                 ))}
               </SelectContent>
             </Select>
-            <Button variant="ghost" size="icon" onClick={() => removeSubjectRow(i)} aria-label="Remove subject">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10"
+              onClick={() => removeSubjectRow(i)}
+              aria-label="Remove subject"
+            >
               <X className="h-4 w-4" />
             </Button>
           </div>

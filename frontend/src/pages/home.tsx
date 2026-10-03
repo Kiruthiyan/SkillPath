@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Brain, Target, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Brain, CheckCircle2, Target, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePageTitle } from "@/hooks/use-page-title";
@@ -56,8 +56,18 @@ export default function Home() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
-                <Link href="/courses">{t.actions.browseCourses}</Link>
+                <Link href="/register">{t.actions.getStarted}</Link>
               </Button>
+            </div>
+            <div className="mt-5 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:items-center sm:gap-4">
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-[hsl(var(--secondary))]" />
+                Z-score check works without sign in
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-[hsl(var(--secondary))]" />
+                Sign in only for saved and personalized tools
+              </span>
             </div>
           </motion.div>
         </div>
@@ -89,11 +99,18 @@ export default function Home() {
 
       <section className="bg-muted py-16">
         <div className="mx-auto max-w-6xl px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">{t.home.ctaHeading}</h2>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">{t.home.ctaSubtitle}</p>
-          <Button size="lg" asChild>
-            <Link href="/register">{t.actions.getStarted}</Link>
-          </Button>
+          <h2 className="text-2xl font-bold mb-4">Check first. Create an account when you need more.</h2>
+          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            Students can use the Z-score checker immediately. Sign in later to save courses, build roadmaps, and unlock personalized dashboards.
+          </p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
+            <Button size="lg" asChild>
+              <Link href="/checker">{t.nav.checker}</Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/register">{t.actions.getStarted}</Link>
+            </Button>
+          </div>
           <p className="text-sm text-muted-foreground mt-4">
             {t.auth.alreadyHaveAccount}{" "}
             <Link href="/login" className="text-primary font-semibold hover:underline">

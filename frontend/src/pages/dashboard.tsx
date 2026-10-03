@@ -370,7 +370,7 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="courses" className="space-y-4">
-            <TabsList className="grid w-full sm:w-80 grid-cols-3">
+            <TabsList className="grid w-full grid-cols-1 gap-1 sm:w-80 sm:grid-cols-3">
               <TabsTrigger value="courses">Courses ({savedCourses?.length || 0})</TabsTrigger>
               <TabsTrigger value="universities">Universities ({savedUniversities?.length || 0})</TabsTrigger>
               <TabsTrigger value="careers">Careers</TabsTrigger>

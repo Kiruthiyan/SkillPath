@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Switch, Route, Redirect, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ApiError } from "@/api";
@@ -10,43 +10,46 @@ import { RequireAuth } from "@/components/require-auth";
 import { AuthBootstrap } from "@/components/auth-bootstrap";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { useAuthStore } from "@/hooks/use-auth";
+import { applyRouteSeo } from "@/lib/seo";
 import "@/hooks/use-auth";
 
-import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
-import Profile from "@/pages/profile";
-import Settings from "@/pages/settings";
-import Dashboard from "@/pages/dashboard";
-import Courses from "@/pages/courses";
-import CourseDetail from "@/pages/course-detail";
-import Careers from "@/pages/careers";
-import Reviews from "@/pages/reviews";
-import SuccessStories from "@/pages/stories";
-import Roadmap from "@/pages/roadmap";
-import Chat from "@/pages/chat";
-import Login from "@/pages/login";
-import Register from "@/pages/register";
-import ForgotPassword from "@/pages/forgot-password";
-import ChangePasswordForced from "@/pages/change-password";
-import AcceptInvite from "@/pages/accept-invite";
-import UniversityAdminDashboard from "@/pages/university-admin/dashboard";
-import Mentors from "@/pages/mentors";
-import MentorDashboard from "@/pages/mentor/dashboard";
-import AdminMentors from "@/pages/admin/mentors";
-import Opportunities from "@/pages/opportunities";
-import AdminOpportunities from "@/pages/admin/opportunities";
-import Universities from "@/pages/universities";
 import Checker from "@/pages/checker";
-import AdminOverview from "@/pages/admin/overview";
-import AdminUsers from "@/pages/admin/users";
-import AdminImports from "@/pages/admin/imports";
-import AdminReviewQueue from "@/pages/admin/review-queue";
-import AdminUniversities from "@/pages/admin/universities";
-import AdminCourses from "@/pages/admin/courses";
-import AdminRules from "@/pages/admin/rules";
-import AdminZscoreData from "@/pages/admin/zscore-data";
 import { RequireAdmin } from "@/components/require-admin";
 import { RequireRole } from "@/components/require-role";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const NotFound = lazy(() => import("@/pages/not-found"));
+const Profile = lazy(() => import("@/pages/profile"));
+const Settings = lazy(() => import("@/pages/settings"));
+const Dashboard = lazy(() => import("@/pages/dashboard"));
+const Courses = lazy(() => import("@/pages/courses"));
+const CourseDetail = lazy(() => import("@/pages/course-detail"));
+const Careers = lazy(() => import("@/pages/careers"));
+const Reviews = lazy(() => import("@/pages/reviews"));
+const SuccessStories = lazy(() => import("@/pages/stories"));
+const Roadmap = lazy(() => import("@/pages/roadmap"));
+const Chat = lazy(() => import("@/pages/chat"));
+const Login = lazy(() => import("@/pages/login"));
+const Register = lazy(() => import("@/pages/register"));
+const ForgotPassword = lazy(() => import("@/pages/forgot-password"));
+const ChangePasswordForced = lazy(() => import("@/pages/change-password"));
+const AcceptInvite = lazy(() => import("@/pages/accept-invite"));
+const UniversityAdminDashboard = lazy(() => import("@/pages/university-admin/dashboard"));
+const Mentors = lazy(() => import("@/pages/mentors"));
+const MentorDashboard = lazy(() => import("@/pages/mentor/dashboard"));
+const AdminMentors = lazy(() => import("@/pages/admin/mentors"));
+const Opportunities = lazy(() => import("@/pages/opportunities"));
+const AdminOpportunities = lazy(() => import("@/pages/admin/opportunities"));
+const Universities = lazy(() => import("@/pages/universities"));
+const AdminOverview = lazy(() => import("@/pages/admin/overview"));
+const AdminUsers = lazy(() => import("@/pages/admin/users"));
+const AdminImports = lazy(() => import("@/pages/admin/imports"));
+const AdminReviewQueue = lazy(() => import("@/pages/admin/review-queue"));
+const AdminUniversities = lazy(() => import("@/pages/admin/universities"));
+const AdminCourses = lazy(() => import("@/pages/admin/courses"));
+const AdminRules = lazy(() => import("@/pages/admin/rules"));
+const AdminZscoreData = lazy(() => import("@/pages/admin/zscore-data"));
 
 /**
  * Endpoints where a 401 means "the credentials you just submitted are wrong",
@@ -307,6 +310,26 @@ function ProtectedChangePassword() {
   );
 }
 
+function RouteMetadata() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    applyRouteSeo(location);
+  }, [location]);
+
+  return null;
+}
+
+function PageFallback() {
+  return (
+    <div className="space-y-4 py-8" aria-busy="true" aria-label="Loading page">
+      <Skeleton className="h-8 w-56 max-w-full" />
+      <Skeleton className="h-32 w-full" />
+      <Skeleton className="h-24 w-full" />
+    </div>
+  );
+}
+
 /** `/admin` is not a page; send it to the real landing page. */
 function AdminIndexRedirect() {
   return <Redirect to="/admin/overview" replace />;
@@ -329,45 +352,48 @@ function ProtectedAdminNotFound() {
 function Router() {
   return (
     <AppLayout>
+      <RouteMetadata />
       <ForcedPasswordChangeGate />
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/change-password" component={ProtectedChangePassword} />
-        <Route path="/accept-invite" component={AcceptInvite} />
-        <Route path="/university-admin" component={ProtectedUniversityAdminDashboard} />
-        <Route path="/mentors" component={ProtectedMentorsDirectory} />
-        <Route path="/mentor" component={ProtectedMentorDashboard} />
-        <Route path="/admin/mentors" component={ProtectedAdminMentors} />
-        <Route path="/opportunities" component={ProtectedOpportunities} />
-        <Route path="/admin/opportunities" component={ProtectedAdminOpportunities} />
-        <Route path="/profile" component={ProtectedProfile} />
-        <Route path="/settings" component={ProtectedSettings} />
-        <Route path="/dashboard" component={ProtectedDashboard} />
-        <Route path="/universities/:id" component={ProtectedUniversities} />
-        <Route path="/universities" component={ProtectedUniversities} />
-        <Route path="/courses" component={ProtectedCourses} />
-        <Route path="/courses/:id" component={ProtectedCourseDetail} />
-        <Route path="/checker" component={Checker} />
-        <Route path="/admin" component={AdminIndexRedirect} />
-        <Route path="/admin/overview" component={ProtectedAdminOverview} />
-        <Route path="/admin/users" component={ProtectedAdminUsers} />
-        <Route path="/admin/imports" component={ProtectedAdminImports} />
-        <Route path="/admin/review" component={ProtectedAdminReviewQueue} />
-        <Route path="/admin/universities" component={ProtectedAdminUniversities} />
-        <Route path="/admin/courses" component={ProtectedAdminCourses} />
-        <Route path="/admin/rules" component={ProtectedAdminRules} />
-        <Route path="/admin/zscore" component={ProtectedAdminZscoreData} />
-        <Route path="/careers" component={ProtectedCareers} />
-        <Route path="/reviews" component={ProtectedReviews} />
-        <Route path="/stories" component={ProtectedSuccessStories} />
-        <Route path="/roadmap" component={ProtectedRoadmap} />
-        <Route path="/chat" component={ProtectedChat} />
-        <Route path="/admin/*" component={ProtectedAdminNotFound} />
-        <Route component={NotFound} />
-      </Switch>
+      <Suspense fallback={<PageFallback />}>
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path="/change-password" component={ProtectedChangePassword} />
+          <Route path="/accept-invite" component={AcceptInvite} />
+          <Route path="/university-admin" component={ProtectedUniversityAdminDashboard} />
+          <Route path="/mentors" component={ProtectedMentorsDirectory} />
+          <Route path="/mentor" component={ProtectedMentorDashboard} />
+          <Route path="/admin/mentors" component={ProtectedAdminMentors} />
+          <Route path="/opportunities" component={ProtectedOpportunities} />
+          <Route path="/admin/opportunities" component={ProtectedAdminOpportunities} />
+          <Route path="/profile" component={ProtectedProfile} />
+          <Route path="/settings" component={ProtectedSettings} />
+          <Route path="/dashboard" component={ProtectedDashboard} />
+          <Route path="/universities/:id" component={ProtectedUniversities} />
+          <Route path="/universities" component={ProtectedUniversities} />
+          <Route path="/courses" component={ProtectedCourses} />
+          <Route path="/courses/:id" component={ProtectedCourseDetail} />
+          <Route path="/checker" component={Checker} />
+          <Route path="/admin" component={AdminIndexRedirect} />
+          <Route path="/admin/overview" component={ProtectedAdminOverview} />
+          <Route path="/admin/users" component={ProtectedAdminUsers} />
+          <Route path="/admin/imports" component={ProtectedAdminImports} />
+          <Route path="/admin/review" component={ProtectedAdminReviewQueue} />
+          <Route path="/admin/universities" component={ProtectedAdminUniversities} />
+          <Route path="/admin/courses" component={ProtectedAdminCourses} />
+          <Route path="/admin/rules" component={ProtectedAdminRules} />
+          <Route path="/admin/zscore" component={ProtectedAdminZscoreData} />
+          <Route path="/careers" component={ProtectedCareers} />
+          <Route path="/reviews" component={ProtectedReviews} />
+          <Route path="/stories" component={ProtectedSuccessStories} />
+          <Route path="/roadmap" component={ProtectedRoadmap} />
+          <Route path="/chat" component={ProtectedChat} />
+          <Route path="/admin/*" component={ProtectedAdminNotFound} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </AppLayout>
   );
 }

@@ -25,6 +25,26 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          if (id.includes("jspdf")) return "pdf-jspdf";
+          if (id.includes("html2canvas")) return "pdf-html2canvas";
+          if (id.includes("dompurify")) return "pdf-sanitize";
+          if (id.includes("framer-motion")) return "motion";
+          if (id.includes("react-hook-form") || id.includes("@hookform") || id.includes("zod")) {
+            return "forms";
+          }
+          if (id.includes("@radix-ui")) return "radix-ui";
+          if (id.includes("@tanstack/react-query")) return "query";
+          if (id.includes("react") || id.includes("react-dom") || id.includes("wouter")) {
+            return "react-core";
+          }
+          return undefined;
+        },
+      },
+    },
   },
   server: {
     port,

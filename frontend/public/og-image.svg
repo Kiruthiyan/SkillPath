@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SkillPath AI</title>
+  <desc id="desc">Sri Lankan university Z-score and course guidance</desc>
+  <rect width="1200" height="630" fill="#f6f8fb"/>
+  <rect x="64" y="64" width="1072" height="502" rx="28" fill="#ffffff" stroke="#d7dde7" stroke-width="2"/>
+  <circle cx="168" cy="158" r="48" fill="#1e3a5f"/>
+  <path d="M135 154h66l-33-21-33 21Zm10 11v36h46v-36h-46Z" fill="#f8fafc"/>
+  <text x="248" y="152" fill="#1e3a5f" font-family="Arial, sans-serif" font-size="54" font-weight="700">SkillPath AI</text>
+  <text x="248" y="214" fill="#526173" font-family="Arial, sans-serif" font-size="28">Sri Lankan university guidance powered by UGC handbook data</text>
+  <rect x="112" y="298" width="320" height="112" rx="18" fill="#e9f7fd" stroke="#38a8d8"/>
+  <text x="144" y="344" fill="#1e3a5f" font-family="Arial, sans-serif" font-size="28" font-weight="700">Z-Score Checker</text>
+  <text x="144" y="382" fill="#526173" font-family="Arial, sans-serif" font-size="20">No login required</text>
+  <rect x="456" y="298" width="288" height="112" rx="18" fill="#f1f5f9" stroke="#d7dde7"/>
+  <text x="488" y="344" fill="#1e3a5f" font-family="Arial, sans-serif" font-size="28" font-weight="700">Course Matches</text>
+  <text x="488" y="382" fill="#526173" font-family="Arial, sans-serif" font-size="20">Official data</text>
+  <rect x="768" y="298" width="320" height="112" rx="18" fill="#f5f1fb" stroke="#8f5bd4"/>
+  <text x="800" y="344" fill="#1e3a5f" font-family="Arial, sans-serif" font-size="28" font-weight="700">Career Roadmaps</text>
+  <text x="800" y="382" fill="#526173" font-family="Arial, sans-serif" font-size="20">Personalized planning</text>
+  <text x="112" y="494" fill="#1e3a5f" font-family="Arial, sans-serif" font-size="24" font-weight="700">skillpath.ai</text>
+</svg>

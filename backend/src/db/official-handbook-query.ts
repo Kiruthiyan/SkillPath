@@ -1,5 +1,8 @@
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { db, pool } from "./client";
 import { universitiesTable } from "./schema/index";
+import { logger } from "../lib/logger";
 
 export const OFFICIAL_HANDBOOK_YEAR = "2025/2026";
 const SOURCE_HANDBOOK_YEAR = "2025/2026";
@@ -29,6 +32,61 @@ interface OfficialCutoffRow {
   academic_year: string;
   cutoff: number;
 }
+
+interface StaticCourseRow {
+  academic_year: string;
+  uni_code: string;
+  course_id: string;
+  university: string;
+  course_name: string;
+  faculty: string | null;
+  duration: string | null;
+  medium: unknown;
+  intake: number | null;
+  campus: string | null;
+}
+
+interface StaticEligibilityRow {
+  academic_year: string;
+  uni_code: string;
+  course_name?: string;
+  eligible_streams: unknown;
+  required_subjects: unknown;
+  minimum_grades: unknown;
+  special_requirements: unknown;
+}
+
+interface StaticCutoffRow {
+  academic_year: string;
+  uni_code?: string;
+  university?: string;
+  course_name?: string;
+  district: string;
+  cutoff: number | null;
+}
+
+interface StaticSimpleProgramme {
+  academicYear: string;
+  university: string;
+  universityShortName?: string;
+  degreeName: string;
+  faculty?: string | null;
+  stream?: string | null;
+  district?: string | null;
+  minimumZScore?: number | null;
+  durationYears?: number | null;
+  degreeType?: string | null;
+  description?: string | null;
+}
+
+interface StaticHandbookData {
+  courses: StaticCourseRow[];
+  eligibilityRules: StaticEligibilityRow[];
+  cutoffs: StaticCutoffRow[];
+}
+
+let staticHandbookCache: StaticHandbookData | null | undefined;
+let warnedAboutStaticFallback = false;
 
 export interface OfficialCourse {
   id: number;
@@ -235,6 +293,184 @@ export function getCourseEligibleStreams(row: { course_name?: string | null; eli
   return SECTION9_STREAM_MAPPINGS[name] ?? [];
 }
 
+function academicYearMatches(left: string, right: string): boolean {
+  const normalize = (value: string) => value.replace(/^20(\d{2})\/20(\d{2})$/, "20$1/$2");
+  return left === right || normalize(left) === normalize(right);
+}
+
+function readJsonCandidate<T>(paths: string[]): T | null {
+  for (const path of paths) {
+    if (!existsSync(path)) continue;
+    return JSON.parse(readFileSync(path, "utf8")) as T;
+  }
+  return null;
+}
+
+function staticDataPaths(fileName: string): string[] {
+  return [
+    resolve(process.cwd(), "../HandBook/2025", fileName),
+    resolve(process.cwd(), "HandBook/2025", fileName),
+  ];
+}
+
+function backendDataPath(fileName: string): string {
+  return resolve(process.cwd(), "data/handbooks", fileName);
+}
+
+function loadStaticHandbookData(): StaticHandbookData | null {
+  if (staticHandbookCache !== undefined) return staticHandbookCache;
+
+  const courses = readJsonCandidate<{ courses: StaticCourseRow[] }>(staticDataPaths("courses_2025.json"));
+  const eligibilityRules = readJsonCandidate<StaticEligibilityRow[]>(staticDataPaths("eligibility_rules_2025.json"));
+  const cutoffs = readJsonCandidate<StaticCutoffRow[]>(staticDataPaths("zscore_cutoffs_2025.json"));
+
+  if (courses && eligibilityRules && cutoffs) {
+    staticHandbookCache = {
+      courses: courses.courses,
+      eligibilityRules,
+      cutoffs,
+    };
+    return staticHandbookCache;
+  }
+
+  const compact = readJsonCandidate<{ programmes: StaticSimpleProgramme[] }>([
+    backendDataPath("2025_26.json"),
+    backendDataPath("2024_25.json"),
+  ]);
+
+  if (!compact) {
+    staticHandbookCache = null;
+    return staticHandbookCache;
+  }
+
+  const courseCodeByKey = new Map<string, string>();
+  const coursesByKey = new Map<string, StaticCourseRow>();
+  const eligibilityByKey = new Map<string, StaticEligibilityRow>();
+  const staticCutoffs: StaticCutoffRow[] = [];
+
+  for (const programme of compact.programmes) {
+    const key = `${programme.academicYear}|${programme.university}|${programme.degreeName}`;
+    if (!courseCodeByKey.has(key)) {
+      courseCodeByKey.set(key, (courseCodeByKey.size + 1).toString(36).padStart(4, "0"));
+    }
+    const uniCode = courseCodeByKey.get(key)!;
+    coursesByKey.set(key, {
+      academic_year: programme.academicYear,
+      uni_code: uniCode,
+      course_id: `${programme.academicYear}:${uniCode}`,
+      university: programme.university,
+      course_name: programme.degreeName,
+      faculty: programme.faculty ?? null,
+      duration: programme.durationYears != null ? `${programme.durationYears.toString().padStart(2, "0")} Years` : null,
+      medium: null,
+      intake: null,
+      campus: null,
+    });
+
+    const stream = programme.stream ? [programme.stream] : SECTION9_STREAM_MAPPINGS[programme.degreeName] ?? [];
+    eligibilityByKey.set(key, {
+      academic_year: programme.academicYear,
+      uni_code: uniCode,
+      course_name: programme.degreeName,
+      eligible_streams: stream,
+      required_subjects: [],
+      minimum_grades: [],
+      special_requirements: [],
+    });
+
+    if (programme.district && programme.minimumZScore != null) {
+      staticCutoffs.push({
+        academic_year: programme.academicYear,
+        uni_code: uniCode,
+        university: programme.university,
+        course_name: programme.degreeName,
+        district: programme.district,
+        cutoff: programme.minimumZScore,
+      });
+    }
+  }
+
+  staticHandbookCache = {
+    courses: Array.from(coursesByKey.values()),
+    eligibilityRules: Array.from(eligibilityByKey.values()),
+    cutoffs: staticCutoffs,
+  };
+  return staticHandbookCache;
+}
+
+function errorSummary(err: unknown): string {
+  if (err instanceof Error) {
+    const nested = (err as { errors?: unknown[]; aggregateErrors?: unknown[] }).errors
+      ?? (err as { aggregateErrors?: unknown[] }).aggregateErrors
+      ?? [];
+    return [err.message, (err as { code?: string }).code, ...nested.map(errorSummary)]
+      .filter(Boolean)
+      .join(" ");
+  }
+  return String(err);
+}
+
+function canUseStaticFallback(err: unknown): boolean {
+  const summary = errorSummary(err);
+  return /EACCES|ECONNREFUSED|ENOTFOUND|ETIMEDOUT|timeout|does not exist|DATABASE_URL/i.test(summary);
+}
+
+function warnStaticFallback(err: unknown) {
+  if (warnedAboutStaticFallback) return;
+  warnedAboutStaticFallback = true;
+  logger.warn({ err: errorSummary(err) }, "Using bundled handbook data for public checker endpoints");
+}
+
+function latestStaticCutoff(
+  data: StaticHandbookData,
+  course: StaticCourseRow,
+  district: string,
+): { cutoff: number | null; academicYear: string | null } {
+  const candidates = data.cutoffs
+    .filter((cutoff) =>
+      cutoff.cutoff != null &&
+      (cutoff.uni_code === course.uni_code ||
+        (cutoff.university === course.university && cutoff.course_name === course.course_name)) &&
+      (cutoff.district === district || cutoff.district === "All Island")
+    )
+    .sort((a, b) => {
+      if (a.district !== b.district) return a.district === district ? -1 : 1;
+      return b.academic_year.localeCompare(a.academic_year);
+    });
+
+  const latest = candidates[0];
+  return {
+    cutoff: latest?.cutoff ?? null,
+    academicYear: latest?.academic_year ?? null,
+  };
+}
+
+function staticCourseRows(params: { academicYear?: string; district?: string }): OfficialCourseRow[] {
+  const data = loadStaticHandbookData();
+  if (!data) return [];
+
+  const academicYear = params.academicYear ?? OFFICIAL_HANDBOOK_YEAR;
+  const district = params.district ?? "All Island";
+
+  return data.courses
+    .filter((course) => academicYearMatches(course.academic_year, academicYear))
+    .map((course) => {
+      const eligibility = data.eligibilityRules.find(
+        (rule) => academicYearMatches(rule.academic_year, course.academic_year) && rule.uni_code === course.uni_code,
+      );
+      const cutoff = latestStaticCutoff(data, course, district);
+      return {
+        ...course,
+        eligible_streams: eligibility?.eligible_streams ?? SECTION9_STREAM_MAPPINGS[course.course_name] ?? [],
+        required_subjects: eligibility?.required_subjects ?? [],
+        minimum_grades: eligibility?.minimum_grades ?? [],
+        special_requirements: eligibility?.special_requirements ?? [],
+        latest_cutoff: cutoff.cutoff,
+        latest_cutoff_year: cutoff.academicYear,
+      };
+    });
+}
+
 function rowToCourse(row: OfficialCourseRow, opts: { district?: string; zscore?: number }): OfficialCourse {
   const eligibleStreams = getCourseEligibleStreams(row);
   const medium = asMedium(row.medium);
@@ -277,51 +513,57 @@ async function fetchCourseRows(params: {
 }): Promise<OfficialCourseRow[]> {
   const academicYear = params.academicYear ?? OFFICIAL_HANDBOOK_YEAR;
   const district = params.district ?? "All Island";
-  const result = await pool.query<OfficialCourseRow>(
-    `
-      select
-        c.academic_year,
-        c.uni_code,
-        c.course_id,
-        c.university,
-        c.course_name,
-        c.faculty,
-        c.duration,
-        c.medium,
-        c.intake,
-        c.campus,
-        e.eligible_streams,
-        e.required_subjects,
-        e.minimum_grades,
-        e.special_requirements,
-        (
-          select z.cutoff
-          from official_handbook_zscore_cutoffs z
-          where z.source_handbook_year = $2
-            and z.uni_code = c.uni_code
-            and (z.district = $3 or z.district = 'All Island')
-          order by case when z.district = $3 then 0 else 1 end, z.academic_year desc
-          limit 1
-        ) as latest_cutoff,
-        (
-          select z.academic_year
-          from official_handbook_zscore_cutoffs z
-          where z.source_handbook_year = $2
-            and z.uni_code = c.uni_code
-            and (z.district = $3 or z.district = 'All Island')
-          order by case when z.district = $3 then 0 else 1 end, z.academic_year desc
-          limit 1
-        ) as latest_cutoff_year
-      from official_handbook_courses c
-      left join official_handbook_eligibility_rules e
-        on e.academic_year = c.academic_year
-       and e.uni_code = c.uni_code
-      where c.academic_year = $1
-      order by c.course_name, c.university, c.uni_code
-    `,
-    [academicYear, SOURCE_HANDBOOK_YEAR, district],
-  );
-  return result.rows;
+  try {
+    const result = await pool.query<OfficialCourseRow>(
+      `
+        select
+          c.academic_year,
+          c.uni_code,
+          c.course_id,
+          c.university,
+          c.course_name,
+          c.faculty,
+          c.duration,
+          c.medium,
+          c.intake,
+          c.campus,
+          e.eligible_streams,
+          e.required_subjects,
+          e.minimum_grades,
+          e.special_requirements,
+          (
+            select z.cutoff
+            from official_handbook_zscore_cutoffs z
+            where z.source_handbook_year = $2
+              and z.uni_code = c.uni_code
+              and (z.district = $3 or z.district = 'All Island')
+            order by case when z.district = $3 then 0 else 1 end, z.academic_year desc
+            limit 1
+          ) as latest_cutoff,
+          (
+            select z.academic_year
+            from official_handbook_zscore_cutoffs z
+            where z.source_handbook_year = $2
+              and z.uni_code = c.uni_code
+              and (z.district = $3 or z.district = 'All Island')
+            order by case when z.district = $3 then 0 else 1 end, z.academic_year desc
+            limit 1
+          ) as latest_cutoff_year
+        from official_handbook_courses c
+        left join official_handbook_eligibility_rules e
+          on e.academic_year = c.academic_year
+         and e.uni_code = c.uni_code
+        where c.academic_year = $1
+        order by c.course_name, c.university, c.uni_code
+      `,
+      [academicYear, SOURCE_HANDBOOK_YEAR, district],
+    );
+    return result.rows;
+  } catch (err) {
+    if (!canUseStaticFallback(err)) throw err;
+    warnStaticFallback(err);
+    return staticCourseRows({ academicYear, district });
+  }
 }
 
 export async function listOfficialCourses(opts: {
@@ -360,18 +602,29 @@ export async function getOfficialCutoffHistory(
   uniCode: string,
   district: string,
 ): Promise<Array<{ academicYear: string; minimumZScore: number }>> {
-  const result = await pool.query<OfficialCutoffRow>(
-    `
-      select academic_year, cutoff
-      from official_handbook_zscore_cutoffs
-      where source_handbook_year = $1
-        and uni_code = $2
-        and district = $3
-      order by academic_year desc
-    `,
-    [SOURCE_HANDBOOK_YEAR, uniCode, district],
-  );
-  return result.rows.map((row) => ({ academicYear: row.academic_year, minimumZScore: row.cutoff }));
+  try {
+    const result = await pool.query<OfficialCutoffRow>(
+      `
+        select academic_year, cutoff
+        from official_handbook_zscore_cutoffs
+        where source_handbook_year = $1
+          and uni_code = $2
+          and district = $3
+        order by academic_year desc
+      `,
+      [SOURCE_HANDBOOK_YEAR, uniCode, district],
+    );
+    return result.rows.map((row) => ({ academicYear: row.academic_year, minimumZScore: row.cutoff }));
+  } catch (err) {
+    if (!canUseStaticFallback(err)) throw err;
+    warnStaticFallback(err);
+    const data = loadStaticHandbookData();
+    if (!data) return [];
+    return data.cutoffs
+      .filter((row) => row.uni_code === uniCode && row.district === district && row.cutoff != null)
+      .sort((a, b) => b.academic_year.localeCompare(a.academic_year))
+      .map((row) => ({ academicYear: row.academic_year, minimumZScore: row.cutoff! }));
+  }
 }
 
 export async function getOfficialCourseDetail(
@@ -447,16 +700,26 @@ export async function getOfficialUniversity(id: number): Promise<OfficialUnivers
 }
 
 export async function listOfficialStreams(): Promise<string[]> {
-  const result = await pool.query<{ stream: string }>(
-    `
-      select distinct jsonb_array_elements_text(eligible_streams) as stream
-      from official_handbook_eligibility_rules
-      where academic_year = $1
-      order by stream
-    `,
-    [OFFICIAL_HANDBOOK_YEAR],
-  );
-  const streams = new Set(result.rows.map((row) => row.stream));
+  const streams = new Set<string>();
+  try {
+    const result = await pool.query<{ stream: string }>(
+      `
+        select distinct jsonb_array_elements_text(eligible_streams) as stream
+        from official_handbook_eligibility_rules
+        where academic_year = $1
+        order by stream
+      `,
+      [OFFICIAL_HANDBOOK_YEAR],
+    );
+    for (const row of result.rows) streams.add(row.stream);
+  } catch (err) {
+    if (!canUseStaticFallback(err)) throw err;
+    warnStaticFallback(err);
+    const data = loadStaticHandbookData();
+    for (const row of data?.eligibilityRules ?? []) {
+      for (const stream of asStringList(row.eligible_streams)) streams.add(stream);
+    }
+  }
   for (const list of Object.values(SECTION9_STREAM_MAPPINGS)) {
     for (const s of list) streams.add(s);
   }
@@ -474,27 +737,48 @@ export async function listOfficialStreams(): Promise<string[]> {
 }
 
 export async function listOfficialSubjects(): Promise<string[]> {
-  const result = await pool.query<{ subject: string }>(
-    `
-      select distinct jsonb_array_elements_text(required_subjects) as subject
-      from official_handbook_eligibility_rules
-      where academic_year = $1
-      order by subject
-    `,
-    [OFFICIAL_HANDBOOK_YEAR],
-  );
-  return result.rows.map((row) => row.subject);
+  try {
+    const result = await pool.query<{ subject: string }>(
+      `
+        select distinct jsonb_array_elements_text(required_subjects) as subject
+        from official_handbook_eligibility_rules
+        where academic_year = $1
+        order by subject
+      `,
+      [OFFICIAL_HANDBOOK_YEAR],
+    );
+    return result.rows.map((row) => row.subject);
+  } catch (err) {
+    if (!canUseStaticFallback(err)) throw err;
+    warnStaticFallback(err);
+    const subjects = new Set<string>();
+    const data = loadStaticHandbookData();
+    for (const row of data?.eligibilityRules ?? []) {
+      for (const subject of asStringList(row.required_subjects)) subjects.add(subject);
+    }
+    return Array.from(subjects).sort();
+  }
 }
 
 export async function listOfficialAcademicYears(): Promise<Array<{ academicYear: string; handbookAvailable: boolean }>> {
-  const result = await pool.query<{ academic_year: string }>(
-    `
-      select distinct academic_year
-      from official_handbook_courses
-      order by academic_year
-    `,
-  );
-  return result.rows.map((row) => ({ academicYear: row.academic_year, handbookAvailable: true }));
+  try {
+    const result = await pool.query<{ academic_year: string }>(
+      `
+        select distinct academic_year
+        from official_handbook_courses
+        order by academic_year
+      `,
+    );
+    return result.rows.map((row) => ({ academicYear: row.academic_year, handbookAvailable: true }));
+  } catch (err) {
+    if (!canUseStaticFallback(err)) throw err;
+    warnStaticFallback(err);
+    const data = loadStaticHandbookData();
+    const years = new Set((data?.courses ?? []).map((course) => course.academic_year));
+    return Array.from(years)
+      .sort()
+      .map((academicYear) => ({ academicYear, handbookAvailable: true }));
+  }
 }
 
 function isPassingGrade(grade: string | undefined): boolean {

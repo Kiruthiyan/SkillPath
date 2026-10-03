@@ -71,7 +71,7 @@ function UserMenu() {
     : "U";
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative shrink-0" ref={menuRef}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -137,10 +137,10 @@ function MarketingHeader() {
 
   return (
     <header className="border-b border-[hsl(var(--border))] bg-card/80 backdrop-blur sticky top-0 z-40">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary">
+      <div className="mx-auto flex max-w-6xl min-w-0 items-center justify-between gap-3 px-4 py-3">
+        <Link href="/" className="flex min-w-0 items-center gap-2 font-bold text-xl text-primary">
           <GraduationCap className="h-7 w-7" />
-          SkillPath AI
+          <span className="truncate">SkillPath AI</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link href="/courses" className="text-muted-foreground hover:text-foreground">{t.nav.courses}</Link>
@@ -148,7 +148,7 @@ function MarketingHeader() {
           <Link href="/careers" className="text-muted-foreground hover:text-foreground">{t.nav.careers}</Link>
           <Link href="/stories" className="text-muted-foreground hover:text-foreground">{t.nav.stories}</Link>
         </nav>
-        <div className="flex items-center gap-2.5">
+        <div className="flex min-w-0 shrink-0 items-center gap-2.5">
           <LanguageSwitcher variant="select" />
           {isAuthenticated ? (
             <UserMenu />
@@ -173,7 +173,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
   const navItems = getNavForRole(role, t);
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen min-w-0 flex">
       <aside className="hidden lg:flex w-64 flex-col border-r border-[hsl(var(--border))] bg-card h-screen sticky top-0">
         <div className="p-5 border-b border-[hsl(var(--border))] flex items-center justify-between shrink-0">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
@@ -200,12 +200,12 @@ function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
       </aside>
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="border-b border-[hsl(var(--border))] bg-card px-4 md:px-6 py-3 flex items-center justify-between">
-          <Link href="/" className="lg:hidden font-bold text-primary flex items-center gap-1.5">
-            <GraduationCap className="h-5 w-5" /> SkillPath AI
+        <header className="border-b border-[hsl(var(--border))] bg-card px-4 md:px-6 py-3 flex min-w-0 items-center justify-between gap-3">
+          <Link href="/" className="lg:hidden min-w-0 font-bold text-primary flex items-center gap-1.5">
+            <GraduationCap className="h-5 w-5 shrink-0" /> <span className="truncate">SkillPath AI</span>
           </Link>
           <div className="hidden lg:block"></div>
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 shrink-0 items-center gap-3">
             <LanguageSwitcher variant="select" />
             {isAuthenticated ? (
               <UserMenu />
@@ -233,7 +233,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </nav>
-        <main id="main-content" className="flex-1 p-4 md:p-8 max-w-6xl mx-auto w-full">{children}</main>
+        <main id="main-content" className="flex-1 min-w-0 p-4 md:p-8 max-w-6xl mx-auto w-full">{children}</main>
       </div>
     </div>
   );

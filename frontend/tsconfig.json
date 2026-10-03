@@ -20,6 +20,7 @@
     "useUnknownInCatchVariables": true,
     "alwaysStrict": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "target": "es2022",
     "jsx": "react-jsx",
     "baseUrl": ".",

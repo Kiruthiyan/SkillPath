@@ -9,6 +9,30 @@ const app = express();
 
 const corsOrigins = process.env.CORS_ORIGINS?.split(",").map((o) => o.trim()).filter(Boolean);
 
+function collectErrorText(err: unknown): string {
+  const seen = new Set<unknown>();
+  const parts: string[] = [];
+
+  function visit(value: unknown): void {
+    if (!value || typeof value !== "object" || seen.has(value)) return;
+    seen.add(value);
+
+    const record = value as Record<string, unknown>;
+    for (const key of ["name", "code", "message"]) {
+      const part = record[key];
+      if (typeof part === "string" && part) parts.push(part);
+    }
+
+    if (Array.isArray(record.errors)) {
+      for (const nested of record.errors) visit(nested);
+    }
+    visit(record.cause);
+  }
+
+  visit(err);
+  return parts.join(" ");
+}
+
 if (process.env.NODE_ENV === "production" && !corsOrigins?.length) {
   logger.warn(
     "CORS_ORIGINS is empty in production — reflecting any Origin. Set CORS_ORIGINS to your Vercel URL(s).",
@@ -59,15 +83,16 @@ app.use(
     _next: express.NextFunction,
   ) => {
     logger.error({ err }, "Unhandled API error");
-    const raw = [err.message, (err as { cause?: Error }).cause?.message]
-      .filter(Boolean)
-      .join(" ");
-    const message = raw.includes("ENOTFOUND") || raw.includes("ECONNREFUSED")
+    const raw = collectErrorText(err);
+    const isDatabaseConnectionError = /EACCES|ECONNREFUSED|ENOTFOUND|ETIMEDOUT|timeout/i.test(raw);
+    const isDatabaseSchemaError = raw.includes("does not exist");
+    const message = isDatabaseConnectionError
       ? "Database connection failed. Check DATABASE_URL and your Supabase project status."
-      : raw.includes("does not exist")
+      : isDatabaseSchemaError
         ? "Database schema is out of date. Run: pnpm db:push"
         : "Internal server error";
-    res.status(err.status ?? 500).json({ error: message });
+    const status = isDatabaseConnectionError ? 503 : err.status ?? 500;
+    res.status(status).json({ error: message });
   },
 );
 
