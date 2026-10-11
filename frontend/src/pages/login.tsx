@@ -3,8 +3,7 @@ import { useLocation, useSearch, Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { motion } from "framer-motion";
-import { LogIn, GraduationCap, Eye, EyeOff, Home, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
 
 import { useLogin } from "@/api";
 import { useAuthStore } from "@/hooks/use-auth";
@@ -21,7 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AuthShell, AuthDivider, AUTH_INPUT, AUTH_BUTTON, AUTH_LABEL, AUTH_LINK } from "@/components/auth-shell";
 import { useToast } from "@/hooks/use-toast";
 import { GoogleAuthButton } from "@/components/google-auth-button";
 
@@ -41,9 +40,16 @@ export default function Login() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Successful login always lands on the role dashboard — never restore a
-  // previous user's last path via ?redirect= (same-device account switch).
-  const passwordChanged = new URLSearchParams(search).get("passwordChanged") === "1";
+  const params = new URLSearchParams(search);
+  const passwordChanged = params.get("passwordChanged") === "1";
+  // Return to the page the user was sent here from, but only for same-site
+  // paths; route guards still bounce a role away from pages it may not open.
+  const requested = params.get("redirect");
+  const redirectTo =
+    requested && requested.startsWith("/") && !requested.startsWith("//") && !requested.startsWith("/login") && !requested.startsWith("/register")
+      ? requested
+      : null;
+  const destination = (role?: string | null) => redirectTo ?? getDashboardPath(role);
 
   useEffect(() => {
     if (passwordChanged) {
@@ -66,7 +72,7 @@ export default function Login() {
       onSuccess: (data) => {
         setAuth(data.token, data.user);
         toast({ title: "Welcome back!", description: `Signed in as ${data.user.name}` });
-        setLocation(getDashboardPath(data.user.role));
+        setLocation(destination(data.user.role));
       },
       onError: (err: any) => {
         toast({
@@ -83,158 +89,103 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="px-4 pt-4">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Home className="h-4 w-4" />
-          {t.nav.home}
-        </Link>
-      </div>
-
-      <div className="flex-1 flex items-center justify-center py-10 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="w-full max-w-md"
-      >
-        <div className="text-center mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 font-bold text-2xl text-primary hover:opacity-90 transition-opacity"
-          >
-            <div className="h-10 w-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md">
-              <GraduationCap className="h-6 w-6" />
-            </div>
-            <span>SkillPath AI</span>
+    <AuthShell
+      title="Welcome back"
+      subtitle={t.auth.signInSubtitle}
+      footer={
+        <>
+          {t.auth.dontHaveAccount}{" "}
+          <Link href="/register" className={AUTH_LINK}>
+            {t.nav.register}
           </Link>
-        </div>
+        </>
+      }
+    >
+      <GoogleAuthButton
+        mode="signin"
+        onSuccess={(user) => setLocation(destination(user?.role))}
+      />
 
-        <Card className="shadow-lg border-border/80 backdrop-blur-xs">
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-2xl font-bold tracking-tight flex items-center justify-center gap-2">
-              <LogIn className="h-5 w-5 text-primary" />
-              {t.auth.signInTitle}
-            </CardTitle>
-            <CardDescription className="text-sm text-muted-foreground mt-1">
-              {t.auth.signInSubtitle}
-            </CardDescription>
-          </CardHeader>
+      <AuthDivider label={t.auth.orDivider} />
 
-          <CardContent className="space-y-5">
-            {/* Google Authentication Button */}
-            <GoogleAuthButton
-              mode="signin"
-              onSuccess={(user) => setLocation(getDashboardPath(user?.role))}
-            />
-
-            {/* Visual Divider */}
-            <div className="relative my-2">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border"></div>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground font-medium">
-                  {t.auth.orDivider}
-                </span>
-              </div>
-            </div>
-
-            {/* Email & Password Form */}
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs font-semibold text-foreground">
+                      <FormLabel className={AUTH_LABEL}>
                         {t.auth.emailLabel}
                       </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="you@example.com"
-                          autoComplete="email"
-                          className="h-10 text-sm"
-                          {...field}
-                        />
-                      </FormControl>
+                      <div className="relative">
+                        <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="you@example.com"
+                            autoComplete="email"
+                            className={`pl-10 ${AUTH_INPUT}`}
+                            {...field}
+                          />
+                        </FormControl>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={form.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
                       <div className="flex items-center justify-between">
-                        <FormLabel className="text-xs font-semibold text-foreground">
+                        <FormLabel className={AUTH_LABEL}>
                           {t.auth.passwordLabel}
                         </FormLabel>
                         <Link
                           href="/forgot-password"
-                          className="text-xs font-medium text-primary hover:underline"
+                          className="text-sm font-semibold text-[#1d83c4] hover:underline"
                         >
                           {t.auth.forgotPassword}
                         </Link>
                       </div>
-                      <FormControl>
-                        <div className="relative">
+                      <div className="relative">
+                        <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                        <FormControl>
                           <Input
                             type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
                             autoComplete="current-password"
-                            className="h-10 text-sm pr-10"
+                            className={`pl-10 pr-12 ${AUTH_INPUT}`}
                             {...field}
                           />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
-                            title={showPassword ? t.auth.hidePassword : t.auth.showPassword}
-                            aria-label={showPassword ? t.auth.hidePassword : t.auth.showPassword}
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-4 w-4" />
-                            ) : (
-                              <Eye className="h-4 w-4" />
-                            )}
-                          </button>
-                        </div>
-                      </FormControl>
+                        </FormControl>
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
+                          title={showPassword ? t.auth.hidePassword : t.auth.showPassword}
+                          aria-label={showPassword ? t.auth.hidePassword : t.auth.showPassword}
+                        >
+                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <Button
-                  type="submit"
-                  className="w-full h-10 text-sm font-semibold shadow-sm mt-2"
-                  disabled={isPending}
-                >
-                  {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                  {isPending ? t.actions.signingIn : t.auth.signInBtn}
-                </Button>
-              </form>
-            </Form>
-
-            <p className="text-center text-sm text-muted-foreground pt-1">
-              {t.auth.dontHaveAccount}{" "}
-              <Link href="/register" className="text-primary font-semibold hover:underline">
-                {t.nav.register}
-              </Link>
-            </p>
-          </CardContent>
-        </Card>
-      </motion.div>
-      </div>
-    </div>
+          <Button
+            type="submit"
+            className={`mt-2 ${AUTH_BUTTON}`}
+            disabled={isPending}
+          >
+            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isPending ? t.actions.signingIn : t.auth.signInBtn}
+          </Button>
+        </form>
+      </Form>
+    </AuthShell>
   );
 }
-

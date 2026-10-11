@@ -1,8 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Brain, CheckCircle2, Target, Users } from "lucide-react";
+import { ArrowRight, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { useTranslations } from "@/lib/i18n";
 
@@ -10,115 +9,57 @@ export default function Home() {
   usePageTitle();
   const { t } = useTranslations();
 
-  const features = [
-    {
-      icon: Target,
-      title: t.home.smartRecommendations,
-      description: t.home.smartRecommendationsDesc,
-    },
-    {
-      icon: BookOpen,
-      title: t.home.exploreCourses,
-      description: t.home.exploreCoursesDesc,
-    },
-    {
-      icon: Brain,
-      title: t.home.aiRoadmap,
-      description: t.home.aiRoadmapDesc,
-    },
-    {
-      icon: Users,
-      title: t.home.alumniInsights,
-      description: t.home.alumniInsightsDesc,
-    },
-  ];
-
   return (
-    <div>
-      <section className="relative overflow-hidden bg-gradient-to-b from-[hsl(213,52%,25%)] to-[hsl(213,52%,18%)] text-white">
-        <div className="mx-auto max-w-6xl px-4 py-24 md:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
+    <div className="relative flex min-h-dvh min-w-0 flex-col items-center justify-center overflow-x-hidden bg-linear-to-b from-[#4cc0ee] to-[#1d83c4] px-6 py-12 pb-[calc(3rem+env(safe-area-inset-bottom))] pt-[calc(3rem+env(safe-area-inset-top))] text-center text-white">
+      <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="relative z-10 flex w-full max-w-xl flex-col items-center"
+      >
+        <span className="mb-4 flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/80 bg-white/10 shadow-sm backdrop-blur">
+          <GraduationCap className="h-10 w-10" />
+        </span>
+        <p className="mb-8 text-xl font-bold">SkillPath AI</p>
+
+        <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+          Find your university and career path
+        </h1>
+        <p className="mb-9 max-w-md text-base leading-relaxed text-white/85 md:text-lg">
+          {t.home.heroSubtitle}
+        </p>
+
+        <div className="flex w-full max-w-sm flex-col gap-3">
+          <Button
+            size="lg"
+            asChild
+            className="h-12 rounded-xl bg-white text-base font-semibold text-[#1d83c4] shadow-sm hover:bg-white/90"
           >
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-              {t.home.heroTitle}
-            </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
-              {t.home.heroSubtitle}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/checker">
-                  {t.nav.checker} <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
-                <Link href="/register">{t.actions.getStarted}</Link>
-              </Button>
-            </div>
-            <div className="mt-5 flex flex-col gap-2 text-sm text-white/80 sm:flex-row sm:items-center sm:gap-4">
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-[hsl(var(--secondary))]" />
-                Z-score check works without sign in
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-[hsl(var(--secondary))]" />
-                Sign in only for saved and personalized tools
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-20">
-        <h2 className="text-3xl font-bold text-center mb-12">{t.home.featuresHeading}</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <Card className="h-full hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <feature.icon className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm leading-relaxed">{feature.description}</CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-muted py-16">
-        <div className="mx-auto max-w-6xl px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Check first. Create an account when you need more.</h2>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            Students can use the Z-score checker immediately. Sign in later to save courses, build roadmaps, and unlock personalized dashboards.
-          </p>
-          <div className="flex flex-col justify-center gap-3 sm:flex-row">
-            <Button size="lg" asChild>
-              <Link href="/checker">{t.nav.checker}</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/register">{t.actions.getStarted}</Link>
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">
-            {t.auth.alreadyHaveAccount}{" "}
-            <Link href="/login" className="text-primary font-semibold hover:underline">
-              {t.nav.signIn}
+            <Link href="/checker">
+              Check Z-Score <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
-          </p>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            asChild
+            className="h-12 rounded-xl border-2 border-white bg-transparent text-base font-semibold text-white hover:bg-white/15 hover:text-white"
+          >
+            <Link href="/register">Create Account</Link>
+          </Button>
+          <Button
+            size="lg"
+            variant="ghost"
+            asChild
+            className="h-12 rounded-xl text-base font-semibold text-white hover:bg-white/15 hover:text-white"
+          >
+            <Link href="/login">Sign In</Link>
+          </Button>
         </div>
-      </section>
+      </motion.div>
     </div>
   );
 }

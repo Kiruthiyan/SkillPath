@@ -64,7 +64,7 @@ export const useProfileStore = create<ProfileState>()(
     (set, get) => ({
       ...DEFAULT_PROFILE_FIELDS,
       language: "en",
-      theme: "system",
+      theme: "light",
       resetProfile: () => set({ ...DEFAULT_PROFILE_FIELDS }),
       setFullName: (fullName) => set({ fullName }),
       setEducationStage: (educationStage) => set({ educationStage }),
@@ -94,25 +94,16 @@ export const useProfileStore = create<ProfileState>()(
     {
       name: "skillpath-profile",
       onRehydrateStorage: () => (state) => {
-        if (state?.theme) {
-          applyTheme(state.theme);
-        }
+        if (state) state.theme = "light";
+        applyTheme("light");
       },
     },
   ),
 );
 
-export function applyTheme(theme: "light" | "dark" | "system") {
-  const root = document.documentElement;
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  if (isDark) {
-    root.classList.add("dark");
-  } else {
-    root.classList.remove("dark");
-  }
+// Light mode only: dark mode is disabled.
+export function applyTheme(_theme?: "light" | "dark" | "system") {
+  document.documentElement.classList.remove("dark");
 }
 
 export const EDUCATION_STAGES = [

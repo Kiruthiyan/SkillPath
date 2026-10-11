@@ -216,7 +216,7 @@ export function GoogleAuthButton({
           variant="outline"
           disabled={isLoading}
           onClick={handlePromptClick}
-          className="w-full h-11 flex items-center justify-center gap-3 border-border hover:bg-muted/60 transition-all text-sm font-medium shadow-xs"
+          className="w-full h-12 rounded-xl border-slate-300 bg-white flex items-center justify-center gap-3 border-border hover:bg-muted/60 transition-all text-sm font-medium shadow-xs"
         >
           {isLoading ? (
             <Loader2 className="h-4 w-4 animate-spin text-primary" />

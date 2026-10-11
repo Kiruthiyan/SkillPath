@@ -23,8 +23,6 @@ import {
   Bell,
   BookOpen,
   Sun,
-  Moon,
-  Laptop,
   Loader2,
   Eye,
   EyeOff,
@@ -839,8 +837,6 @@ export default function SettingsPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { mode: "light" as const, label: t.settings.themeLight, icon: Sun },
-                  { mode: "dark" as const, label: t.settings.themeDark, icon: Moon },
-                  { mode: "system" as const, label: t.settings.themeSystem, icon: Laptop },
                 ].map(({ mode, label, icon: Icon }) => {
                   const isSelected = theme === mode;
                   return (
