@@ -1,11 +1,9 @@
 name: Deploy backend (EC2)
 
-# Runs only when triggered manually or after CI passes on master.
+# Disabled for now: manual trigger only. After the manual deploy works and the
+# secrets are set, add a push trigger on master (paths: backend/**, deploy/**).
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths: ["backend/**", "deploy/**"]
 
 concurrency:
   group: deploy-backend
