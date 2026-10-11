@@ -13,14 +13,14 @@ export function QueryError({
 }: QueryErrorProps) {
   return (
     <Card className="border-destructive/30 bg-destructive/5">
-      <CardContent className="flex items-center gap-4 p-6">
+      <CardContent className="flex flex-col items-start gap-4 p-4 sm:flex-row sm:items-center sm:p-6">
         <AlertCircle className="h-8 w-8 text-destructive shrink-0" />
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           <p className="font-medium">Failed to load</p>
           <p className="text-sm text-muted-foreground">{message}</p>
         </div>
         {onRetry && (
-          <Button variant="outline" size="sm" onClick={onRetry}>
+          <Button variant="outline" size="sm" onClick={onRetry} className="w-full sm:w-auto">
             Retry
           </Button>
         )}

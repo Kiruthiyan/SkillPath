@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
 import { Building2, ArrowLeft } from "lucide-react";
@@ -14,13 +15,17 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function Universities() {
   const { t } = useTranslations();
   const params = useParams();
   const universityId = params.id ? parseInt(params.id) : null;
+  const [typeFilter, setTypeFilter] = useState<"all" | "government" | "private">("all");
 
   const { data: universities, isLoading, isError, refetch } = useListUniversities();
+  const filteredUniversities =
+    typeFilter === "all" ? universities : universities?.filter((u) => u.type === typeFilter);
   const { data: university, isLoading: isLoadingDetail, isError: isDetailError, refetch: refetchDetail } =
     useGetUniversity(universityId ?? 0, {
       query: {
@@ -55,9 +60,12 @@ export default function Universities() {
         <Card className="overflow-hidden">
           <div className="h-3" style={{ backgroundColor: university.logoColor ?? "#1e3a5f" }} />
           <CardHeader>
-            <Badge variant="secondary" className="w-fit">
-              {university.courseCount ?? 0} {t.universities.officialCourses}
-            </Badge>
+            <div className="flex items-center gap-2">
+              <Badge variant="secondary" className="w-fit">
+                {university.courseCount ?? 0} {t.universities.officialCourses}
+              </Badge>
+              {university.type && <Badge variant="outline" className="capitalize w-fit">{university.type}</Badge>}
+            </div>
             <CardTitle className="text-3xl">{university.name}</CardTitle>
             <CardDescription className="text-base">
               {t.universities.providerDescription}
@@ -73,9 +81,21 @@ export default function Universities() {
 
   return (
     <div className="space-y-8 pb-10">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">{t.universities.title}</h1>
-        <p className="text-muted-foreground mt-2">{t.universities.subtitle}</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t.universities.title}</h1>
+          <p className="text-muted-foreground mt-2">{t.universities.subtitle}</p>
+        </div>
+        <Select value={typeFilter} onValueChange={(v) => setTypeFilter(v as typeof typeFilter)}>
+          <SelectTrigger className="w-40">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All types</SelectItem>
+            <SelectItem value="government">Government</SelectItem>
+            <SelectItem value="private">Private</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {isError && <QueryError onRetry={() => refetch()} />}
@@ -90,7 +110,7 @@ export default function Universities() {
           animate={{ opacity: 1 }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {universities?.map((u) => (
+          {filteredUniversities?.map((u) => (
             <Card key={u.id} className="overflow-hidden hover:border-primary/50 transition-colors flex flex-col justify-between">
               <div>
                 <div className="h-2" style={{ backgroundColor: u.logoColor ?? "#1e3a5f" }} />
@@ -109,9 +129,12 @@ export default function Universities() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Badge variant="secondary">
-                    {u.courseCount ?? 0} {t.universities.officialCourses}
-                  </Badge>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="secondary">
+                      {u.courseCount ?? 0} {t.universities.officialCourses}
+                    </Badge>
+                    {u.type && <Badge variant="outline" className="capitalize">{u.type}</Badge>}
+                  </div>
                 </CardContent>
               </div>
               <div className="p-6 pt-0">

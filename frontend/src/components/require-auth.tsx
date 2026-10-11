@@ -4,15 +4,17 @@ import { useAuthStore } from "@/hooks/use-auth";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
-  const token = useAuthStore((s) => s.token);
 
   useEffect(() => {
-    if (!token) {
-      setLocation("/login");
+    if (!isAuthenticated) {
+      setLocation(`/login?redirect=${encodeURIComponent(location)}`, { replace: true });
     }
-  }, [token, setLocation]);
+    // `location` is intentionally omitted so the redirect does not re-fire
+    // against the path we just navigated to.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, setLocation]);
 
   if (!isAuthenticated) {
     return (

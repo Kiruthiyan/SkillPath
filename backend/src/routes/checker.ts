@@ -1,4 +1,5 @@
 import { Router } from "express";
+import rateLimit from "express-rate-limit";
 import { z } from "zod";
 import {
   OFFICIAL_HANDBOOK_YEAR,
@@ -10,7 +11,18 @@ import {
   listOfficialSubjects,
 } from "../db/official-handbook-query";
 
+// All routes below are intentionally public/unauthenticated: they only ever
+// return official-handbook data (streams, subjects, cutoffs, eligibility
+// rules), never anything scoped to a specific user. Do not add auth here.
 const router = Router();
+
+const checkerComputeRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many requests. Please try again later." },
+});
 
 function isPassingGrade(grade: string | undefined): boolean {
   return !!grade && grade.toUpperCase() !== "F";
@@ -40,7 +52,7 @@ const recommendationsBody = z.object({
   zscore: z.number(),
 });
 
-router.post("/checker/recommendations", async (req, res) => {
+router.post("/checker/recommendations", checkerComputeRateLimiter, async (req, res) => {
   const parsed = recommendationsBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
@@ -159,7 +171,7 @@ const eligibilityBody = z.object({
   district: z.string().min(1),
 });
 
-router.post("/checker/programmes/:id/eligibility", async (req, res) => {
+router.post("/checker/programmes/:id/eligibility", checkerComputeRateLimiter, async (req, res) => {
   const id = Number(req.params.id);
   const parsed = eligibilityBody.safeParse(req.body);
   if (!parsed.success) {

@@ -3,11 +3,11 @@ import { db } from "../db";
 import { usersTable } from "../db";
 import { eq } from "drizzle-orm";
 import { UpdateProfileBody } from "../api-zod";
-import { requireAuth } from "../middleware/auth";
+import { requireActiveSession } from "../middleware/auth";
 
 const router = Router();
 
-router.patch("/users/me", requireAuth, async (req, res) => {
+router.patch("/users/me", requireActiveSession, async (req, res) => {
   const parsed = UpdateProfileBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });

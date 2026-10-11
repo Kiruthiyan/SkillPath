@@ -253,13 +253,6 @@ function getFallbackPredictionExplanation(params: {
   return text;
 }
 
-function getFallbackChatResponse(message: string): string {
-  const lower = message.toLowerCase();
-  if (lower.includes("it") || lower.includes("computer")) {
-    return "IT and Computer Science degrees from universities like Moratuwa and Colombo open excellent career paths in Sri Lanka's growing tech industry. Starting salaries range from LKR 60,000–120,000/month. Consider your Z-score when choosing between state and private universities.";
-  }
-  if (lower.includes("abroad") || lower.includes("overseas")) {
-    return "Many Sri Lankan graduates find opportunities in Australia, UK, Canada, and Singapore. IT and engineering graduates have the best prospects. Build strong portfolios and consider certifications like AWS or CIMA to improve your chances.";
-  }
-  return `Thank you for your question. As SkillPath AI, I can help with university course selection, career paths, salary expectations, and opportunities abroad for Sri Lankan A/L students. Please ask a more specific question about degrees, careers, or Z-scores. (Note: Set GEMINI_API_KEY for full AI responses.)`;
+function getFallbackChatResponse(_message: string): string {
+  return "AI guidance is temporarily unavailable. Please try again later, or continue with the course checker and official handbook data. (Configure GEMINI_API_KEY for full AI responses.)";
 }

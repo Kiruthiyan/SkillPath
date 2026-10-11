@@ -69,43 +69,39 @@ pnpm start
 
 - `DATABASE_URL` - PostgreSQL connection string
 - `JWT_SECRET` - Secret for signing auth tokens
-- `GEMINI_API_KEY` - Optional; AI features use fallback templates when unset
+- `GEMINI_API_KEY` - Optional; roadmap/chat return honest unavailable errors when unset
 - `PORT` - API server port, default `5000`
-- `CORS_ORIGINS` - Comma-separated allowed origins in production
-- `AI_REQUIRE_AUTH` - Set to `true` in production to require login for AI chat and roadmap generation
-
-## UGC Handbook Updates
-
-Official admission cutoffs are stored in `backend/data/handbooks/` and imported into the backend database.
-
-When UGC publishes a new PDF:
-
-```bash
-cd backend
-pip install -r scripts/ingest-handbook/requirements.txt
-python scripts/ingest-handbook/extract.py --url https://www.ugc.ac.lk/downloads/admissions/Handbook_2025_26/student_handbook_english.pdf --year 2025_26
-pnpm handbook:import --year 2025_26
-pnpm db:seed
-```
-
-Predicted next-year cutoffs use a simple trend average over the last 2-3 handbook years. Gemini is used only for natural-language explanations, never for cutoff numbers.
+- `CORS_ORIGINS` - **Required in production** — comma-separated allowed frontend origins
+- `APP_BASE_URL` - Deployed frontend URL (invite links + API `/` redirect)
+- `GOOGLE_CLIENT_ID` - Required for Google sign-in verification
+- `SMTP_*` - Required for password-reset email delivery
 
 ## Deployment
 
-Frontend on Vercel:
+### Frontend (Vercel)
 
 - Root Directory: `frontend`
 - Install Command: `pnpm install --frozen-lockfile`
 - Build Command: `pnpm build`
 - Output Directory: `dist`
-- Environment: `VITE_API_URL=https://your-backend.example.com`
+- Environment:
+  - `VITE_API_URL=https://your-api.onrender.com` (no trailing slash)
+  - `VITE_GOOGLE_CLIENT_ID=...` (if Google sign-in is enabled)
 
-Backend on Railway/Render/Fly/etc.:
+### Backend (Render)
+
+Use the repo blueprint [`render.yaml`](render.yaml), or create a Web Service manually:
 
 - Root Directory: `backend`
-- Install Command: `pnpm install --frozen-lockfile`
-- Build Command: `pnpm build`
+- Build Command: `pnpm install --frozen-lockfile && pnpm build`
 - Start Command: `pnpm start`
-- Environment: `DATABASE_URL`, `JWT_SECRET`, optional `GEMINI_API_KEY`, `CORS_ORIGINS`, `AI_REQUIRE_AUTH=true`
+- Health Check Path: `/api/healthz`
+- Environment (set in Render dashboard):
+  - `DATABASE_URL`, `JWT_SECRET` (required)
+  - `CORS_ORIGINS=https://your-app.vercel.app` (required — do not leave empty)
+  - `APP_BASE_URL=https://your-app.vercel.app`
+  - `GEMINI_API_KEY`, `GOOGLE_CLIENT_ID`, `SMTP_*` as needed
+
+Local Postgres (optional): `docker compose up -d` then point `DATABASE_URL` at `postgresql://skillpath:skillpath@localhost:5432/skillpath`.
 
 Never commit `.env` files.

@@ -67,10 +67,53 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 #root {
   min-height: 100vh;
+  min-width: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+.prerender-shell {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.prerender-shell h1 {
+  margin: 0;
+  color: hsl(var(--foreground));
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.05;
+}
+
+.prerender-shell p {
+  margin: 0;
+  color: hsl(var(--muted-foreground));
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.prerender-brand {
+  color: hsl(var(--primary)) !important;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.prerender-note {
+  font-size: 0.875rem !important;
 }
 
 @layer utilities {

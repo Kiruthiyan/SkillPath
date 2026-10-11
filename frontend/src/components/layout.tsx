@@ -11,6 +11,9 @@ import {
   Star,
   Trophy,
   Building2,
+  Landmark,
+  ShieldCheck,
+  Users,
   LogOut,
   LogIn,
   Target,
@@ -22,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/hooks/use-auth";
 import { useTranslations } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { getNavForRole } from "@/lib/rbac";
 
 function SkipLink() {
   const { t } = useTranslations();
@@ -35,25 +39,11 @@ function SkipLink() {
   );
 }
 
-function getNavItems(t: ReturnType<typeof useTranslations>["t"]) {
-  return [
-    { href: "/dashboard", label: t.nav.dashboard, icon: LayoutDashboard },
-    { href: "/courses", label: t.nav.courses, icon: BookOpen },
-    { href: "/checker", label: t.nav.checker, icon: Target },
-    { href: "/universities", label: t.nav.universities, icon: Building2 },
-    { href: "/careers", label: t.nav.careers, icon: Briefcase },
-    { href: "/roadmap", label: t.nav.roadmap, icon: Map },
-    { href: "/reviews", label: t.nav.reviews, icon: Star },
-    { href: "/stories", label: t.nav.stories, icon: Trophy },
-    { href: "/chat", label: t.nav.chat, icon: MessageSquare },
-    { href: "/settings", label: t.nav.settings, icon: Settings },
-  ];
-}
-
 function UserMenu() {
   const [open, setOpen] = useState(false);
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
+  const [, setLocation] = useLocation();
   const { t } = useTranslations();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -81,7 +71,7 @@ function UserMenu() {
     : "U";
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative shrink-0" ref={menuRef}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -127,6 +117,7 @@ function UserMenu() {
               onClick={() => {
                 setOpen(false);
                 logout();
+                setLocation("/login");
               }}
               className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors text-left"
             >
@@ -141,17 +132,15 @@ function UserMenu() {
 }
 
 function MarketingHeader() {
-  const user = useAuthStore((s) => s.user);
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
-  const logout = useAuthStore((s) => s.logout);
   const { t } = useTranslations();
 
   return (
     <header className="border-b border-[hsl(var(--border))] bg-card/80 backdrop-blur sticky top-0 z-40">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary">
+      <div className="mx-auto flex max-w-6xl min-w-0 items-center justify-between gap-3 px-4 py-3">
+        <Link href="/" className="flex min-w-0 items-center gap-2 font-bold text-xl text-primary">
           <GraduationCap className="h-7 w-7" />
-          SkillPath AI
+          <span className="truncate">SkillPath AI</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
           <Link href="/courses" className="text-muted-foreground hover:text-foreground">{t.nav.courses}</Link>
@@ -159,15 +148,10 @@ function MarketingHeader() {
           <Link href="/careers" className="text-muted-foreground hover:text-foreground">{t.nav.careers}</Link>
           <Link href="/stories" className="text-muted-foreground hover:text-foreground">{t.nav.stories}</Link>
         </nav>
-        <div className="flex items-center gap-2.5">
+        <div className="flex min-w-0 shrink-0 items-center gap-2.5">
           <LanguageSwitcher variant="select" />
           {isAuthenticated ? (
-            <>
-              <Button variant="outline" size="sm" asChild className="hidden sm:inline-flex">
-                <Link href="/dashboard">{t.nav.dashboard}</Link>
-              </Button>
-              <UserMenu />
-            </>
+            <UserMenu />
           ) : (
             <Button size="sm" asChild>
               <Link href="/login"><LogIn className="h-4 w-4 mr-1" /> {t.nav.signIn}</Link>
@@ -182,11 +166,14 @@ function MarketingHeader() {
 function AppShell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated());
+  const role = useAuthStore((s) => s.user?.role);
   const { t } = useTranslations();
-  const navItems = getNavItems(t);
+  // Navigation follows the authenticated user's role, never the URL. A role's
+  // items are its own; nothing is inherited from the student navigation.
+  const navItems = getNavForRole(role, t);
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen min-w-0 flex">
       <aside className="hidden lg:flex w-64 flex-col border-r border-[hsl(var(--border))] bg-card h-screen sticky top-0">
         <div className="p-5 border-b border-[hsl(var(--border))] flex items-center justify-between shrink-0">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
@@ -213,12 +200,12 @@ function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
       </aside>
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="border-b border-[hsl(var(--border))] bg-card px-4 md:px-6 py-3 flex items-center justify-between">
-          <Link href="/" className="lg:hidden font-bold text-primary flex items-center gap-1.5">
-            <GraduationCap className="h-5 w-5" /> SkillPath AI
+        <header className="border-b border-[hsl(var(--border))] bg-card px-4 md:px-6 py-3 flex min-w-0 items-center justify-between gap-3">
+          <Link href="/" className="lg:hidden min-w-0 font-bold text-primary flex items-center gap-1.5">
+            <GraduationCap className="h-5 w-5 shrink-0" /> <span className="truncate">SkillPath AI</span>
           </Link>
           <div className="hidden lg:block"></div>
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 shrink-0 items-center gap-3">
             <LanguageSwitcher variant="select" />
             {isAuthenticated ? (
               <UserMenu />
@@ -246,7 +233,7 @@ function AppShell({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </nav>
-        <main id="main-content" className="flex-1 p-4 md:p-8 max-w-6xl mx-auto w-full">{children}</main>
+        <main id="main-content" className="flex-1 min-w-0 p-4 md:p-8 max-w-6xl mx-auto w-full">{children}</main>
       </div>
     </div>
   );
@@ -256,7 +243,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const { t } = useTranslations();
   const isHome = location === "/";
-  const isAuthPage = location === "/login" || location === "/register";
+  // Pages that must render without app chrome. A user in the forced
+  // password-change or invite-acceptance flow has no business seeing a sidebar.
+  const isAuthPage =
+    location === "/login" ||
+    location === "/register" ||
+    location === "/forgot-password" ||
+    location === "/change-password" ||
+    location === "/accept-invite";
 
   if (isHome) {
     return (

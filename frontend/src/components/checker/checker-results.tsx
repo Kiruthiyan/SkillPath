@@ -49,14 +49,14 @@ function ResultDetailsModal({
         onClick={(e) => e.stopPropagation()}
       >
         <CardHeader className="space-y-2 pb-3">
-          <div className="flex items-start justify-between gap-2">
-            <div>
-              <CardTitle className="text-lg leading-snug">{result.courseName}</CardTitle>
-              <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1">
-                <Building2 className="h-3.5 w-3.5 shrink-0" />
-                <span className="font-medium text-foreground/80">{result.university}</span>
-              </div>
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <CardTitle className="text-lg leading-snug">{result.courseName}</CardTitle>
+            <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1">
+              <Building2 className="h-3.5 w-3.5 shrink-0" />
+              <span className="min-w-0 font-medium text-foreground/80">{result.university}</span>
             </div>
+          </div>
             <button
               type="button"
               onClick={onClose}
@@ -148,7 +148,7 @@ function ResultCard({
                 ? "text-amber-500"
                 : "text-muted-foreground"
           )} />
-          <div className="flex flex-wrap items-center gap-1.5 justify-end">
+          <div className="flex min-w-0 flex-wrap items-center gap-1.5 justify-end">
             <Badge variant="outline" className="text-[11px]">{modeLabel}</Badge>
             <Badge
               variant="outline"
@@ -166,9 +166,9 @@ function ResultCard({
           </div>
         </div>
         <CardTitle className="text-lg leading-snug">{result.courseName}</CardTitle>
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <div className="flex min-w-0 items-center gap-1.5 text-sm text-muted-foreground">
           <Building2 className="h-3.5 w-3.5 shrink-0" />
-          <span className="font-medium text-foreground/80">{result.university}</span>
+          <span className="min-w-0 font-medium text-foreground/80">{result.university}</span>
         </div>
       </CardHeader>
       <CardContent className="space-y-3 pt-0">
@@ -183,7 +183,7 @@ function ResultCard({
         {/* Z-score comparison */}
         {result.officialCutoff != null && diff != null ? (
           <div className="rounded-lg px-3 py-2 text-xs border font-medium bg-muted/40">
-            <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="grid gap-2 text-center sm:grid-cols-3">
               <div>
                 <p className="text-muted-foreground font-normal">Your Z-score</p>
                 <p className="font-mono font-semibold">{result.studentZScore}</p>
@@ -322,14 +322,14 @@ export function CheckerResults({
       <p className="text-sm text-muted-foreground">{res.disclaimer}</p>
 
       {/* Filter Tabs: Eligible vs Non-Eligible vs Cutoff Unavailable vs All */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-2 bg-muted/60 rounded-xl border border-[hsl(var(--border))]">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-col gap-4 rounded-xl border border-[hsl(var(--border))] bg-muted/60 p-2 sm:flex-row sm:items-start sm:justify-between">
+        <div className="grid w-full grid-cols-1 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center">
           {/* ELIGIBLE BUTTON (Default) */}
           <button
             type="button"
             onClick={() => setFilterStatus("eligible")}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-xs",
+              "flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all shadow-xs sm:justify-start",
               filterStatus === "eligible"
                 ? "bg-card text-emerald-700 dark:text-emerald-300 border-2 border-emerald-500 shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-card/50"
@@ -347,7 +347,7 @@ export function CheckerResults({
             type="button"
             onClick={() => setFilterStatus("non-eligible")}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-xs",
+              "flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all shadow-xs sm:justify-start",
               filterStatus === "non-eligible"
                 ? "bg-card text-red-700 dark:text-red-300 border-2 border-red-500 shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-card/50"
@@ -365,7 +365,7 @@ export function CheckerResults({
             type="button"
             onClick={() => setFilterStatus("cutoff-unavailable")}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-xs",
+              "flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all shadow-xs sm:justify-start",
               filterStatus === "cutoff-unavailable"
                 ? "bg-card text-amber-700 dark:text-amber-300 border-2 border-amber-500 shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-card/50"
@@ -383,7 +383,7 @@ export function CheckerResults({
             type="button"
             onClick={() => setFilterStatus("all")}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-xs",
+              "flex min-h-10 min-w-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all shadow-xs sm:justify-start",
               filterStatus === "all"
                 ? "bg-card text-primary border-2 border-primary shadow-sm"
                 : "text-muted-foreground hover:text-foreground hover:bg-card/50"
@@ -397,7 +397,7 @@ export function CheckerResults({
         </div>
 
         {/* Quick Search */}
-        <div className="relative w-full sm:w-64">
+        <div className="relative w-full sm:w-64 sm:shrink-0">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="text"
@@ -410,8 +410,8 @@ export function CheckerResults({
       </div>
 
       {/* Filter Status Explanation Header */}
-      <div className="flex items-center justify-between text-xs text-muted-foreground px-1">
-        <div className="flex items-center gap-1.5 font-medium text-foreground">
+      <div className="flex items-center justify-between px-1 text-xs text-muted-foreground">
+        <div className="flex min-w-0 items-center gap-1.5 font-medium text-foreground">
           {filterStatus === "eligible" && (
             <span>
               Showing <strong>{displayedResults.length}</strong> courses that meet handbook requirements —{" "}

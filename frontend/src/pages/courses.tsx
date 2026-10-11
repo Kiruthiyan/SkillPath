@@ -94,7 +94,7 @@ export default function Courses() {
     () => ({
       stream: streamFilter !== "all" ? streamFilter : undefined,
       zscore: profile.zscore ?? undefined,
-      district: profile.district || "Colombo",
+      district: profile.district || undefined,
       yearMode: "predicted" as const,
       universityId: universityFilter !== "all" ? Number(universityFilter) : undefined,
       faculty: facultyFilter !== "all" ? facultyFilter : undefined,

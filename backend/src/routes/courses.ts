@@ -1,10 +1,32 @@
 import { Router } from "express";
+import { inArray, asc } from "drizzle-orm";
+import { db } from "../db";
+import { careerPathsTable } from "../db";
 import {
   getOfficialCourseDetail,
   listOfficialCourses,
 } from "../db/official-handbook-query";
 
 const router = Router();
+
+/**
+ * career_paths has no direct FK to handbook courses (it's a small, hand-curated
+ * table keyed by a coarse degreeType). This maps a course's real faculty text to
+ * the degreeType categories that exist, so related careers are genuinely relevant
+ * rather than an arbitrary/mock join.
+ */
+function facultyToDegreeTypes(faculty: string | null): string[] {
+  if (!faculty) return [];
+  const f = faculty.toLowerCase();
+  const types = new Set<string>();
+  if (f.includes("engineering")) types.add("Engineering");
+  if (f.includes("medic") || f.includes("dental") || f.includes("veterinary") || f.includes("health"))
+    types.add("Medicine");
+  if (f.includes("computing") || f.includes("science")) types.add("Science");
+  if (f.includes("commerce") || f.includes("management") || f.includes("business"))
+    types.add("Commerce");
+  return Array.from(types);
+}
 
 router.get("/courses", async (req, res) => {
   const stream = req.query.stream as string | undefined;
@@ -98,7 +120,19 @@ router.get("/courses/:id/careers", async (req, res) => {
     return;
   }
 
-  res.json([]);
+  const degreeTypes = facultyToDegreeTypes(course.faculty);
+  if (degreeTypes.length === 0) {
+    res.json([]);
+    return;
+  }
+
+  const careers = await db
+    .select()
+    .from(careerPathsTable)
+    .where(inArray(careerPathsTable.degreeType, degreeTypes))
+    .orderBy(asc(careerPathsTable.title));
+
+  res.json(careers);
 });
 
 export default router;

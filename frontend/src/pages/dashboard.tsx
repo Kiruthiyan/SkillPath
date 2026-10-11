@@ -67,16 +67,16 @@ export default function Dashboard() {
     useGetDashboardStats();
 
   const { data: recommendations, isLoading: recsLoading } = useGetRecommendations(
-    { stream, zscore, district: district || "Colombo", yearMode: "predicted" },
+    { stream, zscore, district, yearMode: "predicted" },
     {
       query: {
         queryKey: getGetRecommendationsQueryKey({
           stream,
           zscore,
-          district: district || "Colombo",
+          district,
           yearMode: "predicted",
         }),
-        enabled: isProfileComplete,
+        enabled: isProfileComplete && !!district,
       },
     },
   );
@@ -134,13 +134,15 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex items-center self-start sm:self-center">
-          <Badge
-            variant="outline"
-            className="px-3.5 py-1.5 text-xs font-semibold bg-card/80 border-primary/30 text-foreground shadow-xs flex items-center gap-1.5"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span>UGC Handbook {stats?.handbookYear || "2025/2026"}</span>
-          </Badge>
+          {stats?.handbookYear ? (
+            <Badge
+              variant="outline"
+              className="px-3.5 py-1.5 text-xs font-semibold bg-card/80 border-primary/30 text-foreground shadow-xs flex items-center gap-1.5"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              <span>UGC Handbook {stats.handbookYear}</span>
+            </Badge>
+          ) : null}
         </div>
       </div>
 
@@ -368,7 +370,7 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="courses" className="space-y-4">
-            <TabsList className="grid w-full sm:w-80 grid-cols-3">
+            <TabsList className="grid w-full grid-cols-1 gap-1 sm:w-80 sm:grid-cols-3">
               <TabsTrigger value="courses">Courses ({savedCourses?.length || 0})</TabsTrigger>
               <TabsTrigger value="universities">Universities ({savedUniversities?.length || 0})</TabsTrigger>
               <TabsTrigger value="careers">Careers</TabsTrigger>

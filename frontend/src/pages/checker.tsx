@@ -16,8 +16,8 @@ export default function Checker() {
 
   const [form, setForm] = useState<CheckerFormValue>(() => ({
     academicYear: "",
-    stream: profile.stream || "Physical Science",
-    district: profile.district || "Colombo",
+    stream: profile.stream || "",
+    district: profile.district || "",
     zscore: profile.zscore != null ? String(profile.zscore) : "",
     subjectGrades: [],
   }));
@@ -79,7 +79,7 @@ export default function Checker() {
         <CardContent className="p-6 space-y-5">
           <CheckerForm value={form} onChange={setForm} />
           <Button onClick={handleSubmit} disabled={!canSubmit || isPending} className="w-full sm:w-auto">
-            {isPending ? t.actions.saving : t.checker.checkBtn}
+            {isPending ? t.actions.processing : t.checker.checkBtn}
           </Button>
         </CardContent>
       </Card>

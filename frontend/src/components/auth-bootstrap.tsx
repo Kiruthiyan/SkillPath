@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useGetMe, getGetMeQueryKey } from "@/api";
 import { ApiError } from "@/api";
 import { useAuthStore } from "@/hooks/use-auth";
+import { useProfileStore } from "@/hooks/use-profile";
 
 /** Validates persisted JWT on app load and syncs user profile from the server. */
 export function AuthBootstrap() {
@@ -21,6 +22,15 @@ export function AuthBootstrap() {
   useEffect(() => {
     if (data && token) {
       setAuth(token, data);
+      // Server is the source of truth for academic profile fields. Always
+      // overwrite local persisted profile values after /auth/me succeeds so
+      // stale Zustand data never masks the latest DB values.
+      const profile = useProfileStore.getState();
+      if (data.name) profile.setFullName(data.name);
+      profile.setStream(data.stream ?? "");
+      profile.setZscore(data.zscore ?? null);
+      profile.setDistrict(data.district ?? "");
+      if (data.language) profile.setLanguage(data.language);
     }
   }, [data, token, setAuth]);
 

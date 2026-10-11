@@ -23,6 +23,7 @@ export interface University {
   /** @nullable */
   description?: string | null;
   courseCount?: number;
+  type?: "government" | "private" | "unknown";
 }
 
 /**
@@ -324,6 +325,9 @@ export interface User {
   district?: string | null;
   /** @nullable */
   role?: string | null;
+  isActive?: boolean;
+  googleLinked?: boolean;
+  mustChangePassword?: boolean;
 }
 
 export interface AuthResponse {

@@ -4,3 +4,9 @@ export { setBaseUrl, setAuthTokenGetter, ApiError, customFetch } from "./custom-
 export type { AuthTokenGetter } from "./custom-fetch";
 export * from "./checker";
 export * from "./admin";
+export * from "./auth-otp";
+export * from "./auth-account";
+export * from "./university-admin";
+export * from "./invites";
+export * from "./mentors";
+export * from "./opportunities";

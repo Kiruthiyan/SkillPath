@@ -1,0 +1,76 @@
+{
+  "siteName": "SkillPath AI",
+  "defaultTitle": "SkillPath AI",
+  "defaultDescription": "SkillPath AI helps Sri Lankan A/L students check Z-score eligibility, discover university pathways, and plan careers using UGC handbook data.",
+  "defaultImagePath": "/og-image.svg",
+  "defaultLocale": "en_LK",
+  "twitterCard": "summary_large_image",
+  "routes": [
+    {
+      "path": "/",
+      "title": "SkillPath AI - Sri Lankan University Course and Z-Score Guidance",
+      "description": "Find Sri Lankan university course options, check Z-score eligibility, and plan your path with UGC handbook-based guidance.",
+      "index": true,
+      "ogType": "website",
+      "prerender": true,
+      "summaryHeading": "SkillPath AI",
+      "summaryBody": "A launch-ready university and career guidance platform for Sri Lankan A/L students. Start with the free public Z-score checker, then sign in for saved courses, roadmaps, and personalized tools.",
+      "structuredData": ["organization", "website"]
+    },
+    {
+      "path": "/checker",
+      "title": "Free Z-Score Checker for Sri Lankan University Admissions | SkillPath AI",
+      "description": "Check Sri Lankan university course eligibility with official UGC handbook-derived streams, districts, subject rules, and Z-score cutoffs. No login required.",
+      "index": true,
+      "ogType": "website",
+      "prerender": true,
+      "summaryHeading": "Free Z-Score and Course Checker",
+      "summaryBody": "Use verified UGC handbook-derived data to compare your A/L stream, district, subjects, and Z-score against recent official admission cutoffs. The checker is public and works without signing in.",
+      "structuredData": ["organization", "checkerWebApp", "checkerFaq"]
+    },
+    {
+      "path": "/login",
+      "title": "Sign In | SkillPath AI",
+      "description": "Sign in to SkillPath AI to access saved courses, dashboards, roadmaps, and personalized guidance.",
+      "index": false,
+      "ogType": "website",
+      "prerender": true,
+      "summaryHeading": "Sign In",
+      "summaryBody": "Access your personalized SkillPath AI dashboard, saved courses, roadmaps, and account tools."
+    },
+    {
+      "path": "/register",
+      "title": "Create Your SkillPath AI Account",
+      "description": "Create a free SkillPath AI account to save courses, build roadmaps, and personalize university guidance.",
+      "index": false,
+      "ogType": "website",
+      "prerender": true,
+      "summaryHeading": "Create Your Account",
+      "summaryBody": "Register to save your student profile, course shortlist, AI roadmap, and personalized university planning tools."
+    },
+    {
+      "path": "/forgot-password",
+      "title": "Reset Password | SkillPath AI",
+      "description": "Reset your SkillPath AI account password securely.",
+      "index": false,
+      "ogType": "website",
+      "prerender": true,
+      "summaryHeading": "Reset Your Password",
+      "summaryBody": "Recover access to your SkillPath AI account securely."
+    }
+  ],
+  "checkerFaq": [
+    {
+      "question": "Can I use the SkillPath AI Z-score checker without signing in?",
+      "answer": "Yes. The Z-score checker is public and can be used without creating an account. Sign in is only needed for personalized saved features such as dashboards, roadmaps, and saved courses."
+    },
+    {
+      "question": "What data does the Z-score checker use?",
+      "answer": "The checker uses UGC handbook-derived admission data, including academic year, A/L stream, district, subject requirements, and historical Z-score cutoff mappings available in the application data."
+    },
+    {
+      "question": "Does a matching Z-score guarantee admission?",
+      "answer": "No. The result is guidance based on official historical data and handbook rules. Final admission depends on the official UGC process, annual cutoffs, quotas, and applicant competition."
+    }
+  ]
+}

@@ -35,29 +35,37 @@ export interface ProfileState {
   setNotification: (key: keyof ProfileState["notifications"], value: boolean) => void;
   setTheme: (theme: "light" | "dark" | "system") => void;
   isComplete: () => boolean;
+  resetProfile: () => void;
 }
+
+// User-specific fields only — excludes `theme`/`language`, which are
+// device-level preferences that should survive a logout/login switch.
+const DEFAULT_PROFILE_FIELDS = {
+  fullName: "",
+  educationStage: "A/L Completed",
+  stream: "",
+  zscore: null,
+  district: "",
+  interests: [],
+  preferredCareers: [],
+  skills: [],
+  preferredUniversities: [],
+  preferredStudyAreas: [],
+  notifications: {
+    universityUpdates: true,
+    scholarshipAlerts: true,
+    internshipAlerts: true,
+    roadmapReminders: true,
+  },
+} satisfies Partial<ProfileState>;
 
 export const useProfileStore = create<ProfileState>()(
   persist(
     (set, get) => ({
-      fullName: "",
-      educationStage: "A/L Completed",
-      stream: "",
-      zscore: null,
-      district: "Colombo",
-      interests: [],
-      preferredCareers: [],
-      skills: [],
+      ...DEFAULT_PROFILE_FIELDS,
       language: "en",
-      preferredUniversities: [],
-      preferredStudyAreas: [],
-      notifications: {
-        universityUpdates: true,
-        scholarshipAlerts: true,
-        internshipAlerts: true,
-        roadmapReminders: true,
-      },
       theme: "system",
+      resetProfile: () => set({ ...DEFAULT_PROFILE_FIELDS }),
       setFullName: (fullName) => set({ fullName }),
       setEducationStage: (educationStage) => set({ educationStage }),
       setStream: (stream) => set({ stream }),
@@ -116,6 +124,7 @@ export const EDUCATION_STAGES = [
 ] as const;
 
 export const UGC_DISTRICTS = [
+  "All Island",
   "Colombo",
   "Gampaha",
   "Kalutara",
@@ -126,10 +135,7 @@ export const UGC_DISTRICTS = [
   "Matara",
   "Hambantota",
   "Jaffna",
-  "Kilinochchi",
-  "Mannar",
-  "Mullaitivu",
-  "Vavuniya",
+  "Vanni",
   "Batticaloa",
   "Ampara",
   "Trincomalee",

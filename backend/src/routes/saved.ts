@@ -15,11 +15,11 @@ import {
   SaveUniversityBody,
   RecordSearchBody,
 } from "../api-zod";
-import { requireAuth } from "../middleware/auth";
+import { requireActiveSession } from "../middleware/auth";
 
 const router = Router();
 
-router.get("/saved/courses", requireAuth, async (req, res) => {
+router.get("/saved/courses", requireActiveSession, async (req, res) => {
   const saved = await db
     .select({
       programmeId: savedCoursesTable.courseId,
@@ -49,7 +49,7 @@ router.get("/saved/courses", requireAuth, async (req, res) => {
   res.json(rows);
 });
 
-router.post("/saved/courses", requireAuth, async (req, res) => {
+router.post("/saved/courses", requireActiveSession, async (req, res) => {
   const parsed = SaveCourseBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
@@ -91,7 +91,7 @@ router.post("/saved/courses", requireAuth, async (req, res) => {
   res.status(201).json({ message: "Course saved" });
 });
 
-router.delete("/saved/courses/:courseId", requireAuth, async (req, res) => {
+router.delete("/saved/courses/:courseId", requireActiveSession, async (req, res) => {
   const courseId = Number(req.params.courseId);
   if (Number.isNaN(courseId)) {
     res.status(400).json({ error: "Invalid course ID" });
@@ -110,7 +110,7 @@ router.delete("/saved/courses/:courseId", requireAuth, async (req, res) => {
   res.status(204).send();
 });
 
-router.get("/saved/universities", requireAuth, async (req, res) => {
+router.get("/saved/universities", requireActiveSession, async (req, res) => {
   const rows = await db
     .select({
       id: universitiesTable.id,
@@ -134,7 +134,7 @@ router.get("/saved/universities", requireAuth, async (req, res) => {
   res.json(rows);
 });
 
-router.post("/saved/universities", requireAuth, async (req, res) => {
+router.post("/saved/universities", requireActiveSession, async (req, res) => {
   const parsed = SaveUniversityBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
@@ -176,7 +176,7 @@ router.post("/saved/universities", requireAuth, async (req, res) => {
   res.status(201).json({ message: "University saved" });
 });
 
-router.delete("/saved/universities/:universityId", requireAuth, async (req, res) => {
+router.delete("/saved/universities/:universityId", requireActiveSession, async (req, res) => {
   const universityId = Number(req.params.universityId);
   if (Number.isNaN(universityId)) {
     res.status(400).json({ error: "Invalid university ID" });
@@ -195,7 +195,7 @@ router.delete("/saved/universities/:universityId", requireAuth, async (req, res)
   res.status(204).send();
 });
 
-router.get("/roadmaps", requireAuth, async (req, res) => {
+router.get("/roadmaps", requireActiveSession, async (req, res) => {
   const rows = await db
     .select({
       id: roadmapsTable.id,
@@ -223,7 +223,7 @@ router.get("/roadmaps", requireAuth, async (req, res) => {
   );
 });
 
-router.get("/dashboard/recent-searches", requireAuth, async (req, res) => {
+router.get("/dashboard/recent-searches", requireActiveSession, async (req, res) => {
   const rows = await db
     .select()
     .from(recentSearchesTable)
@@ -251,7 +251,7 @@ router.get("/dashboard/recent-searches", requireAuth, async (req, res) => {
   res.json(uniqueSearches);
 });
 
-router.post("/dashboard/recent-searches", requireAuth, async (req, res) => {
+router.post("/dashboard/recent-searches", requireActiveSession, async (req, res) => {
   const parsed = RecordSearchBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid request body" });
@@ -281,7 +281,7 @@ router.post("/dashboard/recent-searches", requireAuth, async (req, res) => {
   });
 });
 
-router.delete("/dashboard/recent-searches", requireAuth, async (req, res) => {
+router.delete("/dashboard/recent-searches", requireActiveSession, async (req, res) => {
   await db
     .delete(recentSearchesTable)
     .where(eq(recentSearchesTable.userId, req.user!.userId));

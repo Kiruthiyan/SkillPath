@@ -23,7 +23,7 @@ export default function Reviews() {
   const courseIdParam = getQueryParam(search, "courseId");
   const courseId = courseIdParam ? parseInt(courseIdParam) : undefined;
   const profile = useProfileStore();
-  const district = profile.district || "Colombo";
+  const district = profile.district || undefined;
 
   const { data: course } = useGetCourse(
     courseId ?? 0,
