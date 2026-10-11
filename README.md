@@ -101,6 +101,8 @@ On Windows, Supabase's direct `db.*.supabase.co` host may fail; use the **Sessio
 
 **Frontend (Vercel)** — Root directory `frontend`; install `pnpm install --frozen-lockfile`; build `pnpm build`; output `dist`; set `VITE_API_URL` and `VITE_GOOGLE_CLIENT_ID`.
 
+**Backend (AWS EC2)** — Docker Compose + Caddy HTTPS; see [`docs/DEPLOY_EC2.md`](docs/DEPLOY_EC2.md).
+
 **Backend (Render)** — Use [`render.yaml`](render.yaml) or create a Web Service with root `backend`, build `pnpm install --frozen-lockfile && pnpm build`, start `pnpm start`, health check `/api/healthz`. Set `DATABASE_URL`, `JWT_SECRET`, `CORS_ORIGINS` and `APP_BASE_URL`, plus the optional keys above.
 
 ## Security

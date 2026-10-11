@@ -1,0 +1,11 @@
+{
+	email {$ACME_EMAIL}
+}
+
+{$API_DOMAIN} {
+	encode gzip
+	reverse_proxy api:5000 {
+		health_uri /api/healthz
+		health_interval 30s
+	}
+}
