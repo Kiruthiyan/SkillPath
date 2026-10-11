@@ -1,107 +1,108 @@
 # SkillPath AI
 
-AI-powered university and career navigator for Sri Lankan A/L students.
+AI-powered university and career navigator for Sri Lankan A/L students. Check Z-score eligibility, explore UGC-handbook courses and universities, build career roadmaps, chat with an AI guide, and connect with mentors.
 
-This repository contains two independently installable apps:
+## Features
+
+- **Public Z-score checker** — no account needed.
+- **Courses and universities** — searchable data imported from the UGC handbooks (2022–2025).
+- **AI roadmap and chat** — powered by Google Gemini (optional; returns an honest "unavailable" error when no key is set).
+- **Role-based dashboards** — student, mentor, university admin and admin, each with its own navigation and route guards.
+- **Authentication** — email/password and Google sign-in, with OTP-based password reset by email.
+- **Responsive UI** — mobile-first with bottom navigation on phones and a sidebar on desktop; English, Sinhala and Tamil.
+
+## Tech stack
+
+| Layer    | Technology                                                          |
+| -------- | ------------------------------------------------------------------- |
+| Frontend | React, Vite, TypeScript, Tailwind CSS, Radix UI, TanStack Query, wouter |
+| Backend  | Node.js, Express, TypeScript, Drizzle ORM, Vitest                   |
+| Database | PostgreSQL (Supabase or any Postgres)                               |
+| Hosting  | Vercel (frontend), Render (backend)                                 |
+
+## Repository layout
 
 ```text
 SkillPath/
-+-- backend/          # Express API, DB schema/import, AI integration
-+-- frontend/         # Vite React app
-+-- docs/             # OpenAPI spec and audit notes
-+-- .github/          # CI
-+-- docker-compose.yml
-+-- README.md
+├── backend/            Express API, database schema, handbook import, AI integration
+├── frontend/           Vite + React application
+├── HandBook/           Source UGC handbook data
+├── docs/               OpenAPI spec and audit reports
+├── .github/workflows/  CI workflow
+├── docker-compose.yml  Optional local Postgres
+└── render.yaml         Render blueprint for the API
 ```
 
-## Prerequisites
+## Getting started
 
-- Node.js 20+
-- pnpm 9+
-- Supabase Postgres project, or another PostgreSQL database
+**Prerequisites:** Node.js 20+, pnpm 9+, and a PostgreSQL database.
 
-## Frontend
-
-```bash
-cd frontend
-pnpm install
-pnpm dev
-```
-
-The dev server runs at `http://localhost:5173` and proxies `/api` to `http://localhost:5000`.
-
-For production, set `VITE_API_URL` to the deployed backend origin, without a trailing slash.
-
-```bash
-cd frontend
-pnpm build
-```
-
-## Backend
+### 1. Backend
 
 ```bash
 cd backend
-cp .env.example .env
-```
-
-Set `DATABASE_URL` in `backend/.env` to your Supabase connection string. URL-encode special characters in the password, for example `@` becomes `%40`.
-
-On Windows, the direct `db.*.supabase.co` host may fail. In Supabase Dashboard, use **Database** -> **Connect** -> **Session pooler** and copy the session mode URI.
-
-```bash
-cd backend
+cp .env.example .env     # then fill in the values below
 pnpm install
-pnpm db:push
+pnpm db:push             # create tables
 pnpm handbook:import --all
 pnpm db:seed
-pnpm dev
+pnpm dev                 # http://localhost:5000
 ```
 
-The API runs at `http://localhost:5000`.
+For a local database: `docker compose up -d`, then set
+`DATABASE_URL=postgresql://skillpath:skillpath@localhost:5432/skillpath`.
+
+### 2. Frontend
 
 ```bash
-cd backend
-pnpm build
-pnpm start
+cd frontend
+cp .env.example .env
+pnpm install
+pnpm dev                 # http://localhost:5173 (proxies /api to :5000)
 ```
 
-## Backend Environment
+## Environment variables
 
-- `DATABASE_URL` - PostgreSQL connection string
-- `JWT_SECRET` - Secret for signing auth tokens
-- `GEMINI_API_KEY` - Optional; roadmap/chat return honest unavailable errors when unset
-- `PORT` - API server port, default `5000`
-- `CORS_ORIGINS` - **Required in production** — comma-separated allowed frontend origins
-- `APP_BASE_URL` - Deployed frontend URL (invite links + API `/` redirect)
-- `GOOGLE_CLIENT_ID` - Required for Google sign-in verification
-- `SMTP_*` - Required for password-reset email delivery
+**Backend** (`backend/.env`)
+
+| Variable | Purpose |
+| -------- | ------- |
+| `DATABASE_URL` | PostgreSQL connection string (required) |
+| `JWT_SECRET` | Secret for signing auth tokens (required) |
+| `CORS_ORIGINS` | Comma-separated allowed frontend origins (required in production) |
+| `APP_BASE_URL` | Deployed frontend URL, used for invite links |
+| `GOOGLE_CLIENT_ID` | Verifies Google sign-in |
+| `GEMINI_API_KEY` | Enables AI roadmap and chat |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | Sends password-reset OTP emails |
+| `PORT` | API port (default `5000`) |
+
+**Frontend** (`frontend/.env`)
+
+| Variable | Purpose |
+| -------- | ------- |
+| `VITE_API_URL` | Deployed backend origin, no trailing slash (production) |
+| `VITE_GOOGLE_CLIENT_ID` | Google OAuth web client ID |
+
+On Windows, Supabase's direct `db.*.supabase.co` host may fail; use the **Session pooler** URI from *Database → Connect* instead, and URL-encode special characters in the password.
+
+## Scripts
+
+| Where | Command | Description |
+| ----- | ------- | ----------- |
+| backend | `pnpm dev` / `build` / `start` | Run, build and serve the API |
+| backend | `pnpm typecheck` / `pnpm test` | Type-check and run tests |
+| backend | `pnpm db:push` / `db:seed` | Apply schema and seed data |
+| backend | `pnpm seed:super-admin` | One-time super admin bootstrap |
+| backend | `pnpm handbook:import` | Import handbook data |
+| frontend | `pnpm dev` / `build` / `preview` | Run, build (with SEO prerender) and preview |
+| frontend | `pnpm typecheck` | Type-check |
 
 ## Deployment
 
-### Frontend (Vercel)
+**Frontend (Vercel)** — Root directory `frontend`; install `pnpm install --frozen-lockfile`; build `pnpm build`; output `dist`; set `VITE_API_URL` and `VITE_GOOGLE_CLIENT_ID`.
 
-- Root Directory: `frontend`
-- Install Command: `pnpm install --frozen-lockfile`
-- Build Command: `pnpm build`
-- Output Directory: `dist`
-- Environment:
-  - `VITE_API_URL=https://your-api.onrender.com` (no trailing slash)
-  - `VITE_GOOGLE_CLIENT_ID=...` (if Google sign-in is enabled)
+**Backend (Render)** — Use [`render.yaml`](render.yaml) or create a Web Service with root `backend`, build `pnpm install --frozen-lockfile && pnpm build`, start `pnpm start`, health check `/api/healthz`. Set `DATABASE_URL`, `JWT_SECRET`, `CORS_ORIGINS` and `APP_BASE_URL`, plus the optional keys above.
 
-### Backend (Render)
+## Security
 
-Use the repo blueprint [`render.yaml`](render.yaml), or create a Web Service manually:
-
-- Root Directory: `backend`
-- Build Command: `pnpm install --frozen-lockfile && pnpm build`
-- Start Command: `pnpm start`
-- Health Check Path: `/api/healthz`
-- Environment (set in Render dashboard):
-  - `DATABASE_URL`, `JWT_SECRET` (required)
-  - `CORS_ORIGINS=https://your-app.vercel.app` (required — do not leave empty)
-  - `APP_BASE_URL=https://your-app.vercel.app`
-  - `GEMINI_API_KEY`, `GOOGLE_CLIENT_ID`, `SMTP_*` as needed
-
-Local Postgres (optional): `docker compose up -d` then point `DATABASE_URL` at `postgresql://skillpath:skillpath@localhost:5432/skillpath`.
-
-Never commit `.env` files.
+Never commit `.env` files. Only `.env.example` templates are tracked. Auth routes are guarded on both the client and the API; see [`docs/`](docs) for the API spec and audit reports.

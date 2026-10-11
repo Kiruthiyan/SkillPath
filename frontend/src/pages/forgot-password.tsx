@@ -3,8 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { motion } from "framer-motion";
-import { KeyRound, GraduationCap, Eye, EyeOff, Home, CheckCircle2, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 import { useRequestPasswordOtp, useVerifyPasswordOtp, useResetPassword } from "@/api";
 import { usePageTitle } from "@/hooks/use-page-title";
@@ -19,7 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AuthShell, AUTH_INPUT, AUTH_BUTTON, AUTH_LABEL, AUTH_LINK } from "@/components/auth-shell";
 import { useToast } from "@/hooks/use-toast";
 
 const RESEND_COOLDOWN_SECONDS = 60;
@@ -152,232 +151,191 @@ export default function ForgotPassword() {
     );
   }
 
+  const subtitle =
+    step === "email"
+      ? t.auth.forgotPasswordSubtitle
+      : step === "otp"
+        ? `${t.auth.otpSentTo} ${email}`
+        : step === "password"
+          ? t.auth.resetPasswordTitle
+          : t.auth.resetSuccessSubtitle;
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="px-4 pt-4">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Home className="h-4 w-4" />
-          {t.nav.home}
-        </Link>
-      </div>
-
-      <div className="flex-1 flex items-center justify-center py-10 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="w-full max-w-md"
-        >
-          <div className="text-center mb-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 font-bold text-2xl text-primary hover:opacity-90 transition-opacity"
+    <AuthShell
+      title={step === "success" ? t.auth.resetSuccessTitle : t.auth.forgotPasswordTitle}
+      subtitle={subtitle}
+      footer={
+        step !== "success" ? (
+          <Link href="/login" className={AUTH_LINK}>
+            {t.auth.backToSignIn}
+          </Link>
+        ) : null
+      }
+    >
+      {step === "email" && (
+        <Form {...emailForm}>
+          <form onSubmit={emailForm.handleSubmit(handleSendOtp)} className="space-y-4">
+            <FormField
+              control={emailForm.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={AUTH_LABEL}>
+                    {t.auth.emailLabel}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                      className={AUTH_INPUT}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button
+              type="submit"
+              className={`mt-2 ${AUTH_BUTTON}`}
+              disabled={isSendingOtp}
             >
-              <div className="h-10 w-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md">
-                <GraduationCap className="h-6 w-6" />
-              </div>
-              <span>SkillPath AI</span>
-            </Link>
-          </div>
+              {isSendingOtp && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+              {isSendingOtp ? t.actions.processing : t.auth.sendCodeBtn}
+            </Button>
+          </form>
+        </Form>
+      )}
 
-          <Card className="shadow-lg border-border/80 backdrop-blur-xs">
-            <CardHeader className="text-center pb-4">
-              <CardTitle className="text-2xl font-bold tracking-tight flex items-center justify-center gap-2">
-                {step === "success" ? (
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                ) : (
-                  <KeyRound className="h-5 w-5 text-primary" />
-                )}
-                {step === "success" ? t.auth.resetSuccessTitle : t.auth.forgotPasswordTitle}
-              </CardTitle>
-              <CardDescription className="text-sm text-muted-foreground mt-1">
-                {step === "email" && t.auth.forgotPasswordSubtitle}
-                {step === "otp" && `${t.auth.otpSentTo} ${email}`}
-                {step === "password" && t.auth.resetPasswordTitle}
-                {step === "success" && t.auth.resetSuccessSubtitle}
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent className="space-y-5">
-              {step === "email" && (
-                <Form {...emailForm}>
-                  <form onSubmit={emailForm.handleSubmit(handleSendOtp)} className="space-y-4">
-                    <FormField
-                      control={emailForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs font-semibold text-foreground">
-                            {t.auth.emailLabel}
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="you@example.com"
-                              autoComplete="email"
-                              className="h-10 text-sm"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+      {step === "otp" && (
+        <Form {...otpForm}>
+          <form onSubmit={otpForm.handleSubmit(handleVerifyOtp)} className="space-y-4">
+            <FormField
+              control={otpForm.control}
+              name="otp"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={AUTH_LABEL}>
+                    {t.auth.otpLabel}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={6}
+                      placeholder="000000"
+                      autoComplete="one-time-code"
+                      className={`text-center font-semibold tracking-[0.4em] ${AUTH_INPUT}`}
+                      {...field}
                     />
-                    <Button
-                      type="submit"
-                      className="w-full h-10 text-sm font-semibold shadow-sm mt-2"
-                      disabled={isSendingOtp}
-                    >
-                      {isSendingOtp && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                      {isSendingOtp ? t.actions.processing : t.auth.sendCodeBtn}
-                    </Button>
-                  </form>
-                </Form>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
+            />
+            <Button
+              type="submit"
+              className={`${AUTH_BUTTON}`}
+              disabled={isVerifyingOtp}
+            >
+              {isVerifyingOtp && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+              {isVerifyingOtp ? t.actions.processing : t.auth.verifyOtpBtn}
+            </Button>
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={cooldown > 0 || isSendingOtp}
+              className="w-full text-center text-sm font-semibold text-[#1d83c4] hover:underline disabled:text-muted-foreground disabled:no-underline disabled:cursor-not-allowed"
+            >
+              {cooldown > 0
+                ? `${t.auth.resendCodeIn} ${cooldown}s`
+                : t.auth.resendCode}
+            </button>
+          </form>
+        </Form>
+      )}
 
-              {step === "otp" && (
-                <Form {...otpForm}>
-                  <form onSubmit={otpForm.handleSubmit(handleVerifyOtp)} className="space-y-4">
-                    <FormField
-                      control={otpForm.control}
-                      name="otp"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs font-semibold text-foreground">
-                            {t.auth.otpLabel}
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="text"
-                              inputMode="numeric"
-                              maxLength={6}
-                              placeholder="000000"
-                              autoComplete="one-time-code"
-                              className="h-10 text-sm tracking-[0.4em] text-center font-semibold"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+      {step === "password" && (
+        <Form {...passwordForm}>
+          <form onSubmit={passwordForm.handleSubmit(handleResetPassword)} className="space-y-4">
+            <FormField
+              control={passwordForm.control}
+              name="newPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={AUTH_LABEL}>
+                    {t.auth.newPasswordLabel}
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        autoComplete="new-password"
+                        className={`pr-12 ${AUTH_INPUT}`}
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d83c4]/30"
+                        title={showPassword ? t.auth.hidePassword : t.auth.showPassword}
+                        aria-label={showPassword ? t.auth.hidePassword : t.auth.showPassword}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={passwordForm.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={AUTH_LABEL}>
+                    {t.auth.confirmPasswordLabel}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      autoComplete="new-password"
+                      className={AUTH_INPUT}
+                      {...field}
                     />
-                    <Button
-                      type="submit"
-                      className="w-full h-10 text-sm font-semibold shadow-sm"
-                      disabled={isVerifyingOtp}
-                    >
-                      {isVerifyingOtp && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                      {isVerifyingOtp ? t.actions.processing : t.auth.verifyOtpBtn}
-                    </Button>
-                    <button
-                      type="button"
-                      onClick={handleResend}
-                      disabled={cooldown > 0 || isSendingOtp}
-                      className="w-full text-center text-xs font-medium text-primary hover:underline disabled:text-muted-foreground disabled:no-underline disabled:cursor-not-allowed"
-                    >
-                      {cooldown > 0
-                        ? `${t.auth.resendCodeIn} ${cooldown}s`
-                        : t.auth.resendCode}
-                    </button>
-                  </form>
-                </Form>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
+            />
+            <Button
+              type="submit"
+              className={`mt-2 ${AUTH_BUTTON}`}
+              disabled={isResettingPassword}
+            >
+              {isResettingPassword && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+              {isResettingPassword ? t.actions.processing : t.auth.resetPasswordBtn}
+            </Button>
+          </form>
+        </Form>
+      )}
 
-              {step === "password" && (
-                <Form {...passwordForm}>
-                  <form onSubmit={passwordForm.handleSubmit(handleResetPassword)} className="space-y-4">
-                    <FormField
-                      control={passwordForm.control}
-                      name="newPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs font-semibold text-foreground">
-                            {t.auth.newPasswordLabel}
-                          </FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="••••••••"
-                                autoComplete="new-password"
-                                className="h-10 text-sm pr-10"
-                                {...field}
-                              />
-                              <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
-                                title={showPassword ? t.auth.hidePassword : t.auth.showPassword}
-                                aria-label={showPassword ? t.auth.hidePassword : t.auth.showPassword}
-                              >
-                                {showPassword ? (
-                                  <EyeOff className="h-4 w-4" />
-                                ) : (
-                                  <Eye className="h-4 w-4" />
-                                )}
-                              </button>
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={passwordForm.control}
-                      name="confirmPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-xs font-semibold text-foreground">
-                            {t.auth.confirmPasswordLabel}
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type={showPassword ? "text" : "password"}
-                              placeholder="••••••••"
-                              autoComplete="new-password"
-                              className="h-10 text-sm"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      className="w-full h-10 text-sm font-semibold shadow-sm mt-2"
-                      disabled={isResettingPassword}
-                    >
-                      {isResettingPassword && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                      {isResettingPassword ? t.actions.processing : t.auth.resetPasswordBtn}
-                    </Button>
-                  </form>
-                </Form>
-              )}
-
-              {step === "success" && (
-                <Button
-                  className="w-full h-10 text-sm font-semibold shadow-sm"
-                  onClick={() => setLocation("/login")}
-                >
-                  {t.auth.backToSignIn}
-                </Button>
-              )}
-
-              {step !== "success" && (
-                <p className="text-center text-sm text-muted-foreground pt-1">
-                  <Link href="/login" className="text-primary font-semibold hover:underline">
-                    {t.auth.backToSignIn}
-                  </Link>
-                </p>
-              )}
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
-    </div>
+      {step === "success" && (
+        <Button
+          className={`${AUTH_BUTTON}`}
+          onClick={() => setLocation("/login")}
+        >
+          {t.auth.backToSignIn}
+        </Button>
+      )}
+    </AuthShell>
   );
 }

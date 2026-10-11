@@ -303,6 +303,57 @@ export default function AdminMentors() {
     );
   }
 
+  const renderActions = (m: (typeof filtered)[number]) => {
+    const canVerify = m.verificationStatus !== "verified";
+    const canActivate = m.verificationStatus === "verified" && !m.isAcceptingStudents;
+    const canSuspend = m.verificationStatus === "verified";
+    const canReject = m.verificationStatus !== "rejected";
+    return (
+            <div className="flex flex-wrap gap-1">
+              <Button size="sm" variant="outline" onClick={() => setViewing(m)}>
+                View
+              </Button>
+              <Button size="sm" variant="outline" onClick={() => openEdit(m)}>
+                Edit
+              </Button>
+              {canVerify && (
+                <Button
+                  size="sm"
+                  disabled={isVerifying}
+                  onClick={() => runVerify(m.id, "verified", true)}
+                >
+                  Verify & Activate
+                </Button>
+              )}
+              {canActivate && (
+                <Button size="sm" disabled={isUpdating} onClick={() => activate(m.id)}>
+                  Activate
+                </Button>
+              )}
+              {canSuspend && (
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  disabled={isVerifying}
+                  onClick={() => setConfirm({ id: m.id, action: "suspend", label: m.name || m.email })}
+                >
+                  Suspend
+                </Button>
+              )}
+              {canReject && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={isVerifying}
+                  onClick={() => setConfirm({ id: m.id, action: "reject", label: m.name || m.email })}
+                >
+                  Reject
+                </Button>
+              )}
+            </div>
+    );
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-4">
@@ -388,7 +439,34 @@ export default function AdminMentors() {
         ) : filtered.length === 0 ? (
           <p className="text-sm text-muted-foreground">No mentors in this status.</p>
         ) : (
-          <div className="overflow-x-auto rounded-lg border">
+          <>
+          <ul className="space-y-3 md:hidden">
+            {filtered.map((m) => (
+              <li key={m.id} className="space-y-3 rounded-2xl border bg-card p-4 shadow-sm">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate font-semibold">{m.name || "—"}</p>
+                    <p className="truncate text-xs text-muted-foreground">{m.email}</p>
+                  </div>
+                  <Badge variant={STATUS_VARIANT[m.verificationStatus] ?? "outline"}>{m.verificationStatus}</Badge>
+                </div>
+                {(m.expertiseAreas ?? []).length > 0 && (
+                  <div className="flex flex-wrap gap-1">
+                    {(m.expertiseAreas ?? []).map((a) => (
+                      <Badge key={a} variant="secondary">{a}</Badge>
+                    ))}
+                  </div>
+                )}
+                <p className="text-xs text-muted-foreground">
+                  {m.yearsExperience != null ? `${m.yearsExperience}y experience` : "Experience not set"}
+                  {m.availability ? ` · ${m.availability}` : ""}
+                  {m.verificationStatus === "verified" ? ` · ${m.isAcceptingStudents ? "Accepting" : "Not accepting"}` : ""}
+                </p>
+                {renderActions(m)}
+              </li>
+            ))}
+          </ul>
+          <div className="hidden overflow-x-auto rounded-lg border md:block">
             <table className="w-full text-sm">
               <thead className="bg-muted/40 text-left">
                 <tr>
@@ -402,10 +480,6 @@ export default function AdminMentors() {
               </thead>
               <tbody>
                 {filtered.map((m) => {
-                  const canVerify = m.verificationStatus !== "verified";
-                  const canActivate = m.verificationStatus === "verified" && !m.isAcceptingStudents;
-                  const canSuspend = m.verificationStatus === "verified";
-                  const canReject = m.verificationStatus !== "rejected";
                   return (
                     <tr key={m.id} className="border-t">
                       <td className="p-3">
@@ -438,48 +512,7 @@ export default function AdminMentors() {
                       </td>
                       <td className="p-3 max-w-[10rem] truncate">{m.availability || "—"}</td>
                       <td className="p-3">
-                        <div className="flex flex-wrap gap-1">
-                          <Button size="sm" variant="outline" onClick={() => setViewing(m)}>
-                            View
-                          </Button>
-                          <Button size="sm" variant="outline" onClick={() => openEdit(m)}>
-                            Edit
-                          </Button>
-                          {canVerify && (
-                            <Button
-                              size="sm"
-                              disabled={isVerifying}
-                              onClick={() => runVerify(m.id, "verified", true)}
-                            >
-                              Verify & Activate
-                            </Button>
-                          )}
-                          {canActivate && (
-                            <Button size="sm" disabled={isUpdating} onClick={() => activate(m.id)}>
-                              Activate
-                            </Button>
-                          )}
-                          {canSuspend && (
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              disabled={isVerifying}
-                              onClick={() => setConfirm({ id: m.id, action: "suspend", label: m.name || m.email })}
-                            >
-                              Suspend
-                            </Button>
-                          )}
-                          {canReject && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              disabled={isVerifying}
-                              onClick={() => setConfirm({ id: m.id, action: "reject", label: m.name || m.email })}
-                            >
-                              Reject
-                            </Button>
-                          )}
-                        </div>
+                        {renderActions(m)}
                       </td>
                     </tr>
                   );
@@ -487,6 +520,7 @@ export default function AdminMentors() {
               </tbody>
             </table>
           </div>
+          </>
         )}
 
         {viewing && (

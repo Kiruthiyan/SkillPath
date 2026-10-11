@@ -6,15 +6,15 @@
 }
 
 :root {
-  --background: 210 20% 98%;
+  --background: 204 40% 98%;
   --foreground: 215 25% 15%;
   --card: 0 0% 100%;
   --card-foreground: 215 25% 15%;
   --popover: 0 0% 100%;
   --popover-foreground: 215 25% 15%;
-  --primary: 213 52% 25%;
+  --primary: 203 74% 44%;
   --primary-foreground: 210 40% 98%;
-  --primary-border: 213 52% 20%;
+  --primary-border: 203 74% 38%;
   --secondary: 199 89% 48%;
   --secondary-foreground: 210 40% 98%;
   --secondary-border: 199 89% 40%;
@@ -27,7 +27,7 @@
   --destructive-border: 0 72% 45%;
   --border: 214 20% 88%;
   --input: 214 20% 88%;
-  --ring: 213 52% 25%;
+  --ring: 203 74% 44%;
   --button-outline: hsl(var(--border));
 }
 
@@ -68,10 +68,38 @@ body {
   color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  overflow-wrap: break-word;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 16px inputs on touch devices stop iOS Safari zooming on focus */
+@media (max-width: 1023px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+  button,
+  [role="button"],
+  a {
+    touch-action: manipulation;
+  }
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
   min-width: 0;
 }
 

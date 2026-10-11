@@ -1,58 +1,57 @@
-# Never commit secrets — copy .env.example to .env locally
+# --- Secrets: copy .env.example to .env locally, never commit real values ---
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
-# build outputs (all packages)
-dist/
-**/dist/
-tmp/
-out-tsc/
-
-# typescript incremental
-*.tsbuildinfo
-
-# dependencies
+# --- Dependencies ---
 node_modules/
 .pnpm-store/
 
-# logs / OS
+# --- Build output ---
+dist/
+**/dist/
+build/
+out-tsc/
+tmp/
+*.tsbuildinfo
+
+# --- Test / coverage ---
+coverage/
+.nyc_output/
+
+# --- Logs ---
 *.log
-npm-debug.log
-yarn-error.log
+*.err.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Python (handbook ingest scripts) ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# --- OS ---
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# IDE / tooling
+# --- Editors / AI tooling (local only) ---
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
 *.sublime-workspace
+.cursor/
+.claude/
+.antigravity/
+
+# --- Deploy / misc ---
+.vercel/
 .cache/
 .local/
-.cursor/
-
-# mobile / misc
 .expo
 .expo-shared
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
-# deploy
-.vercel/
-
-# legacy nx references
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
