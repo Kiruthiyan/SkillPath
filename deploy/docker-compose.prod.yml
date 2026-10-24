@@ -1,0 +1,39 @@
+# Production stack for a single EC2 host: API + Caddy (automatic HTTPS).
+# Usage (from repo root):  docker compose -f deploy/docker-compose.prod.yml --env-file deploy/.env up -d --build
+services:
+  api:
+    build: ../backend
+    image: skillpath-api:latest
+    env_file: ../backend/.env
+    environment:
+      NODE_ENV: production
+      PORT: "5000"
+    restart: unless-stopped
+    expose:
+      - "5000"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      API_DOMAIN: ${API_DOMAIN:?set API_DOMAIN in deploy/.env}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL in deploy/.env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

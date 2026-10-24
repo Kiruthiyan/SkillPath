@@ -7,6 +7,11 @@ import { logger } from "./lib/logger";
 
 const app = express();
 
+// Behind a reverse proxy (Caddy/Nginx) the client IP comes from X-Forwarded-For.
+// Needed for correct per-client rate limiting. Set TRUST_PROXY=0 to disable.
+const trustProxy = Number(process.env.TRUST_PROXY ?? (process.env.NODE_ENV === "production" ? "1" : "0"));
+if (trustProxy > 0) app.set("trust proxy", trustProxy);
+
 const corsOrigins = process.env.CORS_ORIGINS?.split(",").map((o) => o.trim()).filter(Boolean);
 
 function collectErrorText(err: unknown): string {
