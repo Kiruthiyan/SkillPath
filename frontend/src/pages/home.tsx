@@ -32,6 +32,20 @@ export default function Home() {
           {t.home.heroSubtitle}
         </p>
 
+        {/* G.4: Source attribution & trust info — text only, no layout change */}
+        <p className="mb-6 max-w-md text-xs leading-relaxed text-white/70">
+          Eligibility data sourced from the{" "}
+          <a
+            href="https://www.ugc.ac.lk/downloads/admissions/cutoff_2025/COP_2024_2025-ENGLISH_Final.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-white/90"
+          >
+            UGC Admissions Handbook (2024/25 edition)
+          </a>
+          . Results are estimates only — official UGC data prevails.
+        </p>
+
         <div className="flex w-full max-w-sm flex-col gap-3">
           <Button
             size="lg"

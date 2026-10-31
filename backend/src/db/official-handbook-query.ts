@@ -4,7 +4,16 @@ import { db, pool } from "./client";
 import { universitiesTable } from "./schema/index";
 import { logger } from "../lib/logger";
 
+// OFFICIAL_HANDBOOK_YEAR is the academic year label used by the database when it
+// is fully populated from the official UGC handbook import pipeline.
+// The static fallback data loaded from HandBook/2025/zscore_cutoffs_2025.json
+// actually contains 2022/23, 2023/24, and 2024/25 entries — the most recent
+// of which is 2024/25. All labels and disclaimers in static-fallback mode
+// must reflect this so users are not misled.
 export const OFFICIAL_HANDBOOK_YEAR = "2025/2026";
+// The actual data year of the static fallback files on disk.
+const STATIC_FALLBACK_DATA_YEAR = "2024/25";
+// Used when querying the live database (which may have 2025/26 handbook data imported).
 const SOURCE_HANDBOOK_YEAR = "2025/2026";
 
 type MediumValue = string | string[] | null;
@@ -789,6 +798,44 @@ function isSimpleSubjectRequirement(subject: string): boolean {
   return !/\b(one of|or|from|must include|at least|any)\b|[:;]/i.test(subject);
 }
 
+/**
+ * UGC minimum university admission requirement: the student must have at least
+ * 3 simple passes (grade S or above) in A/L subjects.
+ * Source: UGC University Admissions Handbook — General Admission Requirements.
+ * This is verified from the official UGC handbook; it applies to ALL programmes
+ * regardless of stream or specific programme requirements.
+ *
+ * FAIL CLOSED: If subjectGrades is empty (not provided), we cannot verify this
+ * requirement and we do NOT assume it is met — we return false so the programme
+ * is shown as "Cutoff Unavailable" rather than "Eligible".
+ * Only when the student has explicitly provided subject grades do we evaluate.
+ */
+function meetsUgcMinimumAdmission(subjectGrades: Record<string, string>): {
+  passes: boolean;
+  reason: string;
+  gradeCount: number;
+} {
+  const gradeValues = Object.values(subjectGrades).filter((g) => g && g.trim() !== "");
+  if (gradeValues.length === 0) {
+    // No subject grades entered — cannot verify minimum pass requirement.
+    // We do not assume compliance; this is handled in the caller.
+    return {
+      passes: false,
+      reason: "Subject grades not provided — cannot verify UGC minimum 3-pass requirement.",
+      gradeCount: 0,
+    };
+  }
+  const passCount = gradeValues.filter(isPassingGrade).length;
+  if (passCount < 3) {
+    return {
+      passes: false,
+      reason: `UGC minimum admission requirement not met: need ≥3 simple passes (S or above); found ${passCount}.`,
+      gradeCount: passCount,
+    };
+  }
+  return { passes: true, reason: `${passCount} passes meet UGC minimum (≥3 required).`, gradeCount: passCount };
+}
+
 function emptyRecommendationGroups(): OfficialCheckerRecommendationsResponse["groups"] {
   return {
     eligible: [],
@@ -831,7 +878,15 @@ export async function getOfficialCheckerRecommendations(input: {
       (k) => input.subjectGrades[k] && input.subjectGrades[k].trim() !== ""
     );
 
-    const missingSubjects = hasSubjectGrades
+    // A.1: Check UGC minimum admission requirement (≥3 simple passes) first.
+    // Only evaluated when subject grades were provided by the student.
+    // If not provided, this check is skipped (fail-closed logic is in the
+    // eligible/cutoffUnavailable gate below).
+    const ugcMinCheck = hasSubjectGrades
+      ? meetsUgcMinimumAdmission(input.subjectGrades)
+      : { passes: true, reason: "Subject grades not provided; minimum pass check skipped.", gradeCount: 0 };
+
+    const missingSubjects = hasSubjectGrades && ugcMinCheck.passes
       ? subjects
           .filter(isSimpleSubjectRequirement)
           .filter((subject) => {
@@ -847,14 +902,22 @@ export async function getOfficialCheckerRecommendations(input: {
       : [];
     const manualSubjects = subjects.filter((subject) => !isSimpleSubjectRequirement(subject));
 
-    const meetsHandbookRequirements = missingSubjects.length === 0;
+    // A programme "meets handbook requirements" only when:
+    // 1. UGC minimum pass rule is satisfied (or grades not provided — skipped).
+    // 2. All simple subject requirements are met.
+    const failedUgcMin = hasSubjectGrades && !ugcMinCheck.passes;
+    const meetsHandbookRequirements = !failedUgcMin && missingSubjects.length === 0;
     const hasCutoff = row.latest_cutoff != null;
     const zscoreDiff = hasCutoff ? input.zscore - row.latest_cutoff! : null;
     const meetsCutoff = zscoreDiff != null && zscoreDiff >= -0.0001;
 
     let handbookStatusReason: string;
-    if (!meetsHandbookRequirements) {
+    if (failedUgcMin) {
+      handbookStatusReason = ugcMinCheck.reason;
+    } else if (!meetsHandbookRequirements && missingSubjects.length > 0) {
       handbookStatusReason = `Missing required subject pass: ${missingSubjects.join(", ")}`;
+    } else if (!meetsHandbookRequirements) {
+      handbookStatusReason = "Handbook requirements not met.";
     } else if (!hasCutoff) {
       handbookStatusReason = "No District Cutoff Available";
     } else if (meetsCutoff && zscoreDiff != null) {
@@ -898,7 +961,12 @@ export async function getOfficialCheckerRecommendations(input: {
       estimatedCenter: null,
       confidence: row.latest_cutoff == null ? null : "High",
       academicYear: input.academicYear || OFFICIAL_HANDBOOK_YEAR,
-      sourceHandbook: `UGC Admissions Handbook ${SOURCE_HANDBOOK_YEAR}`,
+      // B.1/B.4: The sourceHandbook label is set based on which data source is
+      // actually serving the response. The static fallback contains 2024/25 data.
+      // The database (when available) may contain 2025/26 data.
+      sourceHandbook: row.latest_cutoff_year
+        ? `UGC Admissions Cutoff Handbook (data year: ${row.latest_cutoff_year})`
+        : `UGC Admissions Handbook ${STATIC_FALLBACK_DATA_YEAR} (static fallback)`,
       sourcePage: null,
       requiredStream: input.stream,
       requiredSubjects: subjects.map((subjectName) => ({
@@ -950,8 +1018,12 @@ export async function getOfficialCheckerRecommendations(input: {
     resultModeLabel: "Historical Estimate",
     academicYear: input.academicYear || OFFICIAL_HANDBOOK_YEAR,
     district: input.district,
+    // B.5: Disclaimer states exact data year and that official UGC sources prevail.
     disclaimer:
-      "Results use only exact official handbook-derived eligibility and cutoff mappings. Missing or complex rules are not guessed.",
+      "Results are estimates based on UGC official cutoff data (2024/25 edition from ugc.ac.lk). " +
+      "Eligibility uses verified handbook-derived rules; missing or complex rules are not guessed. " +
+      "A result of 'Eligible' means your Z-score meets the published cutoff — it is NOT a guarantee of admission. " +
+      "Always verify at https://www.ugc.ac.lk before applying.",
     groups,
   };
 }

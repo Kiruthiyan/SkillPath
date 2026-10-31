@@ -32,6 +32,9 @@ __pycache__/
 .venv/
 venv/
 
+# --- Handbook PDF sources (large binary files, downloaded locally) ---
+backend/data/handbooks/sources/
+
 # --- OS ---
 .DS_Store
 Thumbs.db

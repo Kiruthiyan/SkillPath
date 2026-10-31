@@ -2,7 +2,7 @@
   "siteName": "SkillPath AI",
   "defaultTitle": "SkillPath AI",
   "defaultDescription": "SkillPath AI helps Sri Lankan A/L students check Z-score eligibility, discover university pathways, and plan careers using UGC handbook data.",
-  "defaultImagePath": "/og-image.svg",
+  "defaultImagePath": "/og-image.png",
   "defaultLocale": "en_LK",
   "twitterCard": "summary_large_image",
   "routes": [

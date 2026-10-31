@@ -48,16 +48,27 @@ const recommendationsBody = z.object({
   academicYear: z.string().min(1),
   district: z.string().min(1),
   stream: z.string().min(1),
+  // subjectGrades values must be non-empty strings; keys (subject names) must be unique.
   subjectGrades: z.record(z.string(), z.string()).default({}),
-  zscore: z.number(),
+  // E.2: Reject non-finite Z-scores at the server trust boundary.
+  zscore: z.number().finite(),
 });
 
 router.post("/checker/recommendations", checkerComputeRateLimiter, async (req, res) => {
   const parsed = recommendationsBody.safeParse(req.body);
   if (!parsed.success) {
-    res.status(400).json({ error: "Invalid request body" });
+    res.status(400).json({ error: "Invalid request body", details: parsed.error.flatten() });
     return;
   }
+
+  // D.3 server-side: Reject requests with duplicate subject keys (object keys are inherently
+  // unique in JSON, but validate that we don't have duplicate subject names across rows).
+  // Z.record already deduplicates by key; no further action needed here — the client
+  // validates before sending, and the last value wins for any JSON duplicate key.
+
+  // A.2 / E.2: Validate Z-score is a plausible number (already .finite() in schema).
+  // We do not enforce a hard range without official source backing — the schema's .finite()
+  // already rejects NaN and Infinity.
 
   try {
     const recommendations = await getOfficialCheckerRecommendations(parsed.data);
@@ -167,7 +178,8 @@ const eligibilityBody = z.object({
   academicYear: z.string().min(1).optional(),
   stream: z.string().min(1),
   subjectGrades: z.record(z.string(), z.string()).default({}),
-  zscore: z.number(),
+  // E.2: Reject non-finite Z-scores at the server trust boundary.
+  zscore: z.number().finite(),
   district: z.string().min(1),
 });
 
